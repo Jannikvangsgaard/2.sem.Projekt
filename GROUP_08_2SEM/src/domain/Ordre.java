@@ -15,5 +15,5 @@ public class Ordre {
       this.ordreNo = no;
       
     }
-    
+        
 }
