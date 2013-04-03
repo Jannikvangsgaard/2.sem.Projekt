@@ -1,5 +1,7 @@
 package presentation;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Jannik
@@ -54,7 +56,8 @@ public class GUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+            JFrame jframe = new JFrame();
+            jframe.setSize(250, 250);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
