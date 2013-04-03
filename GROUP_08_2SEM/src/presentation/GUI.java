@@ -30,14 +30,14 @@ public class GUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButtonBook.setText("Book");
+        jButtonBook.setText("HURR");
         jButtonBook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonBookActionPerformed(evt);
             }
         });
 
-        jButtonHentVare.setText("Hent vare");
+        jButtonHentVare.setText("DURR");
 
         jLabel1.setText("I CAN COMPUTER BRO");
 
@@ -50,7 +50,7 @@ public class GUI extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonBook)
                     .addComponent(jButtonHentVare))
-                .addContainerGap(376, Short.MAX_VALUE))
+                .addContainerGap(401, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 174, Short.MAX_VALUE)

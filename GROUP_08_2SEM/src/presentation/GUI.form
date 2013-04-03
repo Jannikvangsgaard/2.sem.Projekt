@@ -28,7 +28,7 @@
                   <Component id="jButtonBook" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="jButtonHentVare" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="376" max="32767" attributes="0"/>
+              <EmptySpace pref="401" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
@@ -61,7 +61,7 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="jButtonBook">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Book"/>
+        <Property name="text" type="java.lang.String" value="HURR"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBookActionPerformed"/>
@@ -69,7 +69,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="jButtonHentVare">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Hent vare"/>
+        <Property name="text" type="java.lang.String" value="DURR"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
