@@ -76,16 +76,15 @@ public class TheMapper {
     
      public boolean saveItem(ArrayList<Item> item, Connection con) {
 		int rowsInserted = 0;
-		String SQLString1 = "insert into ordre values(?)";
-		String SQLString2 = "insert into ordreDetails values(?,?)";
-
+		String SQLString1 = "update tilrådighed set antal = ? where varerNo = ?; ";
+	
 		PreparedStatement statement = null;
 
 		try {
 			statement = con.prepareStatement(SQLString1);
 
-			for (int i = 0; i < order.size(); i++) {
-				Order o = order.get(i);
+			for (int i = 0; i < item.size(); i++) {
+				Item it = item.get(i);
 				statement.setInt(1, o.getOrderNo());
 				statement.setInt(2, o.getKundeID());
 				statement.setInt(3, o.getState());
