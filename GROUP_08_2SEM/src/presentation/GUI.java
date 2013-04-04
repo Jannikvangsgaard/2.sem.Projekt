@@ -24,7 +24,6 @@ DefaultListModel model1;
      public void visVareliste(){
         
         try{
-            control.createVare(10,1337);
             model1.clear();
             ArrayList vareliste1 = control.getVareliste();
             for (int i=0; i<vareliste1.size();i++){
