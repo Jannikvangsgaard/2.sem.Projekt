@@ -10,6 +10,7 @@ public class Control {
    
     ArrayList<Vare> vareliste = new ArrayList<Vare>();
     ArrayList<Order> ordreliste = new ArrayList<Order>();
+    ArrayList<Kunde> kundeliste = new ArrayList<Kunde>();
     
     public void createVare(int nummer, int antal){
         Vare vare= new Vare(nummer, antal);
@@ -25,8 +26,20 @@ public class Control {
     }
     public void createKunde(String navn){
        Kunde kunde = new Kunde(navn);
+       kundeliste.add(kunde);
     }
     public ArrayList getOrdreliste(){
         return ordreliste;
+    }
+    public ArrayList getKundeliste(){
+        return kundeliste;
+    }
+    
+    public String kundeToString(){
+        String res="";
+        for(int i=0; i<kundeliste.size();i++){
+            res +=kundeliste.get(i).getNavn() +"\n";
+        }
+        return res;
     }
 }
