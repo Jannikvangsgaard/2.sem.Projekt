@@ -2,6 +2,7 @@ package datasource;
 
 import domain.*;
 import java.sql.Connection;
+import java.util.ArrayList;
 
 /**
  *
@@ -35,7 +36,7 @@ public class DBFacade
               return om.getKunde(ono, con);
           }
           
-          public boolean saveOrder(Order o)
+          public boolean saveOrder(ArrayList<Order> o)
           {
               return om.saveOrder(o, con);
           }
