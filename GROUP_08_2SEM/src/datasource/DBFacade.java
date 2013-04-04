@@ -9,12 +9,12 @@ import java.sql.Connection;
  */
 public class DBFacade
 {
-    	  private Ordermapper om; 
+    	  private TheMapper om; 
 	  private Connection con;
 	  private static DBFacade instance;
 	 
 	  private DBFacade() {
-		  om 	= new Ordermapper();
+		  om 	= new TheMapper();
 		  con 	= new DBConnector().getConnection(); 
 		  							  
 	  }

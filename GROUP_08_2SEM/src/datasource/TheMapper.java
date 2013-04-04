@@ -13,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author Mike
  */
-public class Ordermapper {
+public class TheMapper {
     
     public boolean saveOrder(ArrayList<Order> order, Connection con) {
 		int rowsInserted = 0;
