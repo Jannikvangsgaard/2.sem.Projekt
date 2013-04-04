@@ -40,8 +40,8 @@ public class OrderMapperPIK
     {
         Order o = null;
         
-        String SQLString1 = "SELECT * FROM ordre WHERE ono = ?";  //Get order
-        String SQLString2 = "SELECT * FROM ordredetails WHERE ono = ?"; //Get orderdetails
+        String SQLString1 = "SELECT * FROM ordre";  //Get order
+        String SQLString2 = "SELECT varerno, antal FROM ordredetails WHERE ordreno = ?"; //Get orderdetails
         
         PreparedStatement statement = null;
         PreparedStatement statement2 = null;
