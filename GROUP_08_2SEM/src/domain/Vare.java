@@ -6,27 +6,16 @@ package domain;
  */
 public class Vare
 {
+    private int vareNo;
+    private int vareAntal;
+    
 
-    String vareNavn;
-    int vareAntal;
-    int vareNo;
-
-    public Vare(String vareNavn, int vareAntal, int vareNo)
+    public Vare(int vareNo, int vareAntal)
     {
-        this.vareNavn = vareNavn;
-        this.vareAntal = vareAntal;
         this.vareNo = vareNo;
+        this.vareAntal = vareAntal;
     }
 
-    public String getVareNavn()
-    {
-        return vareNavn;
-    }
-
-    public void setVareNavn(String vareNavn)
-    {
-        this.vareNavn = vareNavn;
-    }
 
     public int getVareAntal()
     {
