@@ -2,6 +2,8 @@ package datasource;
 
 import domain.Ordre;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
  * @author 
@@ -38,6 +40,35 @@ public class OrderMapperPIK
         
         String SQLString1 = "SELECT * FROM ordre WHERE ono = ?";  //Hent ordre
         String SQLString2 = "SELECT * FROM ordredetails WHERE ono = ?"; //Hent ordredetaljer
+        
+        PreparedStatement statement = null;
+        
+        try
+        {
+            //Hent ordre
+            statement = conn.prepareStatement(SQLString1);
+            statement.setInt(1, ono);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) 
+            {
+                o = new Ordre(ono,
+                        rs.get(ono));
+                        
+                //^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            }
+        }
+        
+        catch(Exception ex)
+        {
+            System.out.println("Fejl i OrderMapper - getOrdre");
+            System.out.println(ex.getMessage());
+        }
+        
+        if (testRun) 
+        {
+            System.out.println("Retrieved Order: " + o);
+        }
+        return o;
     }
 
 }
