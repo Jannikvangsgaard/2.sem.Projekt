@@ -1,9 +1,11 @@
 package datasource;
 
 import domain.Order;
+import domain.Vare;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 /**
  * @author 
@@ -18,7 +20,7 @@ public class OrderMapperPIK
     static boolean testRun = false;
     
     /**
-     * Metoder til at gemme på databasen
+     * Save on database
      */
     
     
@@ -31,37 +33,44 @@ public class OrderMapperPIK
     
     
     /**
-     * Metoder til at læse fra databasen
+     * Read from database
      */
     
-    public Order getOrdre(int ono, Connection conn)
+    public Order getOrder(int ono, Connection conn)
     {
         Order o = null;
         
-        String SQLString1 = "SELECT * FROM ordre WHERE ono = ?";  //Hent ordre
-        String SQLString2 = "SELECT * FROM ordredetails WHERE ono = ?"; //Hent ordredetaljer
+        String SQLString1 = "SELECT * FROM ordre";  //Get order
+        String SQLString2 = "SELECT varerno, antal FROM ordredetails WHERE ordreno = ?"; //Get orderdetails
         
         PreparedStatement statement = null;
+        PreparedStatement statement2 = null;
         
-        try
+         try
         {
-            //Hent ordre
+            //Get order
             statement = conn.prepareStatement(SQLString1);
-            statement.setInt(1, ono);
+            statement2 = conn.prepareStatement(SQLString2);
+            ArrayList<Vare> vare = new ArrayList();
+            
             ResultSet rs = statement.executeQuery();
-            if (rs.next()) 
+            ResultSet rs2 = statement2.executeQuery();
+            while (rs2.next()) 
             {
-               if (rs.next()) {
-                        o = new Order(rs.getInt(1), 
-                                
-                                
-                //idonteven
+                int VareNo = rs2.getInt(1);
+                int qty = rs2.getInt(2);
+                Vare v = new Vare(VareNo, qty);
+                vare.add(v);
+            }
+            while (rs.next())
+            {
+                o = new Order(ono, vare);
             }
         }
-        
+         
         catch(Exception ex)
         {
-            System.out.println("Fejl i OrderMapper - getOrdre");
+            System.out.println("Error in OrderMapper - getOrdre");
             System.out.println(ex.getMessage());
         }
         
