@@ -4,6 +4,11 @@
  */
 package datasource;
 
+import domain.Ordre;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.util.ArrayList;
+
 /**
  *
  * @author Mike
@@ -22,8 +27,8 @@ public class Ordremapper {
 
 			for (int i = 0; i < ordre.size(); i++) {
 				Ordre o = ordre.get(i);
-				statement.setInt(1, o.getordreNo());
-				statement.setInt(2, o.getkundeNo());
+				statement.setInt(1, o.getOrdreNo());
+				statement.setInt(2, o.getKundeID());
 				statement.setInt(3, o.getState());
 
 				rowsInserted += statement.executeUpdate();
@@ -36,10 +41,10 @@ public class Ordremapper {
 				for (int i = 0; i < ordre.size(); i++) {
 					Ordre o = ordre.get(i);
                                         
-                                        for(int j = 0 ; j < o.getvarerArray.size(); j++){
-					statement.setInt(1, o.getvarerArray(j));
-					statement.setInt(2, o.getvarerArray(j++));
-                                        statement.setInt(3, o.getordreNo());
+                                        for(int j = 0 ; j < o.getVareliste.size(); j++){
+					statement.setInt(1, o.getVareliste(j));
+					statement.setInt(2, o.getVareliste(j++));
+                                        statement.setInt(3, o.getOrdreNo());
                                         }
 					rowsInserted += statement.executeUpdate();
 				}
