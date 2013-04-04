@@ -56,12 +56,6 @@ public class Ordre {
         return vareliste;
     }
 
-    public void setVareliste(ArrayList<Vare> vareliste) {
-        this.vareliste = vareliste;
-    }
-    public ArrayList getVareArray(){
-        return vareliste;
-    }
     
     
         
