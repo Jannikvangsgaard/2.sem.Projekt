@@ -8,12 +8,10 @@ import java.util.ArrayList;
  */
 public class Ordre {
     private int ordreNo;
-    private int antal;
     private int kundeID;
     private int state;
     private ArrayList<Vare> vareliste = new ArrayList<Vare>();
-    public Ordre(int antal, int no, ArrayList<Vare> tissemand){
-      this.antal = antal;
+    public Ordre(int no, ArrayList<Vare> tissemand){
       this.ordreNo = no;
       vareliste = tissemand;          
       state=0;        
@@ -26,14 +24,6 @@ public class Ordre {
 
     public void setOrdreNo(int ordreNo) {
         this.ordreNo = ordreNo;
-    }
-
-    public int getAntal() {
-        return antal;
-    }
-
-    public void setAntal(int antal) {
-        this.antal = antal;
     }
 
     public int getKundeID() {
