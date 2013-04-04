@@ -35,7 +35,7 @@ public class DBFacade
               return om.getKunde(ono, con);
           }
           
-          public boolean gemOrder(Ordre o)
+          public boolean saveOrder(Ordre o)
           {
               return om.saveOrder(o, con);
           }
