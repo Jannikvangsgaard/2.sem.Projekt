@@ -7,7 +7,10 @@ package domain;
 public class Kunde {
    private String kundeID;
    private String navn;
-   private String ordreNo;
+
+    public Kunde(String navn) {
+        this.navn = navn;
+    }
 
     public String getKundeID() {
         return kundeID;
@@ -25,12 +28,5 @@ public class Kunde {
         this.navn = navn;
     }
 
-    public String getOrdreNo() {
-        return ordreNo;
-    }
-
-    public void setOrdreNo(String ordreNo) {
-        this.ordreNo = ordreNo;
-    }
     
 }
