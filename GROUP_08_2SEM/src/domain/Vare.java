@@ -9,9 +9,9 @@ public class Vare
 
     String vareNavn;
     int vareAntal;
-    String vareNo;
+    int vareNo;
 
-    public Vare(String vareNavn, int vareAntal, String vareNo)
+    public Vare(String vareNavn, int vareAntal, int vareNo)
     {
         this.vareNavn = vareNavn;
         this.vareAntal = vareAntal;
@@ -38,12 +38,12 @@ public class Vare
         this.vareAntal = vareAntal;
     }
 
-    public String getVareNo()
+    public int getVareNo()
     {
         return vareNo;
     }
 
-    public void setVareNo(String vareNo)
+    public void setVareNo(int vareNo)
     {
         this.vareNo = vareNo;
     }
