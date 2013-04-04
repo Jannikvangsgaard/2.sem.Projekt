@@ -6,24 +6,24 @@ import java.util.ArrayList;
  *
  * @author Jannik
  */
-public class Ordre {
-    private int ordreNo;
+public class Order {
+    private int orderNo;
     private int kundeID;
     private int state;
     private ArrayList<Vare> vareliste = new ArrayList<Vare>();
-    public Ordre(int no, ArrayList<Vare> tissemand){
-      this.ordreNo = no;
+    public Order(int no, ArrayList<Vare> tissemand){
+      this.orderNo = no;
       vareliste = tissemand;          
       state=0;        
               
     }
 
-    public int getOrdreNo() {
-        return ordreNo;
+    public int getOrderNo() {
+        return orderNo;
     }
 
-    public void setOrdreNo(int ordreNo) {
-        this.ordreNo = ordreNo;
+    public void setOrderNo(int ordreNo) {
+        this.orderNo = ordreNo;
     }
 
     public int getKundeID() {

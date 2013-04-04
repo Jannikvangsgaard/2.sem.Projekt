@@ -14,7 +14,7 @@ public class DBFacade
 	  private static DBFacade instance;
 	 
 	  private DBFacade() {
-		  om 	= new Ordremapper();
+		  om 	= new Ordermapper();
 		  con 	= new DBConnector().getConnection(); 
 		  							  
 	  }
@@ -35,7 +35,7 @@ public class DBFacade
               return om.getKunde(ono, con);
           }
           
-          public boolean saveOrder(Ordre o)
+          public boolean saveOrder(Order o)
           {
               return om.saveOrder(o, con);
           }

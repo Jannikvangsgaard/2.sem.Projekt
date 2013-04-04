@@ -4,7 +4,7 @@
  */
 package datasource;
 
-import domain.Ordre;
+import domain.Order;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
@@ -13,9 +13,9 @@ import java.util.ArrayList;
  *
  * @author Mike
  */
-public class Ordremapper {
+public class Ordermapper {
     
-    public boolean saveOrdre(ArrayList<Ordre> ordre, Connection con) {
+    public boolean saveOrder(ArrayList<Order> order, Connection con) {
 		int rowsInserted = 0;
 		String SQLString1 = "insert into ordre values(?,?,?)";
 		String SQLString2 = "insert into ordreDetails values(?,?,?)";
@@ -25,25 +25,25 @@ public class Ordremapper {
 		try {
 			statement = con.prepareStatement(SQLString1);
 
-			for (int i = 0; i < ordre.size(); i++) {
-				Ordre o = ordre.get(i);
-				statement.setInt(1, o.getOrdreNo());
+			for (int i = 0; i < order.size(); i++) {
+				Order o = order.get(i);
+				statement.setInt(1, o.getOrderNo());
 				statement.setInt(2, o.getKundeID());
 				statement.setInt(3, o.getState());
 
 				rowsInserted += statement.executeUpdate();
 			}
 
-			if (rowsInserted == ordre.size()) {
+			if (rowsInserted == order.size()) {
 				rowsInserted = 0;
 				statement = con.prepareStatement(SQLString2);
 
-				for (int i = 0; i < ordre.size(); i++) {
-					Ordre o = ordre.get(i);
+				for (int i = 0; i < order.size(); i++) {
+					Order o = order.get(i);
                                         for(int j = 0 ; j < o.getVareliste().size(); j++){
 					statement.setInt(1, o.getVareliste().get(j).getVareNo());
 					statement.setInt(2, o.getVareliste().get(j).getVareAntal());
-                                        statement.setInt(3, o.getOrdreNo());
+                                        statement.setInt(3, o.getOrderNo());
                                         }
 					rowsInserted += statement.executeUpdate();
 				}
@@ -55,7 +55,7 @@ public class Ordremapper {
 			System.out.println("Fejl i OrdreMapper - SaveNewProject");
 			e.printStackTrace();
 		}
-		return rowsInserted == ordre.size();
+		return rowsInserted == order.size();
 
 	}
     

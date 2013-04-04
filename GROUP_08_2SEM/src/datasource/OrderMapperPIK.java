@@ -1,6 +1,6 @@
 package datasource;
 
-import domain.Ordre;
+import domain.Order;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -34,9 +34,9 @@ public class OrderMapperPIK
      * Metoder til at læse fra databasen
      */
     
-    public Ordre getOrdre(int ono, Connection conn)
+    public Order getOrdre(int ono, Connection conn)
     {
-        Ordre o = null;
+        Order o = null;
         
         String SQLString1 = "SELECT * FROM ordre WHERE ono = ?";  //Hent ordre
         String SQLString2 = "SELECT * FROM ordredetails WHERE ono = ?"; //Hent ordredetaljer
@@ -52,7 +52,7 @@ public class OrderMapperPIK
             if (rs.next()) 
             {
                if (rs.next()) {
-                        o = new Ordre(rs.getInt(1), 
+                        o = new Order(rs.getInt(1), 
                                 
                                 
                 //idonteven

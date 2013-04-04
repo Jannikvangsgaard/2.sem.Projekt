@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Control {
    
     ArrayList<Vare> vareliste = new ArrayList<Vare>();
-    ArrayList<Ordre> ordreliste = new ArrayList<Ordre>();
+    ArrayList<Order> ordreliste = new ArrayList<Order>();
     
     public void createVare(int nummer, int antal){
         Vare vare= new Vare(nummer, antal);
@@ -17,7 +17,7 @@ public class Control {
         
     }
     public void createOrdre(int ordreNo, ArrayList<Vare> Tissemand){
-       Ordre ordre = new Ordre(ordreNo, Tissemand);
+       Order ordre = new Order(ordreNo, Tissemand);
        ordreliste.add(ordre);
     }
     public ArrayList getVareliste(){
