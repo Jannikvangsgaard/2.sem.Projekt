@@ -115,7 +115,7 @@ DefaultListModel model1;
                 .addGap(0, 207, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("tab1", jPanel1);
+        jTabbedPane1.addTab("Opret Kunde", jPanel1);
 
         jScrollPane1.setViewportView(jListvareliste);
 

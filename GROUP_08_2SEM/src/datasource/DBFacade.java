@@ -38,7 +38,7 @@ public class DBFacade
 
     public Kunde getCustomer(int ono)
     {
-        return tm.getCumstomer(ono, con);
+        return tm.getCustomer(ono, con);
     }
 
     public Vare getVare(int ono)
