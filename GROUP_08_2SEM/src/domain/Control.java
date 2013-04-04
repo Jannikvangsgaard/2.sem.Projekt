@@ -18,6 +18,7 @@ public class Control {
     }
     public void createOrdre(int ordreNo, ArrayList<Vare> Tissemand){
        Ordre ordre = new Ordre(ordreNo, Tissemand);
+       ordreliste.add(ordre);
     }
     public ArrayList getVareliste(){
         return vareliste;

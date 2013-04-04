@@ -40,20 +40,19 @@ public class Ordremapper {
 
 				for (int i = 0; i < ordre.size(); i++) {
 					Ordre o = ordre.get(i);
-                                        
-                                        for(int j = 0 ; j < o.getVareliste.size(); j++){
-					statement.setInt(1, o.getVareliste(j));
-					statement.setInt(2, o.getVareliste(j++));
+                                        for(int j = 0 ; j < o.getVareliste().size(); j++){
+					statement.setInt(1, o.getVareliste().get(j).getVareNo());
+					statement.setInt(2, o.getVareliste().get(j).getVareAntal());
                                         statement.setInt(3, o.getOrdreNo());
                                         }
 					rowsInserted += statement.executeUpdate();
 				}
 			} else {
-				System.out.println("Fejl i ProjectMapper - Part 1");
+				System.out.println("Fejl i OrdreMapper - Part 1");
 			}
 
 		} catch (Exception e) {
-			System.out.println("Fejl i ProjectMapper - SaveNewProject");
+			System.out.println("Fejl i OrdreMapper - SaveNewProject");
 			e.printStackTrace();
 		}
 		return rowsInserted == ordre.size();
