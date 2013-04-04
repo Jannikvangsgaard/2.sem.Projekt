@@ -51,10 +51,11 @@ public class OrderMapperPIK
             ResultSet rs = statement.executeQuery();
             if (rs.next()) 
             {
-                o = new Ordre(ono,
-                        rs.get(ono));
-                        
-                //^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+               if (rs.next()) {
+                        o = new Ordre(rs.getInt(1), 
+                                
+                                
+                //idonteven
             }
         }
         
