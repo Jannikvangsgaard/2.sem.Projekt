@@ -9,8 +9,12 @@ public class Customer {
    private String name;
    
     public Customer(String name) {
-        this.customerID = customerID;
+        
         this.name = name;
+    }
+    public Customer(int customerID,String name){
+        this.customerID = customerID;
+        this.name=name;
     }
 
     public int getCustomerID() {
