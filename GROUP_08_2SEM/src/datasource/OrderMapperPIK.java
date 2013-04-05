@@ -19,23 +19,6 @@ public class OrderMapperPIK
     
     static boolean testRun = false;
     
-    /**
-     * Save on database
-     */
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    /**
-     * Read from database
-     */
-    
     public Order getOrder(int ono, Connection conn)
     {
         Order o = null;
