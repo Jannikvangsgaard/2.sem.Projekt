@@ -22,7 +22,7 @@ public class Main {
         customer = c.getCustomerlist();
         for (int i = 0; i < customer.size(); i++)
         {
-            customer.get(i);
+            System.out.println(customer.get(i));
         }
         ArrayList  item= new ArrayList();
         item = c.getItemliste();

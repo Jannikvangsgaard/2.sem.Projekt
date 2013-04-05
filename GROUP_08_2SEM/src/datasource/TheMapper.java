@@ -133,7 +133,6 @@ public class TheMapper
             System.out.println("Error in TheMapper - getCustomer");
             System.out.println(ex.getMessage());
         }
-//        System.out.println(customer);
         return customer;
     }
 
