@@ -1,5 +1,6 @@
 package domain;
 
+import datasource.DBFacade;
 import java.util.ArrayList;
 
 /**
@@ -13,6 +14,7 @@ public class Control {
     ArrayList<Customer> customerlist = new ArrayList<Customer>();
     ArrayList<Item> itemlistReserved = new ArrayList<Item>();
     ArrayList availableItems = new ArrayList();
+    private DBFacade dbf;
 
     public void createItem(int number, int amount) {
         Item item = new Item(number, amount);
@@ -39,6 +41,7 @@ public class Control {
     }
 
     public ArrayList getCustomerlist() {
+        customerlist = dbf.getCustomer();
         return customerlist;
     }
 
