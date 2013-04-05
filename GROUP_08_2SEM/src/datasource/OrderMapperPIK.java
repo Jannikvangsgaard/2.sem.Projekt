@@ -20,7 +20,7 @@ public class OrderMapperPIK
     
     static boolean testRun = false;
     
-    public Customer getCustomer(Connection conn){
+    public ArrayList<Customer> getCustomer(Connection conn){
         
         String SQLString = "SELECT * FROM kunde";
         
