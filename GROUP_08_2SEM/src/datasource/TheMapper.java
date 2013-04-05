@@ -56,8 +56,8 @@ public class TheMapper {
 				for (int i = 0; i < order.size(); i++) {
 					Order o = order.get(i);
                                         for(int j = 0 ; j < o.getItemlist().size(); j++){
-					statement.setInt(1, o.getItemlist().get(j).getVareNo());
-					statement.setInt(2, o.getItemlist().get(j).getVareAntal());
+					statement.setInt(1, o.getItemlist().get(j).getItemNo());
+					statement.setInt(2, o.getItemlist().get(j).getItemAmount());
                                         statement.setInt(3, o.getOrderNo());
                                         }
 					rowsInserted += statement.executeUpdate();
@@ -86,8 +86,8 @@ public class TheMapper {
 
 			for (int i = 0; i < freeItems.size(); i++) {
                             Item fi = freeItems.get(i);
-                            statement.setInt(1, freeItems.get(i).getVareAntal());
-                            statement.setInt(2, freeItems.get(i).getVareNo());
+                            statement.setInt(1, freeItems.get(i).getItemAmount());
+                            statement.setInt(2, freeItems.get(i).getItemNo());
 				
                                 
                                 }

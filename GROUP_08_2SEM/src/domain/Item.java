@@ -6,34 +6,34 @@ package domain;
  */
 public class Item
 {
-    private int vareNo;
-    private int vareAntal;
+    private int itemNo;
+    private int itemAmount;
     
 
-    public Item(int vareNo, int vareAntal)
+    public Item(int itemNo, int itemAmount)
     {
-        this.vareNo = vareNo;
-        this.vareAntal = vareAntal;
+        this.itemNo = itemNo;
+        this.itemAmount = itemAmount;
     }
 
 
-    public int getVareAntal()
+    public int getItemAmount()
     {
-        return vareAntal;
+        return itemAmount;
     }
 
-    public void setVareAntal(int vareAntal)
+    public void setItemAmount(int ItemAmount)
     {
-        this.vareAntal = vareAntal;
+        this.itemAmount = ItemAmount;
     }
 
-    public int getVareNo()
+    public int getItemNo()
     {
-        return vareNo;
+        return itemNo;
     }
 
-    public void setVareNo(int vareNo)
+    public void setItemNo(int itemNo)
     {
-        this.vareNo = vareNo;
+        this.itemNo = itemNo;
     }
 }

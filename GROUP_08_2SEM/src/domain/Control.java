@@ -62,7 +62,7 @@ public class Control {
         for (int i=0; i<varelistereserveret.size();i++){
             for (int j=0; j<vareliste.size();j++){
                 if (vareliste.get(j)==varelistereserveret.get(i)){
-                    ledigevare.add(vareliste.get(j).getVareAntal()-varelistereserveret.get(j).getVareAntal());
+                    ledigevare.add(vareliste.get(j).getItemAmount()-varelistereserveret.get(j).getItemAmount());
                 }
             }
         }
