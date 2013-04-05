@@ -1,5 +1,6 @@
 package datasource;
 
+import domain.Customer;
 import domain.Order;
 import domain.Item;
 import java.sql.Connection;
@@ -18,6 +19,36 @@ public class OrderMapperPIK
 {
     
     static boolean testRun = false;
+    
+    public Customer getCustomer(Connection conn){
+        
+        String SQLString = "SELECT * FROM kunde";
+        
+        PreparedStatement statement = null;
+        ArrayList<Customer> customer = new ArrayList();
+        try
+        {
+            //Get order
+            statement = conn.prepareStatement(SQLString);
+            
+            
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) 
+            {
+                int customerNo = rs.getInt(1);
+                String customerName = rs.getString(2);
+                Customer c = new Customer(customerNo, customerName);
+                customer.add(c);
+            }
+        }
+         
+        catch(Exception ex)
+        {
+            System.out.println("Error in OrderMapper - getOrdre");
+            System.out.println(ex.getMessage());
+        }
+        return customer;
+    }
     
     public Order getOrder(int ono, Connection conn)
     {

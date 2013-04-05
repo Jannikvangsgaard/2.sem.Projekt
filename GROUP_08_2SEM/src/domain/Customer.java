@@ -5,18 +5,19 @@ package domain;
  * @author Jannik
  */
 public class Customer {
-   private String customerID;
+   private int customerID;
    private String name;
    
-    public Customer(String name) {
+    public Customer(int customerID, String name) {
+        this.customerID = customerID;
         this.name = name;
     }
 
-    public String getCustomerID() {
+    public int getCustomerID() {
         return customerID;
     }
 
-    public void setCustomerID(String customerID) {
+    public void setCustomerID(int customerID) {
         this.customerID = customerID;
     }
 
