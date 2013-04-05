@@ -17,10 +17,14 @@ import java.util.ArrayList;
  */
 public class TheMapper
 {
-
+    
     static boolean testRun = false;
+    
+     /**
+     * Read from database
+     */
 
-    public Order getOrder(int ono, Connection conn)
+    public Order getOrders(int ono, Connection conn)
     {
         Order o = null;
 
@@ -38,12 +42,14 @@ public class TheMapper
             ArrayList<Item> vare = new ArrayList();
 
             ResultSet rs = statement.executeQuery();
-            ResultSet rs2 = statement2.executeQuery();
-            while (rs2.next())
+            
+            while (rs.next())
             {
-                int VareNo = rs2.getInt(1);
-                int qty = rs2.getInt(2);
-                Item v = new Item(VareNo, qty);
+                statement2.setInt(1, ono);
+                int VareNo = rs.getInt(2);
+                String vNa = rs.getString(3);
+                int qty = rs.getInt(4);
+                Item v = new Item(VareNo, vNa, qty);
                 vare.add(v);
             }
             while (rs.next())
@@ -62,7 +68,48 @@ public class TheMapper
         }
         return o;
     }
+    
+    
+    
+    public ArrayList<Item> getItems(Connection conn)
+    {
+        Item i = null;
+        ArrayList<Item> itemsArr = new ArrayList();
+        
+        String SQLString = "SELECT * FROM varer";
+        
+        PreparedStatement statement = null;
+        
+        try 
+        {
+            statement = conn.prepareStatement(SQLString);
+            
+            ResultSet rs = statement.executeQuery();
+            
+            while (rs.next())
+            {
+                int vNo = rs.getInt(1);
+                String vNa = rs.getString(2);
+                int vQtotal = rs.getInt(3);
+                
+                i = new Item(vNo, vNa, vQtotal);
+                itemsArr.add(i);
+            }
+        }
+        
+        catch (Exception e)
+        {
+            System.out.println("Fejl i TheMapper - getItems");
+        }
+        
+        return itemsArr;
+    }
 
+    
+    /**
+     * Write to database
+     */
+    
     public boolean saveOrder(ArrayList<Order> order, Connection con)
     {
         int rowsInserted = 0;
