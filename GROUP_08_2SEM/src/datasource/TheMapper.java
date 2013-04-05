@@ -90,9 +90,9 @@ public class TheMapper
             {
                 int vNo = rs.getInt(1);
                 String vNa = rs.getString(2);
-                int vAtotal = rs.getInt(3);
+                int vQtotal = rs.getInt(3);
                 
-                i = new Item(vNo, vNa, vAtotal);
+                i = new Item(vNo, vNa, vQtotal);
                 itemsArr.add(i);
             }
         }
