@@ -10,7 +10,7 @@ public class Control {
 
     ArrayList<Vare> vareliste = new ArrayList<Vare>();
     ArrayList<Order> ordreliste = new ArrayList<Order>();
-    ArrayList<Kunde> kundeliste = new ArrayList<Kunde>();
+    ArrayList<Customer> kundeliste = new ArrayList<Customer>();
     ArrayList<Vare> varelistereserveret = new ArrayList<Vare>();
     ArrayList ledigevare = new ArrayList();
 
@@ -30,7 +30,7 @@ public class Control {
     }
 
     public void createKunde(String navn) {
-        Kunde kunde = new Kunde(navn);
+        Customer kunde = new Customer(navn);
         kundeliste.add(kunde);
     }
 
@@ -45,7 +45,7 @@ public class Control {
     public String kundeToString() {
         String res = "";
         for (int i = 0; i < kundeliste.size(); i++) {
-            res += kundeliste.get(i).getNavn() + "\n";
+            res += kundeliste.get(i).getName() + "\n";
         }
         return res;
     }

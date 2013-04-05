@@ -36,7 +36,7 @@ public class DBFacade
         return tm.getOrder(ono, con);
     }
 
-    public Kunde getCustomer(int ono)
+    public Customer getCustomer(int ono)
     {
         return tm.getCustomer(ono, con);
     }
