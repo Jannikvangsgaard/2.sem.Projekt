@@ -107,7 +107,7 @@ public class TheMapper
     }
     
     public ArrayList<Customer> getCustomer(Connection conn){
-        
+        System.out.println("themapper her");
         String SQLString = "SELECT * FROM kunde";
         
         PreparedStatement statement = null;
@@ -133,6 +133,7 @@ public class TheMapper
             System.out.println("Error in TheMapper - getCustomer");
             System.out.println(ex.getMessage());
         }
+        System.out.println(customer);
         return customer;
     }
 

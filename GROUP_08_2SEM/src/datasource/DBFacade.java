@@ -13,23 +13,23 @@ public class DBFacade
 
     private TheMapper tm;
     private Connection con;
-    private static DBFacade instance;
+//    private static DBFacade instance;
 
-    private DBFacade()
+    public DBFacade()
     {
         tm = new TheMapper();
         con = new DBConnector().getConnection();
 
     }
 
-    public static DBFacade getInstance()
-    {
-        if (instance == null)
-        {
-            instance = new DBFacade();
-        }
-        return instance;
-    }
+//    public static DBFacade getInstance()
+//    {
+//        if (instance == null)
+//        {
+//            instance = new DBFacade();
+//        }
+//        return instance;
+//    }
 
     public Order getOrder(int ono)
     {
@@ -38,6 +38,7 @@ public class DBFacade
 
     public ArrayList getCustomer()
     {
+        System.out.println("dbfacade her");
         return tm.getCustomer(con);
     }
 
