@@ -5,6 +5,8 @@
 package presentation;
 
 import domain.Control;
+import domain.Item;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,16 +16,19 @@ public class Main {
     
     public static void main(String[] args) {
         Control c = new Control();
-         
-        
-//        for (int i = 0; i < c.getCustomerlist().size(); i++)
-//        {
-//            c.getCustomerlist().get(i);
-//        }
-        
-        for (int i = 0; i < c.getItemliste().size(); i++)
+//         c.getCustomerlist().get(0);
+//         c.getCustomerlist().get(1);
+        ArrayList  customer= new ArrayList();
+        customer = c.getCustomerlist();
+        for (int i = 0; i < customer.size(); i++)
         {
-            c.getItemliste().get(i).toString();
+            customer.get(i);
+        }
+        ArrayList  item= new ArrayList();
+        item = c.getItemliste();
+        for (int i = 0; i < item.size(); i++)
+        {
+            System.out.println(item.get(i));
         }
         
         

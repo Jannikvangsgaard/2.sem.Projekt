@@ -74,7 +74,7 @@ public class TheMapper
     
     public ArrayList<Item> getItems(Connection conn)
     {
-        Item i = null;
+//        Item i = null;
         ArrayList<Item> itemsArr = new ArrayList();
         
         String SQLString = "SELECT * FROM varer";
@@ -93,7 +93,7 @@ public class TheMapper
                 String vNa = rs.getString(2);
                 int vQtotal = rs.getInt(3);
                 
-                i = new Item(vNo, vNa, vQtotal);
+                Item i = new Item(vNo, vNa, vQtotal);
                 itemsArr.add(i);
             }
         }
@@ -133,7 +133,7 @@ public class TheMapper
             System.out.println("Error in TheMapper - getCustomer");
             System.out.println(ex.getMessage());
         }
-        System.out.println(customer);
+//        System.out.println(customer);
         return customer;
     }
 
