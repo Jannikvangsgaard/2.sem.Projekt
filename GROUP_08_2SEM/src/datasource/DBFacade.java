@@ -33,7 +33,7 @@ public class DBFacade
 
     public Order getOrder(int ono)
     {
-        return tm.getOrder(ono, con);
+        return tm.getOrders(ono, con);
     }
 
     public ArrayList getCustomer()
@@ -41,9 +41,9 @@ public class DBFacade
         return tm.getCustomer(con);
     }
 
-    public Item getVare(int ono)
+    public ArrayList getVare()
     {
-        return tm.getItem(ono, con);
+        return tm.getItems(con);
     }
 
     public boolean saveOrder(ArrayList<Order> o)
