@@ -16,8 +16,8 @@ public class Control {
     ArrayList availableItems = new ArrayList();
     private DBFacade dbf;
 
-    public void createItem(int number, int amount) {
-        Item item = new Item(number, amount);
+    public void createItem(int number,String itemName, int amount) {
+        Item item = new Item(number,itemName, amount);
         itemlist.add(item);
 
     }
@@ -31,10 +31,10 @@ public class Control {
         return itemlist;
     }
 
-    public void createCustomer(String name) {
-        Customer customer = new Customer(name);
-        customerlist.add(customer);
-    }
+//    public void createCustomer(int customerID, String name) {
+//        Customer customer = new Customer(customerID, name);
+//        customerlist.add(customer);
+//    }
 
     public ArrayList getOrderlist() {
         return orderlist;
