@@ -12,6 +12,10 @@ public class Customer {
         this.customerID = customerID;
         this.name = name;
     }
+    public Customer(int customerID,String name){
+        this.customerID = customerID;
+        this.name=name;
+    }
 
     public int getCustomerID() {
         return customerID;
