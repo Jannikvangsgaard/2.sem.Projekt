@@ -17,8 +17,12 @@ import java.util.ArrayList;
  */
 public class TheMapper
 {
-
+    
     static boolean testRun = false;
+    
+     /**
+     * Read from database
+     */
 
     public Order getOrder(int ono, Connection conn)
     {
@@ -63,6 +67,11 @@ public class TheMapper
         return o;
     }
 
+    
+    /**
+     * Write to database
+     */
+    
     public boolean saveOrder(ArrayList<Order> order, Connection con)
     {
         int rowsInserted = 0;
