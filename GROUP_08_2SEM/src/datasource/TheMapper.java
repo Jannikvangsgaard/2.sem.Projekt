@@ -107,7 +107,7 @@ public class TheMapper
     }
     
     public ArrayList<Customer> getCustomer(Connection conn){
-        System.out.println("themapper her");
+//        System.out.println("themapper her");
         String SQLString = "SELECT * FROM kunde";
         
         PreparedStatement statement = null;

@@ -38,13 +38,13 @@ public class DBFacade
 
     public ArrayList getCustomer()
     {
-        System.out.println("dbfacade her");
+//        System.out.println("dbfacade her");
         return tm.getCustomer(con);
     }
 
     public ArrayList getVare()
     {
-        System.out.println("DBFacade");
+//        System.out.println("DBFacade");
         return tm.getItems(con);
     }
 
