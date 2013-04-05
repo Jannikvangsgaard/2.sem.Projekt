@@ -25,7 +25,7 @@ DefaultListModel model1;
         
         try{
             model1.clear();
-            ArrayList vareliste1 = control.getVareliste();
+            ArrayList vareliste1 = control.getItemliste();
             for (int i=0; i<vareliste1.size();i++){
                 model1.addElement(vareliste1.get(i));
             }
@@ -156,7 +156,7 @@ DefaultListModel model1;
 
         String navn = jTextFieldKundeNavn.getText();
         if (navn!=null){
-            control.createKunde(navn);
+            control.createCustomer(navn);
        } else if (navn==null){
            JOptionPane.showMessageDialog(null, "Husk at skrive et navn");
        }
@@ -164,8 +164,8 @@ DefaultListModel model1;
 
     private void jButtonHentKunderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHentKunderActionPerformed
         
-        if (control.getKundeliste()!=null){
-                 jTextAreaVisKunder.setText(control.kundeToString());
+        if (control.getCustomerlist()!=null){
+                 jTextAreaVisKunder.setText(control.customerToString());
            
         }
         
