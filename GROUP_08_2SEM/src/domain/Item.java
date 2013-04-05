@@ -6,13 +6,15 @@ package domain;
  */
 public class Item
 {
+    private String itemName;
     private int itemNo;
     private int itemAmount;
     
 
-    public Item(int itemNo, int itemAmount)
+    public Item(int itemNo, String itemName, int itemAmount)
     {
         this.itemNo = itemNo;
+        this.itemName = itemName;
         this.itemAmount = itemAmount;
     }
 
