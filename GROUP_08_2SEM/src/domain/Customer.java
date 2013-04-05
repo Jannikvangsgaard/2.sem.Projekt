@@ -8,7 +8,7 @@ public class Customer {
    private int customerID;
    private String name;
    
-    public Customer(String name) {
+    public Customer(int customerID, String name) {
         this.customerID = customerID;
         this.name = name;
     }
@@ -27,6 +27,11 @@ public class Customer {
 
     public void setName(String name) {
         this.name = name;
+    }
+    
+    public String toString()
+    {
+        return "ID: " + customerID + ", Name: " + name;
     }
 
     

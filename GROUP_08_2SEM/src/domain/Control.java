@@ -29,13 +29,14 @@ public class Control {
     }
 
     public ArrayList getItemliste() {
+        itemlist = dbf.getVare();
         return itemlist;
     }
 
-    public void createCustomer(String name) {
+    public void createCustomer(int id, String name) {
         if (customerlist!=null){
          int TISSEMAND = customerlist.size()-1;
-        Customer customer = new Customer(name);
+        Customer customer = new Customer(id, name);
         customer.setCustomerID(customerlist.get(TISSEMAND).getCustomerID()+1);
         customerlist.add(customer);
         }

@@ -44,6 +44,7 @@ public class DBFacade
 
     public ArrayList getVare()
     {
+        System.out.println("DBFacade");
         return tm.getItems(con);
     }
 

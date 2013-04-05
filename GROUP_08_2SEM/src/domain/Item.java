@@ -38,4 +38,9 @@ public class Item
     {
         this.itemNo = itemNo;
     }
+    
+    public String toString()
+    {
+        return "ItemNo: " + itemNo + " Item name: " + itemName + " Item amount: " + itemAmount;
+    }
 }

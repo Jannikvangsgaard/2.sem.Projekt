@@ -12,11 +12,21 @@ import domain.Control;
  */
 public class Main {
     
-    
     public static void main(String[] args) {
         Control c = new Control();
          
-        System.out.println(c.getCustomerlist());
+        
+//        for (int i = 0; i < c.getCustomerlist().size(); i++)
+//        {
+//            c.getCustomerlist().get(i);
+//        }
+        
+        for (int i = 0; i < c.getItemliste().size(); i++)
+        {
+            c.getItemliste().get(i).toString();
+        }
+        
+        
     }
     
     
