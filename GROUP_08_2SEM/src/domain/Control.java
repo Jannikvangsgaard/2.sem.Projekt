@@ -32,10 +32,14 @@ public class Control {
         return itemlist;
     }
 
-//    public void createCustomer(int customerID, String name) {
-//        Customer customer = new Customer(customerID, name);
-//        customerlist.add(customer);
-//    }
+    public void createCustomer(String name) {
+        if (customerlist!=null){
+         int TISSEMAND = customerlist.size()-1;
+        Customer customer = new Customer(name);
+        customer.setCustomerID(customerlist.get(TISSEMAND).getCustomerID()+1);
+        customerlist.add(customer);
+        }
+    }
 
     public ArrayList getOrderlist() {
         return orderlist;
