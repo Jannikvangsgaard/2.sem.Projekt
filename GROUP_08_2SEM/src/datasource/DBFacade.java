@@ -36,9 +36,9 @@ public class DBFacade
         return tm.getOrder(ono, con);
     }
 
-    public Customer getCustomer(int ono)
+    public ArrayList getCustomer()
     {
-        return tm.getCustomer(ono, con);
+        return tm.getCustomer(con);
     }
 
     public Item getVare(int ono)
