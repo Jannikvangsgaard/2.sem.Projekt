@@ -41,7 +41,7 @@ public class DBFacade
         return tm.getCustomer(ono, con);
     }
 
-    public Vare getVare(int ono)
+    public Item getVare(int ono)
     {
         return tm.getItem(ono, con);
     }

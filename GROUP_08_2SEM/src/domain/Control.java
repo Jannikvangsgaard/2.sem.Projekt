@@ -8,19 +8,19 @@ import java.util.ArrayList;
  */
 public class Control {
 
-    ArrayList<Vare> vareliste = new ArrayList<Vare>();
+    ArrayList<Item> vareliste = new ArrayList<Item>();
     ArrayList<Order> ordreliste = new ArrayList<Order>();
     ArrayList<Customer> kundeliste = new ArrayList<Customer>();
-    ArrayList<Vare> varelistereserveret = new ArrayList<Vare>();
+    ArrayList<Item> varelistereserveret = new ArrayList<Item>();
     ArrayList ledigevare = new ArrayList();
 
     public void createVare(int nummer, int antal) {
-        Vare vare = new Vare(nummer, antal);
+        Item vare = new Item(nummer, antal);
         vareliste.add(vare);
 
     }
 
-    public void createOrdre(int ordreNo, ArrayList<Vare> Tissemand) {
+    public void createOrdre(int ordreNo, ArrayList<Item> Tissemand) {
         Order ordre = new Order(ordreNo, Tissemand);
         ordreliste.add(ordre);
     }
@@ -52,8 +52,8 @@ public class Control {
 
     public void reserveretVare() {
         for (int i=0;i<ordreliste.size();i++){
-        for (int j=0;j<ordreliste.get(i).getVareliste().size();j++){
-            varelistereserveret.add(ordreliste.get(j).getVareliste().get(j));
+        for (int j=0;j<ordreliste.get(i).getItemlist().size();j++){
+            varelistereserveret.add(ordreliste.get(j).getItemlist().get(j));
             
         }    
         }

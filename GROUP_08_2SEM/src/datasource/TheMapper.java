@@ -5,7 +5,7 @@
 package datasource;
 
 import domain.Order;
-import domain.Vare;
+import domain.Item;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -43,7 +43,7 @@ public class TheMapper {
 			for (int i = 0; i < order.size(); i++) {
 				Order o = order.get(i);
 				statement.setInt(1, o.getOrderNo());
-				statement.setInt(2, o.getKundeID());
+				statement.setInt(2, o.getCustomerID());
 				statement.setInt(3, o.getState());
 
 				rowsInserted += statement.executeUpdate();
@@ -55,9 +55,9 @@ public class TheMapper {
 
 				for (int i = 0; i < order.size(); i++) {
 					Order o = order.get(i);
-                                        for(int j = 0 ; j < o.getVareliste().size(); j++){
-					statement.setInt(1, o.getVareliste().get(j).getVareNo());
-					statement.setInt(2, o.getVareliste().get(j).getVareAntal());
+                                        for(int j = 0 ; j < o.getItemlist().size(); j++){
+					statement.setInt(1, o.getItemlist().get(j).getVareNo());
+					statement.setInt(2, o.getItemlist().get(j).getVareAntal());
                                         statement.setInt(3, o.getOrderNo());
                                         }
 					rowsInserted += statement.executeUpdate();
@@ -75,7 +75,7 @@ public class TheMapper {
 	}
     
     
-     public boolean saveItem(ArrayList<Vare> freeItems, Connection con) {
+     public boolean saveItem(ArrayList<Item> freeItems, Connection con) {
 		int rowsInserted = 0;
 		String SQLString1 = "update tilrådighed set antal = ? where varerNo = ?; ";
 	
@@ -85,7 +85,7 @@ public class TheMapper {
 			statement = con.prepareStatement(SQLString1);
 
 			for (int i = 0; i < freeItems.size(); i++) {
-                            Vare fi = freeItems.get(i);
+                            Item fi = freeItems.get(i);
                             statement.setInt(1, freeItems.get(i).getVareAntal());
                             statement.setInt(2, freeItems.get(i).getVareNo());
 				

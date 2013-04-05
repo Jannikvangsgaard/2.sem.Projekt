@@ -1,7 +1,7 @@
 package datasource;
 
 import domain.Order;
-import domain.Vare;
+import domain.Item;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -51,7 +51,7 @@ public class OrderMapperPIK
             //Get order
             statement = conn.prepareStatement(SQLString1);
             statement2 = conn.prepareStatement(SQLString2);
-            ArrayList<Vare> vare = new ArrayList();
+            ArrayList<Item> vare = new ArrayList();
             
             ResultSet rs = statement.executeQuery();
             ResultSet rs2 = statement2.executeQuery();
@@ -59,7 +59,7 @@ public class OrderMapperPIK
             {
                 int VareNo = rs2.getInt(1);
                 int qty = rs2.getInt(2);
-                Vare v = new Vare(VareNo, qty);
+                Item v = new Item(VareNo, qty);
                 vare.add(v);
             }
             while (rs.next())

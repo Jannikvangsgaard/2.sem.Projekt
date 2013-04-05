@@ -4,13 +4,13 @@ package domain;
  *
  * @author Jannik
  */
-public class Vare
+public class Item
 {
     private int vareNo;
     private int vareAntal;
     
 
-    public Vare(int vareNo, int vareAntal)
+    public Item(int vareNo, int vareAntal)
     {
         this.vareNo = vareNo;
         this.vareAntal = vareAntal;
