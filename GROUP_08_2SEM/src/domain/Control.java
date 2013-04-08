@@ -81,4 +81,7 @@ public class Control {
             }
         }
     }
+    public boolean saveOrder(ArrayList<Order> o) {
+		return dbf.saveOrder(o);
+	}
 }
