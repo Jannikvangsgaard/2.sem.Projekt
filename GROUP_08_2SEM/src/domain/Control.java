@@ -23,8 +23,8 @@ public class Control {
 
     }
 
-    public void createOrder(ArrayList<Item> Itemliste) {
-        Order order = new Order(Itemliste);
+    public void createOrder(ArrayList<Item> Itemliste, Customer customer) {
+        Order order = new Order(Itemliste, customer);
         orderlist.add(order);
     }
    
