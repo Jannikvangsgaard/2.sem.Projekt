@@ -146,7 +146,7 @@ public class TheMapper {
             for (int i = 0; i < order.size(); i++) {
                 Order o = order.get(i);
                 statement.setInt(1, o.getOrderNo());
-//                statement.setInt(2, o.getCustomerID());
+                statement.setInt(2, o.getCustomer().getCustomerID());
                 statement.setInt(3, o.getState());
                 
                 rowsInserted += statement.executeUpdate();
