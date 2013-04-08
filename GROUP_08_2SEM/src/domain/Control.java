@@ -68,10 +68,15 @@ public class Control {
         }
     }
     public void availableItems(){
+        Item item1, item2, item3;
         for (int i=0; i<itemlistReserved.size();i++){
             for (int j=0; j<itemlist.size();j++){
                 if (itemlist.get(j)==itemlistReserved.get(i)){
-                    availableItems.add(itemlist.get(j).getItemAmount()-itemlistReserved.get(j).getItemAmount());
+                    item1 = itemlist.get(j);
+                    item2 = itemlistReserved.get(i);
+                    item3 = item1;
+                    item3.setItemAmount(item1.getItemAmount()-item2.getItemAmount());
+                    availableItems.add(item3);
                 }
             }
         }
