@@ -19,18 +19,18 @@ public class Main {
         Control c = new Control();
 //         c.getCustomerlist().get(0);
 //         c.getCustomerlist().get(1);
-        ArrayList  customer= new ArrayList();
-        customer = c.getCustomerlist();
-        for (int i = 0; i < customer.size(); i++)
-        {
-            System.out.println(customer.get(i));
-        }
-        ArrayList  item= new ArrayList();
-        item = c.getItemliste();
-        for (int i = 0; i < item.size(); i++)
-        {
-            System.out.println(item.get(i));
-        }
+//        ArrayList  customer= new ArrayList();
+//        customer = c.getCustomerlist();
+//        for (int i = 0; i < customer.size(); i++)
+//        {
+//            System.out.println(customer.get(i));
+//        }
+//        ArrayList  item= new ArrayList();
+//        item = c.getItemliste();
+//        for (int i = 0; i < item.size(); i++)
+//        {
+//            System.out.println(item.get(i));
+//        }
        Item i = new Item(1024,"glas",4);
        Item i2 = new Item(1023,"hoppeborg",2);
        ArrayList order = new ArrayList();
@@ -38,7 +38,8 @@ public class Main {
        varer.add(i);
        varer.add(i2);
        Order o = new Order(2000,varer);
-       c.
+       order.add(o);
+       c.saveOrder(order);
         
     }
     
