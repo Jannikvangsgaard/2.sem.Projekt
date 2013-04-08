@@ -33,15 +33,15 @@ public class Control {
         return itemlist;
     }
 
-    public void createCustomer(int id, String name) {
-        if (customerlist!=null){
+    public void createCustomer(String name) {
+        if (customerlist!=null || customerlist.size()>=1){
          int TISSEMAND = customerlist.size()-1;
-        Customer customer = new Customer(id, name);
+        Customer customer = new Customer(name);
         customer.setCustomerID(customerlist.get(TISSEMAND).getCustomerID()+1);
         customerlist.add(customer);
         }
     }
-
+    
     public ArrayList getOrderlist() {
         return orderlist;
     }

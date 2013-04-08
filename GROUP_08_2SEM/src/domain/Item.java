@@ -9,7 +9,7 @@ public class Item
     private String itemName;
     private int itemNo;
     private int itemAmount;
-    
+    private int price;
 
     public Item(int itemNo, String itemName, int itemAmount)
     {
@@ -18,6 +18,12 @@ public class Item
         this.itemAmount = itemAmount;
     }
 
+    public int getPrice(){
+        return price;
+    }
+    public void setPrice(int price){
+        this.price = price;
+    }
 
     public int getItemAmount()
     {
