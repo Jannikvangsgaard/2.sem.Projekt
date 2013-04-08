@@ -58,5 +58,8 @@ public class DBFacade
     {
         return tm.saveItem(i, con);
     }
+    public boolean saveCustomer(ArrayList<Customer> customer){
+        return tm.saveCustomer(customer, con);
+    }
    
 }

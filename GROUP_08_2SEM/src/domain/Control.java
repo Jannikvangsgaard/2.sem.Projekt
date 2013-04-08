@@ -86,4 +86,7 @@ public class Control {
         System.out.println("control");
 		return dbf.saveOrder(o);
 	}
+     public void saveCustomer(ArrayList<Customer> customer){
+        dbf.saveCustomer(customer);
+    }
 }
