@@ -123,7 +123,7 @@ public class TheMapper {
         int rowsInserted = 0;
         String SQLString1 = "insert into ordre values(?,?,?)";
         String SQLString2 = "insert into ordreDetails values(?,?,?)";
-        String SQLString3 = "select employeeseq.nextval from dual";
+        String SQLString3 = "select ordreseq.nextval from dual";
 
 
 
