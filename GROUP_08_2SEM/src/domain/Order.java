@@ -11,8 +11,7 @@ public class Order {
     private int customerID;
     private int state;
     private ArrayList<Item> itemlist = new ArrayList<Item>();
-    public Order(int no, ArrayList<Item> itemliste){
-      this.orderNo = no;
+    public Order(ArrayList<Item> itemliste){
       itemlist = itemliste;          
       state=0;        
               

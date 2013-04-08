@@ -82,6 +82,7 @@ public class Control {
         }
     }
     public boolean saveOrder(ArrayList<Order> o) {
+        System.out.println("control");
 		return dbf.saveOrder(o);
 	}
 }

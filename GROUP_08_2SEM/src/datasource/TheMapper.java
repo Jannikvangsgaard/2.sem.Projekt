@@ -143,6 +143,7 @@ public class TheMapper
     
     public boolean saveOrder(ArrayList<Order> order, Connection con)
     {
+        System.out.println("mapper");
         int rowsInserted = 0;
         String SQLString1 = "insert into ordre values(?,?,?)";
         String SQLString2 = "insert into ordreDetails values(?,?,?)";

@@ -50,6 +50,7 @@ public class DBFacade
 
     public boolean saveOrder(ArrayList<Order> o)
     {
+        System.out.println("dbfacade");
         return tm.saveOrder(o, con);
     }
 
