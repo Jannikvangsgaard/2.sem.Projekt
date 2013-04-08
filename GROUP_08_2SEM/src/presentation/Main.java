@@ -37,7 +37,7 @@ public class Main {
        ArrayList varer = new ArrayList();
        varer.add(i);
        varer.add(i2);
-       Order o = new Order(2000,varer);
+       Order o = new Order(varer);
        order.add(o);
        c.saveOrder(order);
         

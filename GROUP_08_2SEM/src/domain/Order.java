@@ -16,6 +16,10 @@ public class Order {
       state=0;        
               
     }
+    public Order(int orderNo, ArrayList<Item> itemliste){
+    
+        
+    }
 
     public int getOrderNo() {
         return orderNo;
