@@ -30,6 +30,11 @@ public class Main {
         {
             System.out.println(item.get(i));
         }
+       Item i = new Item(1024,'glas',4); 
+       ArrayList order = new ArrayList();
+       ArrayList varer = new ArrayList();
+       
+        
         
         
     }
