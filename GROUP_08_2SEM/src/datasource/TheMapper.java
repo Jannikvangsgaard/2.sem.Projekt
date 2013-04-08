@@ -123,7 +123,7 @@ public class TheMapper {
         int rowsInserted = 0;
         String SQLString1 = "insert into ordre values(?,?,?)";
         String SQLString2 = "insert into ordreDetails values(?,?,?)";
-        String SQLString3 = "select employeeseq.nextval from dual";
+        String SQLString3 = "select ordreseq.nextval from dual";
         
         
         
@@ -218,18 +218,18 @@ public class TheMapper {
         try {
             statement = con.prepareStatement(SQLString2);
             ResultSet rs = statement.executeQuery();
-            
-            
-            for (int i = 0; i < customer.size(); i++) {
-                Customer cus = customer.get(i);
-                statement.setString(2, customer.get(i).getName());
-            }
-            statement = con.prepareStatement(SQLString1);
-            if (rs.next()) {
+             if (rs.next()) {
                 for (int j = 0; customer.size() > j; j++) {
                     Customer o = customer.get(j);
                     o.setCustomerID(rs.getInt(1));
                 }
+            
+            statement = con.prepareStatement(SQLString1);
+            for (int i = 0; i < customer.size(); i++) {
+                Customer cus = customer.get(i);
+                statement.setString(2, customer.get(i).getName());
+            }
+           
             }
             
             
