@@ -37,12 +37,12 @@ public class Main {
        ArrayList customerlist = new ArrayList();
        Item i = new Item(1022,"glas",4);
        Item i2 = new Item(1023,"hoppeborg",2);
-       Customer customer = new Customer(1001 ,"Mike");
-       customerlist.add(customer);
+//       Customer customer = new Customer(1001 ,"Mike");
+//       customerlist.add(customer);
 //       c.saveCustomer(customerlist);
        varer.add(i);
        varer.add(i2);
-       Order o = new Order(varer, customer);
+       Order o = new Order(varer, new Customer(1001,"Mike"));
        order.add(o);
        c.saveOrder(order);
         
