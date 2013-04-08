@@ -160,17 +160,20 @@ public class TheMapper {
                     Order o = order.get(i);
                     for (int j = 0; j < o.getItemlist().size(); j++) {
                         statement.setInt(1, o.getItemlist().get(j).getItemNo());
+                        System.out.println( o.getItemlist().get(j).getItemNo());
                         statement.setInt(2, o.getItemlist().get(j).getItemAmount());
+                        System.out.println( o.getItemlist().get(j).getItemAmount());
                         statement.setInt(3, o.getOrderNo());
+                        rowsInserted += statement.executeUpdate();
                     }
-                    rowsInserted += statement.executeUpdate();
+                    
                 }
             } else {
                 System.out.println("Fejl i OrdreMapper - Part 1");
             }
             
         } catch (Exception e) {
-            System.out.println("Fejl i OrdreMapper - SaveNewProject");
+            System.out.println("Fejl i OrdreMapper - SaveOrder");
             e.printStackTrace();
         }
         return rowsInserted == order.size();
@@ -191,12 +194,12 @@ public class TheMapper {
                 statement.setInt(1, freeItems.get(i).getItemAmount());
                 statement.setInt(2, freeItems.get(i).getItemNo());
                 
-                
+                rowsInserted += statement.executeUpdate();
             }
             
             
             
-            rowsInserted += statement.executeUpdate();
+            
             
             
             
