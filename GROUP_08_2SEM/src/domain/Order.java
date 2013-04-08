@@ -10,11 +10,12 @@ public class Order {
     private int orderNo;
     private int customerID;
     private int state;
+    private Customer customer;
     private ArrayList<Item> itemlist = new ArrayList<Item>();
-    public Order(ArrayList<Item> itemliste){
+    public Order(ArrayList<Item> itemliste, Customer customer){
       itemlist = itemliste;          
       state=0;        
-              
+      this.customer = customer;        
     }
     public Order(int orderNo, ArrayList<Item> itemliste){
     

@@ -27,7 +27,7 @@ public class Control {
         Order order = new Order(Itemliste);
         orderlist.add(order);
     }
-
+   
     public ArrayList getItemliste() {
         itemlist = dbf.getVare();
         return itemlist;
@@ -41,6 +41,7 @@ public class Control {
         customerlist.add(customer);
         }
     }
+    
     
     public ArrayList getOrderlist() {
         return orderlist;

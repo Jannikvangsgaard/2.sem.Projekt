@@ -5,6 +5,7 @@
 package presentation;
 
 import domain.Control;
+import domain.Customer;
 import domain.Item;
 import domain.Order;
 import java.util.ArrayList;
@@ -33,11 +34,12 @@ public class Main {
 //        }
        Item i = new Item(1024,"glas",4);
        Item i2 = new Item(1023,"hoppeborg",2);
+       Customer customer = new Customer("Mike");
        ArrayList order = new ArrayList();
        ArrayList varer = new ArrayList();
        varer.add(i);
        varer.add(i2);
-       Order o = new Order(varer);
+       Order o = new Order(varer, customer);
        order.add(o);
        c.saveOrder(order);
         
