@@ -212,7 +212,7 @@ public class TheMapper {
          */
         int rowsInserted = 0;
         String SQLString1 = "insert into kunde values(?,?)";
-
+        String SQLString2 ="select kundeseq.nextval from dual";
         PreparedStatement statement = null;
 
         try {

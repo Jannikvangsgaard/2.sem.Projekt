@@ -35,6 +35,7 @@ public class Main {
        Item i = new Item(1024,"glas",4);
        Item i2 = new Item(1023,"hoppeborg",2);
        Customer customer = new Customer("Mike");
+       c.saveCustomer(customer);
        ArrayList order = new ArrayList();
        ArrayList varer = new ArrayList();
        varer.add(i);
