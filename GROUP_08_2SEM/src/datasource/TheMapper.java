@@ -49,7 +49,7 @@ public class TheMapper {
                 vare.add(v);
             }
             while (rs.next()) {
-                o = new Order(ono, vare);
+//                o = new Order(ono, vare);
             }
         } catch (Exception ex) {
             System.out.println("Error in OrderMapper - getOrdre");
@@ -119,7 +119,7 @@ public class TheMapper {
      * Write to database
      */
     public boolean saveOrder(ArrayList<Order> order, Connection con) {
-        System.out.println(order.get(0).getCustomerID());
+        System.out.println(order.get(0).getCustomer().getCustomerID());
         System.out.println("mapper");
         int rowsInserted = 0;
         String SQLString1 = "insert into ordre values(?,?,?)";
@@ -146,7 +146,7 @@ public class TheMapper {
             for (int i = 0; i < order.size(); i++) {
                 Order o = order.get(i);
                 statement.setInt(1, o.getOrderNo());
-                statement.setInt(2, o.getCustomerID());
+//                statement.setInt(2, o.getCustomerID());
                 statement.setInt(3, o.getState());
                 
                 rowsInserted += statement.executeUpdate();

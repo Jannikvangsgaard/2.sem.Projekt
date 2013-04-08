@@ -8,7 +8,6 @@ import java.util.ArrayList;
  */
 public class Order {
     private int orderNo;
-    private int customerID;
     private int state;
     private Customer customer;
     private ArrayList<Item> itemlist = new ArrayList<Item>();
@@ -17,9 +16,12 @@ public class Order {
       state=0;        
       this.customer = customer;        
     }
-    public Order(int orderNo, ArrayList<Item> itemliste){
-    
-        
+//    public Order(int orderNo, ArrayList<Item> itemliste){
+//    
+//        
+//    }
+    public Customer getCustomer(){
+        return customer;
     }
 
     public int getOrderNo() {
@@ -30,13 +32,6 @@ public class Order {
         this.orderNo = ordreNo;
     }
 
-    public int getCustomerID() {
-        return customerID;
-    }
-
-    public void setCustomerID(int kundeID) {
-        this.customerID = kundeID;
-    }
 
     public int getState() {
         return state;
