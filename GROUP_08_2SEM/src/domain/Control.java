@@ -72,7 +72,7 @@ public class Control {
         Item item1, item2, item3;
         for (int i=0; i<itemlistReserved.size();i++){
             for (int j=0; j<itemlist.size();j++){
-                if (itemlist.get(j)==itemlistReserved.get(i)){
+                if (itemlist.get(j).getItemAmount()>=itemlistReserved.get(i).getItemAmount()&& itemlist.get(j)==itemlistReserved.get(i)){
                     item1 = itemlist.get(j);
                     item2 = itemlistReserved.get(i);
                     item3 = item1;
@@ -82,6 +82,7 @@ public class Control {
             }
         }
     }
+    
     public boolean saveOrder(ArrayList<Order> o) {
         System.out.println("control");
 		return dbf.saveOrder(o);
