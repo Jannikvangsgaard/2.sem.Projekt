@@ -209,7 +209,6 @@ public class TheMapper {
 
     public boolean saveCustomer(ArrayList<Customer> customer, Connection con) {
 
-        
         int rowsInserted = 0;
         String SQLString1 = "insert into kunde values(?,?)";
         String SQLString2 = "select kundeseq.nextval from dual";
@@ -227,6 +226,7 @@ public class TheMapper {
             statement = con.prepareStatement(SQLString1);
             for (int i = 0; i < customer.size(); i++) {
                 Customer cus = customer.get(i);
+                statement.setInt(1,customer.get(i).getCustomerID());
                 statement.setString(2, customer.get(i).getName());
             }
            
