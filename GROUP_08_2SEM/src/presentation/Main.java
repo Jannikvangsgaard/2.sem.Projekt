@@ -32,12 +32,14 @@ public class Main {
 //        {
 //            System.out.println(item.get(i));
 //        }
+        ArrayList order = new ArrayList();
+       ArrayList varer = new ArrayList();
+       ArrayList customerlist = new ArrayList();
        Item i = new Item(1024,"glas",4);
        Item i2 = new Item(1023,"hoppeborg",2);
        Customer customer = new Customer("Mike");
-       c.saveCustomer(customer);
-       ArrayList order = new ArrayList();
-       ArrayList varer = new ArrayList();
+       customerlist.add(customer);
+       c.saveCustomer(customerlist);
        varer.add(i);
        varer.add(i2);
        Order o = new Order(varer, customer);

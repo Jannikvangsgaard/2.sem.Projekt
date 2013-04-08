@@ -216,11 +216,16 @@ public class TheMapper {
         PreparedStatement statement = null;
 
         try {
-            statement = con.prepareStatement(SQLString1);
-
+            statement = con.prepareStatement(SQLString2);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next()) {
+                for (int j = 0; customer.size() > j; j++) {
+                    Customer o = customer.get(j);
+                    o.setCustomerID(rs.getInt(1));
+                }
+            }
             for (int i = 0; i < customer.size(); i++) {
                 Customer cus = customer.get(i);
-                statement.setInt(1, customer.get(i).getCustomerID());
                 statement.setString(2, customer.get(i).getName());
 
 
