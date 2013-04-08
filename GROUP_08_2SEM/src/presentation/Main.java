@@ -35,11 +35,11 @@ public class Main {
         ArrayList order = new ArrayList();
        ArrayList varer = new ArrayList();
        ArrayList customerlist = new ArrayList();
-       Item i = new Item(1024,"glas",4);
+       Item i = new Item(1022,"glas",4);
        Item i2 = new Item(1023,"hoppeborg",2);
-       Customer customer = new Customer("Mike");
+       Customer customer = new Customer(1001 ,"Mike");
        customerlist.add(customer);
-       c.saveCustomer(customerlist);
+//       c.saveCustomer(customerlist);
        varer.add(i);
        varer.add(i2);
        Order o = new Order(varer, customer);
