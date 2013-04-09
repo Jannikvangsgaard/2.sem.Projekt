@@ -249,10 +249,10 @@ DefaultListModel model2;
     private void jButtonTilføjVareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTilføjVareActionPerformed
     {//GEN-HEADEREND:event_jButtonTilføjVareActionPerformed
         int amount =(Integer.parseInt(jTextFieldAntalItems.getText()));
-        ArrayList<Item> vareliste1 = control.getItemList();
+        ArrayList<Item> vareliste1 = control.loadItemliste();
         for(int i = 0; i < vareliste1.size(); i++)
         {
-            if(vareliste1.get(i).toStringGUI() == jListvareliste.getSelectedValue())
+            if(vareliste1.get(i).toStringGUI().equals(jListvareliste.getSelectedValue()))
             {
                 if(vareliste1.get(i).getItemAmount() < amount)
                 {
@@ -260,7 +260,7 @@ DefaultListModel model2;
                 }
                 else
                 {
-                    model2.addElement(vareliste1.get(i).getItemName() + amount);
+                    model2.addElement(vareliste1.get(i).getItemName() + " Antal: " + amount);
                 }
             }
         }
@@ -275,7 +275,7 @@ DefaultListModel model2;
             try
             {
                 model1.clear();
-                ArrayList<Item> vareliste1 = control.getItemList();
+                ArrayList<Item> vareliste1 = control.loadItemliste();
                 for (int i=0; i<vareliste1.size();i++)
                 {
                     model1.addElement(vareliste1.get(i).toStringGUI());
