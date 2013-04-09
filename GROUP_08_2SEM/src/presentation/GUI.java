@@ -245,7 +245,7 @@ DefaultListModel model1;
             try
             {
                 model1.clear();
-                ArrayList<Item> vareliste1 = control.getItemliste();
+                ArrayList<Item> vareliste1 = control.getItemList();
                 for (int i=0; i<vareliste1.size();i++)
                 {
                     model1.addElement(vareliste1.get(i).toStringGUI());
