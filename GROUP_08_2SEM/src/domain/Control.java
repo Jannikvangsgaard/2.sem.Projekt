@@ -9,7 +9,9 @@ import java.util.ArrayList;
  */
 public class Control {
 
-    private ArrayList<Item> itemlist, itemlistReserved, availableItems = new ArrayList<Item>();
+    private ArrayList<Item> itemlist = new ArrayList<Item>();
+    private ArrayList<Item> itemlistReserved = new ArrayList<Item>();
+    private ArrayList<Item> availableItems = new ArrayList<Item>();
     private ArrayList<Order> orderlist = new ArrayList<Order>();
     private ArrayList<Customer> customerlist = new ArrayList<Customer>();
     private DBFacade dbf;
@@ -21,7 +23,6 @@ public class Control {
     public void createItem(int number,String itemName, int amount) {
         Item item = new Item(number,itemName, amount);
         itemlist.add(item);
-
     }
     public ArrayList<Item> getItemList(){
         return itemlist;
