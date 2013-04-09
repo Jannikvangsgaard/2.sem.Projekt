@@ -73,9 +73,9 @@ public class Control {
     }
     public void availableItems(){
         Item item1, item2, item3;
-        for (int i=0; i<itemlistReserved.size();i++){
-            for (int j=0; j<itemlist.size();j++){
-                if (itemlist.get(j).getItemAmount()>=itemlistReserved.get(i).getItemAmount()&& itemlist.get(j)==itemlistReserved.get(i)){
+        for (int i=0; i<itemlist.size();i++){
+            for (int j=0; j<itemlistReserved.size();j++){
+                if (itemlist.get(i).getItemAmount()>=itemlistReserved.get(j).getItemAmount()&& itemlist.get(i)==itemlistReserved.get(j)){
                     item1 = itemlist.get(j);
                     item2 = itemlistReserved.get(i);
                     item3 = item1;
