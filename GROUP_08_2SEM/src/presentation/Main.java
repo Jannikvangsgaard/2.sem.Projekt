@@ -47,7 +47,7 @@ public class Main {
        c.createItem(1023, "hoppeborg", 2);
        c.createItem(1021, "noget", 3);
        c.createItem(1337, "DILDO", 1000000);
-       varer = c.getItemList2();
+       varer = c.getItemList();
        c.createOrder(varer, new Customer("Mike"));
 //       Order o = new Order(varer, new Customer(1001,"Mike"));
 //       order.add(o);
