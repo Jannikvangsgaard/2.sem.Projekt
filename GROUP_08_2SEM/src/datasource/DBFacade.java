@@ -10,7 +10,7 @@ import java.util.ArrayList;
  */
 public class DBFacade
 {
-
+    private static DBFacade instance;
     private TheMapper tm;
     private Connection con;
 //    private static DBFacade instance;
@@ -22,14 +22,14 @@ public class DBFacade
 
     }
 
-//    public static DBFacade getInstance()
-//    {
-//        if (instance == null)
-//        {
-//            instance = new DBFacade();
-//        }
-//        return instance;
-//    }
+    public static DBFacade getInstance()
+    {
+        if (instance == null)
+        {
+            instance = new DBFacade();
+        }
+        return instance;
+    }
 
     public Order getOrder(int ono)
     {
