@@ -1,6 +1,7 @@
 package presentation;
 
 import domain.Control;
+import domain.Item;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -21,21 +22,7 @@ DefaultListModel model1;
         jListvareliste.setModel(model1);
         visVareliste();
     }
-     public void visVareliste(){
-        
-        try{
-            model1.clear();
-            ArrayList vareliste1 = control.getItemliste();
-            for (int i=0; i<vareliste1.size();i++){
-                model1.addElement(vareliste1.get(i));
-            }
-        }
-        catch(NullPointerException ex){
-            System.out.println("HEJSA");
-            
-        }
-        
-    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -247,6 +234,24 @@ DefaultListModel model1;
     /**
      * @param args the command line arguments
      */
+    
+        public void visVareliste()
+        {
+            try
+            {
+                model1.clear();
+                ArrayList<Item> vareliste1 = control.getItemliste();
+                for (int i=0; i<vareliste1.size();i++)
+                {
+                    model1.addElement(vareliste1.get(i).getItemName());
+                }
+            }
+            catch(NullPointerException ex)
+            {
+                System.out.println("Error in GUI - \"visVareListe\"");
+            }
+        
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

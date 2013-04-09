@@ -21,6 +21,11 @@ public class Item
     public int getPrice(){
         return price;
     }
+    
+    public String getItemName()
+    {
+        return itemName;
+    }
     public void setPrice(int price){
         this.price = price;
     }
