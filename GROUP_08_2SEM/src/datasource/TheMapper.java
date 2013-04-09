@@ -18,8 +18,6 @@ import java.util.ArrayList;
  */
 public class TheMapper {
     
-    static boolean testRun = false;
-
     /**
      * Read from database
      */
@@ -57,10 +55,6 @@ public class TheMapper {
         } catch (Exception ex) {
             System.out.println("Error in OrderMapper - getOrdre");
             System.out.println(ex.getMessage());
-        }
-        
-        if (testRun) {
-            System.out.println("Retrieved Order: " + o);
         }
         return order;
     }
