@@ -36,9 +36,9 @@ public class Main {
         ArrayList order = new ArrayList();
        ArrayList<Item> varer = new ArrayList<Item>();
        ArrayList customerlist = new ArrayList();
-       Item i = new Item(1022,"glas",4);
-       Item i2 = new Item(1023,"hoppeborg",2);
-       Item i3 = new Item(1021,"noget",3);
+//       Item i = new Item(1022,"glas",4);
+//       Item i2 = new Item(1023,"hoppeborg",2);
+//       Item i3 = new Item(1021,"noget",3);
 //       Customer customer = new Customer(1001 ,"Mike");
 //       customerlist.add(customer);
 //       c.saveCustomer(customerlist);
@@ -47,16 +47,16 @@ public class Main {
        c.createItem(1023, "hoppeborg", 2);
        c.createItem(1021, "noget", 3);
        c.createItem(1337, "DILDO", 1000000);
-       varer = c.getItemList();
+       c.reservedItem();
+       c.availableItems();
+       varer.add(c.getItemList().get(0));
        c.createOrder(varer, new Customer("Mike"));
 //       Order o = new Order(varer, new Customer(1001,"Mike"));
 //       order.add(o);
 //       c.saveOrder(order);
-       
-      c.reservedItem();
-      c.availableItems();
-      ledigevare = c.getAvailableItems();
-      System.out.println(ledigevare);
+       c.reservedItem();
+       c.availableItems();
+        System.out.println(c.getAvailableItems());
 //      c.saveFreeItems(ledigevare);
         
     }
