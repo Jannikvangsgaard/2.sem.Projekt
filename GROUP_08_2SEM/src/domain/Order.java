@@ -11,15 +11,21 @@ public class Order {
     private int state;
     private Customer customer;
     private ArrayList<Item> itemlist = new ArrayList<Item>();
-    public Order(ArrayList<Item> itemliste, Customer customer){
-      itemlist = itemliste;          
-      state=0;        
-      this.customer = customer;        
-    }
-//    public Order(int orderNo, ArrayList<Item> itemliste){
-//    
-//        
+    
+    
+//    public Order(ArrayList<Item> itemliste, Customer customer){
+//      itemliste = itemliste;          
+//      state=0;        
+//      this.customer = customer;        
 //    }
+   
+    public Order(int orderNo, ArrayList<Item> itemlist){
+    
+        this.orderNo = orderNo;
+        this.itemlist = itemlist;
+        state = 0;
+        
+    }
     public Customer getCustomer(){
         return customer;
     }
