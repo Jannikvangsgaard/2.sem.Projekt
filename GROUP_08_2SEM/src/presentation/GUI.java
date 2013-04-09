@@ -13,13 +13,16 @@ import javax.swing.JOptionPane;
 public class GUI extends javax.swing.JFrame {
 Control control = new Control();
 DefaultListModel model1;
+DefaultListModel model2;
     /**
      * Creates new form GUI
      */
     public GUI() {
         initComponents();
         model1 = new DefaultListModel();
+        model2 = new DefaultListModel();
         jListvareliste.setModel(model1);
+        jListVareTilOrdre.setModel(model2);
         visVareliste();
     }
 
@@ -42,9 +45,9 @@ DefaultListModel model1;
         jScrollPane1 = new javax.swing.JScrollPane();
         jListvareliste = new javax.swing.JList();
         jTextFieldAntalItems = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jButtonTilføjVare = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        jListVareTilOrdre = new javax.swing.JList();
         jTextFieldCustomerNo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -132,9 +135,16 @@ DefaultListModel model1;
 
         jScrollPane1.setViewportView(jListvareliste);
 
-        jButton1.setText("Tilføj Vare");
+        jButtonTilføjVare.setText("Tilføj Vare");
+        jButtonTilføjVare.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonTilføjVareActionPerformed(evt);
+            }
+        });
 
-        jScrollPane3.setViewportView(jList1);
+        jScrollPane3.setViewportView(jListVareTilOrdre);
 
         jLabel3.setText("Vare liste:");
 
@@ -158,7 +168,7 @@ DefaultListModel model1;
                 .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButtonTilføjVare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jTextFieldAntalItems, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel4))
                 .addGap(65, 65, 65)
@@ -196,7 +206,7 @@ DefaultListModel model1;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldAntalItems, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
+                        .addComponent(jButtonTilføjVare)))
                 .addContainerGap(125, Short.MAX_VALUE))
         );
 
@@ -235,6 +245,26 @@ DefaultListModel model1;
         
         
     }//GEN-LAST:event_jButtonHentKunderActionPerformed
+
+    private void jButtonTilføjVareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTilføjVareActionPerformed
+    {//GEN-HEADEREND:event_jButtonTilføjVareActionPerformed
+        int amount =(Integer.parseInt(jTextFieldAntalItems.getText()));
+        ArrayList<Item> vareliste1 = control.getItemliste();
+        for(int i = 0; i < vareliste1.size(); i++)
+        {
+            if(vareliste1.get(i).toStringGUI() == jListvareliste.getSelectedValue())
+            {
+                if(vareliste1.get(i).getItemAmount() < amount)
+                {
+                    JOptionPane.showMessageDialog(null, "Der er ikke nok af den valgte vare til rådighed på lager");
+                }
+                else
+                {
+                    model2.addElement(vareliste1.get(i).getItemName() + amount);
+                }
+            }
+        }        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonTilføjVareActionPerformed
 
     /**
      * @param args the command line arguments
@@ -289,10 +319,10 @@ DefaultListModel model1;
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonHentKunder;
     private javax.swing.JButton jButtonOpretKunde;
     private javax.swing.JButton jButtonSaveOrder;
+    private javax.swing.JButton jButtonTilføjVare;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -300,7 +330,7 @@ DefaultListModel model1;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JList jList1;
+    private javax.swing.JList jListVareTilOrdre;
     private javax.swing.JList jListvareliste;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

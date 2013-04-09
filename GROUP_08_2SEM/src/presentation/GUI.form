@@ -177,7 +177,7 @@
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jButton1" max="32767" attributes="0"/>
+                              <Component id="jButtonTilføjVare" max="32767" attributes="0"/>
                               <Component id="jTextFieldAntalItems" min="-2" pref="81" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -225,7 +225,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jTextFieldAntalItems" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButtonTilføjVare" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="125" max="32767" attributes="0"/>
@@ -252,10 +252,13 @@
             </Container>
             <Component class="javax.swing.JTextField" name="jTextFieldAntalItems">
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="jButtonTilf&#xf8;jVare">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Tilf&#xf8;j Vare"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonTilf&#xf8;jVareActionPerformed"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane3">
               <AuxValues>
@@ -264,7 +267,7 @@
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JList" name="jList1">
+                <Component class="javax.swing.JList" name="jListVareTilOrdre">
                   <Properties>
                     <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
                       <StringArray count="0"/>
