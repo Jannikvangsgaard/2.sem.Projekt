@@ -67,6 +67,7 @@ public class Control {
         for (int i=0;i<orderlist.size();i++){
         for (int j=0;j<orderlist.get(i).getItemlist().size();j++){
             itemlistReserved.add(orderlist.get(j).getItemlist().get(j));
+            System.out.println(itemlistReserved);
             
         }    
         }
