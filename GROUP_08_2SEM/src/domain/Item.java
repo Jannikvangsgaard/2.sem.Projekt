@@ -21,6 +21,11 @@ public class Item
     public int getPrice(){
         return price;
     }
+    
+    public String getItemName()
+    {
+        return itemName;
+    }
     public void setPrice(int price){
         this.price = price;
     }
@@ -48,5 +53,10 @@ public class Item
     public String toString()
     {
         return "ItemNo: " + itemNo + " Item name: " + itemName + " Item amount: " + itemAmount;
+    }
+    
+    public String toStringGUI()
+    {
+        return itemName + " ledige: " + itemAmount;
     }
 }
