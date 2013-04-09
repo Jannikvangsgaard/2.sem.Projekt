@@ -135,6 +135,7 @@ public class TheMapper {
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 for (int k = 0; order.size() > k; k++) {
+                    System.out.println("mapper del 1");
                     Order o = order.get(k);
                     o.setOrderNo(rs.getInt(1));
                 }
@@ -147,6 +148,7 @@ public class TheMapper {
                 Order o = order.get(i);
                 statement.setInt(1, o.getOrderNo());
                 statement.setInt(2, o.getCustomer().getCustomerID());
+                System.out.println(o.getCustomer().getCustomerID());
                 statement.setInt(3, o.getState());
                 
                 rowsInserted += statement.executeUpdate();
