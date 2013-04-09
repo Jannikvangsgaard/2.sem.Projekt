@@ -82,7 +82,12 @@ public class Control {
             }
         }
     }
-    
+    public ArrayList<Item> getAvailableItems(){
+        return availableItems;
+    }
+    public void saveFreeItems(ArrayList<Item> hej){
+        dbf.saveItem(hej);
+    }
     public boolean saveOrder(ArrayList<Order> o) {
         System.out.println("control");
 		return dbf.saveOrder(o);

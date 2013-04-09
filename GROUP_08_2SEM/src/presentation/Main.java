@@ -32,6 +32,7 @@ public class Main {
 //        {
 //            System.out.println(item.get(i));
 //        }
+        ArrayList<Item> ledigevare = new ArrayList<Item>();
         ArrayList order = new ArrayList();
        ArrayList varer = new ArrayList();
        ArrayList customerlist = new ArrayList();
@@ -41,12 +42,21 @@ public class Main {
 //       Customer customer = new Customer(1001 ,"Mike");
 //       customerlist.add(customer);
 //       c.saveCustomer(customerlist);
-       varer.add(i);
-       varer.add(i2);
-       varer.add(i3);
+     
+       c.createItem(1022, "Glas", 4);
+       c.createItem(1023, "hoppeborg", 2);
+       c.createItem(1021, "noget", 3);
+       c.createItem(1337, "DILDO", 1000000);
+       c.createOrder(varer, new Customer("Mike"));
        Order o = new Order(varer, new Customer(1001,"Mike"));
        order.add(o);
        c.saveOrder(order);
+       
+      c.reservedItem();
+      c.availableItems();
+      ledigevare = c.getAvailableItems();
+      System.out.println(ledigevare);
+//      c.saveFreeItems(ledigevare);
         
     }
     
