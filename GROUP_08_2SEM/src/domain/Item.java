@@ -54,4 +54,9 @@ public class Item
     {
         return "ItemNo: " + itemNo + " Item name: " + itemName + " Item amount: " + itemAmount;
     }
+    
+    public String toStringGUI()
+    {
+        return itemName + " ledige: " + itemAmount;
+    }
 }
