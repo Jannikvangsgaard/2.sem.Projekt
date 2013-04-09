@@ -29,9 +29,11 @@ public class Control {
         return itemlist;
     }
 
-    public void createOrder(ArrayList<Item> itemliste2, Customer customer) {
+    public ArrayList createOrder(ArrayList<Item> itemliste2, Customer customer) {
         Order order = new Order(itemliste2, customer);
         orderlist.add(order);
+        System.out.println(orderlist);
+        return orderlist;
     }
 
     public ArrayList loadItemliste() {

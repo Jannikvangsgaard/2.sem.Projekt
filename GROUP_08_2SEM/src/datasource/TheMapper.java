@@ -18,12 +18,12 @@ import java.util.ArrayList;
  */
 public class TheMapper {
     
-    static boolean testRun = false;
-
     /**
      * Read from database
      */
-    public Order getOrders(int ono, Connection conn) {
+    public ArrayList getOrders(int ono, Connection conn) {
+        
+        ArrayList<Order> order = new ArrayList();
         Order o = null;
         
         String SQLString1 = "SELECT * FROM ordre";  //Get order
@@ -49,17 +49,14 @@ public class TheMapper {
                 vare.add(v);
             }
             while (rs.next()) {
-//                o = new Order(ono, vare);
+                o = new Order(ono, vare);
+                order.add(o);
             }
         } catch (Exception ex) {
             System.out.println("Error in OrderMapper - getOrdre");
             System.out.println(ex.getMessage());
         }
-        
-        if (testRun) {
-            System.out.println("Retrieved Order: " + o);
-        }
-        return o;
+        return order;
     }
     
     public ArrayList<Item> getItems(Connection conn) {
@@ -135,6 +132,7 @@ public class TheMapper {
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 for (int k = 0; order.size() > k; k++) {
+                    System.out.println("mapper del 1");
                     Order o = order.get(k);
                     o.setOrderNo(rs.getInt(1));
                 }
@@ -147,6 +145,7 @@ public class TheMapper {
                 Order o = order.get(i);
                 statement.setInt(1, o.getOrderNo());
                 statement.setInt(2, o.getCustomer().getCustomerID());
+                System.out.println(o.getCustomer().getCustomerID());
                 statement.setInt(3, o.getState());
                 
                 rowsInserted += statement.executeUpdate();
