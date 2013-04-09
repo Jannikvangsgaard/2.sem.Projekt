@@ -18,12 +18,12 @@ import java.util.ArrayList;
  */
 public class TheMapper {
     
-    static boolean testRun = false;
-
     /**
      * Read from database
      */
-    public Order getOrders(int ono, Connection conn) {
+    public ArrayList getOrders(int ono, Connection conn) {
+        
+        ArrayList<Order> order = new ArrayList();
         Order o = null;
         
         String SQLString1 = "SELECT * FROM ordre";  //Get order
@@ -49,17 +49,14 @@ public class TheMapper {
                 vare.add(v);
             }
             while (rs.next()) {
-//                o = new Order(ono, vare);
+                o = new Order(ono, vare);
+                order.add(o);
             }
         } catch (Exception ex) {
             System.out.println("Error in OrderMapper - getOrdre");
             System.out.println(ex.getMessage());
         }
-        
-        if (testRun) {
-            System.out.println("Retrieved Order: " + o);
-        }
-        return o;
+        return order;
     }
     
     public ArrayList<Item> getItems(Connection conn) {
