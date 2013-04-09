@@ -34,7 +34,7 @@ public class Main {
 //        }
         ArrayList<Item> ledigevare = new ArrayList<Item>();
         ArrayList order = new ArrayList();
-       ArrayList varer = new ArrayList();
+       ArrayList<Item> varer = new ArrayList<Item>();
        ArrayList customerlist = new ArrayList();
        Item i = new Item(1022,"glas",4);
        Item i2 = new Item(1023,"hoppeborg",2);
@@ -47,10 +47,11 @@ public class Main {
        c.createItem(1023, "hoppeborg", 2);
        c.createItem(1021, "noget", 3);
        c.createItem(1337, "DILDO", 1000000);
+       varer = c.getItemList();
        c.createOrder(varer, new Customer("Mike"));
-       Order o = new Order(varer, new Customer(1001,"Mike"));
-       order.add(o);
-       c.saveOrder(order);
+//       Order o = new Order(varer, new Customer(1001,"Mike"));
+//       order.add(o);
+//       c.saveOrder(order);
        
       c.reservedItem();
       c.availableItems();
