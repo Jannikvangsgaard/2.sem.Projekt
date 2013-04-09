@@ -14,8 +14,11 @@ public class Control {
     private ArrayList<Customer> customerlist = new ArrayList<Customer>();
     private ArrayList<Item> itemlistReserved = new ArrayList<Item>();
     private ArrayList availableItems = new ArrayList();
-    private DBFacade dbf = new DBFacade();
+    private DBFacade dbf;
     
+    public Control(){
+        dbf = new DBFacade().getInstance();
+    }
             
     public void createItem(int number,String itemName, int amount) {
         Item item = new Item(number,itemName, amount);
