@@ -251,4 +251,28 @@ public class TheMapper {
         return rowsInserted == customer.size();
         
     }
+    public ArrayList<Item> getAvailableItem(Connection conn) {
+//       
+        String SQLString = "SELECT * FROM tilrådighed";
+        
+        PreparedStatement statement = null;
+        ArrayList<Item> availableItem = new ArrayList();
+        try {
+            statement = conn.prepareStatement(SQLString);
+            
+            
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                int itemNo = rs.getInt(1);
+                int availableItemCount = rs.getInt(2);
+                String itemName = rs.getString(3);
+                Item i = new Item(itemNo, itemName, availableItemCount);
+                availableItem.add(i);
+            }
+        } catch (Exception ex) {
+            System.out.println("Error in TheMapper - getAvailableItem");
+            System.out.println(ex.getMessage());
+        }
+        return availableItem;
+    }
 }
