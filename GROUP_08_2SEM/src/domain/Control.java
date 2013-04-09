@@ -9,11 +9,9 @@ import java.util.ArrayList;
  */
 public class Control {
 
-    private ArrayList<Item> itemlist = new ArrayList<Item>();
+    private ArrayList<Item> itemlist, itemlistReserved, availableItems = new ArrayList<Item>();
     private ArrayList<Order> orderlist = new ArrayList<Order>();
     private ArrayList<Customer> customerlist = new ArrayList<Customer>();
-    private ArrayList<Item> itemlistReserved = new ArrayList<Item>();
-    private ArrayList availableItems = new ArrayList();
     private DBFacade dbf;
     
     public Control(){
@@ -25,14 +23,16 @@ public class Control {
         itemlist.add(item);
 
     }
+    public ArrayList<Item> getItemList(){
+        return itemlist;
+    }
 
-    public void createOrder(ArrayList<Item> itemliste, Customer customer) {
-        Order order = new Order(itemliste, customer);
-        System.out.println(itemlist);
+    public void createOrder(ArrayList<Item> itemliste2, Customer customer) {
+        Order order = new Order(itemliste2, customer);
         orderlist.add(order);
     }
    
-    public ArrayList getItemliste() {
+    public ArrayList loadItemliste() {
         itemlist = dbf.getVare();
         return itemlist;
     }
@@ -67,11 +67,11 @@ public class Control {
     public void reservedItem() {
         System.out.println("hej");
         for (int i=0;i<orderlist.size();i++){
-              System.out.println(orderlist.size());
-              System.out.println(orderlist.get(i).getItemlist().size());
+//              System.out.println(orderlist.size());
+//              System.out.println(orderlist.get(i).getItemlist().size());
         for (int j=0;j<orderlist.get(i).getItemlist().size();j++){
             System.out.println("hej2");
-            itemlistReserved.add(orderlist.get(j).getItemlist().get(j));
+            itemlistReserved.add(orderlist.get(i).getItemlist().get(j));
             System.out.println(itemlistReserved);
             
         }    
