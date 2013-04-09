@@ -26,8 +26,9 @@ public class Control {
 
     }
 
-    public void createOrder(ArrayList<Item> Itemliste, Customer customer) {
-        Order order = new Order(Itemliste, customer);
+    public void createOrder(ArrayList<Item> itemliste, Customer customer) {
+        Order order = new Order(itemliste, customer);
+        System.out.println(itemlist);
         orderlist.add(order);
     }
    
@@ -64,8 +65,12 @@ public class Control {
     }
 
     public void reservedItem() {
+        System.out.println("hej");
         for (int i=0;i<orderlist.size();i++){
+              System.out.println(orderlist.size());
+              System.out.println(orderlist.get(i).getItemlist().size());
         for (int j=0;j<orderlist.get(i).getItemlist().size();j++){
+            System.out.println("hej2");
             itemlistReserved.add(orderlist.get(j).getItemlist().get(j));
             System.out.println(itemlistReserved);
             
@@ -93,7 +98,6 @@ public class Control {
         dbf.saveItem(hej);
     }
     public boolean saveOrder(ArrayList<Order> o) {
-        System.out.println("control");
 		return dbf.saveOrder(o);
 	}
      public void saveCustomer(ArrayList<Customer> customer){
