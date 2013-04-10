@@ -273,7 +273,7 @@ DefaultListModel model2;
     private void jButtonSaveOrderActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSaveOrderActionPerformed
     {//GEN-HEADEREND:event_jButtonSaveOrderActionPerformed
         int kundeNo = Integer.parseInt(jTextFieldCustomerNo.getText());
-        System.out.println(kundeNo);
+        
         ArrayList<Item> orderList = new ArrayList();
         for(int j = 0; j < model2.size(); j++)
         {
@@ -282,19 +282,18 @@ DefaultListModel model2;
         ArrayList<Customer> customerlist = control.getCustomerlist();
         for(int i = 0; i < customerlist.size(); i++)
         {
-            System.out.println("customerlist id "+customerlist.get(i).getCustomerID());
-            System.out.println(customerlist + "gui her");
+        
             if(customerlist.get(i).getCustomerID() == kundeNo)
             {
-                control.saveOrder(control.createOrder(orderList, customerlist.get(i)));
+               control.createOrder(orderList, customerlist.get(i));
                 model2.clear();
                 jTextFieldCustomerNo.setText("");
             }
-            else
-            {
-                JOptionPane.showMessageDialog(null, "Kunden findes ikke");
-            }
-        }
+               
+        } 
+       
+//        control.saveOrder(control.getOrderlist());
+//        
 //        ArrayList<Item> arr = new ArrayList();
 //        control.setAvailableItems();        
 //        control.reservedItem();

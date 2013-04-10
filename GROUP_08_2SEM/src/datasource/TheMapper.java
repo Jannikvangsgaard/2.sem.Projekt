@@ -117,6 +117,7 @@ public class TheMapper {
      */
     public boolean saveOrder(ArrayList<Order> order, Connection con) {
         int rowsInserted = 0;
+        int tal = 0;
         String SQLString1 = "insert into ordre values(?,?,?)";
         String SQLString2 = "insert into ordreDetails values(?,?,?)";
         String SQLString3 = "select ordreseq.nextval from dual";
@@ -128,26 +129,37 @@ public class TheMapper {
         try {
             statement = con.prepareStatement(SQLString3);
             ResultSet rs = statement.executeQuery();
-            if (rs.next()) {
+            if (rs.next()) { 
+                  
                 for (int k = 0; order.size() > k; k++) {
+                   
                     Order o = order.get(k);
+                    
                     o.setOrderNo(rs.getInt(1));
                 }
+                }
                 
-            }
-             
             statement = con.prepareStatement(SQLString1);
             
-            for (int i = 0; i < order.size(); i++) {
-                Order o = order.get(i);
+            for (int j = 0; j< order.size() ;j++){
+            Order otest = order.get(j);
+            tal++;
+                System.out.println(tal);
+            if(otest == order.get(order.size()-1)){
+                System.out.println("if 1");
+            if(tal == order.size()) {
+                System.out.println("if 2");
+                Order o = order.get(j);
+                System.out.println(o.getOrderNo());
                 statement.setInt(1, o.getOrderNo());
                 statement.setInt(2, o.getCustomer().getCustomerID());
                 statement.setInt(3, o.getState());
                 
                 rowsInserted += statement.executeUpdate();
             }
-            
-            if (rowsInserted == order.size()) {
+            }
+            }
+            if (rowsInserted == 1) {
                 rowsInserted = 0;
                 statement = con.prepareStatement(SQLString2);
                 
