@@ -177,7 +177,7 @@
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButton1" pref="90" max="32767" attributes="0"/>
+                          <Component id="jButtonTilføjvare" pref="90" max="32767" attributes="0"/>
                           <Component id="jTextFieldAntalItems" alignment="0" max="32767" attributes="0"/>
                           <Component id="jButtonFjernVare" max="32767" attributes="0"/>
                       </Group>
@@ -222,7 +222,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jTextFieldAntalItems" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButtonTilføjvare" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jButtonFjernVare" min="-2" max="-2" attributes="0"/>
                           </Group>
@@ -251,12 +251,12 @@
             </Container>
             <Component class="javax.swing.JTextField" name="jTextFieldAntalItems">
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="jButtonTilf&#xf8;jvare">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Tilf&#xf8;j Vare"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonTilf&#xf8;jvareActionPerformed"/>
               </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane3">
