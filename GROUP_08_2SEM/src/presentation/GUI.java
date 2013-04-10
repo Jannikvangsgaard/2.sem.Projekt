@@ -46,7 +46,7 @@ DefaultListModel model2;
         jScrollPane1 = new javax.swing.JScrollPane();
         jListvareliste = new javax.swing.JList();
         jTextFieldAntalItems = new javax.swing.JTextField();
-        jButtonTilføjVare = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jListVareTilOrdre = new javax.swing.JList();
         jTextFieldCustomerNo = new javax.swing.JTextField();
@@ -126,7 +126,7 @@ DefaultListModel model2;
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonOpretKunde)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -137,12 +137,12 @@ DefaultListModel model2;
 
         jScrollPane1.setViewportView(jListvareliste);
 
-        jButtonTilføjVare.setText("Tilføj Vare");
-        jButtonTilføjVare.addActionListener(new java.awt.event.ActionListener()
+        jButton1.setText("Tilføj Vare");
+        jButton1.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButtonTilføjVareActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -185,19 +185,18 @@ DefaultListModel model2;
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jTextFieldAntalItems, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jButtonFjernVare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButtonTilføjVare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(65, 65, 65)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                    .addComponent(jTextFieldAntalItems)
+                    .addComponent(jButtonFjernVare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(83, 83, 83)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel5)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jTextFieldCustomerNo, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))
                     .addComponent(jLabel6)
-                    .addComponent(jButtonSaveOrder))
-                .addContainerGap(147, Short.MAX_VALUE))
+                    .addComponent(jButtonSaveOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jTextFieldCustomerNo))
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,10 +223,10 @@ DefaultListModel model2;
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTextFieldAntalItems, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonTilføjVare)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
                         .addComponent(jButtonFjernVare)))
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addContainerGap(137, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Bestilling", jPanel2);
@@ -287,11 +286,6 @@ DefaultListModel model2;
         }
     }//GEN-LAST:event_jButtonTilføjVareActionPerformed
 
-    private void jButtonFjernVareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonFjernVareActionPerformed
-    {//GEN-HEADEREND:event_jButtonFjernVareActionPerformed
-        model2.removeElement(jListVareTilOrdre.getSelectedValue());
-    }//GEN-LAST:event_jButtonFjernVareActionPerformed
-
     private void jButtonSaveOrderActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSaveOrderActionPerformed
     {//GEN-HEADEREND:event_jButtonSaveOrderActionPerformed
         int kundeNo = Integer.parseInt(jTextFieldCustomerNo.getText());
@@ -311,6 +305,32 @@ DefaultListModel model2;
             }
         }
     }//GEN-LAST:event_jButtonSaveOrderActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton1ActionPerformed
+    {//GEN-HEADEREND:event_jButton1ActionPerformed
+        int amount =(Integer.parseInt(jTextFieldAntalItems.getText()));
+        ArrayList<Item> vareliste1 = control.loadItemliste();
+        for(int i = 0; i < vareliste1.size(); i++)
+        {
+            if(vareliste1.get(i).toStringGUI().equals(jListvareliste.getSelectedValue()))
+            {
+                if(vareliste1.get(i).getItemAmount() < amount)
+                {
+                    JOptionPane.showMessageDialog(null, "Der er ikke nok af den valgte vare til rådighed på lager");
+                }
+                else
+                {
+                    vareliste1.get(i).setItemAmount(amount);
+                    model2.addElement(vareliste1.get(i));
+                }
+            }
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButtonFjernVareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonFjernVareActionPerformed
+    {//GEN-HEADEREND:event_jButtonFjernVareActionPerformed
+        model2.removeElement(jListVareTilOrdre.getSelectedValue());
+    }//GEN-LAST:event_jButtonFjernVareActionPerformed
 
     /**
      * @param args the command line arguments
@@ -365,11 +385,11 @@ DefaultListModel model2;
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonFjernVare;
     private javax.swing.JButton jButtonHentKunder;
     private javax.swing.JButton jButtonOpretKunde;
     private javax.swing.JButton jButtonSaveOrder;
-    private javax.swing.JButton jButtonTilføjVare;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
