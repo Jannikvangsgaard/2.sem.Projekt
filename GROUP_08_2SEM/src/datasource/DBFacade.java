@@ -50,7 +50,7 @@ public class DBFacade
 
     public boolean saveOrder(ArrayList<Order> o)
     {
-        System.out.println("dbfacade");
+    
         return tm.saveOrder(o, con);
     }
 
@@ -60,6 +60,9 @@ public class DBFacade
     }
     public boolean saveCustomer(ArrayList<Customer> customer){
         return tm.saveCustomer(customer, con);
+    }
+    public ArrayList getAvailableItems(){
+    return tm.getAvailableItem(con);
     }
    
 }

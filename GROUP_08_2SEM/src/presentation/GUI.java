@@ -293,8 +293,12 @@ DefaultListModel model2;
             }
         }
         ArrayList<Item> arr = new ArrayList();
-        
+        control.setAvailableItems();        
+        control.reservedItem();
+        control.availableItems();
         arr = control.getAvailableItems();
+        System.out.println(arr);
+       
         
         control.saveFreeItems(arr);
     }//GEN-LAST:event_jButtonSaveOrderActionPerformed
