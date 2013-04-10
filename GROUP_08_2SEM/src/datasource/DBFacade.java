@@ -56,7 +56,7 @@ public class DBFacade
 
     public boolean saveItem(ArrayList<Item> i)
     {
-        return tm.saveItem(i, con);
+        return tm.saveAvailableItems(i, con);
     }
     public boolean saveCustomer(ArrayList<Customer> customer){
         return tm.saveCustomer(customer, con);

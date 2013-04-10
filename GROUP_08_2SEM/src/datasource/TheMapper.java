@@ -173,7 +173,7 @@ public class TheMapper {
         
     }
     
-    public boolean saveItem(ArrayList<Item> freeItems, Connection con) {
+    public boolean saveAvailableItem(ArrayList<Item> freeItems, Connection con) {
         int rowsInserted = 0;
         String SQLString1 = "update tilrådighed set antal = ? where varerNo = ?; ";
         
