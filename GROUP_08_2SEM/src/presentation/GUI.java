@@ -361,7 +361,6 @@ public class GUI extends javax.swing.JFrame
                                             JOptionPane.showMessageDialog(null, "Der er ikke nok af den valgte vare til rådighed på lageret");
                                             jTextFieldAntalItems.setText("");
                                             add = false;
-                                            break;
                                         }
                                     } else
                                     {
