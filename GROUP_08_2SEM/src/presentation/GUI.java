@@ -17,7 +17,7 @@ public class GUI extends javax.swing.JFrame
     Control control = new Control();
     DefaultListModel model1;
     DefaultListModel model2;
-    DefaultListModel model3;
+    ArrayList<Item> orderList = new ArrayList();
 
     /**
      * Creates new form GUI
@@ -27,7 +27,6 @@ public class GUI extends javax.swing.JFrame
         initComponents();
         model1 = new DefaultListModel();
         model2 = new DefaultListModel();
-        model3 = new DefaultListModel();
         jListvareliste.setModel(model1);
         jListVareTilOrdre.setModel(model2);
         visVareliste();
@@ -282,11 +281,11 @@ public class GUI extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jButtonSaveOrderActionPerformed
         int kundeNo = Integer.parseInt(jTextFieldCustomerNo.getText());
 
-        ArrayList<Item> orderList = new ArrayList();
-        for (int j = 0; j < model2.size(); j++)
-        {
-            orderList.add((Item) model2.getElementAt(j));
-        }
+//        ArrayList<Item> orderList = new ArrayList();
+//        for (int j = 0; j < model2.size(); j++)
+//        {
+//            orderList.add((Item) model2.getElementAt(j));
+//        }
         ArrayList<Customer> customerlist = control.getCustomerlist();
         for (int i = 0; i < customerlist.size(); i++)
         {
@@ -333,8 +332,8 @@ public class GUI extends javax.swing.JFrame
                             if (model2.isEmpty())
                             {
                                 vareliste1.get(i).setItemAmount(amount);
-                                model2.addElement(vareliste1.get(i));
-                                model3.addElement(vareliste1.get(i).toStringGUI());
+                                orderList.add(vareliste1.get(i));
+                                model2.addElement(vareliste1.get(i).toStringGUI());
                                 jTextFieldAntalItems.setText("");
                             } else
                             {
@@ -343,20 +342,18 @@ public class GUI extends javax.swing.JFrame
                                 boolean add = false;
                                 for (int j = 0; j < model2.size(); j++)
                                 {
-                                    Item midlertidigLager = (Item) model2.getElementAt(j);
-                                    int itemNo = midlertidigLager.getItemNo();
+                                      int itemNo = orderList.get(j).getItemNo();
 
                                     if (itemNo == vareliste1.get(i).getItemNo())
                                     {
-                                        Item getAmountBefore = (Item) model2.getElementAt(j);
-                                        int amountBefore = getAmountBefore.getItemAmount();
+                                        int amountBefore = orderList.get(j).getItemAmount();
                                         if ((amountBefore + amount) <= totalAmount)
                                         {
+                                            orderList.remove(j);
                                             model2.removeElementAt(j);
-                                            model3.removeElementAt(j);
                                             vareliste1.get(i).setItemAmount(amount + amountBefore);
-                                            model2.addElement(vareliste1.get(i));
-                                            model3.addElement(vareliste1.get(i).toStringGUI());
+                                            orderList.add(vareliste1.get(i));
+                                            model2.addElement(vareliste1.get(i).toStringGUI());
                                             jTextFieldAntalItems.setText("");
                                             add = false;
                                         } else
@@ -375,8 +372,8 @@ public class GUI extends javax.swing.JFrame
                                 if (add == true)
                                 {
                                     vareliste1.get(i).setItemAmount(amount);
-                                    model2.addElement(vareliste1.get(i));
-                                    model3.addElement(vareliste1.get(i).toStringGUI());
+                                    orderList.add(vareliste1.get(i));
+                                    model2.addElement(vareliste1.get(i).toStringGUI());
                                     jTextFieldAntalItems.setText("");
                                 }
                             }
@@ -395,6 +392,13 @@ public class GUI extends javax.swing.JFrame
 
     private void jButtonFjernVareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonFjernVareActionPerformed
     {//GEN-HEADEREND:event_jButtonFjernVareActionPerformed
+        for(int i = 0; i < model2.size(); i++)
+        {
+            if(jListVareTilOrdre.getSelectedValue().equals(model2.elementAt(i)))
+            {
+                orderList.remove(i);
+            }
+        }
         model2.removeElement(jListVareTilOrdre.getSelectedValue());
     }//GEN-LAST:event_jButtonFjernVareActionPerformed
 
