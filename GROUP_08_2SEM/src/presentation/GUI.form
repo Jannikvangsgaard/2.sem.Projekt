@@ -70,7 +70,7 @@
                           </Group>
                           <Component id="jButtonOpretKunde" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="272" max="32767" attributes="0"/>
+                      <EmptySpace pref="382" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -188,7 +188,7 @@
                           <Component id="jScrollPane3" alignment="0" pref="0" max="32767" attributes="0"/>
                           <Component id="jTextFieldCustomerNo" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="78" max="32767" attributes="0"/>
+                      <EmptySpace pref="122" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -224,7 +224,7 @@
                               <Component id="jButton1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="125" max="32767" attributes="0"/>
+                      <EmptySpace pref="137" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

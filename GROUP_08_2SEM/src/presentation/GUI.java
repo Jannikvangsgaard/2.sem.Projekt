@@ -299,7 +299,6 @@ DefaultListModel model2;
         for(int j = 0; j < model2.size(); j++)
         {
             orderList.add((Item)model2.getElementAt(j));
-            System.out.println(orderList);
         }
         ArrayList<Customer> customerlist = control.getCustomerlist();
         for(int i = 0; i < customerlist.size(); i++)

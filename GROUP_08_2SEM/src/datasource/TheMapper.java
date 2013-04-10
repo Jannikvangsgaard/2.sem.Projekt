@@ -116,8 +116,6 @@ public class TheMapper {
      * Write to database
      */
     public boolean saveOrder(ArrayList<Order> order, Connection con) {
-        System.out.println(order.get(0).getCustomer().getCustomerID());
-        System.out.println("mapper");
         int rowsInserted = 0;
         String SQLString1 = "insert into ordre values(?,?,?)";
         String SQLString2 = "insert into ordreDetails values(?,?,?)";
@@ -132,7 +130,6 @@ public class TheMapper {
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
                 for (int k = 0; order.size() > k; k++) {
-                    System.out.println("mapper del 1");
                     Order o = order.get(k);
                     o.setOrderNo(rs.getInt(1));
                 }
@@ -145,7 +142,6 @@ public class TheMapper {
                 Order o = order.get(i);
                 statement.setInt(1, o.getOrderNo());
                 statement.setInt(2, o.getCustomer().getCustomerID());
-                System.out.println(o.getCustomer().getCustomerID());
                 statement.setInt(3, o.getState());
                 
                 rowsInserted += statement.executeUpdate();
@@ -159,9 +155,7 @@ public class TheMapper {
                     Order o = order.get(i);
                     for (int j = 0; j < o.getItemlist().size(); j++) {
                         statement.setInt(1, o.getItemlist().get(j).getItemNo());
-                        System.out.println( o.getItemlist().get(j).getItemNo());
                         statement.setInt(2, o.getItemlist().get(j).getItemAmount());
-                        System.out.println( o.getItemlist().get(j).getItemAmount());
                         statement.setInt(3, o.getOrderNo());
                         rowsInserted += statement.executeUpdate();
                     }
