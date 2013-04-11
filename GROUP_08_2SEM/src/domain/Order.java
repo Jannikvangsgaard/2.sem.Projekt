@@ -21,7 +21,7 @@ public class Order {
    
     public Order(int orderNo, ArrayList<Item> itemlist){
     
-        this.orderNo = orderNo;
+        this.orderNo = 0;
         this.itemlist = itemlist;
         state = 0;
         

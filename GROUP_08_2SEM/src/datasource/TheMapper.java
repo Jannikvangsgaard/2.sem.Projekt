@@ -129,6 +129,15 @@ public class TheMapper {
         
         
         PreparedStatement statement = null;
+        for (int j = 0; j< order.size() ;j++){
+            Order otest = order.get(j);
+            System.out.println("1 for");
+            
+            if(otest.getOrderNo() != 0){
+                tal++;
+                System.out.println(tal +"tal her");
+            }}
+        
         
         try {
             statement = con.prepareStatement(SQLString3);
@@ -145,24 +154,19 @@ public class TheMapper {
                 
             statement = con.prepareStatement(SQLString1);
             
-            for (int j = 0; j< order.size() ;j++){
-            Order otest = order.get(j);
-            tal++;
-                System.out.println(tal);
-            if(otest == order.get(order.size()-1)){
-                System.out.println("if 1");
-            if(tal == order.size()) {
-                System.out.println("if 2");
-                Order o = order.get(j);
+          
+                for(int j =tal; tal< order.size(); j++){
+                    System.out.println("Forløkke saveorder");
+                    Order o = order.get(j);
                 System.out.println(o.getOrderNo());
                 statement.setInt(1, o.getOrderNo());
                 statement.setInt(2, o.getCustomer().getCustomerID());
                 statement.setInt(3, o.getState());
                 
                 rowsInserted += statement.executeUpdate();
-            }
-            }
-            }
+                }
+            
+           
             if (rowsInserted == 1) {
                 rowsInserted = 0;
                 statement = con.prepareStatement(SQLString2);
@@ -199,7 +203,6 @@ public class TheMapper {
             statement = con.prepareStatement(SQLString1);
             
             for (int i = 0; i < freeItems.size(); i++) {
-                Item fi = freeItems.get(i);
                 statement.setInt(1, freeItems.get(i).getItemAmount());
                 statement.setInt(2, freeItems.get(i).getItemNo());
                 
