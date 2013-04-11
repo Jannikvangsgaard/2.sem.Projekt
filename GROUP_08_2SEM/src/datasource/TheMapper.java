@@ -21,13 +21,15 @@ public class TheMapper {
     /**
      * Read from database
      */
-    public ArrayList getOrders(int ono, Connection conn) {
+    
+    public ArrayList getOrder(Connection conn) {
         
         ArrayList<Order> order = new ArrayList();
+        ArrayList<Item> item = new ArrayList();
         Order o = null;
         
         String SQLString1 = "SELECT * FROM ordre";  //Get order
-        String SQLString2 = "SELECT varerno, antal FROM ordredetails WHERE ordreno = ?"; //Get orderdetails
+        String SQLString2 = "SELECT * FROM ordredetails"; //Get orderdetails
 
         PreparedStatement statement = null;
         PreparedStatement statement2 = null;
@@ -36,25 +38,27 @@ public class TheMapper {
             //Get order
             statement = conn.prepareStatement(SQLString1);
             statement2 = conn.prepareStatement(SQLString2);
-            ArrayList<Item> vare = new ArrayList();
             
             ResultSet rs = statement.executeQuery();
+            ResultSet rs2 = statement2.executeQuery();
             
-            while (rs.next()) {
-                statement2.setInt(1, ono);
-                int VareNo = rs.getInt(2);
-                String vNa = rs.getString(3);
-                int qty = rs.getInt(4);
-                Item v = new Item(VareNo, vNa, qty);
-                vare.add(v);
+            while (rs2.next()) 
+            {
+                int itemNo = rs2.getInt(1);
+                int itemQty = rs2.getInt(2);
+                int orderNo = rs2.getInt(3);
+                
             }
-            while (rs.next()) {
-                o = new Order(ono, vare);
+            while (rs.next()) 
+            {
+                int orderNo = rs.getInt(1);
+                int kundeNo = rs.getInt(2);
+                
+                o = new Order(orderNo, odArr);
                 order.add(o);
             }
         } catch (Exception ex) {
             System.out.println("Error in OrderMapper - getOrdre");
-            System.out.println(ex.getMessage());
         }
         return order;
     }

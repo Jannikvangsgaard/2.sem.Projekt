@@ -70,7 +70,7 @@
                           </Group>
                           <Component id="jButtonOpretKunde" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="382" max="32767" attributes="0"/>
+                      <EmptySpace pref="272" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -91,7 +91,7 @@
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jButtonOpretKunde" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="97" max="32767" attributes="0"/>
+                              <EmptySpace pref="109" max="32767" attributes="0"/>
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jScrollPane2" min="-2" max="-2" attributes="0"/>
@@ -177,7 +177,7 @@
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jButtonTilføjvare" pref="90" max="32767" attributes="0"/>
+                          <Component id="jButtonTilføjvare" pref="0" max="32767" attributes="0"/>
                           <Component id="jTextFieldAntalItems" alignment="0" max="32767" attributes="0"/>
                           <Component id="jButtonFjernVare" max="32767" attributes="0"/>
                       </Group>
@@ -189,7 +189,7 @@
                           <Component id="jScrollPane3" alignment="0" pref="0" max="32767" attributes="0"/>
                           <Component id="jTextFieldCustomerNo" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="122" max="32767" attributes="0"/>
+                      <EmptySpace pref="62" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
