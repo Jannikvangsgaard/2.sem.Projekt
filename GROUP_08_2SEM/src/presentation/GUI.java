@@ -292,17 +292,12 @@ DefaultListModel model2;
                
         } 
        
-//        control.saveOrder(control.getOrderlist());
-//        
-//        ArrayList<Item> arr = new ArrayList();
-//        control.setAvailableItems();        
-//        control.reservedItem();
-//        control.availableItems();
-//        arr = control.getAvailableItems();
-//        System.out.println(arr);
-//       
-//        
-//        control.saveFreeItems(arr);
+        control.saveOrder();
+        
+     
+        control.reservedItem();
+        control.availableItems();
+        control.saveFreeItems();
     }//GEN-LAST:event_jButtonSaveOrderActionPerformed
 
     private void jButtonTilføjvareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTilføjvareActionPerformed
@@ -340,8 +335,9 @@ DefaultListModel model2;
         {
             try
             {
+                control.setAvailableItems();
                 model1.clear();
-                ArrayList<Item> vareliste1 = control.loadItemliste();
+                ArrayList<Item> vareliste1 = control.getAvailableItems();
                 for (int i=0; i<vareliste1.size();i++)
                 {
                     model1.addElement(vareliste1.get(i).toStringGUI());
