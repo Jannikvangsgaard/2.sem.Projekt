@@ -299,7 +299,7 @@ public class GUI extends javax.swing.JFrame
 
         }
 
-//        control.saveOrder(control.getOrderlist());
+        control.saveOrder(control.getOrderlist());
 //        
 //        ArrayList<Item> arr = new ArrayList();
 //        control.setAvailableItems();        
@@ -331,6 +331,7 @@ public class GUI extends javax.swing.JFrame
                         {
                             if (model2.isEmpty())
                             {
+                                
                                 vareliste1.get(i).setItemAmount(amount);
                                 orderList.add(vareliste1.get(i));
                                 model2.addElement(vareliste1.get(i).toStringGUI());
