@@ -34,7 +34,10 @@ public class Control {
         orderlist.add(order);
         return orderlist;
     }
-
+    public void loadOrderList(){
+    orderlist = dbf.getOrder();
+    }
+    
     public ArrayList loadItemliste() {
         itemlist = dbf.getVare();
         return itemlist;
@@ -105,12 +108,12 @@ public class Control {
         return availableItems;
     }
 
-    public void saveFreeItems(ArrayList<Item> hej) {
-        dbf.saveItem(hej);
+    public void saveFreeItems() {
+        dbf.saveItem(availableItems);
     }
 
-    public boolean saveOrder(ArrayList<Order> o) {
-        return dbf.saveOrder(o);
+    public boolean saveOrder() {
+        return dbf.saveOrder(orderlist);
     }
 
     public void saveCustomer(ArrayList<Customer> customer) {

@@ -21,13 +21,15 @@ public class TheMapper {
     /**
      * Read from database
      */
-    public ArrayList getOrders(int ono, Connection conn) {
+    
+    public ArrayList getOrder(Connection conn) {
         
         ArrayList<Order> order = new ArrayList();
+        ArrayList<Item> item = new ArrayList();
         Order o = null;
         
         String SQLString1 = "SELECT * FROM ordre";  //Get order
-        String SQLString2 = "SELECT varerno, antal FROM ordredetails WHERE ordreno = ?"; //Get orderdetails
+        String SQLString2 = "SELECT * FROM ordredetails"; //Get orderdetails
 
         PreparedStatement statement = null;
         PreparedStatement statement2 = null;
@@ -36,25 +38,27 @@ public class TheMapper {
             //Get order
             statement = conn.prepareStatement(SQLString1);
             statement2 = conn.prepareStatement(SQLString2);
-            ArrayList<Item> vare = new ArrayList();
             
             ResultSet rs = statement.executeQuery();
+            ResultSet rs2 = statement2.executeQuery();
             
-            while (rs.next()) {
-                statement2.setInt(1, ono);
-                int VareNo = rs.getInt(2);
-                String vNa = rs.getString(3);
-                int qty = rs.getInt(4);
-                Item v = new Item(VareNo, vNa, qty);
-                vare.add(v);
+            while (rs2.next()) 
+            {
+                int itemNo = rs2.getInt(1);
+                int itemQty = rs2.getInt(2);
+                int orderNo = rs2.getInt(3);
+                
             }
-            while (rs.next()) {
-                o = new Order(ono, vare);
+            while (rs.next()) 
+            {
+                int orderNo = rs.getInt(1);
+                int kundeNo = rs.getInt(2);
+                
+                o = new Order(orderNo, odArr);
                 order.add(o);
             }
         } catch (Exception ex) {
             System.out.println("Error in OrderMapper - getOrdre");
-            System.out.println(ex.getMessage());
         }
         return order;
     }
@@ -125,6 +129,15 @@ public class TheMapper {
         
         
         PreparedStatement statement = null;
+        for (int j = 0; j< order.size() ;j++){
+            Order otest = order.get(j);
+            System.out.println("1 for");
+            
+            if(otest.getOrderNo() != 0){
+                tal++;
+                System.out.println(tal +"tal her");
+            }}
+        
         
         try {
             statement = con.prepareStatement(SQLString3);
@@ -141,24 +154,19 @@ public class TheMapper {
                 
             statement = con.prepareStatement(SQLString1);
             
-            for (int j = 0; j< order.size() ;j++){
-            Order otest = order.get(j);
-            tal++;
-                System.out.println(tal);
-            if(otest == order.get(order.size()-1)){
-                System.out.println("if 1");
-            if(tal == order.size()) {
-                System.out.println("if 2");
-                Order o = order.get(j);
+          
+                for(int j =tal; tal< order.size(); j++){
+                    System.out.println("Forløkke saveorder");
+                    Order o = order.get(j);
                 System.out.println(o.getOrderNo());
                 statement.setInt(1, o.getOrderNo());
                 statement.setInt(2, o.getCustomer().getCustomerID());
                 statement.setInt(3, o.getState());
                 
                 rowsInserted += statement.executeUpdate();
-            }
-            }
-            }
+                }
+            
+           
             if (rowsInserted == 1) {
                 rowsInserted = 0;
                 statement = con.prepareStatement(SQLString2);
@@ -195,7 +203,6 @@ public class TheMapper {
             statement = con.prepareStatement(SQLString1);
             
             for (int i = 0; i < freeItems.size(); i++) {
-                Item fi = freeItems.get(i);
                 statement.setInt(1, freeItems.get(i).getItemAmount());
                 statement.setInt(2, freeItems.get(i).getItemNo());
                 
