@@ -289,15 +289,20 @@ public class GUI extends javax.swing.JFrame {
                 model2.clear();
                 jTextFieldCustomerNo.setText("");
             }
-               
-        } 
-       
-        control.saveOrder();
-        
-     
-        control.reservedItem();
-        control.availableItems();
-        control.saveFreeItems();
+
+        }
+
+//        control.saveOrder(control.getOrderlist());
+//        
+//        ArrayList<Item> arr = new ArrayList();
+//        control.setAvailableItems();        
+//        control.reservedItem();
+//        control.availableItems();
+//        arr = control.getAvailableItems();
+//        System.out.println(arr);
+//       
+//        
+//        control.saveFreeItems(arr);
     }//GEN-LAST:event_jButtonSaveOrderActionPerformed
 
     private void jButtonTilføjvareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTilføjvareActionPerformed
@@ -374,18 +379,12 @@ public class GUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    
-        public void visVareliste()
-        {
-            try
-            {
-                control.setAvailableItems();
-                model1.clear();
-                ArrayList<Item> vareliste1 = control.getAvailableItems();
-                for (int i=0; i<vareliste1.size();i++)
-                {
-                    model1.addElement(vareliste1.get(i).toStringGUI());
-                }
+    public void visVareliste() {
+        try {
+            model1.clear();
+            ArrayList<Item> vareliste1 = control.loadItemliste();
+            for (int i = 0; i < vareliste1.size(); i++) {
+                model1.addElement(vareliste1.get(i).toStringGUI());
             }
         } catch (NullPointerException ex) {
             System.out.println("Error in GUI - \"visVareListe\"");
