@@ -11,8 +11,7 @@ import javax.swing.JOptionPane;
  *
  * @author Jannik
  */
-public class GUI extends javax.swing.JFrame
-{
+public class GUI extends javax.swing.JFrame {
 
     Control control = new Control();
     DefaultListModel model1;
@@ -22,8 +21,7 @@ public class GUI extends javax.swing.JFrame
     /**
      * Creates new form GUI
      */
-    public GUI()
-    {
+    public GUI() {
         initComponents();
         model1 = new DefaultListModel();
         model2 = new DefaultListModel();
@@ -253,19 +251,16 @@ public class GUI extends javax.swing.JFrame
     private void jButtonOpretKundeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOpretKundeActionPerformed
 
         String navn = jTextFieldKundeNavn.getText();
-        if (navn != null)
-        {
+        if (navn != null) {
             control.createCustomer(navn);
-        } else if (navn == null)
-        {
+        } else if (navn == null) {
             JOptionPane.showMessageDialog(null, "Husk at skrive et navn");
         }
     }//GEN-LAST:event_jButtonOpretKundeActionPerformed
 
     private void jButtonHentKunderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHentKunderActionPerformed
 
-        if (control.getCustomerlist() != null)
-        {
+        if (control.getCustomerlist() != null) {
             jTextAreaVisKunder.setText(control.customerToString());
 
         }
@@ -287,11 +282,9 @@ public class GUI extends javax.swing.JFrame
 //            orderList.add((Item) model2.getElementAt(j));
 //        }
         ArrayList<Customer> customerlist = control.getCustomerlist();
-        for (int i = 0; i < customerlist.size(); i++)
-        {
+        for (int i = 0; i < customerlist.size(); i++) {
 
-            if (customerlist.get(i).getCustomerID() == kundeNo)
-            {
+            if (customerlist.get(i).getCustomerID() == kundeNo) {
                 control.createOrder(orderList, customerlist.get(i));
                 model2.clear();
                 jTextFieldCustomerNo.setText("");
@@ -314,41 +307,30 @@ public class GUI extends javax.swing.JFrame
 
     private void jButtonTilføjvareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTilføjvareActionPerformed
     {//GEN-HEADEREND:event_jButtonTilføjvareActionPerformed
-        try
-        {
+        try {
             int amount = (Integer.parseInt(jTextFieldAntalItems.getText()));
             ArrayList<Item> vareliste1 = control.loadItemliste();
-            for (int i = 0; i < vareliste1.size(); i++)
-            {
-                if (vareliste1.get(i).toStringGUI().equals(jListvareliste.getSelectedValue()))
-                {
-                    if (amount > 0)
-                    {
-                        if (vareliste1.get(i).getItemAmount() < amount)
-                        {
+            for (int i = 0; i < vareliste1.size(); i++) {
+                if (vareliste1.get(i).toStringGUI().equals(jListvareliste.getSelectedValue())) {
+                    if (amount > 0) {
+                        if (vareliste1.get(i).getItemAmount() < amount) {
                             JOptionPane.showMessageDialog(null, "Der er ikke nok af den valgte vare til rådighed på lager");
-                        } else
-                        {
-                            if (model2.isEmpty())
-                            {
+                        } else {
+                            if (model2.isEmpty()) {
                                 vareliste1.get(i).setItemAmount(amount);
                                 orderList.add(vareliste1.get(i));
                                 model2.addElement(vareliste1.get(i).toStringGUI());
                                 jTextFieldAntalItems.setText("");
-                            } else
-                            {
+                            } else {
                                 int totalAmount = vareliste1.get(i).getItemAmount();
                                 vareliste1.get(i).setItemAmount(amount);
                                 boolean add = false;
-                                for (int j = 0; j < model2.size(); j++)
-                                {
-                                      int itemNo = orderList.get(j).getItemNo();
+                                for (int j = 0; j < model2.size(); j++) {
+                                    int itemNo = orderList.get(j).getItemNo();
 
-                                    if (itemNo == vareliste1.get(i).getItemNo())
-                                    {
+                                    if (itemNo == vareliste1.get(i).getItemNo()) {
                                         int amountBefore = orderList.get(j).getItemAmount();
-                                        if ((amountBefore + amount) <= totalAmount)
-                                        {
+                                        if ((amountBefore + amount) <= totalAmount) {
                                             orderList.remove(j);
                                             model2.removeElementAt(j);
                                             vareliste1.get(i).setItemAmount(amount + amountBefore);
@@ -356,20 +338,17 @@ public class GUI extends javax.swing.JFrame
                                             model2.addElement(vareliste1.get(i).toStringGUI());
                                             jTextFieldAntalItems.setText("");
                                             add = false;
-                                        } else
-                                        {
+                                        } else {
                                             JOptionPane.showMessageDialog(null, "Der er ikke nok af den valgte vare til rådighed på lageret");
                                             jTextFieldAntalItems.setText("");
                                             add = false;
                                         }
-                                    } else
-                                    {
+                                    } else {
                                         add = true;
 
                                     }
                                 }
-                                if (add == true)
-                                {
+                                if (add == true) {
                                     vareliste1.get(i).setItemAmount(amount);
                                     orderList.add(vareliste1.get(i));
                                     model2.addElement(vareliste1.get(i).toStringGUI());
@@ -377,24 +356,20 @@ public class GUI extends javax.swing.JFrame
                                 }
                             }
                         }
-                    } else
-                    {
+                    } else {
                         JOptionPane.showMessageDialog(null, "Antal Vare skal være større end 0");
                     }
                 }
             }
-        } catch (NumberFormatException ex)
-        {
+        } catch (NumberFormatException ex) {
             JOptionPane.showMessageDialog(null, "Der skal stå et helt tal i 'Antal Vare' feltet");
         }
     }//GEN-LAST:event_jButtonTilføjvareActionPerformed
 
     private void jButtonFjernVareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonFjernVareActionPerformed
     {//GEN-HEADEREND:event_jButtonFjernVareActionPerformed
-        for(int i = 0; i < model2.size(); i++)
-        {
-            if(jListVareTilOrdre.getSelectedValue().equals(model2.elementAt(i)))
-            {
+        for (int i = 0; i < model2.size(); i++) {
+            if (jListVareTilOrdre.getSelectedValue().equals(model2.elementAt(i))) {
                 orderList.remove(i);
             }
         }
@@ -404,60 +379,46 @@ public class GUI extends javax.swing.JFrame
     /**
      * @param args the command line arguments
      */
-    public void visVareliste()
-    {
-        try
-        {
+    public void visVareliste() {
+        try {
             model1.clear();
             ArrayList<Item> vareliste1 = control.loadItemliste();
-            for (int i = 0; i < vareliste1.size(); i++)
-            {
+            for (int i = 0; i < vareliste1.size(); i++) {
                 model1.addElement(vareliste1.get(i).toStringGUI());
             }
-        } catch (NullPointerException ex)
-        {
+        } catch (NullPointerException ex) {
             System.out.println("Error in GUI - \"visVareListe\"");
         }
 
     }
 
-    public static void main(String args[])
-    {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try
-        {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
-            {
-                if ("Nimbus".equals(info.getName()))
-                {
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex)
-        {
+        } catch (ClassNotFoundException ex) {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex)
-        {
+        } catch (InstantiationException ex) {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex)
-        {
+        } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex)
-        {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable()
-        {
-            public void run()
-            {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
                 new GUI().setVisible(true);
             }
         });
