@@ -250,6 +250,9 @@
               </SubComponents>
             </Container>
             <Component class="javax.swing.JTextField" name="jTextFieldAntalItems">
+              <Events>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextFieldAntalItemsKeyReleased"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JButton" name="jButtonTilf&#xf8;jvare">
               <Properties>
@@ -257,6 +260,7 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonTilf&#xf8;jvareActionPerformed"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jButtonTilf&#xf8;jvareKeyReleased"/>
               </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane3">
