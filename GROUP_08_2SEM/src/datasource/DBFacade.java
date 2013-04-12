@@ -31,9 +31,9 @@ public class DBFacade
         return instance;
     }
 
-    public ArrayList<Order> getOrder(int ono)
+    public ArrayList<Order> getOrder()
     {
-        return tm.getOrders(ono, con);
+        return tm.getOrder(con);
     }
 
     public ArrayList getCustomer()

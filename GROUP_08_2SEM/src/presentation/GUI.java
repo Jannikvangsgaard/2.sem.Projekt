@@ -307,7 +307,7 @@ public class GUI extends javax.swing.JFrame {
 
         }
 
-        control.saveOrder(control.getOrderlist());
+//        control.saveOrder(control.getOrderlist());
 //        
 //        ArrayList<Item> arr = new ArrayList();
 //        control.setAvailableItems();        
