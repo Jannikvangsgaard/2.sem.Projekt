@@ -140,12 +140,27 @@ public class GUI extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jListvareliste);
 
+        jTextFieldAntalItems.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                jTextFieldAntalItemsKeyReleased(evt);
+            }
+        });
+
         jButtonTilføjvare.setText("Tilføj Vare");
         jButtonTilføjvare.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
                 jButtonTilføjvareActionPerformed(evt);
+            }
+        });
+        jButtonTilføjvare.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                jButtonTilføjvareKeyReleased(evt);
             }
         });
 
@@ -292,7 +307,7 @@ public class GUI extends javax.swing.JFrame {
 
         }
 
-//        control.saveOrder(control.getOrderlist());
+        control.saveOrder(control.getOrderlist());
 //        
 //        ArrayList<Item> arr = new ArrayList();
 //        control.setAvailableItems();        
@@ -307,63 +322,139 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButtonTilføjvareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTilføjvareActionPerformed
     {//GEN-HEADEREND:event_jButtonTilføjvareActionPerformed
-        try {
-            int amount = (Integer.parseInt(jTextFieldAntalItems.getText()));
-            ArrayList<Item> vareliste1 = control.loadItemliste();
-            for (int i = 0; i < vareliste1.size(); i++) {
-                if (vareliste1.get(i).toStringGUI().equals(jListvareliste.getSelectedValue())) {
-                    if (amount > 0) {
-                        if (vareliste1.get(i).getItemAmount() < amount) {
-                            JOptionPane.showMessageDialog(null, "Der er ikke nok af den valgte vare til rådighed på lager");
-                        } else {
-                            if (model2.isEmpty()) {
-                                vareliste1.get(i).setItemAmount(amount);
-                                orderList.add(vareliste1.get(i));
-                                model2.addElement(vareliste1.get(i).toStringGUI());
-                                jTextFieldAntalItems.setText("");
-                            } else {
-                                int totalAmount = vareliste1.get(i).getItemAmount();
-                                vareliste1.get(i).setItemAmount(amount);
-                                boolean add = false;
-                                for (int j = 0; j < model2.size(); j++) {
-                                    int itemNo = orderList.get(j).getItemNo();
-
-                                    if (itemNo == vareliste1.get(i).getItemNo()) {
-                                        int amountBefore = orderList.get(j).getItemAmount();
-                                        if ((amountBefore + amount) <= totalAmount) {
-                                            orderList.remove(j);
-                                            model2.removeElementAt(j);
-                                            vareliste1.get(i).setItemAmount(amount + amountBefore);
-                                            orderList.add(vareliste1.get(i));
-                                            model2.addElement(vareliste1.get(i).toStringGUI());
-                                            jTextFieldAntalItems.setText("");
-                                            add = false;
-                                        } else {
-                                            JOptionPane.showMessageDialog(null, "Der er ikke nok af den valgte vare til rådighed på lageret");
-                                            jTextFieldAntalItems.setText("");
-                                            add = false;
-                                        }
-                                    } else {
-                                        add = true;
-
-                                    }
-                                }
-                                if (add == true) {
-                                    vareliste1.get(i).setItemAmount(amount);
-                                    orderList.add(vareliste1.get(i));
-                                    model2.addElement(vareliste1.get(i).toStringGUI());
-                                    jTextFieldAntalItems.setText("");
-                                }
-                            }
+            int amount2 = Integer.parseInt(jTextFieldAntalItems.getText());
+            ArrayList<Item> vareliste2 = control.loadItemliste();
+            for(int i = 0; i < vareliste2.size(); i++)
+            {
+                
+                if(vareliste2.get(i).toStringGUI().equals(jListvareliste.getSelectedValue()))
+                {
+                    for(int h = 0; h < orderList.size(); h++)
+                    {
+                        if(jListvareliste.getSelectedValue().equals(orderList.get(h)))
+                        {
+                            orderList.get(h).setItemAmount(orderList.get(h).getItemAmount() + Integer.parseInt(jTextFieldAntalItems.getText()));
                         }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Antal Vare skal være større end 0");
+                    }
+                    int amount3 = (vareliste2.get(i).getItemAmount()-Integer.parseInt(jTextFieldAntalItems.getText()));
+                    Item item = vareliste2.get(i);
+                    Item item2 = vareliste2.get(i);
+                    System.out.println(item.getItemAmount());
+                    item.setItemAmount(amount2);
+                    System.out.println(item.getItemAmount());
+                    System.out.println(amount2);
+                    orderList.add(item);
+                    System.out.println(orderList.toString());
+                    item2.setItemAmount(amount3);
+                    System.out.println(orderList.toString());
+                    model1.clear();
+                    for(int g = 0; g < vareliste2.size(); g++)
+                    {
+                        model1.addElement(vareliste2.get(g).toStringGUI());
+                    }
+                    model2.clear();
+                    for(int j = 0; j < orderList.size(); j++)
+                    {
+                        model2.addElement(orderList.get(j).toStringGUI());
                     }
                 }
             }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(null, "Der skal stå et helt tal i 'Antal Vare' feltet");
-        }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+//            int amount = Integer.parseInt(jTextFieldAntalItems.getText());
+//            ArrayList<Item> vareliste1 = control.loadItemliste();
+//            for (int i = 0; i < vareliste1.size(); i++)
+//            {
+//                if (vareliste1.get(i).toStringGUI().equals(jListvareliste.getSelectedValue()))
+//                {
+//                    if (amount > 0)
+//                    {
+//                        if (vareliste1.get(i).getItemAmount() < amount)
+//                        {
+//                            JOptionPane.showMessageDialog(null, "Der er ikke nok af den valgte vare til rådighed på lager");
+//                        } else
+//                        {
+//                            if (model2.isEmpty())
+//                            {
+//                                
+//                                vareliste1.get(i).setItemAmount(amount);
+//                                orderList.add(vareliste1.get(i));
+//                                model2.addElement(vareliste1.get(i).toStringGUI());
+//                                jTextFieldAntalItems.setText("");
+//                            } else
+//                            {
+//                                int totalAmount = vareliste1.get(i).getItemAmount();
+//                                vareliste1.get(i).setItemAmount(amount);
+//                                boolean add = false;
+//                                for (int j = 0; j < model2.size(); j++)
+//                                {
+//                                      int itemNo = orderList.get(j).getItemNo();
+//
+//                                    if (itemNo == vareliste1.get(i).getItemNo())
+//                                    {
+//                                        int amountBefore = orderList.get(j).getItemAmount();
+//                                        if ((amountBefore + amount) <= totalAmount)
+//                                        {
+//                                            System.out.println("inde i if statement");
+//                                            orderList.remove(j);
+//                                            model2.removeElementAt(j);
+//                                            vareliste1.get(i).setItemAmount(amount + amountBefore);
+//                                            orderList.add(vareliste1.get(i));
+//                                            model2.addElement(vareliste1.get(i).toStringGUI());
+//                                            jTextFieldAntalItems.setText("");
+//                                            add = false;
+//                                            break;
+//                                        } else
+//                                        {
+//                                            System.out.println("inde i else statement");
+//                                            JOptionPane.showMessageDialog(null, "Der er ikke nok af den valgte vare til rådighed på lageret");
+//                                            jTextFieldAntalItems.setText("");
+//                                            add = false;
+//                                        }
+//                                    } else
+//                                    {
+//                                        add = true;
+//
+//                                    }
+//                                }
+//                                if (add == true)
+//                                {
+//                                    vareliste1.get(i).setItemAmount(amount);
+//                                    orderList.add(vareliste1.get(i));
+//                                    model2.addElement(vareliste1.get(i).toStringGUI());
+//                                    jTextFieldAntalItems.setText("");
+//                                }
+//                            }
+//                        }
+//                    } else
+//                    {
+//                        JOptionPane.showMessageDialog(null, "Antal Vare skal være større end 0");
+//                    }
+//                }
+//            }
     }//GEN-LAST:event_jButtonTilføjvareActionPerformed
 
     private void jButtonFjernVareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonFjernVareActionPerformed
@@ -375,6 +466,26 @@ public class GUI extends javax.swing.JFrame {
         }
         model2.removeElement(jListVareTilOrdre.getSelectedValue());
     }//GEN-LAST:event_jButtonFjernVareActionPerformed
+
+    private void jButtonTilføjvareKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jButtonTilføjvareKeyReleased
+    {//GEN-HEADEREND:event_jButtonTilføjvareKeyReleased
+        
+    }//GEN-LAST:event_jButtonTilføjvareKeyReleased
+
+    private void jTextFieldAntalItemsKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextFieldAntalItemsKeyReleased
+    {//GEN-HEADEREND:event_jTextFieldAntalItemsKeyReleased
+        try{
+        if (jTextFieldAntalItems.getText() != null)
+        { 
+        int amount =Integer.parseInt(jTextFieldAntalItems.getText());
+        }
+        }
+        catch(NumberFormatException ex)
+        {
+            jTextFieldAntalItems.setText("");
+            JOptionPane.showMessageDialog(null, "Antal Vare skal være større end 0 og et helt tal");
+        }
+    }//GEN-LAST:event_jTextFieldAntalItemsKeyReleased
 
     /**
      * @param args the command line arguments
