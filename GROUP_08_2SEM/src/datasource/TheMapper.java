@@ -22,14 +22,14 @@ public class TheMapper {
      * Read from database
      */
     
-    public ArrayList getOrder(Connection conn) {
+    public ArrayList getOrders(int ono, Connection conn) {
         
         ArrayList<Order> order = new ArrayList();
         ArrayList<Item> item = new ArrayList();
         Order o = null;
         
         String SQLString1 = "SELECT * FROM ordre";  //Get order
-        String SQLString2 = "SELECT * FROM ordredetails"; //Get orderdetails
+        String SQLString2 = "SELECT varerno, antal FROM ordredetails WHERE orderno = ?"; //Get orderdetails
 
         PreparedStatement statement = null;
         PreparedStatement statement2 = null;
@@ -40,13 +40,19 @@ public class TheMapper {
             statement2 = conn.prepareStatement(SQLString2);
             
             ResultSet rs = statement.executeQuery();
-            ResultSet rs2 = statement2.executeQuery();
+//            ResultSet rs2 = statement2.executeQuery();
             
-            while (rs2.next()) 
+            while (rs.next()) 
             {
-                int itemNo = rs2.getInt(1);
-                int itemQty = rs2.getInt(2);
-                int orderNo = rs2.getInt(3);
+//                int  = rs2.getInt(1);
+//                int itemQty = rs2.getInt(2);
+//                int orderNo = rs2.getInt(3);
+                statement2.setInt(1, ono);
+                int vareNo = rs.getInt(2);
+                String navn = rs.getString(3);
+                int antal = rs.getInt(4);
+                Item i = new Item(vareNo, navn, antal);
+                item.add(i);
                 
             }
             while (rs.next()) 
@@ -54,7 +60,7 @@ public class TheMapper {
                 int orderNo = rs.getInt(1);
                 int kundeNo = rs.getInt(2);
                 
-                o = new Order(orderNo, odArr);
+                o = new Order(kundeNo, item);
                 order.add(o);
             }
         } catch (Exception ex) {
