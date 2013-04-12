@@ -17,6 +17,7 @@ public class GUI extends javax.swing.JFrame {
     DefaultListModel model1;
     DefaultListModel model2;
     ArrayList<Item> orderList = new ArrayList();
+    ArrayList<Item> vareliste2 = control.loadItemliste();
 
     /**
      * Creates new form GUI
@@ -323,40 +324,44 @@ public class GUI extends javax.swing.JFrame {
     private void jButtonTilføjvareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTilføjvareActionPerformed
     {//GEN-HEADEREND:event_jButtonTilføjvareActionPerformed
             int amount2 = Integer.parseInt(jTextFieldAntalItems.getText());
-            ArrayList<Item> vareliste2 = control.loadItemliste();
+//            ArrayList<Item> vareliste1 = control.loadItemliste();
+            
             for(int i = 0; i < vareliste2.size(); i++)
             {
                 
                 if(vareliste2.get(i).toStringGUI().equals(jListvareliste.getSelectedValue()))
                 {
-                    for(int h = 0; h < orderList.size(); h++)
-                    {
-                        if(jListvareliste.getSelectedValue().equals(orderList.get(h)))
-                        {
-                            orderList.get(h).setItemAmount(orderList.get(h).getItemAmount() + Integer.parseInt(jTextFieldAntalItems.getText()));
-                        }
-                    }
+                    System.out.println("første if her");
                     int amount3 = (vareliste2.get(i).getItemAmount()-Integer.parseInt(jTextFieldAntalItems.getText()));
                     Item item = vareliste2.get(i);
                     Item item2 = vareliste2.get(i);
-                    System.out.println(item.getItemAmount());
                     item.setItemAmount(amount2);
-                    System.out.println(item.getItemAmount());
-                    System.out.println(amount2);
-                    orderList.add(item);
-                    System.out.println(orderList.toString());
-                    item2.setItemAmount(amount3);
-                    System.out.println(orderList.toString());
-                    model1.clear();
-                    for(int g = 0; g < vareliste2.size(); g++)
+                    
+                    for(int h = 0; h < orderList.size(); h++)
                     {
-                        model1.addElement(vareliste2.get(g).toStringGUI());
+                        System.out.println("for her");
+                        int itemNo = orderList.get(h).getItemNo();
+                        if(itemNo == vareliste2.get(i).getItemNo())
+                        {
+                            System.out.println("if her");
+                            orderList.get(h).setItemAmount(orderList.get(h).getItemAmount() + Integer.parseInt(jTextFieldAntalItems.getText()));
+                            System.out.println(orderList.get(h));
+                        }
+
                     }
+                    orderList.add(item);
                     model2.clear();
                     for(int j = 0; j < orderList.size(); j++)
                     {
                         model2.addElement(orderList.get(j).toStringGUI());
                     }
+                    item2.setItemAmount(amount3);
+                    model1.clear();
+                    for(int g = 0; g < vareliste2.size(); g++)
+                    {
+                        model1.addElement(vareliste2.get(g).toStringGUI());
+                    }
+  
                 }
             }
             

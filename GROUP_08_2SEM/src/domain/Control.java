@@ -34,8 +34,8 @@ public class Control {
         orderlist.add(order);
         return orderlist;
     }
-    public void loadOrderList(){
-    orderlist = dbf.getOrder();
+    public void loadOrderList(int ono){
+    orderlist = dbf.getOrder(ono);
     }
     
     public ArrayList loadItemliste() {
