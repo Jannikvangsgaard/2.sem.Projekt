@@ -346,10 +346,8 @@ public class GUI extends javax.swing.JFrame
 
                     for (int h = 0; h < orderList.size(); h++)
                     {
-                        System.out.println(orderList.toString());
                         if (orderList.get(h).getItemNo() == vareliste2.get(i).getItemNo())
                         {
-                            System.out.println("tjek");
                             orderList.get(h).setItemAmount(orderList.get(h).getItemAmount() + Integer.parseInt(jTextFieldAntalItems.getText()));
                             add = true;
                         }
