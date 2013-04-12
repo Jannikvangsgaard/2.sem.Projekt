@@ -21,6 +21,103 @@ public class TheMapper {
     /**
      * Read from database
      */
+       
+    public ArrayList<Order> getAllOrders(Connection conn)
+    {
+        ArrayList<Order> orders = new ArrayList();
+        ArrayList<Item> items   = new ArrayList();
+        PreparedStatement statement = null;
+        Order o = null;
+        Item i  = null;
+        int     ordreNo = 0, 
+                kundeNo = 0, 
+                vareNo = 0, 
+                antal = 0, 
+                state = 0, 
+                vareAntalTotal = 0;
+        String  itemName;
+        
+        String SQLString = "SELECT * FROM ordre "
+                + "NATURAL JOIN ordredetails"
+                + "NATUAL JOIN varer";
+        
+        
+        try
+        {
+            statement = conn.prepareStatement(SQLString);
+            ResultSet rs = statement.executeQuery();
+            
+            while (rs.next())
+            {
+                ordreNo = rs.getInt(1);
+                kundeNo = rs.getInt(2);
+                state   = rs.getInt(3);
+                vareNo  = rs.getInt(4);
+                antal   = rs.getInt(5);
+                itemName = rs.getString(6);
+                vareAntalTotal = rs.getInt(7);
+                i = new Item(vareNo, itemName, antal);
+                items.add(i);
+            }
+            o = new Order(kundeNo, items);
+            orders.add(o);
+        }
+        catch (Exception e)
+        {
+            System.out.println("Fejl i TheMapper - getAllOrders");
+        }
+        
+        return orders;
+    }
+    
+      public ArrayList<Order> getSingleOrder(int ono, Connection conn)
+    {
+        ArrayList<Order> orders = new ArrayList();
+        ArrayList<Item> items   = new ArrayList();
+        PreparedStatement statement = null;
+        Order o = null;
+        Item i  = null;
+        int     kundeNo = 0, 
+                vareNo = 0, 
+                antal = 0, 
+                state = 0, 
+                vareAntalTotal = 0;
+        String  itemName;
+        
+        String SQLString = "SELECT * FROM ordre "
+                + "NATURAL JOIN ordredetails"
+                + "NATUAL JOIN varer"
+                + "WHERE orderno = ?";
+        
+        
+        try
+        {
+            statement = conn.prepareStatement(SQLString);
+            ResultSet rs = statement.executeQuery();
+            
+            while (rs.next())
+            {
+                statement.setInt(1, ono);
+                kundeNo = rs.getInt(2);
+                state   = rs.getInt(3);
+                vareNo  = rs.getInt(4);
+                antal   = rs.getInt(5);
+                itemName = rs.getString(6);
+                vareAntalTotal = rs.getInt(7);
+                i = new Item(vareNo, itemName, antal);
+                items.add(i);
+            }
+            o = new Order(kundeNo, items);
+            orders.add(o);
+        }
+        catch (Exception e)
+        {
+            System.out.println("Fejl i TheMapper - getSingleOrder");
+        }
+        
+        return orders;
+    }
+
     
     public ArrayList getOrders(int ono, Connection conn) {
         
