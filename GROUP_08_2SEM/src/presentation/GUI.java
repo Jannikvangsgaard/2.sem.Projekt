@@ -11,7 +11,8 @@ import javax.swing.JOptionPane;
  *
  * @author Jannik
  */
-public class GUI extends javax.swing.JFrame {
+public class GUI extends javax.swing.JFrame
+{
 
     Control control = new Control();
     DefaultListModel model1;
@@ -22,7 +23,8 @@ public class GUI extends javax.swing.JFrame {
     /**
      * Creates new form GUI
      */
-    public GUI() {
+    public GUI()
+    {
         initComponents();
         model1 = new DefaultListModel();
         model2 = new DefaultListModel();
@@ -267,16 +269,19 @@ public class GUI extends javax.swing.JFrame {
     private void jButtonOpretKundeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOpretKundeActionPerformed
 
         String navn = jTextFieldKundeNavn.getText();
-        if (navn != null) {
+        if (navn != null)
+        {
             control.createCustomer(navn);
-        } else if (navn == null) {
+        } else if (navn == null)
+        {
             JOptionPane.showMessageDialog(null, "Husk at skrive et navn");
         }
     }//GEN-LAST:event_jButtonOpretKundeActionPerformed
 
     private void jButtonHentKunderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHentKunderActionPerformed
 
-        if (control.getCustomerlist() != null) {
+        if (control.getCustomerlist() != null)
+        {
             jTextAreaVisKunder.setText(control.customerToString());
 
         }
@@ -298,9 +303,11 @@ public class GUI extends javax.swing.JFrame {
 //            orderList.add((Item) model2.getElementAt(j));
 //        }
         ArrayList<Customer> customerlist = control.getCustomerlist();
-        for (int i = 0; i < customerlist.size(); i++) {
+        for (int i = 0; i < customerlist.size(); i++)
+        {
 
-            if (customerlist.get(i).getCustomerID() == kundeNo) {
+            if (customerlist.get(i).getCustomerID() == kundeNo)
+            {
                 control.createOrder(orderList, customerlist.get(i));
                 model2.clear();
                 jTextFieldCustomerNo.setText("");
@@ -323,149 +330,71 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButtonTilføjvareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTilføjvareActionPerformed
     {//GEN-HEADEREND:event_jButtonTilføjvareActionPerformed
-            int amount2 = Integer.parseInt(jTextFieldAntalItems.getText());
-//            ArrayList<Item> vareliste1 = control.loadItemliste();
-            
-            for(int i = 0; i < vareliste2.size(); i++)
+        int amount2 = Integer.parseInt(jTextFieldAntalItems.getText());
+        boolean add = false;
+        for (int i = 0; i < vareliste2.size(); i++)
+        {
+            if (vareliste2.get(i).toStringGUI().equals(jListvareliste.getSelectedValue()))
             {
-                
-                if(vareliste2.get(i).toStringGUI().equals(jListvareliste.getSelectedValue()))
+                if (amount2 <= vareliste2.get(i).getItemAmount())
                 {
-                    System.out.println("første if her");
-                    int amount3 = (vareliste2.get(i).getItemAmount()-Integer.parseInt(jTextFieldAntalItems.getText()));
+                    int amount3 = (vareliste2.get(i).getItemAmount() - Integer.parseInt(jTextFieldAntalItems.getText()));
                     Item item = vareliste2.get(i);
                     Item item2 = vareliste2.get(i);
                     item.setItemAmount(amount2);
-                    
-                    for(int h = 0; h < orderList.size(); h++)
+
+                    for (int h = 0; h < orderList.size(); h++)
                     {
-                        System.out.println("for her");
                         int itemNo = orderList.get(h).getItemNo();
-                        if(itemNo == vareliste2.get(i).getItemNo())
+                        if (itemNo == vareliste2.get(i).getItemNo())
                         {
-                            System.out.println("if her");
                             orderList.get(h).setItemAmount(orderList.get(h).getItemAmount() + Integer.parseInt(jTextFieldAntalItems.getText()));
-                            System.out.println(orderList.get(h));
+                            add = true;
                         }
 
                     }
-                    orderList.add(item);
+                    if (add == false)
+                    {
+                        orderList.add(new Item(item.getItemNo(), item.getItemName(), item.getItemAmount()));
+                    }
                     model2.clear();
-                    for(int j = 0; j < orderList.size(); j++)
+                    for (int j = 0; j < orderList.size(); j++)
                     {
                         model2.addElement(orderList.get(j).toStringGUI());
+                        jTextFieldAntalItems.setText("");
                     }
                     item2.setItemAmount(amount3);
                     model1.clear();
-                    for(int g = 0; g < vareliste2.size(); g++)
+                    for (int g = 0; g < vareliste2.size(); g++)
                     {
                         model1.addElement(vareliste2.get(g).toStringGUI());
                     }
-  
+
+                } else
+                {
+                    JOptionPane.showMessageDialog(null, "Antal Vare er for stort i forhold til det antal der er på lager");
+                    break;
                 }
             }
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-//            int amount = Integer.parseInt(jTextFieldAntalItems.getText());
-//            ArrayList<Item> vareliste1 = control.loadItemliste();
-//            for (int i = 0; i < vareliste1.size(); i++)
-//            {
-//                if (vareliste1.get(i).toStringGUI().equals(jListvareliste.getSelectedValue()))
-//                {
-//                    if (amount > 0)
-//                    {
-//                        if (vareliste1.get(i).getItemAmount() < amount)
-//                        {
-//                            JOptionPane.showMessageDialog(null, "Der er ikke nok af den valgte vare til rådighed på lager");
-//                        } else
-//                        {
-//                            if (model2.isEmpty())
-//                            {
-//                                
-//                                vareliste1.get(i).setItemAmount(amount);
-//                                orderList.add(vareliste1.get(i));
-//                                model2.addElement(vareliste1.get(i).toStringGUI());
-//                                jTextFieldAntalItems.setText("");
-//                            } else
-//                            {
-//                                int totalAmount = vareliste1.get(i).getItemAmount();
-//                                vareliste1.get(i).setItemAmount(amount);
-//                                boolean add = false;
-//                                for (int j = 0; j < model2.size(); j++)
-//                                {
-//                                      int itemNo = orderList.get(j).getItemNo();
-//
-//                                    if (itemNo == vareliste1.get(i).getItemNo())
-//                                    {
-//                                        int amountBefore = orderList.get(j).getItemAmount();
-//                                        if ((amountBefore + amount) <= totalAmount)
-//                                        {
-//                                            System.out.println("inde i if statement");
-//                                            orderList.remove(j);
-//                                            model2.removeElementAt(j);
-//                                            vareliste1.get(i).setItemAmount(amount + amountBefore);
-//                                            orderList.add(vareliste1.get(i));
-//                                            model2.addElement(vareliste1.get(i).toStringGUI());
-//                                            jTextFieldAntalItems.setText("");
-//                                            add = false;
-//                                            break;
-//                                        } else
-//                                        {
-//                                            System.out.println("inde i else statement");
-//                                            JOptionPane.showMessageDialog(null, "Der er ikke nok af den valgte vare til rådighed på lageret");
-//                                            jTextFieldAntalItems.setText("");
-//                                            add = false;
-//                                        }
-//                                    } else
-//                                    {
-//                                        add = true;
-//
-//                                    }
-//                                }
-//                                if (add == true)
-//                                {
-//                                    vareliste1.get(i).setItemAmount(amount);
-//                                    orderList.add(vareliste1.get(i));
-//                                    model2.addElement(vareliste1.get(i).toStringGUI());
-//                                    jTextFieldAntalItems.setText("");
-//                                }
-//                            }
-//                        }
-//                    } else
-//                    {
-//                        JOptionPane.showMessageDialog(null, "Antal Vare skal være større end 0");
-//                    }
-//                }
-//            }
+
+        }
     }//GEN-LAST:event_jButtonTilføjvareActionPerformed
 
     private void jButtonFjernVareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonFjernVareActionPerformed
     {//GEN-HEADEREND:event_jButtonFjernVareActionPerformed
-        for (int i = 0; i < model2.size(); i++) {
-            if (jListVareTilOrdre.getSelectedValue().equals(model2.elementAt(i))) {
+        for (int i = 0; i < model2.size(); i++)
+        {
+            if (jListVareTilOrdre.getSelectedValue().equals(model2.elementAt(i)))
+            {
+                model1.clear();
+                for (int g = 0; g < vareliste2.size(); g++)
+                {
+                    if(orderList.get(i).getItemNo() == vareliste2.get(g).getItemNo())
+                    {
+                        vareliste2.get(g).setItemAmount(vareliste2.get(g).getItemAmount() + orderList.get(i).getItemAmount());
+                    }
+                    model1.addElement(vareliste2.get(g).toStringGUI());
+                }
                 orderList.remove(i);
             }
         }
@@ -474,18 +403,17 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButtonTilføjvareKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jButtonTilføjvareKeyReleased
     {//GEN-HEADEREND:event_jButtonTilføjvareKeyReleased
-        
     }//GEN-LAST:event_jButtonTilføjvareKeyReleased
 
     private void jTextFieldAntalItemsKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jTextFieldAntalItemsKeyReleased
     {//GEN-HEADEREND:event_jTextFieldAntalItemsKeyReleased
-        try{
-        if (jTextFieldAntalItems.getText() != null)
-        { 
-        int amount =Integer.parseInt(jTextFieldAntalItems.getText());
-        }
-        }
-        catch(NumberFormatException ex)
+        try
+        {
+            if (jTextFieldAntalItems.getText() != null)
+            {
+                int amount = Integer.parseInt(jTextFieldAntalItems.getText());
+            }
+        } catch (NumberFormatException ex)
         {
             jTextFieldAntalItems.setText("");
             JOptionPane.showMessageDialog(null, "Antal Vare skal være større end 0 og et helt tal");
@@ -495,46 +423,60 @@ public class GUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public void visVareliste() {
-        try {
+    public void visVareliste()
+    {
+        try
+        {
             model1.clear();
             ArrayList<Item> vareliste1 = control.loadItemliste();
-            for (int i = 0; i < vareliste1.size(); i++) {
+            for (int i = 0; i < vareliste1.size(); i++)
+            {
                 model1.addElement(vareliste1.get(i).toStringGUI());
             }
-        } catch (NullPointerException ex) {
+        } catch (NullPointerException ex)
+        {
             System.out.println("Error in GUI - \"visVareListe\"");
         }
 
     }
 
-    public static void main(String args[]) {
+    public static void main(String args[])
+    {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+        try
+        {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels())
+            {
+                if ("Nimbus".equals(info.getName()))
+                {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
+        } catch (ClassNotFoundException ex)
+        {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        } catch (InstantiationException ex)
+        {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex)
+        {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (javax.swing.UnsupportedLookAndFeelException ex)
+        {
             java.util.logging.Logger.getLogger(GUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+        java.awt.EventQueue.invokeLater(new Runnable()
+        {
+            public void run()
+            {
                 new GUI().setVisible(true);
             }
         });
