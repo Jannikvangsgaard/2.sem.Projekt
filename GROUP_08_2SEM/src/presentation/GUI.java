@@ -314,9 +314,9 @@ public class GUI extends javax.swing.JFrame
             }
 
         }
-        orderList.clear();
 
         control.saveOrder();
+        orderList.clear();
 //        
 //        ArrayList<Item> arr = new ArrayList();
 //        control.setAvailableItems();        

@@ -85,7 +85,7 @@ public class TheMapper
 
         String SQLString = "SELECT * FROM ordre "
                 + "NATURAL JOIN ordredetails"
-                + "NATUAL JOIN varer"
+                + "NATURAL JOIN varer"
                 + "WHERE orderno = ?";
 
 
@@ -273,7 +273,7 @@ public class TheMapper
             statement = con.prepareStatement(SQLString1);
 
 
-            for (int j = 0; j < order.size(); j++)
+            for (int j = tal; j < order.size(); j++)
             {
                 System.out.println(tal);
                 System.out.println("Forløkke saveorder");
