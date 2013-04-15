@@ -332,7 +332,6 @@ public class GUI extends javax.swing.JFrame
 
     private void jButtonTilføjvareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTilføjvareActionPerformed
     {//GEN-HEADEREND:event_jButtonTilføjvareActionPerformed
-        System.out.println("tilføj");
         int amount2 = Integer.parseInt(jTextFieldAntalItems.getText());
         boolean add = false;
         System.out.println(vareliste2.size());

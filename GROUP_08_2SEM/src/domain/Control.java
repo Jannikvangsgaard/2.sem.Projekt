@@ -69,7 +69,6 @@ public class Control {
     }
 
     public void reservedItem() {
-        System.out.println("reservedItem");
         for (int i = 0; i < orderlist.size(); i++) {
             for (int j = 0; j < orderlist.get(i).getItemlist().size(); j++) {
                 itemlistReserved.add(orderlist.get(i).getItemlist().get(j));
@@ -80,7 +79,6 @@ public class Control {
     }
 
     public void availableItems() {
-        System.out.println("availableItems");
         Item item1, item2, item3;
         if (availableItems.size() > 0) {
             availableItems.clear();
@@ -120,7 +118,6 @@ public class Control {
     }
     public void loadAvailableItems(){
        availableItems = dbf.getAvailableItems();
-        System.out.println(availableItems+"setAvaiableItems");
      }
     
     public void loadSingleOrder(int ono)

@@ -34,7 +34,7 @@ public class Customer {
     
     public String toString()
     {
-        return "ID: " + customerID + ", Name: " + name;
+        return "Kunde nummer: " + customerID + ", Navn: " + name;
     }
 
     
