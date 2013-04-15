@@ -18,7 +18,7 @@ public class GUI extends javax.swing.JFrame
     DefaultListModel model1;
     DefaultListModel model2;
     ArrayList<Item> orderList = new ArrayList();
-    ArrayList<Item> vareliste2 = control.loadItemliste();
+    ArrayList<Item> vareliste2 = new ArrayList();
 
     /**
      * Creates new form GUI
@@ -30,6 +30,8 @@ public class GUI extends javax.swing.JFrame
         model2 = new DefaultListModel();
         jListvareliste.setModel(model1);
         jListVareTilOrdre.setModel(model2);
+        control.loadItemliste();
+//        vareliste2 = control.getAvailableItems();
         control.loadAvailableItems();
         
         visVareliste();
@@ -65,6 +67,7 @@ public class GUI extends javax.swing.JFrame
         jLabel6 = new javax.swing.JLabel();
         jButtonSaveOrder = new javax.swing.JButton();
         jButtonFjernVare = new javax.swing.JButton();
+        jLabelOrderSavedNotSaved = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,7 +138,7 @@ public class GUI extends javax.swing.JFrame
                             .addComponent(jLabel7))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButtonOpretKunde)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 97, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -206,21 +209,23 @@ public class GUI extends javax.swing.JFrame
                 .addGap(38, 38, 38)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4)
-                    .addComponent(jButtonTilføjvare, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                    .addComponent(jButtonTilføjvare, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addComponent(jTextFieldAntalItems)
                     .addComponent(jButtonFjernVare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(83, 83, 83)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jButtonSaveOrder, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jTextFieldCustomerNo))
-                .addContainerGap(122, Short.MAX_VALUE))
+                    .addComponent(jLabelOrderSavedNotSaved, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel6)
+                        .addComponent(jButtonSaveOrder)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jTextFieldCustomerNo, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -250,7 +255,9 @@ public class GUI extends javax.swing.JFrame
                         .addComponent(jButtonTilføjvare)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonFjernVare)))
-                .addContainerGap(137, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabelOrderSavedNotSaved, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(118, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Bestilling", jPanel2);
@@ -318,17 +325,27 @@ public class GUI extends javax.swing.JFrame
 
         }
 
-        control.saveOrder();
+        if(control.saveOrder() == true)
+        {
+            jLabelOrderSavedNotSaved.setText("Ordren blev gemt");
+        }
+        else
+        {
+            jLabelOrderSavedNotSaved.setText("Ordren blev ikke gemt");
+        }
         orderList.clear();
         control.saveFreeItems(vareliste2);
     }//GEN-LAST:event_jButtonSaveOrderActionPerformed
 
     private void jButtonTilføjvareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTilføjvareActionPerformed
     {//GEN-HEADEREND:event_jButtonTilføjvareActionPerformed
+        System.out.println("tilføj");
         int amount2 = Integer.parseInt(jTextFieldAntalItems.getText());
         boolean add = false;
+        System.out.println(vareliste2.size());
         for (int i = 0; i < vareliste2.size(); i++)
         {
+            System.out.println(vareliste2.size());
             if (vareliste2.get(i).toStringGUI().equals(jListvareliste.getSelectedValue()))
             {
                 if (amount2 <= vareliste2.get(i).getItemAmount())
@@ -354,7 +371,7 @@ public class GUI extends javax.swing.JFrame
                     model2.clear();
                     for (int j = 0; j < orderList.size(); j++)
                     {
-                        model2.addElement(orderList.get(j).toStringGUI());
+                        model2.addElement(orderList.get(j).toStringGUIReserved());
                         jTextFieldAntalItems.setText("");
                     }
                     item2.setItemAmount(amount3);
@@ -422,10 +439,10 @@ public class GUI extends javax.swing.JFrame
         try
         {
             model1.clear();
-            ArrayList<Item> vareliste1 = control.getAvailableItems();
-            for (int i = 0; i < vareliste1.size(); i++)
+            vareliste2 = control.getAvailableItems();
+            for (int i = 0; i < vareliste2.size(); i++)
             {
-                model1.addElement(vareliste1.get(i).toStringGUI());
+                model1.addElement(vareliste2.get(i).toStringGUI());
             }
         } catch (NullPointerException ex)
         {
@@ -488,6 +505,7 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabelOrderSavedNotSaved;
     private javax.swing.JList jListVareTilOrdre;
     private javax.swing.JList jListvareliste;
     private javax.swing.JPanel jPanel1;

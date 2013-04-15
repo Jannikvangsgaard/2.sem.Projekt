@@ -59,4 +59,9 @@ public class Item
     {
         return itemName + " ledige: " + itemAmount;
     }
+    
+    public String toStringGUIReserved()
+    {
+        return itemName + " ønskede antal " + itemAmount;
+    }
 }

@@ -315,7 +315,6 @@ public class TheMapper
 
     public boolean saveAvailableItem(ArrayList<Item> freeItems, Connection con)
     {
-        System.out.println(freeItems.size());
         int rowsInserted = 0;
         String SQLString1 = "update tilrådighed set antal = ? where varerNo = ?";
 
@@ -323,17 +322,12 @@ public class TheMapper
 
         try
         {
-            System.out.println("test 1");
             statement = con.prepareStatement(SQLString1);
 
             for (int i = 0; i < freeItems.size(); i++)
             {
                 statement.setInt(1, freeItems.get(i).getItemAmount());
-                System.out.println(freeItems.get(i).getItemAmount()+ "itemamount");
                 statement.setInt(2, freeItems.get(i).getItemNo());
-                System.out.println(freeItems.get(i).getItemNo() + "itemNo");
-                System.out.println("test");
-                System.out.println(rowsInserted + "test saveavailble");
                 rowsInserted += statement.executeUpdate();
             }
 
