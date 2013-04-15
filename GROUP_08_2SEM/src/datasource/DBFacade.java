@@ -31,7 +31,7 @@ public class DBFacade
         return instance;
     }
 
-    public ArrayList<Order> loadSingleOrder(int ono)
+    public Order loadSingleOrder(int ono)
     {
         return tm.getSingleOrder(ono, con);
     }
