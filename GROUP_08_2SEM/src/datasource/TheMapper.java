@@ -175,6 +175,7 @@ public class TheMapper
      */
     public boolean saveOrder(ArrayList<Order> order, Connection con)
     {
+        System.out.println(order.size() + "order size");
         int rowsInserted = 0;
         int tal = 0;
         String SQLString1 = "insert into ordre values(?,?,?)";
@@ -230,10 +231,11 @@ public class TheMapper
                 rowsInserted = 0;
                 statement = con.prepareStatement(SQLString2);
 
-                for (int i = 0; i < order.size(); i++)
+                for (int i = tal; i < order.size(); i++)
                 {
                     Order o = order.get(i);
-                    for (int j = tal; j < o.getItemlist().size(); j++)
+                    System.out.println(tal + "tal til for");
+                    for (int j = 0; j < o.getItemlist().size(); j++)
                     {
                         statement.setInt(1, o.getItemlist().get(j).getItemNo());
                         statement.setInt(2, o.getItemlist().get(j).getItemAmount());
@@ -252,7 +254,9 @@ public class TheMapper
             System.out.println("Fejl i OrdreMapper - SaveOrder");
             e.printStackTrace();
         }
-        return rowsInserted == order.size()- tal;
+        System.out.println(rowsInserted + "row");
+        System.out.println(order.size()- tal + "size");
+        return rowsInserted == order.get(tal).getItemlist().size();
 
     }
 

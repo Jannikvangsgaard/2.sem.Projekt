@@ -364,35 +364,30 @@ public class GUI extends javax.swing.JFrame
 
             if (customerlist.get(i).getCustomerID() == kundeNo)
             {
-                System.out.println("test 2");
                 control.createOrder(orderList, customerlist.get(i));
-                System.out.println("test 1");
                 model2.clear();
                 jTextFieldCustomerNo.setText("");
             }
         }
-        System.out.println(control.saveOrder());
 
         if(control.saveOrder() == true)
         {
             jLabelOrderSavedNotSaved.setText("Ordren blev gemt");
+            control.saveFreeItems(vareliste2);
         }
         else
         {
             jLabelOrderSavedNotSaved.setText("Ordren blev ikke gemt");
         }
         orderList.clear();
-        control.saveFreeItems(vareliste2);
     }//GEN-LAST:event_jButtonSaveOrderActionPerformed
 
     private void jButtonTilføjvareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTilføjvareActionPerformed
     {//GEN-HEADEREND:event_jButtonTilføjvareActionPerformed
         int amount2 = Integer.parseInt(jTextFieldAntalItems.getText());
         boolean add = false;
-        System.out.println(vareliste2.size());
         for (int i = 0; i < vareliste2.size(); i++)
         {
-            System.out.println(vareliste2.size());
             if (vareliste2.get(i).toStringGUI().equals(jListvareliste.getSelectedValue()))
             {
                 if (amount2 <= vareliste2.get(i).getItemAmount())
