@@ -118,7 +118,7 @@ public class Control {
     public void saveCustomer(ArrayList<Customer> customer) {
         dbf.saveCustomer(customer);
     }
-    public void setAvailableItems(){
+    public void loadAvailableItems(){
        availableItems = dbf.getAvailableItems();
         System.out.println(availableItems+"setAvaiableItems");
      }

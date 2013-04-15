@@ -30,7 +30,7 @@ public class GUI extends javax.swing.JFrame
         model2 = new DefaultListModel();
         jListvareliste.setModel(model1);
         jListVareTilOrdre.setModel(model2);
-        control.availableItems();
+        control.loadAvailableItems();
         
         visVareliste();
         

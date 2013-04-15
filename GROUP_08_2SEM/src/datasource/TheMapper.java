@@ -317,21 +317,24 @@ public class TheMapper
     {
         System.out.println(freeItems.size());
         int rowsInserted = 0;
-        String SQLString1 = "update tilrådighed set antal = ? where varerNo = ?; ";
+        String SQLString1 = "update tilrådighed set antal = ? where varerNo = ?";
 
         PreparedStatement statement = null;
 
         try
         {
+            System.out.println("test 1");
             statement = con.prepareStatement(SQLString1);
 
             for (int i = 0; i < freeItems.size(); i++)
             {
                 statement.setInt(1, freeItems.get(i).getItemAmount());
+                System.out.println(freeItems.get(i).getItemAmount()+ "itemamount");
                 statement.setInt(2, freeItems.get(i).getItemNo());
+                System.out.println(freeItems.get(i).getItemNo() + "itemNo");
                 System.out.println("test");
-                rowsInserted += statement.executeUpdate();
                 System.out.println(rowsInserted + "test saveavailble");
+                rowsInserted += statement.executeUpdate();
             }
 
 
@@ -345,7 +348,7 @@ public class TheMapper
             System.out.println("Fejl i OrdreMapper - SaveNewProject");
             e.printStackTrace();
         }
-        return rowsInserted == freeItems.size();
+        return true;
 
     }
 
