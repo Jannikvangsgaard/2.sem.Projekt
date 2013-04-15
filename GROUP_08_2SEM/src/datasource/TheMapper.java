@@ -244,12 +244,10 @@ public class TheMapper
         for (int j = 0; j < order.size(); j++)
         {
             Order otest = order.get(j);
-            System.out.println("1 for");
 
             if (otest.getOrderNo() != 0)
             {
                 tal++;
-                System.out.println(tal + "tal her");
             }
         }
 
@@ -275,10 +273,7 @@ public class TheMapper
 
             for (int j = tal; j < order.size(); j++)
             {
-                System.out.println(tal);
-                System.out.println("Forløkke saveorder");
                 Order o = order.get(j);
-                System.out.println(o.getOrderNo());
                 statement.setInt(1, o.getOrderNo());
                 statement.setInt(2, o.getCustomer().getCustomerID());
                 statement.setInt(3, o.getState());
@@ -320,6 +315,7 @@ public class TheMapper
 
     public boolean saveAvailableItem(ArrayList<Item> freeItems, Connection con)
     {
+        System.out.println(freeItems.size());
         int rowsInserted = 0;
         String SQLString1 = "update tilrådighed set antal = ? where varerNo = ?; ";
 
@@ -333,8 +329,9 @@ public class TheMapper
             {
                 statement.setInt(1, freeItems.get(i).getItemAmount());
                 statement.setInt(2, freeItems.get(i).getItemNo());
-
+                System.out.println("test");
                 rowsInserted += statement.executeUpdate();
+                System.out.println(rowsInserted + "test saveavailble");
             }
 
 

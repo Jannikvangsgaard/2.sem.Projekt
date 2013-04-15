@@ -30,7 +30,10 @@ public class GUI extends javax.swing.JFrame
         model2 = new DefaultListModel();
         jListvareliste.setModel(model1);
         jListVareTilOrdre.setModel(model2);
+        control.availableItems();
+        
         visVareliste();
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -317,16 +320,7 @@ public class GUI extends javax.swing.JFrame
 
         control.saveOrder();
         orderList.clear();
-//        
-//        ArrayList<Item> arr = new ArrayList();
-//        control.setAvailableItems();        
-//        control.reservedItem();
-//        control.availableItems();
-//        arr = control.getAvailableItems();
-//        System.out.println(arr);
-//       
-//        
-//        control.saveFreeItems(arr);
+        control.saveFreeItems(vareliste2);
     }//GEN-LAST:event_jButtonSaveOrderActionPerformed
 
     private void jButtonTilføjvareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTilføjvareActionPerformed
@@ -428,7 +422,7 @@ public class GUI extends javax.swing.JFrame
         try
         {
             model1.clear();
-            ArrayList<Item> vareliste1 = control.loadItemliste();
+            ArrayList<Item> vareliste1 = control.getAvailableItems();
             for (int i = 0; i < vareliste1.size(); i++)
             {
                 model1.addElement(vareliste1.get(i).toStringGUI());

@@ -107,8 +107,8 @@ public class Control {
         return availableItems;
     }
 
-    public void saveFreeItems() {
-        dbf.saveItem(availableItems);
+    public void saveFreeItems(ArrayList<Item> test) {
+        dbf.saveItem(test);
     }
 
     public boolean saveOrder() {
