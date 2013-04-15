@@ -63,7 +63,7 @@ public class Control {
     public String customerToString() {
         String res = "";
         for (int i = 0; i < customerlist.size(); i++) {
-            res += customerlist.get(i).getName() + "\n";
+            res += customerlist.get(i).toString() + "\n";
         }
         return res;
     }

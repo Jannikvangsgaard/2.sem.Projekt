@@ -293,7 +293,6 @@ public class GUI extends javax.swing.JFrame
         if (control.getCustomerlist() != null)
         {
             jTextAreaVisKunder.setText(control.customerToString());
-
         }
 
 
@@ -307,11 +306,6 @@ public class GUI extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jButtonSaveOrderActionPerformed
         int kundeNo = Integer.parseInt(jTextFieldCustomerNo.getText());
 
-//        ArrayList<Item> orderList = new ArrayList();
-//        for (int j = 0; j < model2.size(); j++)
-//        {
-//            orderList.add((Item) model2.getElementAt(j));
-//        }
         ArrayList<Customer> customerlist = control.getCustomerlist();
         for (int i = 0; i < customerlist.size(); i++)
         {
@@ -322,7 +316,6 @@ public class GUI extends javax.swing.JFrame
                 model2.clear();
                 jTextFieldCustomerNo.setText("");
             }
-
         }
 
         if(control.saveOrder() == true)
@@ -362,7 +355,6 @@ public class GUI extends javax.swing.JFrame
                             orderList.get(h).setItemAmount(orderList.get(h).getItemAmount() + Integer.parseInt(jTextFieldAntalItems.getText()));
                             add = true;
                         }
-
                     }
                     if (add == false)
                     {
@@ -448,7 +440,6 @@ public class GUI extends javax.swing.JFrame
         {
             System.out.println("Error in GUI - \"visVareListe\"");
         }
-
     }
 
     public static void main(String args[])
