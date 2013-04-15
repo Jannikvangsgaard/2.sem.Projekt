@@ -66,9 +66,8 @@ public class TheMapper
         return orders;
     }
     
-    public ArrayList getSingleOrder(int ono, Connection conn)
+    public Order getSingleOrder(int ono, Connection conn)
     {
-        ArrayList<Order> orders = new ArrayList();
         ArrayList<Item> items   = new ArrayList();
         PreparedStatement statement = null;
         Order o = null;
@@ -81,7 +80,6 @@ public class TheMapper
         String  itemName;
         
         String SQLString =  "SELECT * FROM ordre NATURAL JOIN ordredetails NATURAL JOIN varer WHERE ordreno = ?";
-        
         
         try
         {
@@ -100,14 +98,14 @@ public class TheMapper
                 items.add(i);
             }
             o = new Order(customerNo, items);
-            orders.add(o);
         }
+        
         catch (Exception e)
         {
             System.out.println("Fejl i TheMapper - getSingleOrder");
         }
         
-        return orders;
+        return o;
     }
 
     public ArrayList<Item> getItems(Connection conn)

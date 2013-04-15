@@ -33,8 +33,8 @@ public class Control {
         Order order = new Order(itemliste2, customer);
         orderlist.add(order);
     }
-    public void loadOrderList(int ono){
-    orderlist = dbf.loadSingleOrder(ono);
+    public Order loadOrderList(int ono){
+    return dbf.loadSingleOrder(ono);
     }
     
     public ArrayList loadItemliste() {
@@ -123,9 +123,9 @@ public class Control {
         System.out.println(availableItems+"setAvaiableItems");
      }
     
-    public void loadSingleOrder(int ono)
+    public Order loadSingleOrder(int ono)
     {
-        orderlist = dbf.loadSingleOrder(ono);
+        return dbf.loadSingleOrder(ono);
     }
     
     public void loadAllOrders()
