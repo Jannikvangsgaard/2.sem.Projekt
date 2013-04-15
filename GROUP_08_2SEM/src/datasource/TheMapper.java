@@ -47,6 +47,7 @@ public class TheMapper
             {
                 itemNo         = rs.getInt(1);
                 orderNo        = rs.getInt(2);
+                System.out.println(orderNo);
                 customerNo     = rs.getInt(3);
                 state          = rs.getInt(4);
                 qty            = rs.getInt(5);

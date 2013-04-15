@@ -11,6 +11,12 @@ public class Order {
     private int state;
     private Customer customer;
     private ArrayList<Item> itemlist = new ArrayList<Item>();
+
+    @Override
+    public String toString()
+    {
+        return "Ordre nummer " + orderNo + ", state " + state;
+    }
     
     
     public Order(ArrayList<Item> itemlist, Customer customer){

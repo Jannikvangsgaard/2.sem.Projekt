@@ -17,6 +17,8 @@ public class GUI extends javax.swing.JFrame
     Control control = new Control();
     DefaultListModel model1;
     DefaultListModel model2;
+    DefaultListModel model3;
+    DefaultListModel model4;
     ArrayList<Item> orderList = new ArrayList();
     ArrayList<Item> vareliste2 = new ArrayList();
 
@@ -28,10 +30,14 @@ public class GUI extends javax.swing.JFrame
         initComponents();
         model1 = new DefaultListModel();
         model2 = new DefaultListModel();
+        model3 = new DefaultListModel();
+        model4 = new DefaultListModel();
         jListvareliste.setModel(model1);
         jListVareTilOrdre.setModel(model2);
+        jListStatusListe.setModel(model3);
+        jListStatusInformation.setModel(model4);
         control.loadItemliste();
-//        vareliste2 = control.getAvailableItems();
+        control.loadAllOrders();
         control.loadAvailableItems();
         
         visVareliste();
@@ -68,6 +74,12 @@ public class GUI extends javax.swing.JFrame
         jButtonSaveOrder = new javax.swing.JButton();
         jButtonFjernVare = new javax.swing.JButton();
         jLabelOrderSavedNotSaved = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jButtonHentOrdre = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jListStatusListe = new javax.swing.JList();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jListStatusInformation = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -262,6 +274,45 @@ public class GUI extends javax.swing.JFrame
 
         jTabbedPane1.addTab("Bestilling", jPanel2);
 
+        jButtonHentOrdre.setText("Hent Ordre");
+        jButtonHentOrdre.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonHentOrdreActionPerformed(evt);
+            }
+        });
+
+        jScrollPane4.setViewportView(jListStatusListe);
+
+        jScrollPane5.setViewportView(jListStatusInformation);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButtonHentOrdre)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(62, 62, 62)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(203, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonHentOrdre))
+                .addContainerGap(158, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Status", jPanel3);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -312,11 +363,14 @@ public class GUI extends javax.swing.JFrame
 
             if (customerlist.get(i).getCustomerID() == kundeNo)
             {
+                System.out.println("test 2");
                 control.createOrder(orderList, customerlist.get(i));
+                System.out.println("test 1");
                 model2.clear();
                 jTextFieldCustomerNo.setText("");
             }
         }
+        System.out.println(control.saveOrder());
 
         if(control.saveOrder() == true)
         {
@@ -422,6 +476,16 @@ public class GUI extends javax.swing.JFrame
         }
     }//GEN-LAST:event_jTextFieldAntalItemsKeyReleased
 
+    private void jButtonHentOrdreActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonHentOrdreActionPerformed
+    {//GEN-HEADEREND:event_jButtonHentOrdreActionPerformed
+        System.out.println(control.getOrderlist().size());
+        System.out.println(control.getOrderlist().toString());
+        for(int i = 0; i < control.getOrderlist().size(); i++)
+        {
+            model3.addElement(control.getOrderlist().get(i).toString());
+        }
+    }//GEN-LAST:event_jButtonHentOrdreActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -485,6 +549,7 @@ public class GUI extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButtonFjernVare;
     private javax.swing.JButton jButtonHentKunder;
+    private javax.swing.JButton jButtonHentOrdre;
     private javax.swing.JButton jButtonOpretKunde;
     private javax.swing.JButton jButtonSaveOrder;
     private javax.swing.JButton jButtonTilføjvare;
@@ -496,13 +561,18 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabelOrderSavedNotSaved;
+    private javax.swing.JList jListStatusInformation;
+    private javax.swing.JList jListStatusListe;
     private javax.swing.JList jListVareTilOrdre;
     private javax.swing.JList jListvareliste;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextAreaVisKunder;
     private javax.swing.JTextField jTextFieldAntalItems;

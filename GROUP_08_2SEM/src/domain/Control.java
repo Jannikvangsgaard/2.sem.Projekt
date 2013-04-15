@@ -127,6 +127,7 @@ public class Control {
     
     public void loadAllOrders()
     {
+        System.out.println(dbf.loadAllOrders().size());
         orderlist = dbf.loadAllOrders();
     }
 }
