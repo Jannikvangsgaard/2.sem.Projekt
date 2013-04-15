@@ -24,146 +24,90 @@ public class TheMapper
      */
     public ArrayList<Order> getAllOrders(Connection conn)
     {
-        ArrayList<Order> orders = new ArrayList();
-        ArrayList<Item> items = new ArrayList();
+        ArrayList<Order> orders     = new ArrayList();
+        ArrayList<Item> items       = new ArrayList();
         PreparedStatement statement = null;
-        Order o = null;
-        Item i = null;
-        int ordreNo = 0,
-                kundeNo = 0,
-                vareNo = 0,
-                antal = 0,
-                state = 0,
-                vareAntalTotal = 0;
-        String itemName;
-
-        String SQLString = "SELECT * FROM ordre "
-                + "NATURAL JOIN ordredetails"
-                + "NATUAL JOIN varer";
-
-
+        Order o                     = null;
+        Item i                      = null;
+        int     orderNo         = 0, 
+                customerNo      = 0, 
+                itemNo          = 0, 
+                qty             = 0, 
+                state           = 0, 
+                totalAmount     = 0;
+        String  itemName        = "";
+        
+        String SQLString = "SELECT * FROM ordre NATURAL JOIN ordredetails NATURAL JOIN varer";
+        
         try
         {
             statement = conn.prepareStatement(SQLString);
             ResultSet rs = statement.executeQuery();
-
             while (rs.next())
             {
-                ordreNo = rs.getInt(1);
-                kundeNo = rs.getInt(2);
-                state = rs.getInt(3);
-                vareNo = rs.getInt(4);
-                antal = rs.getInt(5);
-                itemName = rs.getString(6);
-                vareAntalTotal = rs.getInt(7);
-                i = new Item(vareNo, itemName, antal);
+                itemNo         = rs.getInt(1);
+                orderNo        = rs.getInt(2);
+                customerNo     = rs.getInt(3);
+                state          = rs.getInt(4);
+                qty            = rs.getInt(5);
+                itemName       = rs.getString(6);
+                totalAmount    = rs.getInt(7);
+                i = new Item(itemNo, itemName, qty);
                 items.add(i);
             }
-            o = new Order(kundeNo, items);
+            o = new Order(customerNo, items);
             orders.add(o);
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             System.out.println("Fejl i TheMapper - getAllOrders");
         }
-
+        
         return orders;
     }
-
-    public ArrayList<Order> getSingleOrder(int ono, Connection conn)
+    
+    public ArrayList getSingleOrder(int ono, Connection conn)
     {
         ArrayList<Order> orders = new ArrayList();
-        ArrayList<Item> items = new ArrayList();
+        ArrayList<Item> items   = new ArrayList();
         PreparedStatement statement = null;
         Order o = null;
-        Item i = null;
-        int kundeNo = 0,
-                vareNo = 0,
-                antal = 0,
-                state = 0,
-                vareAntalTotal = 0;
-        String itemName;
-
-        String SQLString = "SELECT * FROM ordre "
-                + "NATURAL JOIN ordredetails"
-                + "NATURAL JOIN varer"
-                + "WHERE orderno = ?";
-
-
+        Item i  = null;
+        int     customerNo    = 0, 
+                itemNo        = 0, 
+                qty           = 0, 
+                state         = 0, 
+                totalAmount   = 0;
+        String  itemName;
+        
+        String SQLString =  "SELECT * FROM ordre NATURAL JOIN ordredetails NATURAL JOIN varer WHERE ordreno = ?";
+        
+        
         try
         {
-            statement = conn.prepareStatement(SQLString);
-            ResultSet rs = statement.executeQuery();
-
+            statement       = conn.prepareStatement(SQLString);
+            statement.setInt(1, ono);
+            ResultSet rs    = statement.executeQuery();
             while (rs.next())
             {
-                statement.setInt(1, ono);
-                kundeNo = rs.getInt(2);
-                state = rs.getInt(3);
-                vareNo = rs.getInt(4);
-                antal = rs.getInt(5);
-                itemName = rs.getString(6);
-                vareAntalTotal = rs.getInt(7);
-                i = new Item(vareNo, itemName, antal);
+                itemNo         = rs.getInt(1);
+                customerNo     = rs.getInt(3);
+                state          = rs.getInt(4);
+                qty            = rs.getInt(5);
+                itemName       = rs.getString(6);
+                totalAmount    = rs.getInt(7);
+                i = new Item(itemNo, itemName, qty);
                 items.add(i);
             }
-            o = new Order(kundeNo, items);
+            o = new Order(customerNo, items);
             orders.add(o);
-        } catch (Exception e)
+        }
+        catch (Exception e)
         {
             System.out.println("Fejl i TheMapper - getSingleOrder");
         }
-
+        
         return orders;
-    }
-
-    public ArrayList getOrders(int ono, Connection conn)
-    {
-
-        ArrayList<Order> order = new ArrayList();
-        ArrayList<Item> item = new ArrayList();
-        Order o = null;
-
-        String SQLString1 = "SELECT * FROM ordre";  //Get order
-        String SQLString2 = "SELECT varerno, antal FROM ordredetails WHERE orderno = ?"; //Get orderdetails
-
-        PreparedStatement statement = null;
-        PreparedStatement statement2 = null;
-
-        try
-        {
-            //Get order
-            statement = conn.prepareStatement(SQLString1);
-            statement2 = conn.prepareStatement(SQLString2);
-
-            ResultSet rs = statement.executeQuery();
-//            ResultSet rs2 = statement2.executeQuery();
-
-            while (rs.next())
-            {
-//                int  = rs2.getInt(1);
-//                int itemQty = rs2.getInt(2);
-//                int orderNo = rs2.getInt(3);
-                statement2.setInt(1, ono);
-                int vareNo = rs.getInt(2);
-                String navn = rs.getString(3);
-                int antal = rs.getInt(4);
-                Item i = new Item(vareNo, navn, antal);
-                item.add(i);
-
-            }
-            while (rs.next())
-            {
-                int orderNo = rs.getInt(1);
-                int kundeNo = rs.getInt(2);
-
-                o = new Order(kundeNo, item);
-                order.add(o);
-            }
-        } catch (Exception ex)
-        {
-            System.out.println("Error in OrderMapper - getOrdre");
-        }
-        return order;
     }
 
     public ArrayList<Item> getItems(Connection conn)

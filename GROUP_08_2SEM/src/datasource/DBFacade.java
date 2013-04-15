@@ -31,9 +31,14 @@ public class DBFacade
         return instance;
     }
 
-    public ArrayList<Order> getOrder(int ono)
+    public ArrayList<Order> loadSingleOrder(int ono)
     {
-        return tm.getOrders(ono, con);
+        return tm.getSingleOrder(ono, con);
+    }
+    
+    public ArrayList<Order> loadAllOrders()
+    {
+        return tm.getAllOrders(con);
     }
 
     public ArrayList getCustomer()
