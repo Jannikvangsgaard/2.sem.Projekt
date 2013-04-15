@@ -202,7 +202,7 @@ public class TheMapper
             if (rs.next())
             {
 
-                for (int k = 0; order.size() > k; k++)
+                for (int k = tal; order.size() > k; k++)
                 {
 
                     Order o = order.get(k);
@@ -225,7 +225,7 @@ public class TheMapper
             }
 
 
-            if (rowsInserted == 1)
+            if (rowsInserted == order.size() - tal)
             {
                 rowsInserted = 0;
                 statement = con.prepareStatement(SQLString2);
@@ -233,7 +233,7 @@ public class TheMapper
                 for (int i = 0; i < order.size(); i++)
                 {
                     Order o = order.get(i);
-                    for (int j = 0; j < o.getItemlist().size(); j++)
+                    for (int j = tal; j < o.getItemlist().size(); j++)
                     {
                         statement.setInt(1, o.getItemlist().get(j).getItemNo());
                         statement.setInt(2, o.getItemlist().get(j).getItemAmount());
@@ -252,7 +252,7 @@ public class TheMapper
             System.out.println("Fejl i OrdreMapper - SaveOrder");
             e.printStackTrace();
         }
-        return rowsInserted == order.size();
+        return rowsInserted == order.size()- tal;
 
     }
 

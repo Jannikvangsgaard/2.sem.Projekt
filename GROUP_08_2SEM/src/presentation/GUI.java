@@ -36,8 +36,9 @@ public class GUI extends javax.swing.JFrame
         jListVareTilOrdre.setModel(model2);
         jListStatusListe.setModel(model3);
         jListStatusInformation.setModel(model4);
+        
         control.loadItemliste();
-        control.loadAllOrders();
+//        control.loadAllOrders();
         control.loadAvailableItems();
         
         visVareliste();
