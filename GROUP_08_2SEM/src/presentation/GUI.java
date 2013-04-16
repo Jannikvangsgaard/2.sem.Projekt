@@ -356,8 +356,12 @@ public class GUI extends javax.swing.JFrame
 
     private void jButtonSaveOrderActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSaveOrderActionPerformed
     {//GEN-HEADEREND:event_jButtonSaveOrderActionPerformed
+        if(jTextFieldCustomerNo.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null, "Der mangler et kunde nummer");
+        }
+        else{
         int kundeNo = Integer.parseInt(jTextFieldCustomerNo.getText());
-
         ArrayList<Customer> customerlist = control.getCustomerlist();
         for (int i = 0; i < customerlist.size(); i++)
         {
@@ -380,6 +384,7 @@ public class GUI extends javax.swing.JFrame
             jLabelOrderSavedNotSaved.setText("Ordren blev ikke gemt");
         }
         orderList.clear();
+        }
     }//GEN-LAST:event_jButtonSaveOrderActionPerformed
 
     private void jButtonTilføjvareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTilføjvareActionPerformed

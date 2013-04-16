@@ -10,6 +10,7 @@ import domain.Item;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -173,8 +174,9 @@ public class TheMapper
     /**
      * Write to database
      */
-    public boolean saveOrder(ArrayList<Order> order, Connection con)
+    public boolean saveOrder(ArrayList<Order> order, Connection con) throws SQLException
     {
+        con.setAutoCommit(false);
         System.out.println(order.size() + "order size");
         int rowsInserted = 0;
         int tal = 0;
@@ -183,7 +185,7 @@ public class TheMapper
         String SQLString3 = "select ordreseq.nextval from dual";
 
 
-
+        
         PreparedStatement statement = null;
         for (int j = 0; j < order.size(); j++)
         {
@@ -195,7 +197,7 @@ public class TheMapper
             }
         }
 
-
+        
         try
         {
             statement = con.prepareStatement(SQLString3);
