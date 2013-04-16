@@ -46,7 +46,7 @@ public class GUI extends javax.swing.JFrame
 
         control.loadItemliste();
 //        control.loadAllOrders();
-        control.loadAvailableItems();
+//        control.loadAvailableItems();
 
         visVareliste();
         visAlleItemListe();
@@ -584,8 +584,12 @@ public class GUI extends javax.swing.JFrame
         {
             if(jListVarePåLagerStatus.getSelectedValue().equals(alleItemsList.get(i).toStringGUI()))
             {
-                alleItemsList.get(i).setItemAmount(antal);
-               
+                alleItemsList.get(i).setItemAmount(alleItemsList.get(i).getItemAmount() + antal);
+                control.increaseAmount(alleItemsList);
+                jTextFieldÆndringAfVareAntal.setText("");
+                visVareliste();
+                visAlleItemListe();
+                break;
             }
         }
     }//GEN-LAST:event_jButtonBekræftÆndringActionPerformed
@@ -598,6 +602,7 @@ public class GUI extends javax.swing.JFrame
         try
         {
             model1.clear();
+            control.loadAvailableItems();
             vareliste2 = control.getAvailableItems();
             for (int i = 0; i < vareliste2.size(); i++)
             {

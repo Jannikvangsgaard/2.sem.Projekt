@@ -180,7 +180,6 @@ public class TheMapper
     {
         
         con.setAutoCommit(false);
-        System.out.println(order.size() + "order size");
         int rowsInserted = 0;
         int tal = 0;
         String SQLString1 = "insert into ordre values(?,?,?)";
@@ -239,7 +238,6 @@ public class TheMapper
                 for (int i = tal; i < order.size(); i++)
                 {
                     Order o = order.get(i);
-                    System.out.println(tal + "tal til for");
                     for (int j = 0; j < o.getItemlist().size(); j++)
                     {
                         statement.setInt(1, o.getItemlist().get(j).getItemNo());
@@ -259,8 +257,6 @@ public class TheMapper
             System.out.println("Fejl i OrdreMapper - SaveOrder");
             e.printStackTrace();
         }
-        System.out.println(rowsInserted + "row");
-        System.out.println(order.size()- tal + "size");
         return rowsInserted == order.get(tal).getItemlist().size();
 
     }
@@ -382,11 +378,8 @@ public class TheMapper
 public boolean increaseItem(ArrayList<Item> newItems, Connection con)
     {
         int rowsInserted = 0;
-        int nyTotal;
-        String SQLString1 = "Select antal from varer where varerNo = ?";
-        String SQLString2 = "Select antal from tilrådighed where varerNo = ?";
-        String SQLString3 = "update varer set antal = ? where varerNo = ?";
-        String SQLString4 = "update tilrådighed set antal = ? where varerNo = ?";
+        String SQLString1 = "update varer set varerantaltotal = ? where varerNo = ?";
+        String SQLString2 = "update tilrådighed set antal = ? where varerNo = ?";
 
         PreparedStatement statement = null;
 
@@ -395,47 +388,30 @@ public boolean increaseItem(ArrayList<Item> newItems, Connection con)
             statement = con.prepareStatement(SQLString1);
             
             
-            ResultSet rs = statement.executeQuery();
-            while (rs.next())
-            {
             for (int i = 0; i < newItems.size(); i++)
             {
                 
-                statement.setInt(1, newItems.get(i).getItemNo());
-                int bums = rs.getInt(3);
-                Item it = newItems.get(i);
-                nyTotal = bums  +  it.getItemAmount();
                 
-                statement = con.prepareStatement(SQLString3);
                 
-                statement.setInt(1, nyTotal);
+                statement.setInt(1, newItems.get(i).getItemAmount());
                 statement.setInt(2, newItems.get(i).getItemNo());
                 rowsInserted += statement.executeUpdate();
                 
             }
-            }
             
             
-                statement = con.prepareStatement(SQLString2);
-
-               while (rs.next())
-            {
+            statement = con.prepareStatement(SQLString2);
             for (int i = 0; i < newItems.size(); i++)
             {
                 
-                statement.setInt(1, newItems.get(i).getItemNo());
-                int bums = rs.getInt(3);
-                Item it = newItems.get(i);
-                nyTotal = bums  +  it.getItemAmount();
                 
-                statement = con.prepareStatement(SQLString4);
                 
-                statement.setInt(1, nyTotal);
+                statement.setInt(1, newItems.get(i).getItemAmount());
                 statement.setInt(2, newItems.get(i).getItemNo());
                 
                 rowsInserted += statement.executeUpdate();
             }
-            }
+            
 
 
         } catch (Exception e)
