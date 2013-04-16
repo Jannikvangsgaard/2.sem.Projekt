@@ -176,8 +176,8 @@ public class Control {
     public void commit() throws SQLException {
         dbf.commit();
     }
-    public boolean increaseAmount(){
+    public boolean increaseAmount(ArrayList<Item> increasedItem){
     
-        return dbf.increaseAmount(allItemList);
+        return dbf.increaseAmount(increasedItem);
     }
 }
