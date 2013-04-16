@@ -447,7 +447,7 @@ public class GUI extends javax.swing.JFrame
             }
             try
             {
-                if (varelisteTjek() == true)
+                if (control.varelisteTjek(orderList) == true)
                 {
                     control.saveOrder();
                     jLabelOrderSavedNotSaved.setText("Ordren blev gemt");
@@ -630,30 +630,28 @@ public class GUI extends javax.swing.JFrame
         }
     }
 
-    public boolean varelisteTjek()
-    {
-        ArrayList tjek = control.getAvailableItems();
-        boolean status = false;
-        for (int i = 0; i < orderList.size(); i++)
-        {
-            for (int j = 0; j < tjek.size(); j++)
-            {
-                System.out.println(control.getAvailableItems().get(j).getItemAmount());
-                System.out.println(orderList.get(i).getItemAmount());
-                if (control.getAvailableItems().get(j).getItemNo() == orderList.get(i).getItemNo())
-                {
-                    if (control.getAvailableItems().get(j).getItemAmount() > orderList.get(i).getItemAmount())
-                    {
-                        status = true;
-                    } else
-                    {
-                        status = false;
-                    }
-                }
-            }
-        }
-        return status;
-    }
+//    public boolean varelisteTjek()
+//    {
+//        ArrayList tjek = control.getAvailableItems();
+//        boolean status = false;
+//        for (int i = 0; i < tjekListe.size(); i++)
+//        {
+//            for (int j = 0; j < tjek.size(); j++)
+//            {
+//                if (control.getAvailableItems().get(j).getItemNo() == tjekListe.get(i).getItemNo())
+//                {
+//                    if (control.getAvailableItems().get(j).getItemAmount() > tjekListe.get(i).getItemAmount())
+//                    {
+//                        status = true;
+//                    } else
+//                    {
+//                        status = false;
+//                    }
+//                }
+//            }
+//        }
+//        return status;
+//    }
 
     public static void main(String args[])
     {

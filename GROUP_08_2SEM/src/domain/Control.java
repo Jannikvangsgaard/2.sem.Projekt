@@ -180,4 +180,25 @@ public class Control {
     
         return dbf.increaseAmount(increasedItem);
     }
+        public boolean varelisteTjek(ArrayList<Item> tjekListe)
+    {
+        boolean status = false;
+        for (int i = 0; i < tjekListe.size(); i++)
+        {
+            for (int j = 0; j < availableItems.size(); j++)
+            {
+                if (availableItems.get(j).getItemNo() == tjekListe.get(i).getItemNo())
+                {
+                    if (availableItems.get(j).getItemAmount() > tjekListe.get(i).getItemAmount())
+                    {
+                        status = true;
+                    } else
+                    {
+                        status = false;
+                    }
+                }
+            }
+        }
+        return status;
+    }
 }
