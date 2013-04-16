@@ -75,5 +75,9 @@ public class DBFacade
     {
         tm.commit(con);
     }
+    public boolean increaseAmount(ArrayList<Item> it){
+    
+    return tm.increaseItem(it, con);
+    }
    
 }

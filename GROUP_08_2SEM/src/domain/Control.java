@@ -136,4 +136,8 @@ public class Control {
     {
         dbf.commit();
     }
+    public boolean increaseAmount(){
+    
+        return dbf.increaseAmount(allItemList);
+    }
 }
