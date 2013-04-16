@@ -93,9 +93,9 @@ public class GUI extends javax.swing.JFrame
         jPanel4 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jListVarePåLagerStatus = new javax.swing.JList();
-        jTextField1 = new javax.swing.JTextField();
+        jTextFieldÆndringAfVareAntal = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        jButtonBekræftÆndring = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -346,7 +346,14 @@ public class GUI extends javax.swing.JFrame
 
         jLabel8.setText("Ændring af vare");
 
-        jButton1.setText("Bekræft");
+        jButtonBekræftÆndring.setText("Bekræft");
+        jButtonBekræftÆndring.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonBekræftÆndringActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -358,8 +365,8 @@ public class GUI extends javax.swing.JFrame
                 .addGap(100, 100, 100)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jTextFieldÆndringAfVareAntal)
+                    .addComponent(jButtonBekræftÆndring, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(276, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -371,9 +378,9 @@ public class GUI extends javax.swing.JFrame
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldÆndringAfVareAntal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jButton1)))
+                        .addComponent(jButtonBekræftÆndring)))
                 .addContainerGap(171, Short.MAX_VALUE))
         );
 
@@ -570,6 +577,18 @@ public class GUI extends javax.swing.JFrame
         }
     }//GEN-LAST:event_jButtonTestActionPerformed
 
+    private void jButtonBekræftÆndringActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBekræftÆndringActionPerformed
+    {//GEN-HEADEREND:event_jButtonBekræftÆndringActionPerformed
+        int antal = Integer.parseInt(jButtonBekræftÆndring.getText());
+        for(int i = 0; i < alleItemsList.size(); i++)
+        {
+            if(jListVarePåLagerStatus.getSelectedValue().equals(alleItemsList.get(i).toStringGUI()))
+            {
+                
+            }
+        }
+    }//GEN-LAST:event_jButtonBekræftÆndringActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -672,7 +691,7 @@ public class GUI extends javax.swing.JFrame
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonBekræftÆndring;
     private javax.swing.JButton jButtonFjernVare;
     private javax.swing.JButton jButtonHentKunder;
     private javax.swing.JButton jButtonHentOrdre;
@@ -706,9 +725,9 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextAreaVisKunder;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextFieldAntalItems;
     private javax.swing.JTextField jTextFieldCustomerNo;
     private javax.swing.JTextField jTextFieldKundeNavn;
+    private javax.swing.JTextField jTextFieldÆndringAfVareAntal;
     // End of variables declaration//GEN-END:variables
 }

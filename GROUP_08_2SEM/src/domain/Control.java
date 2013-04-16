@@ -19,6 +19,7 @@ public class Control {
     private ArrayList<Item> availableItems = new ArrayList<Item>();
     private ArrayList<Order> orderlist = new ArrayList<Order>();
     private ArrayList<Customer> customerlist = new ArrayList<Customer>();
+    private ArrayList<Item> allItemList = new ArrayList<Item>();
     private DBFacade dbf;
 
     public Control() {
@@ -27,7 +28,8 @@ public class Control {
 
     public ArrayList<Item> allItemList()
     {
-        return dbf.getVare();
+        allItemList = dbf.getVare();
+        return allItemList;
     }
     
     public void createItem(int number, String itemName, int amount) {
