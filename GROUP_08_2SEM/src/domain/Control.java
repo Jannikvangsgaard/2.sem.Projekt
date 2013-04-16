@@ -25,6 +25,11 @@ public class Control {
         dbf = new DBFacade().getInstance();
     }
 
+    public ArrayList<Item> allItemList()
+    {
+        return dbf.getVare();
+    }
+    
     public void createItem(int number, String itemName, int amount) {
         Item item = new Item(number, itemName, amount);
         itemlist.add(item);
