@@ -19,12 +19,19 @@ public class Control {
     private ArrayList<Item> availableItems = new ArrayList<Item>();
     private ArrayList<Order> orderlist = new ArrayList<Order>();
     private ArrayList<Customer> customerlist = new ArrayList<Customer>();
+    private ArrayList<Item> allItemList = new ArrayList<Item>();
     private DBFacade dbf;
 
     public Control() {
         dbf = new DBFacade().getInstance();
     }
 
+    public ArrayList<Item> allItemList()
+    {
+        allItemList = dbf.getVare();
+        return allItemList;
+    }
+    
     public void createItem(int number, String itemName, int amount) {
         Item item = new Item(number, itemName, amount);
         itemlist.add(item);
@@ -168,5 +175,9 @@ public class Control {
 
     public void commit() throws SQLException {
         dbf.commit();
+    }
+    public boolean increaseAmount(ArrayList<Item> increasedItem){
+    
+        return dbf.increaseAmount(increasedItem);
     }
 }

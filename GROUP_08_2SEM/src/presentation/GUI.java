@@ -22,8 +22,10 @@ public class GUI extends javax.swing.JFrame
     DefaultListModel model2;
     DefaultListModel model3;
     DefaultListModel model4;
+    DefaultListModel model5;
     ArrayList<Item> orderList = new ArrayList();
     ArrayList<Item> vareliste2 = new ArrayList();
+    ArrayList<Item> alleItemsList = new ArrayList();
 
     /**
      * Creates new form GUI
@@ -35,16 +37,19 @@ public class GUI extends javax.swing.JFrame
         model2 = new DefaultListModel();
         model3 = new DefaultListModel();
         model4 = new DefaultListModel();
+        model5 = new DefaultListModel();
         jListvareliste.setModel(model1);
         jListVareTilOrdre.setModel(model2);
         jListStatusListe.setModel(model3);
         jListStatusInformation.setModel(model4);
+        jListVarePåLagerStatus.setModel(model5);
 
         control.loadItemliste();
 //        control.loadAllOrders();
         control.loadAvailableItems();
 
         visVareliste();
+        visAlleItemListe();
 
     }
 
@@ -85,6 +90,12 @@ public class GUI extends javax.swing.JFrame
         jListStatusListe = new javax.swing.JList();
         jScrollPane5 = new javax.swing.JScrollPane();
         jListStatusInformation = new javax.swing.JList();
+        jPanel4 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jListVarePåLagerStatus = new javax.swing.JList();
+        jTextFieldÆndringAfVareAntal = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        jButtonBekræftÆndring = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -331,6 +342,50 @@ public class GUI extends javax.swing.JFrame
 
         jTabbedPane1.addTab("Status", jPanel3);
 
+        jScrollPane6.setViewportView(jListVarePåLagerStatus);
+
+        jLabel8.setText("Ændring af vare");
+
+        jButtonBekræftÆndring.setText("Bekræft");
+        jButtonBekræftÆndring.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonBekræftÆndringActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(100, 100, 100)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextFieldÆndringAfVareAntal)
+                    .addComponent(jButtonBekræftÆndring, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(276, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldÆndringAfVareAntal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonBekræftÆndring)))
+                .addContainerGap(171, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Lager Status", jPanel4);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -522,6 +577,18 @@ public class GUI extends javax.swing.JFrame
         }
     }//GEN-LAST:event_jButtonTestActionPerformed
 
+    private void jButtonBekræftÆndringActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBekræftÆndringActionPerformed
+    {//GEN-HEADEREND:event_jButtonBekræftÆndringActionPerformed
+        int antal = Integer.parseInt(jButtonBekræftÆndring.getText());
+        for(int i = 0; i < alleItemsList.size(); i++)
+        {
+            if(jListVarePåLagerStatus.getSelectedValue().equals(alleItemsList.get(i).toStringGUI()))
+            {
+                
+            }
+        }
+    }//GEN-LAST:event_jButtonBekræftÆndringActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -538,6 +605,22 @@ public class GUI extends javax.swing.JFrame
         } catch (NullPointerException ex)
         {
             System.out.println("Error in GUI - \"visVareListe\"");
+        }
+    }
+    
+    public void visAlleItemListe()
+    {
+        try
+        {
+            model5.clear();
+            alleItemsList = control.allItemList();
+            for(int i = 0; i < alleItemsList.size(); i++)
+            {
+                model5.addElement(alleItemsList.get(i).toStringGUI());
+            }
+        }catch (NullPointerException ex)
+        {
+            System.out.println("Error in GUI - \"visAlleItemListe\"");
         }
     }
 
@@ -608,6 +691,7 @@ public class GUI extends javax.swing.JFrame
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonBekræftÆndring;
     private javax.swing.JButton jButtonFjernVare;
     private javax.swing.JButton jButtonHentKunder;
     private javax.swing.JButton jButtonHentOrdre;
@@ -622,23 +706,28 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabelOrderSavedNotSaved;
     private javax.swing.JList jListStatusInformation;
     private javax.swing.JList jListStatusListe;
+    private javax.swing.JList jListVarePåLagerStatus;
     private javax.swing.JList jListVareTilOrdre;
     private javax.swing.JList jListvareliste;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextAreaVisKunder;
     private javax.swing.JTextField jTextFieldAntalItems;
     private javax.swing.JTextField jTextFieldCustomerNo;
     private javax.swing.JTextField jTextFieldKundeNavn;
+    private javax.swing.JTextField jTextFieldÆndringAfVareAntal;
     // End of variables declaration//GEN-END:variables
 }
