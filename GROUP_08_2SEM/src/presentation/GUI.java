@@ -579,12 +579,13 @@ public class GUI extends javax.swing.JFrame
 
     private void jButtonBekræftÆndringActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBekræftÆndringActionPerformed
     {//GEN-HEADEREND:event_jButtonBekræftÆndringActionPerformed
-        int antal = Integer.parseInt(jButtonBekræftÆndring.getText());
+        int antal = Integer.parseInt(jTextFieldÆndringAfVareAntal.getText());
         for(int i = 0; i < alleItemsList.size(); i++)
         {
             if(jListVarePåLagerStatus.getSelectedValue().equals(alleItemsList.get(i).toStringGUI()))
             {
-                
+                alleItemsList.get(i).setItemAmount(antal);
+               
             }
         }
     }//GEN-LAST:event_jButtonBekræftÆndringActionPerformed
