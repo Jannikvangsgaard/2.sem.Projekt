@@ -178,12 +178,12 @@ public class TheMapper
      */
     public boolean saveOrder(ArrayList<Order> order, Connection con) throws SQLException
     {
-        
-        con.setAutoCommit(false);
+//        
+//        con.setAutoCommit(false);
         System.out.println(order.size() + "order size");
         int rowsInserted = 0;
         int tal = 0;
-        String SQLString1 = "insert into ordre values(?,?,?)";
+        String SQLString1 = "insert into ordre values(?,?,?,?)";
         String SQLString2 = "insert into ordreDetails values(?,?,?)";
         String SQLString3 = "select ordreseq.nextval from dual";
 
@@ -226,6 +226,7 @@ public class TheMapper
                 statement.setInt(1, o.getOrderNo());
                 statement.setInt(2, o.getCustomer().getCustomerID());
                 statement.setInt(3, o.getState());
+                statement.setString(4, o.getDateString());
 
                 rowsInserted += statement.executeUpdate();
             }
@@ -267,7 +268,7 @@ public class TheMapper
 
     public boolean saveAvailableItem(ArrayList<Item> freeItems, Connection con) throws SQLException
     {
-        con.setAutoCommit(false);
+//        con.setAutoCommit(false);
         int rowsInserted = 0;
         String SQLString1 = "update tilrådighed set antal = ? where varerNo = ?";
 
