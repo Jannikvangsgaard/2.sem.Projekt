@@ -2,6 +2,7 @@ package datasource;
 
 import domain.*;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -53,13 +54,13 @@ public class DBFacade
         return tm.getItems(con);
     }
 
-    public boolean saveOrder(ArrayList<Order> o)
+    public boolean saveOrder(ArrayList<Order> o) throws SQLException
     {
     
         return tm.saveOrder(o, con);
     }
 
-    public boolean saveItem(ArrayList<Item> i)
+    public boolean saveItem(ArrayList<Item> i) throws SQLException
     {
         return tm.saveAvailableItem(i, con);
     }
@@ -68,6 +69,11 @@ public class DBFacade
     }
     public ArrayList getAvailableItems(){
     return tm.getAvailableItem(con);
+    }
+    
+    public void commit() throws SQLException
+    {
+        tm.commit(con);
     }
    
 }

@@ -3,7 +3,10 @@ package presentation;
 import domain.Control;
 import domain.Customer;
 import domain.Item;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -75,6 +78,7 @@ public class GUI extends javax.swing.JFrame
         jButtonSaveOrder = new javax.swing.JButton();
         jButtonFjernVare = new javax.swing.JButton();
         jLabelOrderSavedNotSaved = new javax.swing.JLabel();
+        jButtonTest = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jButtonHentOrdre = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -214,6 +218,15 @@ public class GUI extends javax.swing.JFrame
             }
         });
 
+        jButtonTest.setText("test");
+        jButtonTest.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonTestActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -231,14 +244,16 @@ public class GUI extends javax.swing.JFrame
                     .addComponent(jButtonFjernVare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(83, 83, 83)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabelOrderSavedNotSaved, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel5)
-                        .addComponent(jLabel6)
-                        .addComponent(jButtonSaveOrder)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addComponent(jTextFieldCustomerNo, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)))
-                .addContainerGap(82, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jButtonTest)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabelOrderSavedNotSaved, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel6)
+                    .addComponent(jButtonSaveOrder)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(jTextFieldCustomerNo, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -269,8 +284,10 @@ public class GUI extends javax.swing.JFrame
                         .addGap(18, 18, 18)
                         .addComponent(jButtonFjernVare)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabelOrderSavedNotSaved, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabelOrderSavedNotSaved, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonTest))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Bestilling", jPanel2);
@@ -373,16 +390,21 @@ public class GUI extends javax.swing.JFrame
                 jTextFieldCustomerNo.setText("");
             }
         }
-
-        if(control.saveOrder() == true)
-        {
-            jLabelOrderSavedNotSaved.setText("Ordren blev gemt");
-            control.saveFreeItems(vareliste2);
-        }
-        else
-        {
-            jLabelOrderSavedNotSaved.setText("Ordren blev ikke gemt");
-        }
+            try
+            {
+                if(control.saveOrder() == true)
+                {
+                    jLabelOrderSavedNotSaved.setText("Ordren blev gemt");
+                    control.saveFreeItems(vareliste2);
+                }
+                else
+                {
+                    jLabelOrderSavedNotSaved.setText("Ordren blev ikke gemt");
+                }
+            } catch (SQLException ex)
+            {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
         orderList.clear();
         }
     }//GEN-LAST:event_jButtonSaveOrderActionPerformed
@@ -487,6 +509,17 @@ public class GUI extends javax.swing.JFrame
         }
     }//GEN-LAST:event_jButtonHentOrdreActionPerformed
 
+    private void jButtonTestActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTestActionPerformed
+    {//GEN-HEADEREND:event_jButtonTestActionPerformed
+        try
+        {
+            control.commit();
+        } catch (SQLException ex)
+        {
+            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButtonTestActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -553,6 +586,7 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JButton jButtonHentOrdre;
     private javax.swing.JButton jButtonOpretKunde;
     private javax.swing.JButton jButtonSaveOrder;
+    private javax.swing.JButton jButtonTest;
     private javax.swing.JButton jButtonTilføjvare;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

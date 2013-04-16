@@ -1,6 +1,7 @@
 package domain;
 
 import datasource.DBFacade;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
@@ -105,11 +106,11 @@ public class Control {
         return availableItems;
     }
 
-    public void saveFreeItems(ArrayList<Item> test) {
+    public void saveFreeItems(ArrayList<Item> test) throws SQLException {
         dbf.saveItem(test);
     }
 
-    public boolean saveOrder() {
+    public boolean saveOrder() throws SQLException {
         return dbf.saveOrder(orderlist);
     }
 
@@ -129,5 +130,10 @@ public class Control {
     {
         System.out.println(dbf.loadAllOrders().size());
         orderlist = dbf.loadAllOrders();
+    }
+    
+    public void commit() throws SQLException
+    {
+        dbf.commit();
     }
 }

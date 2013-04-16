@@ -176,6 +176,7 @@ public class TheMapper
      */
     public boolean saveOrder(ArrayList<Order> order, Connection con) throws SQLException
     {
+        
         con.setAutoCommit(false);
         System.out.println(order.size() + "order size");
         int rowsInserted = 0;
@@ -262,8 +263,9 @@ public class TheMapper
 
     }
 
-    public boolean saveAvailableItem(ArrayList<Item> freeItems, Connection con)
+    public boolean saveAvailableItem(ArrayList<Item> freeItems, Connection con) throws SQLException
     {
+        con.setAutoCommit(false);
         int rowsInserted = 0;
         String SQLString1 = "update tilrådighed set antal = ? where varerNo = ?";
 
@@ -369,5 +371,9 @@ public class TheMapper
             System.out.println(ex.getMessage());
         }
         return availableItem;
+    }
+    public void commit(Connection con) throws SQLException
+    {
+        con.commit();
     }
 }

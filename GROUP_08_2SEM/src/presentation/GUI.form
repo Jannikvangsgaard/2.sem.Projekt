@@ -183,14 +183,18 @@
                       </Group>
                       <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabelOrderSavedNotSaved" pref="150" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jButtonTest" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabelOrderSavedNotSaved" pref="172" max="32767" attributes="0"/>
+                          </Group>
                           <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                           <Component id="jButtonSaveOrder" min="-2" max="-2" attributes="0"/>
                           <Component id="jScrollPane3" pref="0" max="32767" attributes="0"/>
-                          <Component id="jTextFieldCustomerNo" alignment="0" pref="150" max="32767" attributes="0"/>
+                          <Component id="jTextFieldCustomerNo" alignment="0" pref="227" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="82" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -229,8 +233,11 @@
                           </Group>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jLabelOrderSavedNotSaved" min="-2" pref="20" max="-2" attributes="0"/>
-                      <EmptySpace pref="118" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jLabelOrderSavedNotSaved" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="jButtonTest" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="115" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -321,6 +328,14 @@
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabelOrderSavedNotSaved">
+            </Component>
+            <Component class="javax.swing.JButton" name="jButtonTest">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="test"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonTestActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
