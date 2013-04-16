@@ -36,7 +36,7 @@ public class TheMapper
                 qty             = 0, 
                 state           = 0, 
                 totalAmount     = 0;
-        String  itemName        = "";
+        String  itemName, date        = "";
         
         String SQLString = "SELECT * FROM ordre NATURAL JOIN ordredetails NATURAL JOIN varer";
         
@@ -51,13 +51,14 @@ public class TheMapper
                 System.out.println(orderNo);
                 customerNo     = rs.getInt(3);
                 state          = rs.getInt(4);
-                qty            = rs.getInt(5);
-                itemName       = rs.getString(6);
-                totalAmount    = rs.getInt(7);
+                date           = rs.getString(5);
+                qty            = rs.getInt(6);
+                itemName       = rs.getString(7);
+                totalAmount    = rs.getInt(8);
                 i = new Item(itemNo, itemName, qty);
                 items.add(i);
             }
-            o = new Order(customerNo, items);
+            o = new Order(customerNo, items,date);
             orders.add(o);
         }
         catch (Exception e)
@@ -79,7 +80,7 @@ public class TheMapper
                 qty           = 0, 
                 state         = 0, 
                 totalAmount   = 0;
-        String  itemName;
+        String  itemName, date = "";
         
         String SQLString =  "SELECT * FROM ordre NATURAL JOIN ordredetails NATURAL JOIN varer WHERE ordreno = ?";
         
@@ -93,13 +94,14 @@ public class TheMapper
                 itemNo         = rs.getInt(1);
                 customerNo     = rs.getInt(3);
                 state          = rs.getInt(4);
-                qty            = rs.getInt(5);
-                itemName       = rs.getString(6);
-                totalAmount    = rs.getInt(7);
+                date           = rs.getString(5);
+                qty            = rs.getInt(6);
+                itemName       = rs.getString(7);
+                totalAmount    = rs.getInt(8);
                 i = new Item(itemNo, itemName, qty);
                 items.add(i);
             }
-            o = new Order(customerNo, items);
+            o = new Order(customerNo, items, date);
         }
         
         catch (Exception e)
