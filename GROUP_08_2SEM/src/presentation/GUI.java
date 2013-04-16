@@ -39,13 +39,13 @@ public class GUI extends javax.swing.JFrame
         jListVareTilOrdre.setModel(model2);
         jListStatusListe.setModel(model3);
         jListStatusInformation.setModel(model4);
-        
+
         control.loadItemliste();
 //        control.loadAllOrders();
         control.loadAvailableItems();
-        
+
         visVareliste();
-        
+
     }
 
     @SuppressWarnings("unchecked")
@@ -373,40 +373,41 @@ public class GUI extends javax.swing.JFrame
 
     private void jButtonSaveOrderActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonSaveOrderActionPerformed
     {//GEN-HEADEREND:event_jButtonSaveOrderActionPerformed
-        if(jTextFieldCustomerNo.getText().isEmpty())
+        if (jTextFieldCustomerNo.getText().isEmpty())
         {
             JOptionPane.showMessageDialog(null, "Der mangler et kunde nummer");
-        }
-        else{
-        int kundeNo = Integer.parseInt(jTextFieldCustomerNo.getText());
-        ArrayList<Customer> customerlist = control.getCustomerlist();
-        for (int i = 0; i < customerlist.size(); i++)
+        } else
         {
-
-            if (customerlist.get(i).getCustomerID() == kundeNo)
+            int kundeNo = Integer.parseInt(jTextFieldCustomerNo.getText());
+            ArrayList<Customer> customerlist = control.getCustomerlist();
+            for (int i = 0; i < customerlist.size(); i++)
             {
-                control.createOrder(orderList, customerlist.get(i));
-                model2.clear();
-                jTextFieldCustomerNo.setText("");
+
+                if (customerlist.get(i).getCustomerID() == kundeNo)
+                {
+                    control.createOrder(orderList, customerlist.get(i));
+                    model2.clear();
+                    jTextFieldCustomerNo.setText("");
+                }
             }
-        }
             try
             {
-                if(control.saveOrder() == true)
+                if (varelisteTjek() == true)
                 {
                     control.saveOrder();
                     jLabelOrderSavedNotSaved.setText("Ordren blev gemt");
                     control.saveFreeItems(vareliste2);
-                }
-                else
+                    visVareliste();
+                } else
                 {
                     jLabelOrderSavedNotSaved.setText("Ordren blev ikke gemt");
+                    visVareliste();
                 }
             } catch (SQLException ex)
             {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-        orderList.clear();
+            orderList.clear();
         }
     }//GEN-LAST:event_jButtonSaveOrderActionPerformed
 
@@ -469,7 +470,7 @@ public class GUI extends javax.swing.JFrame
                 model1.clear();
                 for (int g = 0; g < vareliste2.size(); g++)
                 {
-                    if(orderList.get(i).getItemNo() == vareliste2.get(g).getItemNo())
+                    if (orderList.get(i).getItemNo() == vareliste2.get(g).getItemNo())
                     {
                         vareliste2.get(g).setItemAmount(vareliste2.get(g).getItemAmount() + orderList.get(i).getItemAmount());
                     }
@@ -504,7 +505,7 @@ public class GUI extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jButtonHentOrdreActionPerformed
         System.out.println(control.getOrderlist().size());
         System.out.println(control.getOrderlist().toString());
-        for(int i = 0; i < control.getOrderlist().size(); i++)
+        for (int i = 0; i < control.getOrderlist().size(); i++)
         {
             model3.addElement(control.getOrderlist().get(i).toString());
         }
@@ -539,11 +540,30 @@ public class GUI extends javax.swing.JFrame
             System.out.println("Error in GUI - \"visVareListe\"");
         }
     }
-    
+
     public boolean varelisteTjek()
     {
         ArrayList tjek = control.getAvailableItems();
-        return true;
+        boolean status = false;
+        for (int i = 0; i < orderList.size(); i++)
+        {
+            for (int j = 0; j < tjek.size(); j++)
+            {
+                System.out.println(control.getAvailableItems().get(j).getItemAmount());
+                System.out.println(orderList.get(i).getItemAmount());
+                if (control.getAvailableItems().get(j).getItemNo() == orderList.get(i).getItemNo())
+                {
+                    if (control.getAvailableItems().get(j).getItemAmount() > orderList.get(i).getItemAmount())
+                    {
+                        status = true;
+                    } else
+                    {
+                        status = false;
+                    }
+                }
+            }
+        }
+        return status;
     }
 
     public static void main(String args[])

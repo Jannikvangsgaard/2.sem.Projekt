@@ -8,8 +8,8 @@ import java.sql.DriverManager;
  * @author Jannik
  */
 public class DBConnector {
-     private static String id = "CLDATB12E8";
- private static String pw = "CLDATB12E8";
+     private static String id = "cphtk9";
+ private static String pw = "cphtk9";
 
  public Connection getConnection() {
   Connection con = null;
