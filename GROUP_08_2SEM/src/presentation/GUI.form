@@ -437,8 +437,8 @@
                       <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jLabel8" max="32767" attributes="0"/>
-                          <Component id="jTextField1" max="32767" attributes="0"/>
-                          <Component id="jButton1" max="32767" attributes="0"/>
+                          <Component id="jTextFieldÆndringAfVareAntal" max="32767" attributes="0"/>
+                          <Component id="jButtonBekræftÆndring" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="276" max="32767" attributes="0"/>
                   </Group>
@@ -453,9 +453,9 @@
                           <Group type="102" attributes="0">
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jTextFieldÆndringAfVareAntal" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                              <Component id="jButtonBekræftÆndring" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="171" max="32767" attributes="0"/>
@@ -480,17 +480,20 @@
                 </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JTextField" name="jTextField1">
+            <Component class="javax.swing.JTextField" name="jTextField&#xc6;ndringAfVareAntal">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#xc6;ndring af vare"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="jButtonBekr&#xe6;ft&#xc6;ndring">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Bekr&#xe6;ft"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonBekr&#xe6;ft&#xc6;ndringActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
