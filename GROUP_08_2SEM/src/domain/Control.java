@@ -34,7 +34,7 @@ public class Control {
         Calendar c1 = Calendar.getInstance();
         Calendar c2 = Calendar.getInstance();
         Item item1, item2, item3;
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("y M d");
         for (int i = 0; i < orderlist.size(); i++) {
             c2.setTime(sdf.parse(orderlist.get(i).getDateString()));
             if (c1.after(c2)) {

@@ -29,7 +29,7 @@ public class Order {
       Calendar calendar = Calendar.getInstance();
       calendar.add(Calendar.DATE, 3);
       Date date = (Date) calendar.getTime();
-      dateToString = new SimpleDateFormat("yyyy-MM-dd").format(date);
+      dateToString = new SimpleDateFormat("y M d").format(date);
     }
    
     public Order(int orderNo, ArrayList<Item> itemlist, String date){
