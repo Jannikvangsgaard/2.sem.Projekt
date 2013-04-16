@@ -1,8 +1,12 @@
 package domain;
 
 import datasource.DBFacade;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 /**
  *
@@ -26,6 +30,36 @@ public class Control {
         itemlist.add(item);
     }
 
+    public void checkDate() throws ParseException {
+        Calendar c1 = Calendar.getInstance();
+        Calendar c2 = Calendar.getInstance();
+        Item item1, item2, item3;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        for (int i = 0; i < orderlist.size(); i++) {
+            c2.setTime(sdf.parse(orderlist.get(i).getDateString()));
+            if (c1.after(c2)) {
+                orderlist.get(i).setState(2);
+                for (int j = 0; j < orderlist.get(i).getItemlist().size(); j++) {
+                    item1 = orderlist.get(i).getItemlist().get(j);
+                    for (int k = 0; k < availableItems.size(); k++) {
+                        item2 = availableItems.get(k);
+                        if (item2 == item1) {
+                            availableItems.get(k).setItemAmount(item2.getItemAmount() + item1.getItemAmount());
+                            orderlist.get(i).getItemlist().remove(j);
+                        }
+                    }
+                    if (orderlist.get(i).getItemlist().size() > 0) {
+                        for (int kusse = 0; kusse < orderlist.size(); kusse++) {
+                            item3 = orderlist.get(i).getItemlist().get(kusse);
+                            availableItems.add(item3);
+                        }
+
+                    }
+                }
+            }
+        }
+    }
+
     public ArrayList<Item> getItemList() {
         return itemlist;
     }
@@ -34,22 +68,23 @@ public class Control {
         Order order = new Order(itemliste2, customer);
         orderlist.add(order);
     }
-    public Order loadOrderList(int ono){
-    return dbf.loadSingleOrder(ono);
+
+    public Order loadOrderList(int ono) {
+        return dbf.loadSingleOrder(ono);
     }
-    
+
     public ArrayList loadItemliste() {
         itemlist = dbf.getVare();
         return itemlist;
     }
 
     public void createCustomer(String name) {
-        if (name!=null){
+        if (name != null) {
             Customer c = new Customer(name);
             customerlist.add(c);
             dbf.saveCustomer(customerlist);
         }
-        
+
     }
 
     public ArrayList<Order> getOrderlist() {
@@ -117,23 +152,21 @@ public class Control {
     public void saveCustomer(ArrayList<Customer> customer) {
         dbf.saveCustomer(customer);
     }
-    public void loadAvailableItems(){
-       availableItems = dbf.getAvailableItems();
-     }
-    
-    public Order loadSingleOrder(int ono)
-    {
+
+    public void loadAvailableItems() {
+        availableItems = dbf.getAvailableItems();
+    }
+
+    public Order loadSingleOrder(int ono) {
         return dbf.loadSingleOrder(ono);
     }
-    
-    public void loadAllOrders()
-    {
+
+    public void loadAllOrders() {
         System.out.println(dbf.loadAllOrders().size());
         orderlist = dbf.loadAllOrders();
     }
-    
-    public void commit() throws SQLException
-    {
+
+    public void commit() throws SQLException {
         dbf.commit();
     }
 }
