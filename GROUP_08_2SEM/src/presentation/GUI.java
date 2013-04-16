@@ -394,6 +394,7 @@ public class GUI extends javax.swing.JFrame
             {
                 if(control.saveOrder() == true)
                 {
+                    control.saveOrder();
                     jLabelOrderSavedNotSaved.setText("Ordren blev gemt");
                     control.saveFreeItems(vareliste2);
                 }
@@ -537,6 +538,12 @@ public class GUI extends javax.swing.JFrame
         {
             System.out.println("Error in GUI - \"visVareListe\"");
         }
+    }
+    
+    public boolean varelisteTjek()
+    {
+        ArrayList tjek = control.getAvailableItems();
+        return true;
     }
 
     public static void main(String args[])
