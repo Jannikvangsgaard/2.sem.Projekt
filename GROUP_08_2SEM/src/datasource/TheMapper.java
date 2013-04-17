@@ -346,57 +346,54 @@ public class TheMapper {
         int rowsInserted = 0;
         String SQLString1 = "update varer set varerantaltotal = ? where varerNo = ?";
         String SQLString2 = "update tilrådighed set antal = ? where varerNo = ?";
-
+        String SQLString3 = "select varerAntalTotal from varer where varerNo = ?";
+        String SQLString4 = "select antal from tilrådighed where varerNo = ?";
         PreparedStatement statement = null;
 
         try {
+            statement = con.prepareStatement(SQLString3);
+            ResultSet rs = statement.executeQuery();
+            
+            for(int i = 0; i<newItems.size(); i++){
+             if(rs.next())   
+             { 
+              Item it = newItems.get(i);
+              statement.setInt(1, it.getItemNo());
+              it.setAmountTotal(rs.getInt(3));
+             }
+            }
             statement = con.prepareStatement(SQLString1);
             
-            
-            for (int i = 0; i < newItems.size(); i++)
-            {
-                
-                
-                
-                statement.setInt(1, newItems.get(i).getItemAmount());
-                statement.setInt(2, newItems.get(i).getItemNo());
-                rowsInserted += statement.executeUpdate();
-                
+            for(int i =0; i < newItems.size(); i++){
+                Item it = newItems.get(i);
+                int noget;
+                noget = it.getItemAmount() + it.getAmountTotal();
+                statement.setInt(1, noget);
+                statement.setInt(2, it.getItemNo());
             }
             
             
+            statement = con.prepareStatement(SQLString4);
+            
+                 for(int i = 0; i<newItems.size(); i++){
+             if(rs.next())   
+             { 
+              Item it = newItems.get(i);
+              statement.setInt(1, it.getItemNo());
+              it.setAmountTotal(rs.getInt(3));
+             }
+            }
             statement = con.prepareStatement(SQLString2);
-            for (int i = 0; i < newItems.size(); i++)
-            {
-                
-                
-                
-                statement.setInt(1, newItems.get(i).getItemAmount());
-                statement.setInt(2, newItems.get(i).getItemNo());
-                
-                rowsInserted += statement.executeUpdate();
+            
+            for(int i =0; i < newItems.size(); i++){
+                Item it = newItems.get(i);
+                int noget;
+                noget = it.getItemAmount() + it.getAmountTotal();
+                statement.setInt(1, noget);
+                statement.setInt(2, it.getItemNo());
             }
             
-
-
-            statement = con.prepareStatement(SQLString2);
-
-            while (rs.next()) {
-                for (int i = 0; i < newItems.size(); i++) {
-
-                    statement.setInt(1, newItems.get(i).getItemNo());
-                    int bums = rs.getInt(3);
-                    Item it = newItems.get(i);
-                    nyTotal = bums + it.getItemAmount();
-
-                    statement = con.prepareStatement(SQLString4);
-
-                    statement.setInt(1, nyTotal);
-                    statement.setInt(2, newItems.get(i).getItemNo());
-
-                    rowsInserted += statement.executeUpdate();
-                }
-            }
+            
 
 
         } catch (Exception e) {

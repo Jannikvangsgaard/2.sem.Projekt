@@ -10,12 +10,16 @@ public class Item
     private int itemNo;
     private int itemAmount;
     private int price;
+    private int amountTotal;
 
     public Item(int itemNo, String itemName, int itemAmount)
     {
         this.itemNo = itemNo;
         this.itemName = itemName;
         this.itemAmount = itemAmount;
+    }
+    public Item (int amountTotal){
+        this.amountTotal = amountTotal;
     }
 
     public int getPrice(){
@@ -63,5 +67,11 @@ public class Item
     public String toStringGUIReserved()
     {
         return itemName + " ønskede antal " + itemAmount;
+    }
+    public void setAmountTotal(int amount){
+        this.amountTotal = amount;
+    }
+    public int getAmountTotal(){
+        return amountTotal;
     }
 }
