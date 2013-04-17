@@ -71,8 +71,8 @@ public class Control {
         return itemlist;
     }
 
-    public void createOrder(ArrayList<Item> itemliste2, Customer customer) {
-        Order order = new Order(itemliste2, customer);
+    public void createOrder(ArrayList<Item> itemliste2, Customer customer, Date bestillingsDato) {
+        Order order = new Order(itemliste2, customer, bestillingsDato);
         orderlist.add(order);
     }
 

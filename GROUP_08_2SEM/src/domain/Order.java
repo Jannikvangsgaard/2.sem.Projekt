@@ -23,7 +23,7 @@ public class Order {
         return "Ordre nummer " + orderNo + ", state " + state;
     }
 
-    public Order(ArrayList<Item> itemlist, Customer customer) {
+    public Order(ArrayList<Item> itemlist, Customer customer, Date bestillingsDate) {
         this.itemlist = itemlist;
         state = 0;
         this.customer = customer;
@@ -36,7 +36,7 @@ public class Order {
 
     }
 
-    public Order(int orderNo, ArrayList<Item> itemlist, Date bestillingsDate, Date depositumDate) {
+    public Order(int orderNo, ArrayList<Item> itemlist, Date bestillingsDate, Date depositumDate2) {
 
         this.orderNo = 0;
         this.itemlist = itemlist;
