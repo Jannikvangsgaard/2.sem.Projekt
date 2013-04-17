@@ -43,7 +43,7 @@ public class Control {
         Item item1, item2, item3;
         SimpleDateFormat sdf = new SimpleDateFormat("y M d");
         for (int i = 0; i < orderlist.size(); i++) {
-            c2.setTime(sdf.parse(orderlist.get(i).getDateString()));
+            c2.setTime(sdf.parse(orderlist.get(i).getDepositumDateToString()));
             if (c1.after(c2)) {
                 orderlist.get(i).setState(2);
                 for (int j = 0; j < orderlist.get(i).getItemlist().size(); j++) {
