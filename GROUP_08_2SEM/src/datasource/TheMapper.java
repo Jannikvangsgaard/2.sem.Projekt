@@ -227,7 +227,7 @@ public class TheMapper {
                         java.sql.Date sqlDate2 = new java.sql.Date(o.getBestillingsDate().getTime());
                         statement.setDate(4, sqlDate);
                         statement.setDate(5, sqlDate2);
-                        System.out.println("tjek");
+                        System.out.println("" + statement);
                         rowsInserted += statement.executeUpdate();
                     }
 

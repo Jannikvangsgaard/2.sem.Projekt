@@ -115,7 +115,7 @@ public class Control {
         for (int i = 0; i < orderlist.size(); i++) {
             for (int j = 0; j < orderlist.get(i).getItemlist().size(); j++) {
                 itemlistReserved.add(orderlist.get(i).getItemlist().get(j));
-                System.out.println(itemlistReserved);
+                System.out.println(itemlistReserved + "hej");
 
             }
         }
@@ -169,7 +169,7 @@ public class Control {
     }
 
     public void loadAllOrders() {
-        System.out.println(dbf.loadAllOrders().size());
+        System.out.println(dbf.loadAllOrders().size() + "hej");
         orderlist = dbf.loadAllOrders();
     }
 

@@ -23,8 +23,8 @@ public class GUI extends javax.swing.JFrame
 {
 
     Control control = new Control();
-    DefaultListModel model1;
-    DefaultListModel model2;
+    DefaultListModel modelvareliste;
+    DefaultListModel modelVareTilOrdre;
     DefaultListModel model3;
     DefaultListModel model4;
     DefaultListModel model5;
@@ -38,19 +38,21 @@ public class GUI extends javax.swing.JFrame
     public GUI()
     {
         initComponents();
-        model1 = new DefaultListModel();
-        model2 = new DefaultListModel();
+        modelvareliste = new DefaultListModel();
+        modelVareTilOrdre = new DefaultListModel();
         model3 = new DefaultListModel();
         model4 = new DefaultListModel();
         model5 = new DefaultListModel();
-        jListvareliste.setModel(model1);
-        jListVareTilOrdre.setModel(model2);
+        jListvareliste.setModel(modelvareliste);
+        jListVareTilOrdre.setModel(modelVareTilOrdre);
         jListStatusListe.setModel(model3);
         jListStatusInformation.setModel(model4);
         jListVarePåLagerStatus.setModel(model5);
 
         control.loadItemliste();
-//        control.loadAllOrders();
+        control.reservedItem();
+        
+        control.loadAllOrders();
 //        control.loadAvailableItems();
 
         visVareliste();
@@ -513,7 +515,7 @@ public class GUI extends javax.swing.JFrame
                 if (customerlist.get(i).getCustomerID() == kundeNo)
                 {
                     control.createOrder(orderList, customerlist.get(i), date);
-                    model2.clear();
+                    modelVareTilOrdre.clear();
                     jTextFieldCustomerNo.setText("");
                 }
             }
@@ -565,17 +567,17 @@ public class GUI extends javax.swing.JFrame
                     {
                         orderList.add(new Item(item.getItemNo(), item.getItemName(), item.getItemAmount()));
                     }
-                    model2.clear();
+                    modelVareTilOrdre.clear();
                     for (int j = 0; j < orderList.size(); j++)
                     {
-                        model2.addElement(orderList.get(j).toStringGUIReserved());
+                        modelVareTilOrdre.addElement(orderList.get(j).toStringGUIReserved());
                         jTextFieldAntalItems.setText("");
                     }
                     item2.setItemAmount(amount3);
-                    model1.clear();
+                    modelvareliste.clear();
                     for (int g = 0; g < vareliste2.size(); g++)
                     {
-                        model1.addElement(vareliste2.get(g).toStringGUI());
+                        modelvareliste.addElement(vareliste2.get(g).toStringGUI());
                     }
 
                 } else
@@ -590,23 +592,23 @@ public class GUI extends javax.swing.JFrame
 
     private void jButtonFjernVareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonFjernVareActionPerformed
     {//GEN-HEADEREND:event_jButtonFjernVareActionPerformed
-        for (int i = 0; i < model2.size(); i++)
+        for (int i = 0; i < modelVareTilOrdre.size(); i++)
         {
-            if (jListVareTilOrdre.getSelectedValue().equals(model2.elementAt(i)))
+            if (jListVareTilOrdre.getSelectedValue().equals(modelVareTilOrdre.elementAt(i)))
             {
-                model1.clear();
+                modelvareliste.clear();
                 for (int g = 0; g < vareliste2.size(); g++)
                 {
                     if (orderList.get(i).getItemNo() == vareliste2.get(g).getItemNo())
                     {
                         vareliste2.get(g).setItemAmount(vareliste2.get(g).getItemAmount() + orderList.get(i).getItemAmount());
                     }
-                    model1.addElement(vareliste2.get(g).toStringGUI());
+                    modelvareliste.addElement(vareliste2.get(g).toStringGUI());
                 }
                 orderList.remove(i);
             }
         }
-        model2.removeElement(jListVareTilOrdre.getSelectedValue());
+        modelVareTilOrdre.removeElement(jListVareTilOrdre.getSelectedValue());
     }//GEN-LAST:event_jButtonFjernVareActionPerformed
 
     private void jButtonTilføjvareKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jButtonTilføjvareKeyReleased
@@ -692,12 +694,12 @@ public class GUI extends javax.swing.JFrame
     {
         try
         {
-            model1.clear();
-            control.loadAvailableItems();
+            modelvareliste.clear();
+            control.availableItems();
             vareliste2 = control.getAvailableItems();
             for (int i = 0; i < vareliste2.size(); i++)
             {
-                model1.addElement(vareliste2.get(i).toStringGUI());
+                modelvareliste.addElement(vareliste2.get(i).toStringGUI());
             }
         } catch (NullPointerException ex)
         {
