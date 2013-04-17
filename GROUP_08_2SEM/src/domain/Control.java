@@ -1,7 +1,7 @@
 package domain;
 
 import datasource.DBFacade;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

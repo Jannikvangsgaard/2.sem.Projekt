@@ -3,8 +3,13 @@ package presentation;
 import domain.Control;
 import domain.Customer;
 import domain.Item;
+import java.util.Date;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -487,13 +492,27 @@ public class GUI extends javax.swing.JFrame
         } else
         {
             int kundeNo = Integer.parseInt(jTextFieldCustomerNo.getText());
+            Calendar cal = Calendar.getInstance();
+            Date date = (Date) cal.getTime();
+            String dag = jTextFieldDateDage.getText();
+            String måned = jTextFieldDatoMåned.getText();
+            String aar = jTextFieldDateÅr.getText();
+            String dato = aar + måned + dag;
+            DateFormat newDate = new SimpleDateFormat("y M d");
+            try
+            {
+                date = newDate.parse(dato);
+            } catch (ParseException ex)
+            {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
             ArrayList<Customer> customerlist = control.getCustomerlist();
             for (int i = 0; i < customerlist.size(); i++)
             {
 
                 if (customerlist.get(i).getCustomerID() == kundeNo)
                 {
-                    control.createOrder(orderList, customerlist.get(i));
+                    control.createOrder(orderList, customerlist.get(i), date);
                     model2.clear();
                     jTextFieldCustomerNo.setText("");
                 }
