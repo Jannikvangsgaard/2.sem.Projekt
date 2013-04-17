@@ -84,6 +84,10 @@ public class GUI extends javax.swing.JFrame
         jButtonFjernVare = new javax.swing.JButton();
         jLabelOrderSavedNotSaved = new javax.swing.JLabel();
         jButtonTest = new javax.swing.JButton();
+        jTextFieldDateÅr = new javax.swing.JTextField();
+        jTextFieldDateDage = new javax.swing.JTextField();
+        jTextFieldDatoMåned = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jButtonHentOrdre = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -238,32 +242,74 @@ public class GUI extends javax.swing.JFrame
             }
         });
 
+        jTextFieldDateÅr.setText("År");
+        jTextFieldDateÅr.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jTextFieldDateÅrMouseClicked(evt);
+            }
+        });
+
+        jTextFieldDateDage.setText("Dage");
+        jTextFieldDateDage.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jTextFieldDateDageMouseClicked(evt);
+            }
+        });
+
+        jTextFieldDatoMåned.setText("Måned");
+        jTextFieldDatoMåned.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jTextFieldDatoMånedMouseClicked(evt);
+            }
+        });
+
+        jLabel9.setText("Dato:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(33, 33, 33)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4)
-                    .addComponent(jButtonTilføjvare, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jTextFieldAntalItems)
-                    .addComponent(jButtonFjernVare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(83, 83, 83)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel4)
+                            .addComponent(jButtonTilføjvare, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jTextFieldAntalItems)
+                            .addComponent(jButtonFjernVare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(83, 83, 83))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jButtonTest)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelOrderSavedNotSaved, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jButtonSaveOrder)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jTextFieldCustomerNo, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
+                        .addGap(57, 57, 57)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jButtonSaveOrder)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabelOrderSavedNotSaved, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel6)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jTextFieldCustomerNo, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jTextFieldDateDage, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldDatoMåned, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTextFieldDateÅr, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel9))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -276,16 +322,21 @@ public class GUI extends javax.swing.JFrame
                             .addComponent(jLabel3)
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jTextFieldCustomerNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(3, 3, 3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextFieldDateDage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldDatoMåned, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldDateÅr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonSaveOrder))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -294,11 +345,13 @@ public class GUI extends javax.swing.JFrame
                         .addComponent(jButtonTilføjvare)
                         .addGap(18, 18, 18)
                         .addComponent(jButtonFjernVare)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(14, 14, 14)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelOrderSavedNotSaved, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonTest))
-                .addContainerGap(115, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButtonTest)
+                        .addComponent(jButtonSaveOrder)))
+                .addContainerGap(108, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Bestilling", jPanel2);
@@ -594,6 +647,21 @@ public class GUI extends javax.swing.JFrame
         }
     }//GEN-LAST:event_jButtonBekræftÆndringActionPerformed
 
+    private void jTextFieldDateDageMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jTextFieldDateDageMouseClicked
+    {//GEN-HEADEREND:event_jTextFieldDateDageMouseClicked
+        jTextFieldDateDage.setText("");
+    }//GEN-LAST:event_jTextFieldDateDageMouseClicked
+
+    private void jTextFieldDatoMånedMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jTextFieldDatoMånedMouseClicked
+    {//GEN-HEADEREND:event_jTextFieldDatoMånedMouseClicked
+        jTextFieldDatoMåned.setText("");
+    }//GEN-LAST:event_jTextFieldDatoMånedMouseClicked
+
+    private void jTextFieldDateÅrMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jTextFieldDateÅrMouseClicked
+    {//GEN-HEADEREND:event_jTextFieldDateÅrMouseClicked
+        jTextFieldDateÅr.setText("");
+    }//GEN-LAST:event_jTextFieldDateÅrMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -711,6 +779,7 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelOrderSavedNotSaved;
     private javax.swing.JList jListStatusInformation;
     private javax.swing.JList jListStatusListe;
@@ -731,6 +800,9 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JTextArea jTextAreaVisKunder;
     private javax.swing.JTextField jTextFieldAntalItems;
     private javax.swing.JTextField jTextFieldCustomerNo;
+    private javax.swing.JTextField jTextFieldDateDage;
+    private javax.swing.JTextField jTextFieldDateÅr;
+    private javax.swing.JTextField jTextFieldDatoMåned;
     private javax.swing.JTextField jTextFieldKundeNavn;
     private javax.swing.JTextField jTextFieldÆndringAfVareAntal;
     // End of variables declaration//GEN-END:variables
