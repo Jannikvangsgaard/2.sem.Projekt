@@ -76,6 +76,9 @@ public class Order {
     public Date getBestillingsDate() {
         return bestillingsDate;
     }
+    public void setBestillingsDate(Date date){
+        bestillingsDate = date;
+    }
 
     public String getDepositumDateToString() {
         String res = "";

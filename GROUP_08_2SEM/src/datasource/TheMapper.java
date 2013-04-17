@@ -169,8 +169,8 @@ public class TheMapper {
         con.setAutoCommit(false);
         int rowsInserted = 0;
         int tal = 0;
-        String SQLString1 = "insert into ordre values(?,?,?,?,?)";
-        String SQLString2 = "insert into ordreDetails values(?,?,?)";
+        String SQLString1 = "insert into ordre values(?,?,?)";
+        String SQLString2 = "insert into ordreDetails values(?,?,?,?,?)";
         String SQLString3 = "select ordreseq.nextval from dual";
 
 
@@ -206,10 +206,7 @@ public class TheMapper {
                 statement.setInt(1, o.getOrderNo());
                 statement.setInt(2, o.getCustomer().getCustomerID());
                 statement.setInt(3, o.getState());
-                java.sql.Date sqlDate = new java.sql.Date(o.getDepositumDate().getTime());
-                java.sql.Date sqlDate2 = new java.sql.Date(o.getBestillingsDate().getTime());
-                statement.setDate(4, sqlDate);
-                statement.setDate(5, sqlDate2);
+
 
                 rowsInserted += statement.executeUpdate();
             }
@@ -226,6 +223,10 @@ public class TheMapper {
                         statement.setInt(1, o.getItemlist().get(j).getItemNo());
                         statement.setInt(2, o.getItemlist().get(j).getItemAmount());
                         statement.setInt(3, o.getOrderNo());
+                        java.sql.Date sqlDate = new java.sql.Date(o.getDepositumDate().getTime());
+                        java.sql.Date sqlDate2 = new java.sql.Date(o.getBestillingsDate().getTime());
+                        statement.setDate(4, sqlDate);
+                        statement.setDate(5, sqlDate2);
                         rowsInserted += statement.executeUpdate();
                     }
 
