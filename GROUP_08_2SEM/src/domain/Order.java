@@ -31,6 +31,7 @@ public class Order {
         calendar.add(Calendar.DATE, 3);
         Date date = (Date) calendar.getTime();
         depositumDate = date;
+        this.bestillingsDate = bestillingsDate;
 //      java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 //      dateToString = new SimpleDateFormat("y M d").format(sqlDate);
 

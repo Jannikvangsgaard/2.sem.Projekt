@@ -93,6 +93,7 @@ public class GUI extends javax.swing.JFrame
         jTextFieldDateDage = new javax.swing.JTextField();
         jTextFieldDatoMåned = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
+        jTextFieldTest = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jButtonHentOrdre = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -281,23 +282,20 @@ public class GUI extends javax.swing.JFrame
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(33, 33, 33)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4)
-                            .addComponent(jButtonTilføjvare, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                            .addComponent(jTextFieldAntalItems)
-                            .addComponent(jButtonFjernVare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(83, 83, 83))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButtonTest)
-                        .addGap(57, 57, 57)))
+                    .addComponent(jLabel3)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel4)
+                        .addComponent(jButtonTilføjvare, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jTextFieldAntalItems)
+                        .addComponent(jButtonFjernVare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonTest)
+                    .addComponent(jTextFieldTest, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(83, 83, 83)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(jPanel2Layout.createSequentialGroup()
@@ -349,13 +347,15 @@ public class GUI extends javax.swing.JFrame
                         .addGap(18, 18, 18)
                         .addComponent(jButtonTilføjvare)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonFjernVare)))
+                        .addComponent(jButtonFjernVare)
+                        .addGap(50, 50, 50)
+                        .addComponent(jTextFieldTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonTest)))
                 .addGap(14, 14, 14)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelOrderSavedNotSaved, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButtonTest)
-                        .addComponent(jButtonSaveOrder)))
+                    .addComponent(jButtonSaveOrder))
                 .addContainerGap(108, Short.MAX_VALUE))
         );
 
@@ -498,7 +498,7 @@ public class GUI extends javax.swing.JFrame
             String måned = jTextFieldDatoMåned.getText();
             String aar = jTextFieldDateÅr.getText();
             String dato = aar + måned + dag;
-            DateFormat newDate = new SimpleDateFormat();
+            DateFormat newDate = new SimpleDateFormat("yyyyMMdd");
             try
             {
                 date = newDate.parse(dato);
@@ -640,12 +640,16 @@ public class GUI extends javax.swing.JFrame
 
     private void jButtonTestActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTestActionPerformed
     {//GEN-HEADEREND:event_jButtonTestActionPerformed
-        try
+//        try
+//        {
+//            control.commit();
+//        } catch (SQLException ex)
+//        {
+//            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        for(int i = 0; i < control.getOrderlist().size(); i++)
         {
-            control.commit();
-        } catch (SQLException ex)
-        {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        jTextFieldTest.setText(""+control.getOrderlist().get(i).getBestillingsDate());
         }
     }//GEN-LAST:event_jButtonTestActionPerformed
 
@@ -823,6 +827,7 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JTextField jTextFieldDateÅr;
     private javax.swing.JTextField jTextFieldDatoMåned;
     private javax.swing.JTextField jTextFieldKundeNavn;
+    private javax.swing.JTextField jTextFieldTest;
     private javax.swing.JTextField jTextFieldÆndringAfVareAntal;
     // End of variables declaration//GEN-END:variables
 }

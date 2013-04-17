@@ -227,6 +227,7 @@ public class TheMapper {
                         java.sql.Date sqlDate2 = new java.sql.Date(o.getBestillingsDate().getTime());
                         statement.setDate(4, sqlDate);
                         statement.setDate(5, sqlDate2);
+                        System.out.println("tjek");
                         rowsInserted += statement.executeUpdate();
                     }
 
@@ -382,22 +383,15 @@ public class TheMapper {
 
             statement = con.prepareStatement(SQLString2);
 
-            while (rs.next()) {
                 for (int i = 0; i < newItems.size(); i++) {
 
-                    statement.setInt(1, newItems.get(i).getItemNo());
-                    int bums = rs.getInt(3);
-                    Item it = newItems.get(i);
-                    nyTotal = bums + it.getItemAmount();
 
-                    statement = con.prepareStatement(SQLString4);
-
-                    statement.setInt(1, nyTotal);
+                    statement.setInt(1, newItems.get(i).getItemAmount());
                     statement.setInt(2, newItems.get(i).getItemNo());
 
                     rowsInserted += statement.executeUpdate();
                 }
-            }
+            
 
 
         } catch (Exception e) {
