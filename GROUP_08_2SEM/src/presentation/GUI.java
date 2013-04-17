@@ -498,7 +498,7 @@ public class GUI extends javax.swing.JFrame
             String måned = jTextFieldDatoMåned.getText();
             String aar = jTextFieldDateÅr.getText();
             String dato = aar + måned + dag;
-            DateFormat newDate = new SimpleDateFormat("y M d");
+            DateFormat newDate = new SimpleDateFormat();
             try
             {
                 date = newDate.parse(dato);
