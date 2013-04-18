@@ -686,15 +686,21 @@ public class GUI extends javax.swing.JFrame
 
     private void TilføjÆndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TilføjÆndringActionPerformed
         
-        
-        Object o = new Object();
         int antal = Integer.parseInt(jTextFieldÆndringAfVareAntal.getText());
-        o = jListVarePåLagerStatus.getSelectedValue();
-        Item v = (Item) o;
-        it.add(antal,v);
-        jTextFieldÆndringAfVareAntal.setText("");
-        visVareliste();
-        visAlleItemListe();
+        
+        String selected = jListVarePåLagerStatus.getSelectedValue().toString();
+        for(int i = 0; i < alleItemsList.size(); i++)
+        {
+            if(alleItemsList.get(i).toStringGUI().equals(selected))
+            {
+                Item v = alleItemsList.get(i);
+                v.setItemAmount(antal);
+                it.add(v);
+                jTextFieldÆndringAfVareAntal.setText("");
+                visVareliste();
+                visAlleItemListe();
+            }
+        }
 
     }//GEN-LAST:event_TilføjÆndringActionPerformed
 
