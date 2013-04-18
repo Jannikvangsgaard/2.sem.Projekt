@@ -113,11 +113,10 @@ public class Control {
 
     public void reservedItem() {
         for (int i = 0; i < orderlist.size(); i++) {
-            System.out.println(orderlist.size());
-//            for (int j = 0; j < orderlist.get(i).getItemlist().size(); j++) {
-                itemlistReserved.add(orderlist.get(i).getItemlist().get(i));
+            for (int j = 0; j < orderlist.get(i).getItemlist().size(); j++) {
+                itemlistReserved.add(orderlist.get(i).getItemlist().get(j));
 
-//            }
+            }
         }
     }
 
@@ -126,7 +125,6 @@ public class Control {
         if (availableItems.size() > 0) {
             availableItems.clear();
         }
-        System.out.println(itemlistReserved);
         for (int i = 0; i < itemlist.size(); i++) {
 //            System.out.println(itemlistReserved.size());
             for (int j = 0; j < itemlistReserved.size(); j++) {
@@ -156,8 +154,6 @@ public class Control {
     }
 
     public boolean saveOrder() throws SQLException {
-        System.out.println(orderlist.size() + "size her");
-        System.out.println(orderlist);
         return dbf.saveOrder(orderlist);
     }
 
