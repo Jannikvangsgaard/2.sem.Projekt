@@ -3,8 +3,13 @@ package presentation;
 import domain.Control;
 import domain.Customer;
 import domain.Item;
+import java.util.Date;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
@@ -18,8 +23,8 @@ public class GUI extends javax.swing.JFrame
 {
 
     Control control = new Control();
-    DefaultListModel model1;
-    DefaultListModel model2;
+    DefaultListModel modelvareliste;
+    DefaultListModel modelVareTilOrdre;
     DefaultListModel model3;
     DefaultListModel model4;
     DefaultListModel model5;
@@ -35,19 +40,21 @@ public class GUI extends javax.swing.JFrame
     public GUI()
     {
         initComponents();
-        model1 = new DefaultListModel();
-        model2 = new DefaultListModel();
+        modelvareliste = new DefaultListModel();
+        modelVareTilOrdre = new DefaultListModel();
         model3 = new DefaultListModel();
         model4 = new DefaultListModel();
         model5 = new DefaultListModel();
-        jListvareliste.setModel(model1);
-        jListVareTilOrdre.setModel(model2);
+        jListvareliste.setModel(modelvareliste);
+        jListVareTilOrdre.setModel(modelVareTilOrdre);
         jListStatusListe.setModel(model3);
         jListStatusInformation.setModel(model4);
         jListVarePåLagerStatus.setModel(model5);
 
         control.loadItemliste();
-//        control.loadAllOrders();
+        
+        
+        control.loadAllOrders();
 //        control.loadAvailableItems();
 
         visVareliste();
@@ -85,6 +92,11 @@ public class GUI extends javax.swing.JFrame
         jButtonFjernVare = new javax.swing.JButton();
         jLabelOrderSavedNotSaved = new javax.swing.JLabel();
         jButtonTest = new javax.swing.JButton();
+        jTextFieldDateÅr = new javax.swing.JTextField();
+        jTextFieldDateDage = new javax.swing.JTextField();
+        jTextFieldDatoMåned = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        jTextFieldTest = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jButtonHentOrdre = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -227,6 +239,38 @@ public class GUI extends javax.swing.JFrame
             }
         });
 
+        jTextFieldDateÅr.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jTextFieldDateÅr.setText("År");
+        jTextFieldDateÅr.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jTextFieldDateÅrMouseClicked(evt);
+            }
+        });
+
+        jTextFieldDateDage.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jTextFieldDateDage.setText("Dage");
+        jTextFieldDateDage.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jTextFieldDateDageMouseClicked(evt);
+            }
+        });
+
+        jTextFieldDatoMåned.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jTextFieldDatoMåned.setText("Måned");
+        jTextFieldDatoMåned.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                jTextFieldDatoMånedMouseClicked(evt);
+            }
+        });
+
+        jLabel9.setText("Dato:");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -237,22 +281,32 @@ public class GUI extends javax.swing.JFrame
                     .addComponent(jLabel3)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel4)
-                    .addComponent(jButtonTilføjvare, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jTextFieldAntalItems)
-                    .addComponent(jButtonFjernVare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel4)
+                        .addComponent(jButtonTilføjvare, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jTextFieldAntalItems)
+                        .addComponent(jButtonFjernVare, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jButtonTest)
+                    .addComponent(jTextFieldTest, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(83, 83, 83)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jButtonSaveOrder)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jLabelOrderSavedNotSaved, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
+                        .addComponent(jLabel5)
+                        .addComponent(jLabel6)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addComponent(jTextFieldCustomerNo, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButtonTest)
+                        .addComponent(jTextFieldDateDage, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabelOrderSavedNotSaved, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE))
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jButtonSaveOrder)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jTextFieldCustomerNo, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
+                        .addComponent(jTextFieldDatoMåned, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextFieldDateÅr, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel9))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -265,16 +319,21 @@ public class GUI extends javax.swing.JFrame
                             .addComponent(jLabel3)
                             .addComponent(jLabel5))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jTextFieldCustomerNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(3, 3, 3)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextFieldDateDage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldDatoMåned, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jTextFieldDateÅr, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButtonSaveOrder))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -282,12 +341,16 @@ public class GUI extends javax.swing.JFrame
                         .addGap(18, 18, 18)
                         .addComponent(jButtonTilføjvare)
                         .addGap(18, 18, 18)
-                        .addComponent(jButtonFjernVare)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jButtonFjernVare)
+                        .addGap(50, 50, 50)
+                        .addComponent(jTextFieldTest, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonTest)))
+                .addGap(14, 14, 14)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabelOrderSavedNotSaved, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonTest))
-                .addContainerGap(115, Short.MAX_VALUE))
+                    .addComponent(jButtonSaveOrder))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Bestilling", jPanel2);
@@ -451,14 +514,28 @@ public class GUI extends javax.swing.JFrame
         } else
         {
             int kundeNo = Integer.parseInt(jTextFieldCustomerNo.getText());
+            Calendar cal = Calendar.getInstance();
+            Date date = (Date) cal.getTime();
+            String dag = jTextFieldDateDage.getText();
+            String måned = jTextFieldDatoMåned.getText();
+            String aar = jTextFieldDateÅr.getText();
+            String dato = aar + måned + dag;
+            DateFormat newDate = new SimpleDateFormat("yyyyMMdd");
+            try
+            {
+                date = newDate.parse(dato);
+            } catch (ParseException ex)
+            {
+                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
             ArrayList<Customer> customerlist = control.getCustomerlist();
             for (int i = 0; i < customerlist.size(); i++)
             {
 
                 if (customerlist.get(i).getCustomerID() == kundeNo)
                 {
-                    control.createOrder(orderList, customerlist.get(i));
-                    model2.clear();
+                    control.createOrder(orderList, customerlist.get(i), date);
+                    modelVareTilOrdre.clear();
                     jTextFieldCustomerNo.setText("");
                 }
             }
@@ -468,7 +545,7 @@ public class GUI extends javax.swing.JFrame
                 {
                     control.saveOrder();
                     jLabelOrderSavedNotSaved.setText("Ordren blev gemt");
-                    control.saveFreeItems(vareliste2);
+//                    control.saveFreeItems(vareliste2);
                     visVareliste();
                 } else
                 {
@@ -510,17 +587,17 @@ public class GUI extends javax.swing.JFrame
                     {
                         orderList.add(new Item(item.getItemNo(), item.getItemName(), item.getItemAmount()));
                     }
-                    model2.clear();
+                    modelVareTilOrdre.clear();
                     for (int j = 0; j < orderList.size(); j++)
                     {
-                        model2.addElement(orderList.get(j).toStringGUIReserved());
+                        modelVareTilOrdre.addElement(orderList.get(j).toStringGUIReserved());
                         jTextFieldAntalItems.setText("");
                     }
                     item2.setItemAmount(amount3);
-                    model1.clear();
+                    modelvareliste.clear();
                     for (int g = 0; g < vareliste2.size(); g++)
                     {
-                        model1.addElement(vareliste2.get(g).toStringGUI());
+                        modelvareliste.addElement(vareliste2.get(g).toStringGUI());
                     }
 
                 } else
@@ -535,23 +612,23 @@ public class GUI extends javax.swing.JFrame
 
     private void jButtonFjernVareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonFjernVareActionPerformed
     {//GEN-HEADEREND:event_jButtonFjernVareActionPerformed
-        for (int i = 0; i < model2.size(); i++)
+        for (int i = 0; i < modelVareTilOrdre.size(); i++)
         {
-            if (jListVareTilOrdre.getSelectedValue().equals(model2.elementAt(i)))
+            if (jListVareTilOrdre.getSelectedValue().equals(modelVareTilOrdre.elementAt(i)))
             {
-                model1.clear();
+                modelvareliste.clear();
                 for (int g = 0; g < vareliste2.size(); g++)
                 {
                     if (orderList.get(i).getItemNo() == vareliste2.get(g).getItemNo())
                     {
                         vareliste2.get(g).setItemAmount(vareliste2.get(g).getItemAmount() + orderList.get(i).getItemAmount());
                     }
-                    model1.addElement(vareliste2.get(g).toStringGUI());
+                    modelvareliste.addElement(vareliste2.get(g).toStringGUI());
                 }
                 orderList.remove(i);
             }
         }
-        model2.removeElement(jListVareTilOrdre.getSelectedValue());
+        modelVareTilOrdre.removeElement(jListVareTilOrdre.getSelectedValue());
     }//GEN-LAST:event_jButtonFjernVareActionPerformed
 
     private void jButtonTilføjvareKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jButtonTilføjvareKeyReleased
@@ -575,8 +652,7 @@ public class GUI extends javax.swing.JFrame
 
     private void jButtonHentOrdreActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonHentOrdreActionPerformed
     {//GEN-HEADEREND:event_jButtonHentOrdreActionPerformed
-        System.out.println(control.getOrderlist().size());
-        System.out.println(control.getOrderlist().toString());
+        model3.clear();
         for (int i = 0; i < control.getOrderlist().size(); i++)
         {
             model3.addElement(control.getOrderlist().get(i).toString());
@@ -585,12 +661,16 @@ public class GUI extends javax.swing.JFrame
 
     private void jButtonTestActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTestActionPerformed
     {//GEN-HEADEREND:event_jButtonTestActionPerformed
-        try
+//        try
+//        {
+//            control.commit();
+//        } catch (SQLException ex)
+//        {
+//            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        for(int i = 0; i < control.getOrderlist().size(); i++)
         {
-            control.commit();
-        } catch (SQLException ex)
-        {
-            Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+        jTextFieldTest.setText(""+control.getOrderlist().get(i).getBestillingsDate());
         }
     }//GEN-LAST:event_jButtonTestActionPerformed
 
@@ -618,6 +698,21 @@ public class GUI extends javax.swing.JFrame
 
     }//GEN-LAST:event_TilføjÆndringActionPerformed
 
+    private void jTextFieldDateDageMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jTextFieldDateDageMouseClicked
+    {//GEN-HEADEREND:event_jTextFieldDateDageMouseClicked
+        jTextFieldDateDage.setText("");
+    }//GEN-LAST:event_jTextFieldDateDageMouseClicked
+
+    private void jTextFieldDatoMånedMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jTextFieldDatoMånedMouseClicked
+    {//GEN-HEADEREND:event_jTextFieldDatoMånedMouseClicked
+        jTextFieldDatoMåned.setText("");
+    }//GEN-LAST:event_jTextFieldDatoMånedMouseClicked
+
+    private void jTextFieldDateÅrMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jTextFieldDateÅrMouseClicked
+    {//GEN-HEADEREND:event_jTextFieldDateÅrMouseClicked
+        jTextFieldDateÅr.setText("");
+    }//GEN-LAST:event_jTextFieldDateÅrMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -625,12 +720,13 @@ public class GUI extends javax.swing.JFrame
     {
         try
         {
-            model1.clear();
-            control.loadAvailableItems();
+            modelvareliste.clear();
+            control.reservedItem();
+            control.availableItems();
             vareliste2 = control.getAvailableItems();
             for (int i = 0; i < vareliste2.size(); i++)
             {
-                model1.addElement(vareliste2.get(i).toStringGUI());
+                modelvareliste.addElement(vareliste2.get(i).toStringGUI());
             }
         } catch (NullPointerException ex)
         {
@@ -738,6 +834,7 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelOrderSavedNotSaved;
     private javax.swing.JList jListStatusInformation;
     private javax.swing.JList jListStatusListe;
@@ -759,7 +856,11 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JTextArea jTextAreaVisKunder;
     private javax.swing.JTextField jTextFieldAntalItems;
     private javax.swing.JTextField jTextFieldCustomerNo;
+    private javax.swing.JTextField jTextFieldDateDage;
+    private javax.swing.JTextField jTextFieldDateÅr;
+    private javax.swing.JTextField jTextFieldDatoMåned;
     private javax.swing.JTextField jTextFieldKundeNavn;
+    private javax.swing.JTextField jTextFieldTest;
     private javax.swing.JTextField jTextFieldÆndringAfVareAntal;
     // End of variables declaration//GEN-END:variables
 }

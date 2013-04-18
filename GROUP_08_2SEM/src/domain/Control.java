@@ -1,7 +1,7 @@
 package domain;
 
 import datasource.DBFacade;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -71,8 +71,8 @@ public class Control {
         return itemlist;
     }
 
-    public void createOrder(ArrayList<Item> itemliste2, Customer customer) {
-        Order order = new Order(itemliste2, customer);
+    public void createOrder(ArrayList<Item> itemliste2, Customer customer, Date bestillingsDato) {
+        Order order = new Order(itemliste2, customer, bestillingsDato);
         orderlist.add(order);
     }
 
@@ -113,11 +113,11 @@ public class Control {
 
     public void reservedItem() {
         for (int i = 0; i < orderlist.size(); i++) {
-            for (int j = 0; j < orderlist.get(i).getItemlist().size(); j++) {
-                itemlistReserved.add(orderlist.get(i).getItemlist().get(j));
-                System.out.println(itemlistReserved);
+            System.out.println(orderlist.size());
+//            for (int j = 0; j < orderlist.get(i).getItemlist().size(); j++) {
+                itemlistReserved.add(orderlist.get(i).getItemlist().get(i));
 
-            }
+//            }
         }
     }
 
@@ -126,15 +126,18 @@ public class Control {
         if (availableItems.size() > 0) {
             availableItems.clear();
         }
+        System.out.println(itemlistReserved);
         for (int i = 0; i < itemlist.size(); i++) {
+//            System.out.println(itemlistReserved.size());
             for (int j = 0; j < itemlistReserved.size(); j++) {
-                if (itemlist.get(i) == itemlistReserved.get(j) && itemlist.get(i).getItemAmount() >= itemlistReserved.get(j).getItemAmount()) {
-                    item1 = itemlist.get(j);
-                    item2 = itemlistReserved.get(i);
+                if (itemlist.get(i).getItemNo() == itemlistReserved.get(j).getItemNo() && itemlist.get(i).getItemAmount() >= itemlistReserved.get(j).getItemAmount()) {
+                    item1 = itemlist.get(i);
+                    item2 = itemlistReserved.get(j);
                     item3 = item1;
                     item3.setItemAmount(item1.getItemAmount() - item2.getItemAmount());
                     if (item3.getItemAmount() > 0) {
-                        availableItems.add(item3);
+//                        System.out.println("tjek");
+//                        availableItems.add(item3);
                     }
                 }
             }
@@ -153,6 +156,8 @@ public class Control {
     }
 
     public boolean saveOrder() throws SQLException {
+        System.out.println(orderlist.size() + "size her");
+        System.out.println(orderlist);
         return dbf.saveOrder(orderlist);
     }
 
@@ -169,7 +174,6 @@ public class Control {
     }
 
     public void loadAllOrders() {
-        System.out.println(dbf.loadAllOrders().size());
         orderlist = dbf.loadAllOrders();
     }
 

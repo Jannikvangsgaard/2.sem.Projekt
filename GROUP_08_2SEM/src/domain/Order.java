@@ -23,7 +23,7 @@ public class Order {
         return "Ordre nummer " + orderNo + ", state " + state;
     }
 
-    public Order(ArrayList<Item> itemlist, Customer customer) {
+    public Order(ArrayList<Item> itemlist, Customer customer, Date bestillingsDate) {
         this.itemlist = itemlist;
         state = 0;
         this.customer = customer;
@@ -31,14 +31,15 @@ public class Order {
         calendar.add(Calendar.DATE, 3);
         Date date = (Date) calendar.getTime();
         depositumDate = date;
+        this.bestillingsDate = bestillingsDate;
 //      java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 //      dateToString = new SimpleDateFormat("y M d").format(sqlDate);
 
     }
 
-    public Order(int orderNo, ArrayList<Item> itemlist, Date bestillingsDate, Date depositumDate) {
+    public Order(int orderNo, ArrayList<Item> itemlist, Date bestillingsDate, Date depositumDate2) {
 
-        this.orderNo = 0;
+        this.orderNo = orderNo;
         this.itemlist = itemlist;
         state = 0;
         this.bestillingsDate = bestillingsDate;
@@ -75,6 +76,9 @@ public class Order {
 
     public Date getBestillingsDate() {
         return bestillingsDate;
+    }
+    public void setBestillingsDate(Date date){
+        bestillingsDate = date;
     }
 
     public String getDepositumDateToString() {

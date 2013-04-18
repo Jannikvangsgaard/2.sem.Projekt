@@ -40,26 +40,30 @@ public class TheMapper {
         Calendar cal = Calendar.getInstance();
         Date depositumdate = cal.getTime(), bestillingsdate = cal.getTime();
         String SQLString = "SELECT * FROM ordre NATURAL JOIN ordredetails NATURAL JOIN varer";
-
         try {
             statement = conn.prepareStatement(SQLString);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
                 itemNo = rs.getInt(1);
                 orderNo = rs.getInt(2);
-                System.out.println(orderNo);
                 customerNo = rs.getInt(3);
                 state = rs.getInt(4);
-                depositumdate = rs.getDate(5);
-                bestillingsdate = rs.getDate(6);
-                qty = rs.getInt(7);
+                qty = rs.getInt(5);
+                depositumdate = rs.getDate(6);
+                bestillingsdate = rs.getDate(7);
                 itemName = rs.getString(8);
                 totalAmount = rs.getInt(9);
                 i = new Item(itemNo, itemName, qty);
                 items.add(i);
+                o = new Order(orderNo, items, depositumdate, bestillingsdate);
+                orders.add(o);
             }
-            o = new Order(customerNo, items, depositumdate, bestillingsdate);
-            orders.add(o);
+//            if(customerNo != 0)
+//            {
+//            o = new Order(orderNo, items, depositumdate, bestillingsdate);
+//            orders.add(o);
+//                System.out.println(o);
+//            }
         } catch (Exception e) {
             System.out.println("Fejl i TheMapper - getAllOrders");
         }
@@ -166,11 +170,11 @@ public class TheMapper {
     public boolean saveOrder(ArrayList<Order> order, Connection con) throws SQLException
     {
         
-        con.setAutoCommit(false);
+//        con.setAutoCommit(false);
         int rowsInserted = 0;
         int tal = 0;
-        String SQLString1 = "insert into ordre values(?,?,?,?,?)";
-        String SQLString2 = "insert into ordreDetails values(?,?,?)";
+        String SQLString1 = "insert into ordre values(?,?,?)";
+        String SQLString2 = "insert into ordreDetails values(?,?,?,?,?)";
         String SQLString3 = "select ordreseq.nextval from dual";
 
 
@@ -206,10 +210,7 @@ public class TheMapper {
                 statement.setInt(1, o.getOrderNo());
                 statement.setInt(2, o.getCustomer().getCustomerID());
                 statement.setInt(3, o.getState());
-                java.sql.Date sqlDate = new java.sql.Date(o.getDepositumDate().getTime());
-                java.sql.Date sqlDate2 = new java.sql.Date(o.getBestillingsDate().getTime());
-                statement.setDate(4, sqlDate);
-                statement.setDate(5, sqlDate2);
+
 
                 rowsInserted += statement.executeUpdate();
             }
@@ -226,6 +227,10 @@ public class TheMapper {
                         statement.setInt(1, o.getItemlist().get(j).getItemNo());
                         statement.setInt(2, o.getItemlist().get(j).getItemAmount());
                         statement.setInt(3, o.getOrderNo());
+                        java.sql.Date sqlDate = new java.sql.Date(o.getDepositumDate().getTime());
+                        java.sql.Date sqlDate2 = new java.sql.Date(o.getBestillingsDate().getTime());
+                        statement.setDate(4, sqlDate);
+                        statement.setDate(5, sqlDate2);
                         rowsInserted += statement.executeUpdate();
                     }
 
@@ -370,6 +375,31 @@ public class TheMapper {
                 statement.setInt(2, it.getItemNo());
             }
             
+            
+            statement = con.prepareStatement(SQLString2);
+            for (int i = 0; i < newItems.size(); i++)
+            {
+                
+                
+                
+                statement.setInt(1, newItems.get(i).getItemAmount());
+                statement.setInt(2, newItems.get(i).getItemNo());
+                
+                rowsInserted += statement.executeUpdate();
+            }
+            
+
+
+            statement = con.prepareStatement(SQLString2);
+
+                for (int i = 0; i < newItems.size(); i++) {
+
+
+                    statement.setInt(1, newItems.get(i).getItemAmount());
+                    statement.setInt(2, newItems.get(i).getItemNo());
+
+                    rowsInserted += statement.executeUpdate();
+                }
             
 
 
