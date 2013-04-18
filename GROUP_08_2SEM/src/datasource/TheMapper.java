@@ -40,36 +40,30 @@ public class TheMapper {
         Calendar cal = Calendar.getInstance();
         Date depositumdate = cal.getTime(), bestillingsdate = cal.getTime();
         String SQLString = "SELECT * FROM ordre NATURAL JOIN ordredetails NATURAL JOIN varer";
-        System.out.println("test");
         try {
-            System.out.println("test1");
             statement = conn.prepareStatement(SQLString);
-            System.out.println("test2");
             ResultSet rs = statement.executeQuery();
-            System.out.println("test3");
-            System.out.println(rs.next());
             while (rs.next()) {
-                System.out.println("test4");
                 itemNo = rs.getInt(1);
-                System.out.println("test5");
                 orderNo = rs.getInt(2);
-                System.out.println("test6");
-                System.out.println(orderNo);
                 customerNo = rs.getInt(3);
                 state = rs.getInt(4);
-                depositumdate = rs.getDate(5);
-                bestillingsdate = rs.getDate(6);
-                qty = rs.getInt(7);
+                qty = rs.getInt(5);
+                depositumdate = rs.getDate(6);
+                bestillingsdate = rs.getDate(7);
                 itemName = rs.getString(8);
                 totalAmount = rs.getInt(9);
                 i = new Item(itemNo, itemName, qty);
                 items.add(i);
+                o = new Order(orderNo, items, depositumdate, bestillingsdate);
+                orders.add(o);
             }
-            if(customerNo != 0)
-            {
-            o = new Order(customerNo, items, depositumdate, bestillingsdate);
-            orders.add(o);
-            }
+//            if(customerNo != 0)
+//            {
+//            o = new Order(orderNo, items, depositumdate, bestillingsdate);
+//            orders.add(o);
+//                System.out.println(o);
+//            }
         } catch (Exception e) {
             System.out.println("Fejl i TheMapper - getAllOrders");
         }

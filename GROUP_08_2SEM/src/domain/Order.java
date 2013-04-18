@@ -39,7 +39,7 @@ public class Order {
 
     public Order(int orderNo, ArrayList<Item> itemlist, Date bestillingsDate, Date depositumDate2) {
 
-        this.orderNo = 0;
+        this.orderNo = orderNo;
         this.itemlist = itemlist;
         state = 0;
         this.bestillingsDate = bestillingsDate;

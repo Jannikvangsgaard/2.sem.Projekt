@@ -50,7 +50,7 @@ public class GUI extends javax.swing.JFrame
         jListVarePåLagerStatus.setModel(model5);
 
         control.loadItemliste();
-        control.reservedItem();
+        
         
         control.loadAllOrders();
 //        control.loadAvailableItems();
@@ -511,7 +511,6 @@ public class GUI extends javax.swing.JFrame
             {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-            System.out.println(orderList);
             ArrayList<Customer> customerlist = control.getCustomerlist();
             for (int i = 0; i < customerlist.size(); i++)
             {
@@ -529,7 +528,7 @@ public class GUI extends javax.swing.JFrame
                 {
                     control.saveOrder();
                     jLabelOrderSavedNotSaved.setText("Ordren blev gemt");
-                    control.saveFreeItems(vareliste2);
+//                    control.saveFreeItems(vareliste2);
                     visVareliste();
                 } else
                 {
@@ -636,8 +635,7 @@ public class GUI extends javax.swing.JFrame
 
     private void jButtonHentOrdreActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonHentOrdreActionPerformed
     {//GEN-HEADEREND:event_jButtonHentOrdreActionPerformed
-        System.out.println(control.getOrderlist().size());
-        System.out.println(control.getOrderlist().toString());
+        model3.clear();
         for (int i = 0; i < control.getOrderlist().size(); i++)
         {
             model3.addElement(control.getOrderlist().get(i).toString());
@@ -699,6 +697,7 @@ public class GUI extends javax.swing.JFrame
         try
         {
             modelvareliste.clear();
+            control.reservedItem();
             control.availableItems();
             vareliste2 = control.getAvailableItems();
             for (int i = 0; i < vareliste2.size(); i++)
