@@ -40,13 +40,20 @@ public class TheMapper {
         Calendar cal = Calendar.getInstance();
         Date depositumdate = cal.getTime(), bestillingsdate = cal.getTime();
         String SQLString = "SELECT * FROM ordre NATURAL JOIN ordredetails NATURAL JOIN varer";
-
+        System.out.println("test");
         try {
+            System.out.println("test1");
             statement = conn.prepareStatement(SQLString);
+            System.out.println("test2");
             ResultSet rs = statement.executeQuery();
+            System.out.println("test3");
+            System.out.println(rs.next());
             while (rs.next()) {
+                System.out.println("test4");
                 itemNo = rs.getInt(1);
+                System.out.println("test5");
                 orderNo = rs.getInt(2);
+                System.out.println("test6");
                 System.out.println(orderNo);
                 customerNo = rs.getInt(3);
                 state = rs.getInt(4);
@@ -58,8 +65,11 @@ public class TheMapper {
                 i = new Item(itemNo, itemName, qty);
                 items.add(i);
             }
+            if(customerNo != 0)
+            {
             o = new Order(customerNo, items, depositumdate, bestillingsdate);
             orders.add(o);
+            }
         } catch (Exception e) {
             System.out.println("Fejl i TheMapper - getAllOrders");
         }
@@ -166,7 +176,7 @@ public class TheMapper {
     public boolean saveOrder(ArrayList<Order> order, Connection con) throws SQLException
     {
         
-        con.setAutoCommit(false);
+//        con.setAutoCommit(false);
         int rowsInserted = 0;
         int tal = 0;
         String SQLString1 = "insert into ordre values(?,?,?)";
@@ -227,7 +237,6 @@ public class TheMapper {
                         java.sql.Date sqlDate2 = new java.sql.Date(o.getBestillingsDate().getTime());
                         statement.setDate(4, sqlDate);
                         statement.setDate(5, sqlDate2);
-                        System.out.println("" + statement);
                         rowsInserted += statement.executeUpdate();
                     }
 

@@ -153,6 +153,8 @@ public class Control {
     }
 
     public boolean saveOrder() throws SQLException {
+        System.out.println(orderlist.size() + "size her");
+        System.out.println(orderlist);
         return dbf.saveOrder(orderlist);
     }
 
@@ -170,6 +172,7 @@ public class Control {
 
     public void loadAllOrders() {
         System.out.println(dbf.loadAllOrders().size() + "hej");
+        System.out.println(dbf.loadAllOrders());
         orderlist = dbf.loadAllOrders();
     }
 
