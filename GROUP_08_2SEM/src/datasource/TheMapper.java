@@ -345,9 +345,7 @@ public class TheMapper {
     public boolean increaseItem(ArrayList<Item> newItems, Connection con) {
         int rowsInserted = 0;
         String SQLString1 = "update varer set varerantaltotal = ? where varerNo = ?";
-        String SQLString2 = "update tilrådighed set antal = ? where varerNo = ?";
         String SQLString3 = "select varerAntalTotal from varer where varerNo = ?";
-        String SQLString4 = "select antal from tilrådighed where varerNo = ?";
         PreparedStatement statement = null;
 
         try {
@@ -373,27 +371,6 @@ public class TheMapper {
             }
             
             
-//            statement = con.prepareStatement(SQLString4);
-//            
-//                 for(int i = 0; i<newItems.size(); i++){
-//             if(rs.next())   
-//             { 
-//              Item it = newItems.get(i);
-//              statement.setInt(1, it.getItemNo());
-//              it.setAmountTotal(rs.getInt(3));
-//             }
-//            }
-//            statement = con.prepareStatement(SQLString2);
-//            
-//            for(int i =0; i < newItems.size(); i++){
-//                Item it = newItems.get(i);
-//                int noget;
-//                noget = it.getItemAmount() + it.getAmountTotal();
-//                statement.setInt(1, noget);
-//                statement.setInt(2, it.getItemNo());
-//            }
-//            
-//            
 
 
         } catch (Exception e) {
