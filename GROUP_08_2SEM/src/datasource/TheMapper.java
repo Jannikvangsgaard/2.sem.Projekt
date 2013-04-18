@@ -373,27 +373,27 @@ public class TheMapper {
             }
             
             
-            statement = con.prepareStatement(SQLString4);
-            
-                 for(int i = 0; i<newItems.size(); i++){
-             if(rs.next())   
-             { 
-              Item it = newItems.get(i);
-              statement.setInt(1, it.getItemNo());
-              it.setAmountTotal(rs.getInt(3));
-             }
-            }
-            statement = con.prepareStatement(SQLString2);
-            
-            for(int i =0; i < newItems.size(); i++){
-                Item it = newItems.get(i);
-                int noget;
-                noget = it.getItemAmount() + it.getAmountTotal();
-                statement.setInt(1, noget);
-                statement.setInt(2, it.getItemNo());
-            }
-            
-            
+//            statement = con.prepareStatement(SQLString4);
+//            
+//                 for(int i = 0; i<newItems.size(); i++){
+//             if(rs.next())   
+//             { 
+//              Item it = newItems.get(i);
+//              statement.setInt(1, it.getItemNo());
+//              it.setAmountTotal(rs.getInt(3));
+//             }
+//            }
+//            statement = con.prepareStatement(SQLString2);
+//            
+//            for(int i =0; i < newItems.size(); i++){
+//                Item it = newItems.get(i);
+//                int noget;
+//                noget = it.getItemAmount() + it.getAmountTotal();
+//                statement.setInt(1, noget);
+//                statement.setInt(2, it.getItemNo());
+//            }
+//            
+//            
 
 
         } catch (Exception e) {
