@@ -360,22 +360,21 @@ public class TheMapper {
         {
             statement = con.prepareStatement(SQLString1);
             statement2 = con.prepareStatement(SQLString2);
-            ResultSet rs = statement.executeQuery();
             
             for(int i = 0; i < newItems.size(); i++)
             {
+            statement.setInt(1, newItems.get(0).getItemNo());
+            ResultSet rs = statement.executeQuery();
+
                 while(rs.next())   
                 { 
                     Item it = newItems.get(i);
-                    statement.setInt(1, it.getItemNo());
-                    int itemNo      = rs.getInt(1); //skal ikke bruges
-                    String itemNa   = rs.getString(2); //skal ikke bruges
                     int totQty      = rs.getInt(3);
-                    it.setItemAmount(totQty);
+                    it.setAmountTotal(totQty);
                 }
             }
             
-            rs = statement2.executeQuery();
+            ResultSet rs = statement2.executeQuery();
             
             for(int j = 0; j < newItems.size(); j++)
             {
