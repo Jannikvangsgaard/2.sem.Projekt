@@ -117,18 +117,34 @@ public class Control {
         return res;
     }
 
-    public void reservedItem() {
+ public void reservedItem() {
+//        System.out.println("\n -----------------------------------\n\n\n\n");
+        int hej=0;
         for (int i = 0; i < orderlist.size(); i++) {
-//            System.out.println(orderlist + "orderlist");
+//            System.out.println("OrderLIST: " + orderlist.get(i).toString());
             for (int j = 0; j < orderlist.get(i).getItemlist().size(); j++) {
-//                System.out.println(i);
-                System.out.println(orderlist.get(0).getItemlist()  + "du er her");
-                System.out.println(orderlist.get(1).getItemlist()  + "du er her2");
-                System.out.println(orderlist.get(2).getItemlist()  + "du er her3");
+//                System.out.println("ORDERLIST.SIZE()" + orderlist.size() + " J: " + j);
+                for (int k = 0; k<itemlistReserved.size(); k++){
+//                    System.out.println("I: " + i + " J: " + j + " K: " +k);
+                if (itemlistReserved.get(k).getItemNo()==orderlist.get(i).getItemlist().get(j).getItemNo()){
+//                    System.out.println("PIK");
+                itemlistReserved.get(k).setItemAmount(itemlistReserved.get(k).getItemAmount() + orderlist.get(i).getItemlist().get(j).getItemAmount());
+//                System.out.println("ITEMLISTRESERVED" + itemlistReserved.get(j).toString());
+                hej++;
+                }
+                   
+                
+                }
+                if (hej ==0){
                 itemlistReserved.add(orderlist.get(i).getItemlist().get(j));
-
+                }
+                hej=0;
             }
         }
+        System.out.println(itemlistReserved.size());
+        for (int pik =0; pik<itemlistReserved.size(); pik++){
+        System.out.println("ITEMLISTRESERVED:" + itemlistReserved.get(pik).getItemName() + "  "+ itemlistReserved.get(pik).getItemAmount());
+    }
     }
 
     public void availableItems() {
