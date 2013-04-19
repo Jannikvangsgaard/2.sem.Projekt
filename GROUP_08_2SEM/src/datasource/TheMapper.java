@@ -444,11 +444,11 @@ public class TheMapper
 //                    noget = it.getItemAmount() + it.getAmountTotal();
 //                    statement.setInt(1, noget);
 //                    statement.setInt(2, it.getItemNo());
-                    System.out.println("asd");
+                    System.out.println("INCREASEITEM VIRKER");
                 }
                 else
                 {
-                    System.out.println("qwer");
+                    System.out.println("INCREASEITEM VIRKER IKKE");
                 }
             }
             
