@@ -31,7 +31,7 @@ public class GUI extends javax.swing.JFrame
     ArrayList<Item> orderList = new ArrayList();
     ArrayList<Item> vareliste2 = new ArrayList();
     ArrayList<Item> alleItemsList = new ArrayList();
-    ArrayList it = new ArrayList();
+    ArrayList<Item> it = new ArrayList();
     
 
     /**
@@ -694,7 +694,7 @@ public class GUI extends javax.swing.JFrame
             if(alleItemsList.get(i).toStringGUI().equals(selected))
             {
                 Item v = alleItemsList.get(i);
-                v.setItemAmount(antal);
+                v.increaseTotalAmount(antal);
                 it.add(v);
                 jTextFieldÆndringAfVareAntal.setText("");
                 visVareliste();
