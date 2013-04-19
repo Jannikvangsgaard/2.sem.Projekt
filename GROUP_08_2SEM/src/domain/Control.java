@@ -118,18 +118,12 @@ public class Control {
     }
 
  public void reservedItem() {
-//        System.out.println("\n -----------------------------------\n\n\n\n");
         int hej=0;
         for (int i = 0; i < orderlist.size(); i++) {
-//            System.out.println("OrderLIST: " + orderlist.get(i).toString());
             for (int j = 0; j < orderlist.get(i).getItemlist().size(); j++) {
-//                System.out.println("ORDERLIST.SIZE()" + orderlist.size() + " J: " + j);
                 for (int k = 0; k<itemlistReserved.size(); k++){
-//                    System.out.println("I: " + i + " J: " + j + " K: " +k);
                 if (itemlistReserved.get(k).getItemNo()==orderlist.get(i).getItemlist().get(j).getItemNo()){
-//                    System.out.println("PIK");
                 itemlistReserved.get(k).setItemAmount(itemlistReserved.get(k).getItemAmount() + orderlist.get(i).getItemlist().get(j).getItemAmount());
-//                System.out.println("ITEMLISTRESERVED" + itemlistReserved.get(j).toString());
                 hej++;
                 }
                    
@@ -141,30 +135,23 @@ public class Control {
                 hej=0;
             }
         }
-        System.out.println(itemlistReserved.size());
-        for (int pik =0; pik<itemlistReserved.size(); pik++){
-        System.out.println("ITEMLISTRESERVED:" + itemlistReserved.get(pik).getItemName() + "  "+ itemlistReserved.get(pik).getItemAmount());
-    }
     }
 
     public void availableItems() {
-        System.out.println("tjek availiableitems");
         Item item1, item2, item3;
         if (availableItems.size() > 0) {
             availableItems.clear();
         }
         for (int i = 0; i < itemlist.size(); i++) {
-//            System.out.println(itemlistReserved.size());
             for (int j = 0; j < itemlistReserved.size(); j++) {
                 if (itemlist.get(i).getItemNo() == itemlistReserved.get(j).getItemNo() && itemlist.get(i).getItemAmount() >= itemlistReserved.get(j).getItemAmount()) {
                     item1 = itemlist.get(i);
                     item2 = itemlistReserved.get(j);
                     item3 = item1;
                     item3.setItemAmount(item1.getItemAmount() - item2.getItemAmount());
-                    if (item3.getItemAmount() > 0) {
-                        System.out.println("tjek og det er neden under");
+//                    if (item3.getItemAmount() > 0) {
 //                        availableItems.add(item3);
-                    }
+//                    }
                 }
             }
             if (itemlist.get(i).getItemAmount() > 0) {
