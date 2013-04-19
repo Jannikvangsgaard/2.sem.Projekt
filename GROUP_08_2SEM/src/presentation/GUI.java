@@ -52,6 +52,9 @@ public class GUI extends javax.swing.JFrame
         jListVarePåLagerStatus.setModel(model5);
 
         control.loadItemliste();
+        control.reservedItem();
+        control.availableItems();
+//        control.loadSingleOrder(1025);
         
         
         control.loadAllOrders();

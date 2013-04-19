@@ -116,7 +116,9 @@ public class Control {
 //            System.out.println(orderlist + "orderlist");
             for (int j = 0; j < orderlist.get(i).getItemlist().size(); j++) {
 //                System.out.println(i);
-//                System.out.println(orderlist.get(i).getItemlist());
+                System.out.println(orderlist.get(0).getItemlist()  + "du er her");
+                System.out.println(orderlist.get(1).getItemlist()  + "du er her2");
+                System.out.println(orderlist.get(2).getItemlist()  + "du er her3");
                 itemlistReserved.add(orderlist.get(i).getItemlist().get(j));
 
             }
@@ -124,6 +126,7 @@ public class Control {
     }
 
     public void availableItems() {
+        System.out.println("tjek availiableitems");
         Item item1, item2, item3;
         if (availableItems.size() > 0) {
             availableItems.clear();
@@ -137,7 +140,7 @@ public class Control {
                     item3 = item1;
                     item3.setItemAmount(item1.getItemAmount() - item2.getItemAmount());
                     if (item3.getItemAmount() > 0) {
-//                        System.out.println("tjek");
+                        System.out.println("tjek og det er neden under");
 //                        availableItems.add(item3);
                     }
                 }
