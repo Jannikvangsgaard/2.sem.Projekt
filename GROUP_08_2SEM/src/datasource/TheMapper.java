@@ -433,29 +433,14 @@ public class TheMapper
     
     public boolean increaseItem(ArrayList<Item> newItems, Connection con) {
         int rowsInserted = 0;
-//        String SQLString1 = "select varerAntalTotal from varer where varerNo = ?";
         String SQLString2 = "update varer set varerantaltotal = ? where varerNo = ?";
 
-        PreparedStatement statement  = null,
-                          statement2 = null;
+        PreparedStatement statement2 = null;
 
         try 
         {
-//            statement = con.prepareStatement(SQLString1);
             statement2 = con.prepareStatement(SQLString2);
-            
-//            for(int i = 0; i < newItems.size(); i++)
-//            {
-//            statement.setInt(1, newItems.get(0).getItemNo());
-//            ResultSet rs = statement.executeQuery();
-//
-//                while(rs.next())   
-//                { 
-//                    Item it = newItems.get(i);
-//                    int totQty      = rs.getInt(3);
-//                    it.setAmountTotal(totQty);
-//                }
-//            }
+         
             for (int j = 0; j < newItems.size(); j++)
             {
                 statement2.setInt(2, newItems.get(j).getItemNo());
@@ -464,11 +449,6 @@ public class TheMapper
                 int rows = statement2.executeUpdate();
                 if (rows != 0)
                 {
-//                    Item it = newItems.get(j);
-//                    int noget;
-//                    noget = it.getItemAmount() + it.getAmountTotal();
-//                    statement.setInt(1, noget);
-//                    statement.setInt(2, it.getItemNo());
                     System.out.println("INCREASEITEM VIRKER");
                 }
                 else
@@ -487,4 +467,53 @@ public class TheMapper
         return newItems.size() == rowsInserted;
 
     }
+     public boolean saveNewItem(ArrayList<Item> newItem, Connection con)
+    {
+
+        int rowsInserted = 0;
+        String SQLString1 = "insert into varer values(?,?,?)";
+        String SQLString2 = "select varerseq.nextval from dual";
+        PreparedStatement statement = null;
+
+        try
+        {
+            statement = con.prepareStatement(SQLString2);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next())
+            {
+                for (int j = 0; newItem.size() > j; j++)
+                {
+                    Item it = newItem.get(j);
+                    it.setItemNo(rs.getInt(1));
+                }
+
+                statement = con.prepareStatement(SQLString1);
+                for (int i = 0; i < newItem.size(); i++)
+                {
+                    Item ni = newItem.get(i);
+                    statement.setInt(1,newItem.get(i).getItemNo());
+                    statement.setString(2, newItem.get(i).getItemName());
+                    statement.setInt(3, newItem.get(i).getItemAmount());
+                }
+
+            }
+
+
+
+
+
+            rowsInserted += statement.executeUpdate();
+
+
+
+        } catch (Exception e)
+        {
+            System.out.println("Fejl i OrdreMapper - SaveNewProject");
+            e.printStackTrace();
+        }
+        return rowsInserted == newItem.size();
+
+    }
+
+    
 }
