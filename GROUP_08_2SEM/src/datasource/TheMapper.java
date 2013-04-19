@@ -28,11 +28,11 @@ public class TheMapper
     public ArrayList<Order> getAllOrders(Connection conn)
     {
         ArrayList<Order> orders = new ArrayList();
-        ArrayList<Item> items = new ArrayList();
+        ArrayList<Item> itemlist = new ArrayList();
         PreparedStatement statement = null;
         Order o = null;
-        Item i = null;
-        int tjek = 0;
+//        Item i = null;
+        int test = 0;
         int orderNo = 0,
                 customerNo = 0,
                 itemNo = 0,
@@ -49,46 +49,72 @@ public class TheMapper
             ResultSet rs = statement.executeQuery();
             while (rs.next())
             {
-                itemNo = rs.getInt(1);
-                orderNo = rs.getInt(2);
-                customerNo = rs.getInt(3);
-                state = rs.getInt(4);
-                qty = rs.getInt(5);
-                depositumdate = rs.getDate(6);
-                bestillingsdate = rs.getDate(7);
-                itemName = rs.getString(8);
-                totalAmount = rs.getInt(9);
-                if(tjek != orderNo && tjek != 0)
+//                ArrayList<Item> items = new ArrayList();
+//                itemNo = rs.getInt(1);
+                o = getSingleOrder(orderNo = rs.getInt(2), conn);
+//                System.out.println(orderNo + "orderNo");
+//                System.out.println(o.getOrderNo() + "test");
+//                System.out.println(test);
+//                System.out.println(orders.get(test).getOrderNo() + "test2");
+                if(orders.isEmpty())
                 {
-                    o = new Order(tjek, items, depositumdate, bestillingsdate);
+                orders.add(o);
+//                    System.out.println(o.getOrderNo() + "test3");
+//                    System.out.println(orders.get(test).getOrderNo() + "test4");
+                }else if(orders.get(test).getOrderNo() != o.getOrderNo())
+                {
+//                    System.out.println("tjek");
                     orders.add(o);
-                    i = new Item(itemNo, itemName, qty);
-                    
-                    items.add(i);
+                    test++;
                 }else
                 {
-                    System.out.println("tjek 2");
-                    i = new Item(itemNo, itemName, qty);
-                    items.add(i);
-                
+//                    orders.add(o);
+//                    test++;
                 }
-                tjek = rs.getInt(2);
+                System.out.println("test");
+                
+                System.out.println(orders.get(test).getItemlist());
+                
+//                customerNo = rs.getInt(3);
+//                state = rs.getInt(4);
+//                qty = rs.getInt(5);
+//                depositumdate = rs.getDate(6);
+//                bestillingsdate = rs.getDate(7);
+//                itemName = rs.getString(8);
+//                totalAmount = rs.getInt(9);
+//                if(tjek != orderNo && tjek != 0)
+//                {
+//                    o = new Order(tjek, itemlist, depositumdate, bestillingsdate);
+//                    orders.add(o);
+//                    ArrayList<Item> items = new ArrayList();
+//                    test++;
+//                    items.clear();
+//                    itemlist = items;
+//                    items.add(new Item(itemNo, itemName, qty));
+//                }else
+//                {
+//                    ArrayList<Item> items = new ArrayList();
+//                    items.add(new Item(itemNo, itemName, qty));
+//                    itemlist = items;
+//                
+//                }
+//                tjek = rs.getInt(2);
                 
                     
                 
-            }
-            if(rs.next() == false)
-            {
-                o = new Order(orderNo, items, depositumdate, bestillingsdate);
-                orders.add(o);
-                System.out.println(items);
+//            }
+//            if(rs.next() == false)
+//            {
+//                ArrayList<Item> items = new ArrayList();
+//                items = itemlist;
+//                o = new Order(orderNo, items, depositumdate, bestillingsdate);
+//                orders.add(o);
             }
         } catch (Exception e)
         {
             System.out.println("Fejl i TheMapper - getAllOrders");
         }
-        System.out.println(orders.size());
-        System.out.println(orders);
+//        System.out.println(orders.size());
         return orders;
     }
 
@@ -98,7 +124,7 @@ public class TheMapper
         PreparedStatement statement = null;
         Order o = null;
         Item i = null;
-        int customerNo = 0,
+        int orderNo = 0,
                 itemNo = 0,
                 qty = 0,
                 state = 0,
@@ -108,7 +134,6 @@ public class TheMapper
         Date depositumdate = cal.getTime(), bestillingsdate = cal.getTime();
 
         String SQLString = "SELECT * FROM ordre NATURAL JOIN ordredetails NATURAL JOIN varer WHERE ordreno = ?";
-
         try
         {
             statement = conn.prepareStatement(SQLString);
@@ -117,22 +142,22 @@ public class TheMapper
             while (rs.next())
             {
                 itemNo = rs.getInt(1);
-                customerNo = rs.getInt(3);
+                orderNo = rs.getInt(2);
                 state = rs.getInt(4);
-                depositumdate = rs.getDate(5);
-                bestillingsdate = rs.getDate(6);
-                qty = rs.getInt(7);
+                depositumdate = rs.getDate(6);
+                bestillingsdate = rs.getDate(7);
+                qty = rs.getInt(5);
                 itemName = rs.getString(8);
                 totalAmount = rs.getInt(9);
                 i = new Item(itemNo, itemName, qty);
                 items.add(i);
             }
-            o = new Order(customerNo, items, depositumdate, bestillingsdate);
+            System.out.println("tjek hej");
+            o = new Order(orderNo, items, depositumdate, bestillingsdate);
         } catch (Exception e)
         {
             System.out.println("Fejl i TheMapper - getSingleOrder");
         }
-
         return o;
     }
 
