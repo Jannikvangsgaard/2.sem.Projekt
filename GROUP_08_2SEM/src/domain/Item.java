@@ -24,7 +24,7 @@ public class Item
 
     public void increaseTotalAmount(int amount)
     {
-        setAmountTotal(amountTotal+amount);
+        setAmountTotal(itemAmount+amount);
     }
     public int getPrice(){
         return price;

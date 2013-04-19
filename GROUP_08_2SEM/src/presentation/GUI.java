@@ -675,7 +675,6 @@ public class GUI extends javax.swing.JFrame
     }//GEN-LAST:event_jButtonTestActionPerformed
 
     private void jButtonBekræftÆndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBekræftÆndringActionPerformed
-
             control.increaseAmount(it);
 
     }//GEN-LAST:event_jButtonBekræftÆndringActionPerformed
@@ -687,7 +686,6 @@ public class GUI extends javax.swing.JFrame
     private void TilføjÆndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TilføjÆndringActionPerformed
         
         int antal = Integer.parseInt(jTextFieldÆndringAfVareAntal.getText());
-        
         String selected = jListVarePåLagerStatus.getSelectedValue().toString();
         for(int i = 0; i < alleItemsList.size(); i++)
         {
@@ -701,6 +699,7 @@ public class GUI extends javax.swing.JFrame
                 visAlleItemListe();
             }
         }
+  
 
     }//GEN-LAST:event_TilføjÆndringActionPerformed
 
