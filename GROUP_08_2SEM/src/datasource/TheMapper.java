@@ -350,7 +350,7 @@ public class TheMapper {
     
     public boolean increaseItem(ArrayList<Item> newItems, Connection con) {
         int rowsInserted = 0;
-        String SQLString1 = "select varerAntalTotal from varer where varerNo = ?";
+//        String SQLString1 = "select varerAntalTotal from varer where varerNo = ?";
         String SQLString2 = "update varer set varerantaltotal = ? where varerNo = ?";
 
         PreparedStatement statement  = null,
@@ -358,33 +358,39 @@ public class TheMapper {
 
         try 
         {
-            statement = con.prepareStatement(SQLString1);
+//            statement = con.prepareStatement(SQLString1);
             statement2 = con.prepareStatement(SQLString2);
             
-            for(int i = 0; i < newItems.size(); i++)
+//            for(int i = 0; i < newItems.size(); i++)
+//            {
+//            statement.setInt(1, newItems.get(0).getItemNo());
+//            ResultSet rs = statement.executeQuery();
+//
+//                while(rs.next())   
+//                { 
+//                    Item it = newItems.get(i);
+//                    int totQty      = rs.getInt(3);
+//                    it.setAmountTotal(totQty);
+//                }
+//            }
+            for (int j = 0; j < newItems.size(); j++)
             {
-            statement.setInt(1, newItems.get(0).getItemNo());
-            ResultSet rs = statement.executeQuery();
+                statement2.setInt(2, newItems.get(j).getItemNo());
+                statement2.setInt(1, newItems.get(j).getAmountTotal());
 
-                while(rs.next())   
-                { 
-                    Item it = newItems.get(i);
-                    int totQty      = rs.getInt(3);
-                    it.setAmountTotal(totQty);
-                }
-            }
-            
-            ResultSet rs = statement2.executeQuery();
-            
-            for(int j = 0; j < newItems.size(); j++)
-            {
-                while(rs.next())
+                int rows = statement2.executeUpdate();
+                if (rows != 0)
                 {
-                    Item it = newItems.get(j);
-                    int noget;
-                    noget = it.getItemAmount() + it.getAmountTotal();
-                    statement.setInt(1, noget);
-                    statement.setInt(2, it.getItemNo());
+//                    Item it = newItems.get(j);
+//                    int noget;
+//                    noget = it.getItemAmount() + it.getAmountTotal();
+//                    statement.setInt(1, noget);
+//                    statement.setInt(2, it.getItemNo());
+                    System.out.println("asd");
+                }
+                else
+                {
+                    System.out.println("qwer");
                 }
             }
             

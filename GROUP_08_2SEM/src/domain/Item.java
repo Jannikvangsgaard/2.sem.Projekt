@@ -22,6 +22,10 @@ public class Item
         this.amountTotal = amountTotal;
     }
 
+    public void increaseTotalAmount(int amount)
+    {
+        setAmountTotal(amountTotal+amount);
+    }
     public int getPrice(){
         return price;
     }
