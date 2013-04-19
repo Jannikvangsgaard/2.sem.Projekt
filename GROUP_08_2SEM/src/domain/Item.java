@@ -18,6 +18,7 @@ public class Item
         this.itemName = itemName;
         this.itemAmount = itemAmount;
     }
+    
     public Item (int amountTotal){
         this.amountTotal = amountTotal;
     }

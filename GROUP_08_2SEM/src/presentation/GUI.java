@@ -32,6 +32,8 @@ public class GUI extends javax.swing.JFrame
     ArrayList<Item> vareliste2 = new ArrayList();
     ArrayList<Item> alleItemsList = new ArrayList();
     ArrayList<Item> it = new ArrayList();
+    ArrayList<Item> newItem = new ArrayList();
+    
     
 
     /**
@@ -500,15 +502,15 @@ public class GUI extends javax.swing.JFrame
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(35, 35, 35)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(TilføjÆndring, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButtonBekræftÆndring, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextFieldÆndringAfVareAntal, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(TilføjÆndring, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jTextFieldÆndringAfVareAntal, javax.swing.GroupLayout.Alignment.LEADING))
                     .addComponent(FjernÆndring, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(40, 40, 40)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(60, 60, 60))
+                .addGap(38, 38, 38))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -534,9 +536,9 @@ public class GUI extends javax.swing.JFrame
                             .addComponent(jLabel8)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(jTextFieldÆndringAfVareAntal, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(TilføjÆndring)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(TilføjÆndring)
+                            .addGap(18, 18, 18)
                             .addComponent(FjernÆndring)
                             .addGap(21, 21, 21)
                             .addComponent(jButtonBekræftÆndring))))
@@ -755,6 +757,8 @@ public class GUI extends javax.swing.JFrame
 
     private void jButtonBekræftÆndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBekræftÆndringActionPerformed
             control.increaseAmount(it);
+            visAlleItemListe();
+            visVareliste();
 
     }//GEN-LAST:event_jButtonBekræftÆndringActionPerformed
 
@@ -806,7 +810,11 @@ public class GUI extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jButtonLavNyVareActionPerformed
         String vareNavn = jTextFieldNyVareNavn.getText();
         int vareAntal = Integer.parseInt(jTextFieldNyVareAntal.getText());
-        
+        newItem.add(control.creatItem(0, vareNavn, vareAntal));
+        control.saveNewItem(newItem);
+        newItem.clear();
+        visAlleItemListe();
+        visVareliste();
         jTextFieldNyVareNavn.setText("");
         jTextFieldNyVareAntal.setText("");
     }//GEN-LAST:event_jButtonLavNyVareActionPerformed
@@ -837,7 +845,7 @@ public class GUI extends javax.swing.JFrame
         try
         {
             model5.clear();
-            alleItemsList = control.allItemList();
+            alleItemsList = control.loadItemliste();
             for(int i = 0; i < alleItemsList.size(); i++)
             {
                 model5.addElement(alleItemsList.get(i).toStringGUI());

@@ -519,17 +519,17 @@
                       <Component id="jScrollPane6" min="-2" pref="155" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="TilføjÆndring" min="-2" pref="78" max="-2" attributes="0"/>
                           <Component id="jButtonBekræftÆndring" alignment="0" min="-2" pref="78" max="-2" attributes="0"/>
                           <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                               <Component id="jLabel8" alignment="0" max="32767" attributes="0"/>
                               <Component id="jTextFieldÆndringAfVareAntal" alignment="0" max="32767" attributes="0"/>
-                              <Component id="TilføjÆndring" alignment="1" min="-2" pref="78" max="-2" attributes="0"/>
                           </Group>
                           <Component id="FjernÆndring" min="-2" pref="78" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
                       <Component id="jScrollPane7" min="-2" pref="155" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -558,9 +558,9 @@
                                   <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jTextFieldÆndringAfVareAntal" min="-2" pref="20" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="TilføjÆndring" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                  <Component id="TilføjÆndring" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                   <Component id="FjernÆndring" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                                   <Component id="jButtonBekræftÆndring" min="-2" max="-2" attributes="0"/>

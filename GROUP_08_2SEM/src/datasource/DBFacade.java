@@ -79,5 +79,10 @@ public class DBFacade
     
     return tm.increaseItem(it, con);
     }
+    
+    public boolean saveNewItem(ArrayList<Item> it)
+    {
+        return tm.saveNewItem(it, con);
+    }
    
 }

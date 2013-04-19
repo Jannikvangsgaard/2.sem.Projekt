@@ -93,6 +93,12 @@ public class Control {
         }
 
     }
+    
+    public Item creatItem(int itemNo, String itemName, int itemAmount)
+    {
+        Item item = new Item(itemNo, itemName, itemAmount);
+        return item;
+    }
 
     public ArrayList<Order> getOrderlist() {
         return orderlist;
@@ -206,6 +212,11 @@ public class Control {
             }
         }
         return status;
+    }
+        
+    public boolean saveNewItem(ArrayList<Item> it)
+    {
+        return dbf.saveNewItem(it);
     }
    
 }
