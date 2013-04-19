@@ -113,7 +113,10 @@ public class Control {
 
     public void reservedItem() {
         for (int i = 0; i < orderlist.size(); i++) {
+//            System.out.println(orderlist + "orderlist");
             for (int j = 0; j < orderlist.get(i).getItemlist().size(); j++) {
+//                System.out.println(i);
+//                System.out.println(orderlist.get(i).getItemlist());
                 itemlistReserved.add(orderlist.get(i).getItemlist().get(j));
 
             }

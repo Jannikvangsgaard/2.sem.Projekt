@@ -28,11 +28,15 @@ public class TheMapper
     public ArrayList<Order> getAllOrders(Connection conn)
     {
         ArrayList<Order> orders = new ArrayList();
-        ArrayList<Item> items = new ArrayList();
+        ArrayList<Item> itemlist = new ArrayList();
         PreparedStatement statement = null;
         Order o = null;
         Item i = null;
+        int test = 0;
         int tjek = 0;
+        int beforeItemNo = 0;
+        int beforeQty = 0;
+        String beforeItemName = "";
         int orderNo = 0,
                 customerNo = 0,
                 itemNo = 0,
@@ -49,6 +53,7 @@ public class TheMapper
             ResultSet rs = statement.executeQuery();
             while (rs.next())
             {
+//                ArrayList<Item> items = new ArrayList();
                 itemNo = rs.getInt(1);
                 orderNo = rs.getInt(2);
                 customerNo = rs.getInt(3);
@@ -60,35 +65,48 @@ public class TheMapper
                 totalAmount = rs.getInt(9);
                 if(tjek != orderNo && tjek != 0)
                 {
-                    o = new Order(tjek, items, depositumdate, bestillingsdate);
+                    System.out.println(itemlist + "items");
+                    o = new Order(tjek, itemlist, depositumdate, bestillingsdate);
                     orders.add(o);
-                    i = new Item(itemNo, itemName, qty);
-                    
-                    items.add(i);
+                    System.out.println(orders.get(0).getItemlist());
+                    System.out.println(orders.get(test).getItemlist() + "tjek");
+                    ArrayList<Item> items = new ArrayList();
+                    test++;
+                    items.clear();
+                    itemlist = items;
+                    System.out.println(itemlist.size() + "tjek om clear");
+                    items.add(new Item(itemNo, itemName, qty));
                 }else
                 {
                     System.out.println("tjek 2");
-                    i = new Item(itemNo, itemName, qty);
-                    items.add(i);
+                    ArrayList<Item> items = new ArrayList();
+                    items.add(new Item(itemNo, itemName, qty));
+                    System.out.println(items + "tjek");
+                    itemlist = items;
                 
                 }
                 tjek = rs.getInt(2);
+                beforeItemNo = rs.getInt(1);
+                beforeItemName = rs.getString(8);
+                beforeQty = rs.getInt(5);
                 
                     
                 
             }
+                            System.out.println(orders.get(0).getItemlist());
+        System.out.println(orders.get(1).getItemlist());
+        System.out.println(orders.get(2).getItemlist());
             if(rs.next() == false)
             {
+                ArrayList<Item> items = new ArrayList();
+                items = itemlist;
                 o = new Order(orderNo, items, depositumdate, bestillingsdate);
                 orders.add(o);
-                System.out.println(items);
             }
         } catch (Exception e)
         {
             System.out.println("Fejl i TheMapper - getAllOrders");
         }
-        System.out.println(orders.size());
-        System.out.println(orders);
         return orders;
     }
 
