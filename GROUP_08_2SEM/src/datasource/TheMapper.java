@@ -459,7 +459,7 @@ public class TheMapper
             e.printStackTrace();
         }
         
-        return newItems.size() * 2 == rowsInserted;
+        return newItems.size() == rowsInserted;
 
     }
 }
