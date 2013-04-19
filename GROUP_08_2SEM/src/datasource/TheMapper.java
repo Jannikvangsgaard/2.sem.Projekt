@@ -405,64 +405,54 @@ public class TheMapper
         con.commit();
     }
 
-    public boolean increaseItem(ArrayList<Item> newItems, Connection con)
-    {
+    
+    public boolean increaseItem(ArrayList<Item> newItems, Connection con) {
         int rowsInserted = 0;
-        String SQLString1 = "update varer set varerantaltotal = ? where varerNo = ?";
-        String SQLString2 = "update tilrådighed set antal = ? where varerNo = ?";
+        String SQLString1 = "select varerAntalTotal from varer where varerNo = ?";
+        String SQLString2 = "update varer set varerantaltotal = ? where varerNo = ?";
 
-        PreparedStatement statement = null;
+        PreparedStatement statement  = null,
+                          statement2 = null;
 
-        try
+        try 
         {
             statement = con.prepareStatement(SQLString1);
-
-
-            for (int i = 0; i < newItems.size(); i++)
+            statement2 = con.prepareStatement(SQLString2);
+            
+            for(int i = 0; i < newItems.size(); i++)
             {
+            statement.setInt(1, newItems.get(0).getItemNo());
+            ResultSet rs = statement.executeQuery();
 
-
-
-                statement.setInt(1, newItems.get(i).getItemAmount());
-                statement.setInt(2, newItems.get(i).getItemNo());
-                rowsInserted += statement.executeUpdate();
-
+                while(rs.next())   
+                { 
+                    Item it = newItems.get(i);
+                    int totQty      = rs.getInt(3);
+                    it.setAmountTotal(totQty);
+                }
             }
-
-
-            statement = con.prepareStatement(SQLString2);
-            for (int i = 0; i < newItems.size(); i++)
+            
+            ResultSet rs = statement2.executeQuery();
+            
+            for(int j = 0; j < newItems.size(); j++)
             {
-
-
-
-                statement.setInt(1, newItems.get(i).getItemAmount());
-                statement.setInt(2, newItems.get(i).getItemNo());
-
-                rowsInserted += statement.executeUpdate();
+                while(rs.next())
+                {
+                    Item it = newItems.get(j);
+                    int noget;
+                    noget = it.getItemAmount() + it.getAmountTotal();
+                    statement.setInt(1, noget);
+                    statement.setInt(2, it.getItemNo());
+                }
             }
+            
 
-
-
-            statement = con.prepareStatement(SQLString2);
-
-            for (int i = 0; i < newItems.size(); i++)
-            {
-
-
-                statement.setInt(1, newItems.get(i).getItemAmount());
-                statement.setInt(2, newItems.get(i).getItemNo());
-
-                rowsInserted += statement.executeUpdate();
-            }
-
-
-
-        } catch (Exception e)
+        } catch (Exception e) 
         {
-            System.out.println("Fejl i OrdreMapper - SaveNewProject");
+            System.out.println("Fejl i OrdreMapper - increaseItem");
             e.printStackTrace();
         }
+        
         return newItems.size() * 2 == rowsInserted;
 
     }
