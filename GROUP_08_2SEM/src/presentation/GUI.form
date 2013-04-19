@@ -592,6 +592,7 @@
             <Component class="javax.swing.JTextField" name="jTextField&#xc6;ndringAfVareAntal">
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField&#xc6;ndringAfVareAntalActionPerformed"/>
+                <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jTextField&#xc6;ndringAfVareAntalKeyReleased"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
