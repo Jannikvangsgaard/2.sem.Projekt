@@ -32,17 +32,8 @@ public class TheMapper
         ArrayList<Item> itemlist = new ArrayList();
         PreparedStatement statement = null;
         Order o = null;
-//        Item i = null;
-        int test = 0;
-        int orderNo = 0,
-                customerNo = 0,
-                itemNo = 0,
-                qty = 0,
-                state = 0,
-                totalAmount = 0;
-        String itemName = "";
-        Calendar cal = Calendar.getInstance();
-        Date depositumdate = cal.getTime(), bestillingsdate = cal.getTime();
+        int tjek = 0;
+        int orderNo = 0;
         String SQLString = "SELECT * FROM ordre NATURAL JOIN ordredetails NATURAL JOIN varer";
         try
         {
@@ -50,72 +41,20 @@ public class TheMapper
             ResultSet rs = statement.executeQuery();
             while (rs.next())
             {
-//                ArrayList<Item> items = new ArrayList();
-//                itemNo = rs.getInt(1);
                 o = getSingleOrder(orderNo = rs.getInt(2), conn);
-//                System.out.println(orderNo + "orderNo");
-//                System.out.println(o.getOrderNo() + "test");
-//                System.out.println(test);
-//                System.out.println(orders.get(test).getOrderNo() + "test2");
                 if(orders.isEmpty())
                 {
                 orders.add(o);
-//                    System.out.println(o.getOrderNo() + "test3");
-//                    System.out.println(orders.get(test).getOrderNo() + "test4");
-                }else if(orders.get(test).getOrderNo() != o.getOrderNo())
+                }else if(orders.get(tjek).getOrderNo() != o.getOrderNo())
                 {
-//                    System.out.println("tjek");
                     orders.add(o);
-                    test++;
-                }else
-                {
-//                    orders.add(o);
-//                    test++;
-                }
-                System.out.println("test");
-                
-                System.out.println(orders.get(test).getItemlist());
-                
-//                customerNo = rs.getInt(3);
-//                state = rs.getInt(4);
-//                qty = rs.getInt(5);
-//                depositumdate = rs.getDate(6);
-//                bestillingsdate = rs.getDate(7);
-//                itemName = rs.getString(8);
-//                totalAmount = rs.getInt(9);
-//                if(tjek != orderNo && tjek != 0)
-//                {
-//                    o = new Order(tjek, itemlist, depositumdate, bestillingsdate);
-//                    orders.add(o);
-//                    ArrayList<Item> items = new ArrayList();
-//                    test++;
-//                    items.clear();
-//                    itemlist = items;
-//                    items.add(new Item(itemNo, itemName, qty));
-//                }else
-//                {
-//                    ArrayList<Item> items = new ArrayList();
-//                    items.add(new Item(itemNo, itemName, qty));
-//                    itemlist = items;
-//                
-//                }
-//                tjek = rs.getInt(2);
-                
-                    
-                
-//            }
-//            if(rs.next() == false)
-//            {
-//                ArrayList<Item> items = new ArrayList();
-//                items = itemlist;
-//                o = new Order(orderNo, items, depositumdate, bestillingsdate);
-//                orders.add(o);
+                    tjek++;
+                }              
             }
         } catch (Exception e)
         {
             System.out.println("Fejl i TheMapper - getAllOrders");
         }
-//        System.out.println(orders.size());
         return orders;
     }
 
@@ -129,8 +68,10 @@ public class TheMapper
                 itemNo = 0,
                 qty = 0,
                 state = 0,
-                totalAmount = 0;
+                totalAmount = 0,
+                customerNo = 0;
         String itemName = "";
+        Customer customer = null;
         Calendar cal = Calendar.getInstance();
         Date depositumdate = cal.getTime(), bestillingsdate = cal.getTime();
 
@@ -144,17 +85,18 @@ public class TheMapper
             {
                 itemNo = rs.getInt(1);
                 orderNo = rs.getInt(2);
+                customerNo = rs.getInt(3);
                 state = rs.getInt(4);
                 depositumdate = rs.getDate(6);
                 bestillingsdate = rs.getDate(7);
                 qty = rs.getInt(5);
                 itemName = rs.getString(8);
                 totalAmount = rs.getInt(9);
+                customer = getSingleCustomer(conn, customerNo);
                 i = new Item(itemNo, itemName, qty);
                 items.add(i);
             }
-            System.out.println("tjek hej");
-            o = new Order(orderNo, items, depositumdate, bestillingsdate);
+            o = new Order(orderNo, items, depositumdate, bestillingsdate, customer, state);
         } catch (Exception e)
         {
             System.out.println("Fejl i TheMapper - getSingleOrder");
@@ -221,6 +163,35 @@ public class TheMapper
             System.out.println(ex.getMessage());
         }
         return customer;
+    }
+    
+        public Customer getSingleCustomer(Connection conn, int cno)
+    {
+//        System.out.println("themapper her");
+        String SQLString = "SELECT * FROM kunde WHERE kundeno = ?";
+
+        PreparedStatement statement = null;
+        Customer c = null;
+        try
+        {
+            //Get order
+            statement = conn.prepareStatement(SQLString);
+            statement.setInt(1, cno);
+            
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next())
+            {
+                int customerNo = rs.getInt(1);
+                String customerName = rs.getString(2);
+                c = new Customer(customerNo, customerName);
+            }
+        } catch (Exception ex)
+        {
+            System.out.println("Error in TheMapper - getCustomer");
+            System.out.println(ex.getMessage());
+        }
+        return c;
     }
 
     /**
