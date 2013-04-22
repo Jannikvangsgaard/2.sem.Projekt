@@ -233,12 +233,20 @@ public class Control {
      
     public void loadOrdersWithDate(Date dato){
     
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(dato);
+        
+        for(int j = -1; j <2;j++){
+        calendar.add(Calendar.DATE, j);
+        
         for(int i = 0; i < orderlist.size();i++){
-        if(orderlist.get(i).getBestillingsDate().equals(dato)){
+        if(orderlist.get(i).getBestillingsDate().equals(calendar.getTime())){
         orderlistWithDate.add(orderlist.get(i));
         }
         }
+        }
         reservedItem();
-    }
+    
    
+}
 }
