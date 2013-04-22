@@ -28,6 +28,7 @@ public class GUI extends javax.swing.JFrame
     DefaultListModel StatusListe;
     DefaultListModel model4;
     DefaultListModel model5;
+    DefaultListModel model6;
     ArrayList<Item> orderList = new ArrayList();
     ArrayList<Item> vareliste2 = new ArrayList();
     ArrayList<Item> alleItemsList = new ArrayList();
@@ -47,11 +48,13 @@ public class GUI extends javax.swing.JFrame
         StatusListe = new DefaultListModel();
         model4 = new DefaultListModel();
         model5 = new DefaultListModel();
+        model6 = new DefaultListModel();
         jListvareliste.setModel(modelvareliste);
         jListVareTilOrdre.setModel(modelVareTilOrdre);
         jListStatusListe.setModel(StatusListe);
 //        jListStatusInformation.setModel(model4);
         jListVarePåLagerStatus.setModel(model5);
+        VisÆndringer.setModel(model6);
 
         control.loadItemliste();
         control.reservedItem();
@@ -69,8 +72,7 @@ public class GUI extends javax.swing.JFrame
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -132,10 +134,8 @@ public class GUI extends javax.swing.JFrame
         jLabel1.setText("Opret ny kunde");
 
         jButtonOpretKunde.setText("Opret");
-        jButtonOpretKunde.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonOpretKunde.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonOpretKundeActionPerformed(evt);
             }
         });
@@ -147,10 +147,8 @@ public class GUI extends javax.swing.JFrame
         jLabel2.setText("Vis kunder:");
 
         jButtonHentKunder.setText("Hent");
-        jButtonHentKunder.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonHentKunder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonHentKunderActionPerformed(evt);
             }
         });
@@ -205,26 +203,20 @@ public class GUI extends javax.swing.JFrame
 
         jScrollPane1.setViewportView(jListvareliste);
 
-        jTextFieldAntalItems.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyReleased(java.awt.event.KeyEvent evt)
-            {
+        jTextFieldAntalItems.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextFieldAntalItemsKeyReleased(evt);
             }
         });
 
         jButtonTilføjvare.setText("Tilføj Vare");
-        jButtonTilføjvare.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonTilføjvare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonTilføjvareActionPerformed(evt);
             }
         });
-        jButtonTilføjvare.addKeyListener(new java.awt.event.KeyAdapter()
-        {
-            public void keyReleased(java.awt.event.KeyEvent evt)
-            {
+        jButtonTilføjvare.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
                 jButtonTilføjvareKeyReleased(evt);
             }
         });
@@ -240,58 +232,46 @@ public class GUI extends javax.swing.JFrame
         jLabel6.setText("Vare til ordre:");
 
         jButtonSaveOrder.setText("Bekræft Ordre");
-        jButtonSaveOrder.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonSaveOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonSaveOrderActionPerformed(evt);
             }
         });
 
         jButtonFjernVare.setText("Fjern Vare");
-        jButtonFjernVare.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonFjernVare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonFjernVareActionPerformed(evt);
             }
         });
 
         jButtonTest.setText("test");
-        jButtonTest.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonTest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonTestActionPerformed(evt);
             }
         });
 
         jTextFieldDateÅr.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jTextFieldDateÅr.setText("År");
-        jTextFieldDateÅr.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        jTextFieldDateÅr.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextFieldDateÅrMouseClicked(evt);
             }
         });
 
         jTextFieldDateDage.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jTextFieldDateDage.setText("Dage");
-        jTextFieldDateDage.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        jTextFieldDateDage.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextFieldDateDageMouseClicked(evt);
             }
         });
 
         jTextFieldDatoMåned.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jTextFieldDatoMåned.setText("Måned");
-        jTextFieldDatoMåned.addMouseListener(new java.awt.event.MouseAdapter()
-        {
-            public void mouseClicked(java.awt.event.MouseEvent evt)
-            {
+        jTextFieldDatoMåned.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTextFieldDatoMånedMouseClicked(evt);
             }
         });
@@ -383,10 +363,8 @@ public class GUI extends javax.swing.JFrame
         jTabbedPane1.addTab("Bestilling", jPanel2);
 
         jButtonHentOrdre.setText("Hent Ordre");
-        jButtonHentOrdre.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonHentOrdre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonHentOrdreActionPerformed(evt);
             }
         });
@@ -434,39 +412,36 @@ public class GUI extends javax.swing.JFrame
 
         jScrollPane6.setViewportView(jListVarePåLagerStatus);
 
-        jTextFieldÆndringAfVareAntal.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jTextFieldÆndringAfVareAntal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextFieldÆndringAfVareAntalActionPerformed(evt);
+            }
+        });
+        jTextFieldÆndringAfVareAntal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTextFieldÆndringAfVareAntalKeyReleased(evt);
             }
         });
 
         jLabel8.setText("Ændring af vare");
 
         jButtonBekræftÆndring.setText("Bekræft");
-        jButtonBekræftÆndring.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonBekræftÆndring.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonBekræftÆndringActionPerformed(evt);
             }
         });
 
         TilføjÆndring.setText("Tilføj");
-        TilføjÆndring.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        TilføjÆndring.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 TilføjÆndringActionPerformed(evt);
             }
         });
 
         FjernÆndring.setText("Fjern");
-        FjernÆndring.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        FjernÆndring.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 FjernÆndringActionPerformed(evt);
             }
         });
@@ -489,10 +464,8 @@ public class GUI extends javax.swing.JFrame
         jLabel12.setText("Vare antal");
 
         jButtonLavNyVare.setText("Lav vare");
-        jButtonLavNyVare.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        jButtonLavNyVare.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonLavNyVareActionPerformed(evt);
             }
         });
@@ -782,11 +755,34 @@ public class GUI extends javax.swing.JFrame
     }//GEN-LAST:event_jButtonBekræftÆndringActionPerformed
 
     private void FjernÆndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FjernÆndringActionPerformed
-        // TODO add your handling code here:
+        int plads =0;
+        int antal = Integer.parseInt(jTextFieldÆndringAfVareAntal.getText());
+        String selected = jListVarePåLagerStatus.getSelectedValue().toString();
+        for (int i=0; i<alleItemsList.size(); i++){
+            Item i1 = alleItemsList.get(i);
+            if (alleItemsList.get(i).toStringGUI().equals(selected)){
+                Item pikirøv = alleItemsList.get(i);
+            if (antal<i1.getItemAmount()){
+            i1.setItemAmount(i1.getItemAmount()-antal);
+            jTextFieldÆndringAfVareAntal.setText("");
+            visVareliste();
+            visAlleItemListe();
+            model6.add(plads,"Fjern af: " + pikirøv.getItemName() + " Antal: " + antal);
+            plads++;
+            
+        }
+            }
+        }
+    
+        
+        
+        
+        
+        
     }//GEN-LAST:event_FjernÆndringActionPerformed
 
     private void TilføjÆndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TilføjÆndringActionPerformed
-        
+        int plads = 0;
         int antal = Integer.parseInt(jTextFieldÆndringAfVareAntal.getText());
         String selected = jListVarePåLagerStatus.getSelectedValue().toString();
         for(int i = 0; i < alleItemsList.size(); i++)
@@ -794,11 +790,13 @@ public class GUI extends javax.swing.JFrame
             if(alleItemsList.get(i).toStringGUI().equals(selected))
             {
                 Item v = alleItemsList.get(i);
-                v.increaseTotalAmount(antal);
+                v.setAmountTotal(v.getItemAmount()+antal);
                 it.add(v);
                 jTextFieldÆndringAfVareAntal.setText("");
                 visVareliste();
                 visAlleItemListe();
+                model6.add(plads, "Tilføj af: " + v.getItemName() + " Antal: " + antal);
+                plads++;
             }
         }
   
@@ -838,26 +836,19 @@ public class GUI extends javax.swing.JFrame
         jTextFieldNyVareAntal.setText("");
     }//GEN-LAST:event_jButtonLavNyVareActionPerformed
 
-    private void jTextFieldNyVareNavnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jTextFieldNyVareNavnActionPerformed
-    {//GEN-HEADEREND:event_jTextFieldNyVareNavnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextFieldNyVareNavnActionPerformed
-
-    private void jListStatusListeMousePressed(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jListStatusListeMousePressed
-    {//GEN-HEADEREND:event_jListStatusListeMousePressed
-        ArrayList<Item> items = new ArrayList();
-        for (int i = 0; i < control.getOrderlist().size(); i++)
+    private void jTextFieldÆndringAfVareAntalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldÆndringAfVareAntalKeyReleased
+         try
         {
-            if(jListStatusListe.getSelectedValue().equals(control.getOrderlist().get(i).toString()))
+            if (jTextFieldÆndringAfVareAntal.getText() != null)
             {
-                items = control.getOrderlist().get(i).getItemlist();
-                jTextOrdreInformationer.setText(control.getOrderlist().get(i).getCustomer().getCustomerID() + "\n" +
-                                                items.toString() +  "\n" + 
-                                                control.getOrderlist().get(i).getDepositumDate() + "\n" +
-                                                control.getOrderlist().get(i).getBestillingsDate() + "\n");
+                int amount = Integer.parseInt(jTextFieldÆndringAfVareAntal.getText());
             }
+        } catch (NumberFormatException ex)
+        {
+            jTextFieldÆndringAfVareAntal.setText("");
+            JOptionPane.showMessageDialog(null, "Ændring af vare skal være større end 0 og et helt tal");
         }
-    }//GEN-LAST:event_jListStatusListeMousePressed
+    }//GEN-LAST:event_jTextFieldÆndringAfVareAntalKeyReleased
 
     /**
      * @param args the command line arguments
