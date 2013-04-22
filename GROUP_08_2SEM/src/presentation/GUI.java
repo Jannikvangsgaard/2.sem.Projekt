@@ -756,42 +756,49 @@ public class GUI extends javax.swing.JFrame {
 
     private void FjernÆndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FjernÆndringActionPerformed
         int plads = 0;
-        int antal = Integer.parseInt(jTextFieldÆndringAfVareAntal.getText());
-        String selected = jListVarePåLagerStatus.getSelectedValue().toString();
-        for (int i = 0; i < alleItemsList.size(); i++) {
-            if (alleItemsList.get(i).toStringGUI().equals(selected)) {
-                if (antal <= alleItemsList.get(i).getItemAmount()) {
+        if (jListVarePåLagerStatus.getSelectedValue() != null) {
+            System.out.println("HEJHEJHEJEHJ" + jListVarePåLagerStatus.getSelectedValue().toString());
+            int antal = Integer.parseInt(jTextFieldÆndringAfVareAntal.getText());
+            String selected = jListVarePåLagerStatus.getSelectedValue().toString();
+            for (int i = 0; i < alleItemsList.size(); i++) {
+                if (alleItemsList.get(i).toStringGUI().equals(selected)) {
+                    if (antal <= alleItemsList.get(i).getItemAmount()) {
+                        Item v = alleItemsList.get(i);
+                        v.setAmountTotal(v.getItemAmount() + antal);
+                        it.add(v);
+                        jTextFieldÆndringAfVareAntal.setText("");
+                        visVareliste();
+                        visAlleItemListe();
+                        model6.add(plads, "Fjern af: " + v.getItemName() + " Antal: " + antal);
+                        plads++;
+                    }
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Husk at vælge en vare");
+        }
+    }//GEN-LAST:event_FjernÆndringActionPerformed
+
+    private void TilføjÆndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TilføjÆndringActionPerformed
+        int plads = 0;
+        if (jListVarePåLagerStatus.getSelectedValue() != null) {
+            int antal = Integer.parseInt(jTextFieldÆndringAfVareAntal.getText());
+            String selected = jListVarePåLagerStatus.getSelectedValue().toString();
+            for (int i = 0; i < alleItemsList.size(); i++) {
+                if (alleItemsList.get(i).toStringGUI().equals(selected)) {
                     Item v = alleItemsList.get(i);
                     v.setAmountTotal(v.getItemAmount() + antal);
                     it.add(v);
                     jTextFieldÆndringAfVareAntal.setText("");
                     visVareliste();
                     visAlleItemListe();
-                    model6.add(plads, "Fjern af: " + v.getItemName() + " Antal: " + antal);
+                    model6.add(plads, "Tilføj af: " + v.getItemName() + " Antal: " + antal);
                     plads++;
                 }
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Husk at vælge en vare");
         }
-
-    }//GEN-LAST:event_FjernÆndringActionPerformed
-
-    private void TilføjÆndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TilføjÆndringActionPerformed
-        int plads = 0;
-        int antal = Integer.parseInt(jTextFieldÆndringAfVareAntal.getText());
-        String selected = jListVarePåLagerStatus.getSelectedValue().toString();
-        for (int i = 0; i < alleItemsList.size(); i++) {
-            if (alleItemsList.get(i).toStringGUI().equals(selected)) {
-                Item v = alleItemsList.get(i);
-                v.setAmountTotal(v.getItemAmount() + antal);
-                it.add(v);
-                jTextFieldÆndringAfVareAntal.setText("");
-                visVareliste();
-                visAlleItemListe();
-                model6.add(plads, "Tilføj af: " + v.getItemName() + " Antal: " + antal);
-                plads++;
-            }
-        }
-
 
     }//GEN-LAST:event_TilføjÆndringActionPerformed
 
