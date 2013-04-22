@@ -5,6 +5,7 @@
 package datasource;
 
 import domain.Customer;
+import domain.Employee;
 import domain.Order;
 import domain.Item;
 import java.sql.Connection;
@@ -498,10 +499,6 @@ public class TheMapper
 
             }
 
-
-
-
-
             rowsInserted += statement.executeUpdate();
 
 
@@ -515,5 +512,115 @@ public class TheMapper
 
     }
 
+      public Order getDateOrder(Date dato, Connection conn)
+    {
+        ArrayList<Order> order = new ArrayList();
+        PreparedStatement statement = null;
+        Order o = null;
+        Item i = null;
+        int orderNo = 0,
+                itemNo = 0,
+                qty = 0,
+                state = 0,
+                totalAmount = 0;
+        String itemName = "";
+        Calendar cal = Calendar.getInstance();
+        Date depositumdate = cal.getTime(), bestillingsdate = cal.getTime();
+
+        String SQLString = "SELECT * FROM ordre NATURAL JOIN ordredetails NATURAL JOIN varer WHERE bestillingsdato = ?";
+        try
+        {
+            statement = conn.prepareStatement(SQLString);
+            statement.setDate(1,cal.DATE(dato));
+            ResultSet rs = statement.executeQuery();
+            while (rs.next())
+            {
+                itemNo = rs.getInt(1);
+                orderNo = rs.getInt(2);
+                state = rs.getInt(4);
+                depositumdate = rs.getDate(6);
+                bestillingsdate = rs.getDate(7);
+                qty = rs.getInt(5);
+                itemName = rs.getString(8);
+                totalAmount = rs.getInt(9);
+                i = new Item(itemNo, itemName, qty);
+                items.add(i);
+            }
+            System.out.println("tjek hej");
+            o = new Order(orderNo, items, depositumdate, bestillingsdate);
+        } catch (Exception e)
+        {
+            System.out.println("Fejl i TheMapper - getSingleOrder");
+        }
+        return o;
+    }
+
+      
+ public boolean deleteItem(int itemNo, Connection con)
+    {
+
+        int rowsInserted = 0;
+        String SQLString1 = "delete * from varer where varerno = ?";
+        PreparedStatement statement = null;
+
+        try
+        {
+            statement = con.prepareStatement(SQLString1);
+            statement.setInt(1,itemNo);
+
+            rowsInserted += statement.executeUpdate();
+
+
+
+        } catch (Exception e)
+        {
+            System.out.println("Fejl i OrdreMapper - SaveNewProject");
+            e.printStackTrace();
+        }
+        return rowsInserted == 1;
+
+    }      
+      
+    public boolean saveEmployee(ArrayList<Employee> employee, Connection con)
+    {
+
+        int rowsInserted = 0;
+        String SQLString1 = "insert into medarbejder values(?,?)";
+        String SQLString2 = "select medarbejderseq.nextval from dual";
+        PreparedStatement statement = null;
+
+        try
+        {
+            statement = con.prepareStatement(SQLString2);
+            ResultSet rs = statement.executeQuery();
+            if (rs.next())
+            {
+                for (int j = 0; employee.size() > j; j++)
+                {
+                    Employee o = employee.get(j);
+                    o.setEmployeeID(rs.getInt(1));
+                }
+
+                statement = con.prepareStatement(SQLString1);
+                for (int i = 0; i < employee.size(); i++)
+                {
+                    Employee emp = employee.get(i);
+                    statement.setInt(1, employee.get(i).getEmployeeID());
+                    statement.setString(2, employee.get(i).getName());
+                }
+
+            }
+
+            rowsInserted += statement.executeUpdate();
+
+        } catch (Exception e)
+        {
+            System.out.println("Fejl i OrdreMapper - SaveNewProject");
+            e.printStackTrace();
+        }
+        return rowsInserted == employee.size();
+
+    }
+    
     
 }

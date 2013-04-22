@@ -234,5 +234,9 @@ public class Control {
     {
         return dbf.saveNewItem(it);
     }
+    
+     public void saveEmployee(ArrayList<Employee> employee) {
+        dbf.saveEmployee(employee);
+    }
    
 }
