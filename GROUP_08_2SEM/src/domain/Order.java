@@ -37,13 +37,14 @@ public class Order {
 
     }
 
-    public Order(int orderNo, ArrayList<Item> itemlist, Date bestillingsDate, Date depositumDate2) {
+    public Order(int orderNo, ArrayList<Item> itemlist, Date depositumDate, Date bestillingsDate, Customer customer, int state) {
 
         this.orderNo = orderNo;
         this.itemlist = itemlist;
-        state = 0;
+        this.state = state;
         this.bestillingsDate = bestillingsDate;
         this.depositumDate = depositumDate;
+        this.customer = customer;
     }
 
     public Customer getCustomer() {

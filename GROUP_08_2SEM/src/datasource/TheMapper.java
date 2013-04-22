@@ -31,7 +31,7 @@ public class TheMapper
         ArrayList<Item> itemlist = new ArrayList();
         PreparedStatement statement = null;
         Order o = null;
-        int test = 0;
+        int tjek = 0;
         int orderNo = 0;
         String SQLString = "SELECT * FROM ordre NATURAL JOIN ordredetails NATURAL JOIN varer";
         try
@@ -44,10 +44,10 @@ public class TheMapper
                 if(orders.isEmpty())
                 {
                 orders.add(o);
-                }else if(orders.get(test).getOrderNo() != o.getOrderNo())
+                }else if(orders.get(tjek).getOrderNo() != o.getOrderNo())
                 {
                     orders.add(o);
-                    test++;
+                    tjek++;
                 }              
             }
         } catch (Exception e)
@@ -67,8 +67,10 @@ public class TheMapper
                 itemNo = 0,
                 qty = 0,
                 state = 0,
-                totalAmount = 0;
+                totalAmount = 0,
+                customerNo = 0;
         String itemName = "";
+        Customer customer = null;
         Calendar cal = Calendar.getInstance();
         Date depositumdate = cal.getTime(), bestillingsdate = cal.getTime();
 
@@ -82,16 +84,18 @@ public class TheMapper
             {
                 itemNo = rs.getInt(1);
                 orderNo = rs.getInt(2);
+                customerNo = rs.getInt(3);
                 state = rs.getInt(4);
                 depositumdate = rs.getDate(6);
                 bestillingsdate = rs.getDate(7);
                 qty = rs.getInt(5);
                 itemName = rs.getString(8);
                 totalAmount = rs.getInt(9);
+                customer = getSingleCustomer(conn, customerNo);
                 i = new Item(itemNo, itemName, qty);
                 items.add(i);
             }
-            o = new Order(orderNo, items, depositumdate, bestillingsdate);
+            o = new Order(orderNo, items, depositumdate, bestillingsdate, customer, state);
         } catch (Exception e)
         {
             System.out.println("Fejl i TheMapper - getSingleOrder");
@@ -158,6 +162,35 @@ public class TheMapper
             System.out.println(ex.getMessage());
         }
         return customer;
+    }
+    
+        public Customer getSingleCustomer(Connection conn, int cno)
+    {
+//        System.out.println("themapper her");
+        String SQLString = "SELECT * FROM kunde WHERE kundeno = ?";
+
+        PreparedStatement statement = null;
+        Customer c = null;
+        try
+        {
+            //Get order
+            statement = conn.prepareStatement(SQLString);
+            statement.setInt(1, cno);
+            
+
+            ResultSet rs = statement.executeQuery();
+            while (rs.next())
+            {
+                int customerNo = rs.getInt(1);
+                String customerName = rs.getString(2);
+                c = new Customer(customerNo, customerName);
+            }
+        } catch (Exception ex)
+        {
+            System.out.println("Error in TheMapper - getCustomer");
+            System.out.println(ex.getMessage());
+        }
+        return c;
     }
 
     /**

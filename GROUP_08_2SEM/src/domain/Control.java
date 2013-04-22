@@ -56,8 +56,8 @@ public class Control {
                         }
                     }
                     if (orderlist.get(i).getItemlist().size() > 0) {
-                        for (int kusse = 0; kusse < orderlist.size(); kusse++) {
-                            item3 = orderlist.get(i).getItemlist().get(kusse);
+                        for (int l = 0; l < orderlist.size(); l++) {
+                            item3 = orderlist.get(i).getItemlist().get(l);
                             availableItems.add(item3);
                         }
 
@@ -118,21 +118,21 @@ public class Control {
     }
 
  public void reservedItem() {
-        int hej=0;
+        int tjek=0;
         for (int i = 0; i < orderlist.size(); i++) {
             for (int j = 0; j < orderlist.get(i).getItemlist().size(); j++) {
                 for (int k = 0; k<itemlistReserved.size(); k++){
                 if (itemlistReserved.get(k).getItemNo()==orderlist.get(i).getItemlist().get(j).getItemNo()){
                 itemlistReserved.get(k).setItemAmount(itemlistReserved.get(k).getItemAmount() + orderlist.get(i).getItemlist().get(j).getItemAmount());
-                hej++;
+                tjek++;
                 }
                    
                 
                 }
-                if (hej ==0){
+                if (tjek == 0){
                 itemlistReserved.add(orderlist.get(i).getItemlist().get(j));
                 }
-                hej=0;
+                tjek=0;
             }
         }
     }

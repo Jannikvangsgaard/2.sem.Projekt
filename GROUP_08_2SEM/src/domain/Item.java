@@ -61,7 +61,7 @@ public class Item
     
     public String toString()
     {
-        return "ItemNo: " + itemNo + " Item name: " + itemName + " Item amount: " + itemAmount;
+        return "ItemNo: " + itemNo + " Item name: " + itemName + " Item amount: " + itemAmount + "\n";
     }
     
     public String toStringGUI()

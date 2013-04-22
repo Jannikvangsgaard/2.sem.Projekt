@@ -50,7 +50,7 @@ public class GUI extends javax.swing.JFrame
         jListvareliste.setModel(modelvareliste);
         jListVareTilOrdre.setModel(modelVareTilOrdre);
         jListStatusListe.setModel(StatusListe);
-        jListStatusInformation.setModel(model4);
+//        jListStatusInformation.setModel(model4);
         jListVarePåLagerStatus.setModel(model5);
 
         control.loadItemliste();
@@ -107,8 +107,8 @@ public class GUI extends javax.swing.JFrame
         jButtonHentOrdre = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jListStatusListe = new javax.swing.JList();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        jListStatusInformation = new javax.swing.JList();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jTextOrdreInformationer = new javax.swing.JTextArea();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jListVarePåLagerStatus = new javax.swing.JList();
@@ -165,41 +165,40 @@ public class GUI extends javax.swing.JFrame
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButtonHentKunder))))
+                        .addComponent(jLabel1))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
                         .addComponent(jTextFieldKundeNavn, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButtonOpretKunde))
-                .addContainerGap(382, Short.MAX_VALUE))
+                    .addComponent(jButtonOpretKunde)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButtonHentKunder)))
+                .addContainerGap(443, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButtonHentKunder))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextFieldKundeNavn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButtonOpretKunde)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(115, 115, 115))
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldKundeNavn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonOpretKunde)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButtonHentKunder)
+                .addContainerGap(142, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Opret Kunde", jPanel1);
@@ -392,9 +391,18 @@ public class GUI extends javax.swing.JFrame
             }
         });
 
+        jListStatusListe.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
+                jListStatusListeMousePressed(evt);
+            }
+        });
         jScrollPane4.setViewportView(jListStatusListe);
 
-        jScrollPane5.setViewportView(jListStatusInformation);
+        jTextOrdreInformationer.setColumns(20);
+        jTextOrdreInformationer.setRows(5);
+        jScrollPane8.setViewportView(jTextOrdreInformationer);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -404,22 +412,22 @@ public class GUI extends javax.swing.JFrame
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButtonHentOrdre)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(352, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(245, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jButtonHentOrdre)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane8)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jButtonHentOrdre)
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Status", jPanel3);
@@ -835,6 +843,22 @@ public class GUI extends javax.swing.JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextFieldNyVareNavnActionPerformed
 
+    private void jListStatusListeMousePressed(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jListStatusListeMousePressed
+    {//GEN-HEADEREND:event_jListStatusListeMousePressed
+        ArrayList<Item> items = new ArrayList();
+        for (int i = 0; i < control.getOrderlist().size(); i++)
+        {
+            if(jListStatusListe.getSelectedValue().equals(control.getOrderlist().get(i).toString()))
+            {
+                items = control.getOrderlist().get(i).getItemlist();
+                jTextOrdreInformationer.setText(control.getOrderlist().get(i).getCustomer().getCustomerID() + "\n" +
+                                                items.toString() +  "\n" + 
+                                                control.getOrderlist().get(i).getDepositumDate() + "\n" +
+                                                control.getOrderlist().get(i).getBestillingsDate() + "\n");
+            }
+        }
+    }//GEN-LAST:event_jListStatusListeMousePressed
+
     /**
      * @param args the command line arguments
      */
@@ -962,7 +986,6 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelOrderSavedNotSaved;
-    private javax.swing.JList jListStatusInformation;
     private javax.swing.JList jListStatusListe;
     private javax.swing.JList jListVarePåLagerStatus;
     private javax.swing.JList jListVareTilOrdre;
@@ -975,9 +998,9 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextAreaVisKunder;
     private javax.swing.JTextField jTextFieldAntalItems;
@@ -990,5 +1013,6 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JTextField jTextFieldNyVareNavn;
     private javax.swing.JTextField jTextFieldTest;
     private javax.swing.JTextField jTextFieldÆndringAfVareAntal;
+    private javax.swing.JTextArea jTextOrdreInformationer;
     // End of variables declaration//GEN-END:variables
 }
