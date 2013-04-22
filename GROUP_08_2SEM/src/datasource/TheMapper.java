@@ -496,13 +496,12 @@ public class TheMapper
                 totalAmount = 0;
         String itemName = "";
         Calendar cal = Calendar.getInstance();
-        Date depositumdate = cal.getTime(), bestillingsdate = cal.getTime();
 
         String SQLString = "SELECT * FROM ordre NATURAL JOIN ordredetails NATURAL JOIN varer WHERE bestillingsdato = ?";
         try
         {
             statement = conn.prepareStatement(SQLString);
-            statement.setDate(1,cal.DATE(dato));
+            statement.setDate(1,dato);
             ResultSet rs = statement.executeQuery();
             while (rs.next())
             {
