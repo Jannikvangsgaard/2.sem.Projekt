@@ -307,11 +307,6 @@ public class TheMapper
             }
 
 
-
-
-
-
-
         } catch (Exception e)
         {
             System.out.println("Fejl i OrdreMapper - SaveNewProject");
@@ -483,48 +478,7 @@ public class TheMapper
 
     }
 
-      public Order getDateOrder(Date dato, Connection conn)
-    {
-        ArrayList<Order> order = new ArrayList();
-        PreparedStatement statement = null;
-        Order o = null;
-        Item i = null;
-        int orderNo = 0,
-                itemNo = 0,
-                qty = 0,
-                state = 0,
-                totalAmount = 0;
-        String itemName = "";
-        Calendar cal = Calendar.getInstance();
-
-        String SQLString = "SELECT * FROM ordre NATURAL JOIN ordredetails NATURAL JOIN varer WHERE bestillingsdato = ?";
-        try
-        {
-            statement = conn.prepareStatement(SQLString);
-            statement.setDate(1,dato);
-            ResultSet rs = statement.executeQuery();
-            while (rs.next())
-            {
-                itemNo = rs.getInt(1);
-                orderNo = rs.getInt(2);
-                state = rs.getInt(4);
-                depositumdate = rs.getDate(6);
-                bestillingsdate = rs.getDate(7);
-                qty = rs.getInt(5);
-                itemName = rs.getString(8);
-                totalAmount = rs.getInt(9);
-                i = new Item(itemNo, itemName, qty);
-                items.add(i);
-            }
-            System.out.println("tjek hej");
-            o = new Order(orderNo, items, depositumdate, bestillingsdate);
-        } catch (Exception e)
-        {
-            System.out.println("Fejl i TheMapper - getSingleOrder");
-        }
-        return o;
-    }
-
+   
       
  public boolean deleteItem(int itemNo, Connection con)
     {

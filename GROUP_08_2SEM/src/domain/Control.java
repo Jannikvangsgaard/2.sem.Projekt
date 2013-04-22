@@ -20,6 +20,7 @@ public class Control {
     private ArrayList<Order> orderlist = new ArrayList<Order>();
     private ArrayList<Customer> customerlist = new ArrayList<Customer>();
     private ArrayList<Item> allItemList = new ArrayList<Item>();
+    private ArrayList<Order> orderlistWithDate = new ArrayList();
     private DBFacade dbf;
 
     public Control() {
@@ -121,11 +122,11 @@ public class Control {
 
  public void reservedItem() {
         int tjek=0;
-        for (int i = 0; i < orderlist.size(); i++) {
-            for (int j = 0; j < orderlist.get(i).getItemlist().size(); j++) {
+        for (int i = 0; i < orderlistWithDate.size(); i++) {
+            for (int j = 0; j < orderlistWithDate.get(i).getItemlist().size(); j++) {
                 for (int k = 0; k<itemlistReserved.size(); k++){
-                if (itemlistReserved.get(k).getItemNo()==orderlist.get(i).getItemlist().get(j).getItemNo()){
-                itemlistReserved.get(k).setItemAmount(itemlistReserved.get(k).getItemAmount() + orderlist.get(i).getItemlist().get(j).getItemAmount());
+                if (itemlistReserved.get(k).getItemNo()==orderlistWithDate.get(i).getItemlist().get(j).getItemNo()){
+                itemlistReserved.get(k).setItemAmount(itemlistReserved.get(k).getItemAmount() + orderlistWithDate.get(i).getItemlist().get(j).getItemAmount());
                 tjek++;
                 }
                    
@@ -228,6 +229,16 @@ public class Control {
     
      public void saveEmployee(ArrayList<Employee> employee) {
         dbf.saveEmployee(employee);
+    }
+     
+    public void loadOrdersWithDate(Date dato){
+    
+        for(int i = 0; i < orderlist.size();i++){
+        if(orderlist.get(i).getBestillingsDate().equals(dato)){
+        orderlistWithDate.add(orderlist.get(i));
+        }
+        }
+        reservedItem();
     }
    
 }
