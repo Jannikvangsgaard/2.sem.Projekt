@@ -71,6 +71,14 @@ public class Order {
         return itemlist;
     }
 
+    public String getItemlistString(){
+        String res = "";
+        for (int i=0; i<itemlist.size(); i++){
+            res += "Vare navn: " + itemlist.get(i).getItemName() + " vare antal" + itemlist.get(i).getItemAmount();
+        }
+        return res;
+    }
+    
     public Date getDepositumDate() {
         return depositumDate;
     }
