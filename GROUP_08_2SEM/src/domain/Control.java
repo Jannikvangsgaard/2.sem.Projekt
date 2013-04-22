@@ -81,6 +81,8 @@ public class Control {
     }
 
     public ArrayList loadItemliste() {
+//        availableItems.clear();
+//        itemlistReserved.clear();
         itemlist = dbf.getVare();
         return itemlist;
     }
@@ -185,6 +187,8 @@ public class Control {
     }
 
     public void loadAllOrders() {
+        availableItems.clear();
+        itemlistReserved.clear();
         orderlist = dbf.loadAllOrders();
     }
 
