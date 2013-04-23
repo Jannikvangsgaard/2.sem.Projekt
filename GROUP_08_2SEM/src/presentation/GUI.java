@@ -600,10 +600,10 @@ public class GUI extends javax.swing.JFrame {
     private void jButtonOpretKundeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOpretKundeActionPerformed
 
         String navn = jTextFieldKundeNavn.getText();
-        if (navn != null) {
+        if (!jTextFieldKundeNavn.getText().equals("")) {
             control.createCustomer(navn);
             jTextFieldKundeNavn.setText("");
-        } else if (navn == null) {
+        } else {
             JOptionPane.showMessageDialog(null, "Husk at skrive et navn");
         }
     }//GEN-LAST:event_jButtonOpretKundeActionPerformed
@@ -626,7 +626,12 @@ public class GUI extends javax.swing.JFrame {
         if (jTextFieldCustomerNo.getText().isEmpty()) {
             JOptionPane.showMessageDialog(null, "Der mangler et kunde nummer");
         } else {
-            int kundeNo = Integer.parseInt(jTextFieldCustomerNo.getText());
+            int kundeNo = 0;
+            try {
+                kundeNo = Integer.parseInt(jTextFieldCustomerNo.getText());
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "KundeNo skal være hel tal");
+            }
             Calendar cal = Calendar.getInstance();
             Date date = (Date) cal.getTime();
             String dag = jTextFieldDateDage.getText();
@@ -642,7 +647,7 @@ public class GUI extends javax.swing.JFrame {
             ArrayList<Customer> customerlist = control.getCustomerlist();
             for (int i = 0; i < customerlist.size(); i++) {
 
-                if (customerlist.get(i).getCustomerID() == kundeNo) {
+                if (customerlist.get(i).getCustomerID() == kundeNo && kundeNo != 0) {
                     control.createOrder(orderList, customerlist.get(i), date);
                     modelVareTilOrdre.clear();
                     jTextFieldCustomerNo.setText("");
@@ -670,60 +675,73 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButtonTilføjvareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTilføjvareActionPerformed
     {//GEN-HEADEREND:event_jButtonTilføjvareActionPerformed
-        int amount2 = Integer.parseInt(jTextFieldAntalItems.getText());
-        boolean add = false;
-        for (int i = 0; i < vareliste2.size(); i++) {
-            if (vareliste2.get(i).toStringGUI().equals(jListvareliste.getSelectedValue())) {
-                if (amount2 <= vareliste2.get(i).getItemAmount()) {
-                    int amount3 = (vareliste2.get(i).getItemAmount() - Integer.parseInt(jTextFieldAntalItems.getText()));
-                    Item item = vareliste2.get(i);
-                    Item item2 = vareliste2.get(i);
-                    item.setItemAmount(amount2);
+        try {
+            int amount2 = Integer.parseInt(jTextFieldAntalItems.getText());
+            boolean add = false;
+            for (int i = 0; i < vareliste2.size(); i++) {
+                if (vareliste2.get(i).toStringGUI().equals(jListvareliste.getSelectedValue())) {
+                    if (amount2 <= vareliste2.get(i).getItemAmount()) {
+                        int amount3 = (vareliste2.get(i).getItemAmount() - Integer.parseInt(jTextFieldAntalItems.getText()));
+                        Item item = vareliste2.get(i);
+                        Item item2 = vareliste2.get(i);
+                        item.setItemAmount(amount2);
 
-                    for (int h = 0; h < orderList.size(); h++) {
-                        if (orderList.get(h).getItemNo() == vareliste2.get(i).getItemNo()) {
-                            orderList.get(h).setItemAmount(orderList.get(h).getItemAmount() + Integer.parseInt(jTextFieldAntalItems.getText()));
-                            add = true;
+                        for (int h = 0; h < orderList.size(); h++) {
+                            if (orderList.get(h).getItemNo() == vareliste2.get(i).getItemNo()) {
+                                orderList.get(h).setItemAmount(orderList.get(h).getItemAmount() + Integer.parseInt(jTextFieldAntalItems.getText()));
+                                add = true;
+                            }
                         }
-                    }
-                    if (add == false) {
-                        orderList.add(new Item(item.getItemNo(), item.getItemName(), item.getItemAmount()));
-                    }
-                    modelVareTilOrdre.clear();
-                    for (int j = 0; j < orderList.size(); j++) {
-                        modelVareTilOrdre.addElement(orderList.get(j).toStringGUIReserved());
-                        jTextFieldAntalItems.setText("");
-                    }
-                    item2.setItemAmount(amount3);
-                    modelvareliste.clear();
-                    for (int g = 0; g < vareliste2.size(); g++) {
-                        modelvareliste.addElement(vareliste2.get(g).toStringGUI());
-                    }
+                        if (add == false) {
+                            orderList.add(new Item(item.getItemNo(), item.getItemName(), item.getItemAmount()));
+                        }
+                        modelVareTilOrdre.clear();
+                        for (int j = 0; j < orderList.size(); j++) {
+                            modelVareTilOrdre.addElement(orderList.get(j).toStringGUIReserved());
+                            jTextFieldAntalItems.setText("");
+                        }
+                        item2.setItemAmount(amount3);
+                        modelvareliste.clear();
+                        for (int g = 0; g < vareliste2.size(); g++) {
+                            modelvareliste.addElement(vareliste2.get(g).toStringGUI());
+                        }
 
-                } else {
-                    JOptionPane.showMessageDialog(null, "Antal Vare er for stort i forhold til det antal der er på lager");
-                    break;
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Antal Vare er for stort i forhold til det antal der er på lager");
+                        break;
+                    }
                 }
-            }
 
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Husk at skrive antal");
         }
     }//GEN-LAST:event_jButtonTilføjvareActionPerformed
 
     private void jButtonFjernVareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonFjernVareActionPerformed
     {//GEN-HEADEREND:event_jButtonFjernVareActionPerformed
+        System.out.println("hej");
+        int a = modelVareTilOrdre.size();
         for (int i = 0; i < modelVareTilOrdre.size(); i++) {
-            if (jListVareTilOrdre.getSelectedValue().equals(modelVareTilOrdre.elementAt(i))) {
-                modelvareliste.clear();
-                for (int g = 0; g < vareliste2.size(); g++) {
-                    if (orderList.get(i).getItemNo() == vareliste2.get(g).getItemNo()) {
-                        vareliste2.get(g).setItemAmount(vareliste2.get(g).getItemAmount() + orderList.get(i).getItemAmount());
+            try {
+                if (jListVareTilOrdre.getSelectedValue().equals(modelVareTilOrdre.elementAt(i))) {
+                    modelvareliste.clear();
+                    for (int g = 0; g < vareliste2.size(); g++) {
+                        if (orderList.get(i).getItemNo() == vareliste2.get(g).getItemNo()) {
+                            vareliste2.get(g).setItemAmount(vareliste2.get(g).getItemAmount() + orderList.get(i).getItemAmount());
+                        }
+                        modelvareliste.addElement(vareliste2.get(g).toStringGUI());
+                        modelVareTilOrdre.removeElement(jListVareTilOrdre.getSelectedValue());
                     }
-                    modelvareliste.addElement(vareliste2.get(g).toStringGUI());
+                    orderList.remove(i);
                 }
-                orderList.remove(i);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Husk at vælge en vare at fjerne");
             }
         }
-        modelVareTilOrdre.removeElement(jListVareTilOrdre.getSelectedValue());
+        if (a==0){
+            JOptionPane.showMessageDialog(null, "Husk at hente Liste før du prøve at fjerne en vare");
+        }
     }//GEN-LAST:event_jButtonFjernVareActionPerformed
 
     private void jButtonTilføjvareKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jButtonTilføjvareKeyReleased
@@ -748,6 +766,20 @@ public class GUI extends javax.swing.JFrame {
         for (int i = 0; i < control.getOrderlist().size(); i++) {
             StatusListe.addElement(control.getOrderlist().get(i).toString());
         }
+        Calendar cal = Calendar.getInstance();
+        Date date = (Date) cal.getTime();
+        if (StatusListe.isEmpty()) {
+            try {
+                control.loadAllOrders();
+                control.loadOrdersWithDate(date);
+                for (int i = 0; i < control.getOrderlist().size(); i++) {
+                    StatusListe.addElement(control.getOrderlist().get(i).toString());
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "pik??");
+            }
+        }
+
     }//GEN-LAST:event_jButtonHentOrdreActionPerformed
 
     private void jButtonTestActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTestActionPerformed
@@ -765,10 +797,14 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTestActionPerformed
 
     private void jButtonBekræftÆndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBekræftÆndringActionPerformed
+        if (!it.isEmpty()){
         control.increaseAmount(it);
         visAlleItemListe();
         visVareliste();
         model6.removeAllElements();
+        } else{
+            JOptionPane.showMessageDialog(null, "Husk at tilføj/fjern før du kan bekræftte");
+    }
 
     }//GEN-LAST:event_jButtonBekræftÆndringActionPerformed
 
@@ -842,14 +878,18 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButtonLavNyVareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonLavNyVareActionPerformed
     {//GEN-HEADEREND:event_jButtonLavNyVareActionPerformed
-        String vareNavn = jTextFieldNyVareNavn.getText();
-        int vareAntal = Integer.parseInt(jTextFieldNyVareAntal.getText());
-        newItem.add(control.creatItem(0, vareNavn, vareAntal));
-        control.saveNewItem(newItem);
-        newItem.clear();
-        visAlleItemListe();
-        jTextFieldNyVareNavn.setText("");
-        jTextFieldNyVareAntal.setText("");
+        if (!jTextFieldKundeNavn.getText().equals("")) {
+            String vareNavn = jTextFieldNyVareNavn.getText();
+            int vareAntal = Integer.parseInt(jTextFieldNyVareAntal.getText());
+            newItem.add(control.creatItem(0, vareNavn, vareAntal));
+            control.saveNewItem(newItem);
+            newItem.clear();
+            visAlleItemListe();
+            jTextFieldNyVareNavn.setText("");
+            jTextFieldNyVareAntal.setText("");
+        } else {
+            JOptionPane.showMessageDialog(null, "Husk at skriv et navn");
+        }
     }//GEN-LAST:event_jButtonLavNyVareActionPerformed
 
     private void jTextFieldÆndringAfVareAntalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextFieldÆndringAfVareAntalKeyReleased
@@ -877,21 +917,21 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButtonHentVareListeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonHentVareListeActionPerformed
     {//GEN-HEADEREND:event_jButtonHentVareListeActionPerformed
-            Calendar cal = Calendar.getInstance();
-            Date date = (Date) cal.getTime();
-            String dag = jTextFieldDateDage.getText();
-            String måned = jTextFieldDatoMåned.getText();
-            String aar = jTextFieldDateÅr.getText();
-            String dato = aar + måned + dag;
-            DateFormat newDate = new SimpleDateFormat("yyyyMMdd");
-            try {
-                date = newDate.parse(dato);
-            } catch (ParseException ex) {
-                Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        Calendar cal = Calendar.getInstance();
+        Date date = (Date) cal.getTime();
+        String dag = jTextFieldDateDage.getText();
+        String måned = jTextFieldDatoMåned.getText();
+        String aar = jTextFieldDateÅr.getText();
+        String dato = aar + måned + dag;
+        DateFormat newDate = new SimpleDateFormat("yyyyMMdd");
+        try {
+            date = newDate.parse(dato);
             control.loadAllOrders();
             control.loadOrdersWithDate(date);
             visVareliste();
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "Husk at skriv en Dato");
+        }
     }//GEN-LAST:event_jButtonHentVareListeActionPerformed
 
     /**
