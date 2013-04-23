@@ -425,7 +425,7 @@ public class TheMapper {
     
       public boolean updateDepositum(Order o, Connection con) {
         int rowsInserted = 0;
-        String SQLString1 = "update varer set state = ? where varerNo = ?";
+        String SQLString1 = "update ordre set state = ? where ordreNo = ?";
 
         PreparedStatement statement2 = null;
 

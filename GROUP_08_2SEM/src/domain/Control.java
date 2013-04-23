@@ -263,4 +263,9 @@ public class Control {
         
                 dbf.deleteItem(item.getItemNo());
     }
+    
+    public boolean updateOrder(Order o)
+    {
+        return dbf.updateOrder(o);
+    }
 }

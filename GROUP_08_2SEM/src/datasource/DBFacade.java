@@ -84,5 +84,10 @@ public class DBFacade
      public boolean deleteItem(int itemNo){
          return tm.deleteItem(itemNo, con);
      }
+     
+     public boolean updateOrder(Order o)
+     {
+         return tm.updateDepositum(o, con);
+     }
    
 }
