@@ -878,13 +878,17 @@ public class GUI extends javax.swing.JFrame {
 
     private void jButtonLavNyVareActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonLavNyVareActionPerformed
     {//GEN-HEADEREND:event_jButtonLavNyVareActionPerformed
-        if (!jTextFieldKundeNavn.getText().equals("")) {
+        if (!jTextFieldNyVareNavn.getText().equals("")) {
             String vareNavn = jTextFieldNyVareNavn.getText();
+            try{
             int vareAntal = Integer.parseInt(jTextFieldNyVareAntal.getText());
             newItem.add(control.creatItem(0, vareNavn, vareAntal));
             control.saveNewItem(newItem);
             newItem.clear();
             visAlleItemListe();
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(null, "VareAntal skal være et hel tal");
+            }
             jTextFieldNyVareNavn.setText("");
             jTextFieldNyVareAntal.setText("");
         } else {
@@ -905,12 +909,24 @@ public class GUI extends javax.swing.JFrame {
 
     private void jListStatusListeMousePressed(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jListStatusListeMousePressed
     {//GEN-HEADEREND:event_jListStatusListeMousePressed
+        String ab = "";
+        
         for (int i = 0; i < control.getOrderlist().size(); i++) {
+            if (control.getOrderlist().get(i).getState()==1){
+                         ab = "ja\n";
+} else {        
+                if (control.getOrderlist().get(i).getState()==2){
+                ab ="udløbet\n";
+            } else {
+                    ab ="nej\n";
+                }
+            }
             if (control.getOrderlist().get(i).toString().equals(jListStatusListe.getSelectedValue())) {
-                jTextOrdreInformationer.setText(control.getOrderlist().get(i).getCustomer().getCustomerID() + "\n"
-                        + control.getOrderlist().get(i).getDepositumDate() + "\n"
-                        + control.getOrderlist().get(i).getBestillingsDate() + "\n"
-                        + control.getOrderlist().get(i).getItemlist());
+                jTextOrdreInformationer.setText("Kunde ID: " +control.getOrderlist().get(i).getCustomer().getCustomerID() + "\n"
+                        + "Depositum Dato: " + control.getOrderlist().get(i).getDepositumDate() + "\n"
+                        +  "Bestillings Dato: " +control.getOrderlist().get(i).getBestillingsDate() + "\n"
+                        +  "Depositum modtaget: " + ab        
+                        + control.getOrderlist().get(i).getItemlistString());
             }
         }
     }//GEN-LAST:event_jListStatusListeMousePressed
