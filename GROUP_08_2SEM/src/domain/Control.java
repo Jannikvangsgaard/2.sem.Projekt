@@ -167,9 +167,7 @@ public class Control {
         return availableItems;
     }
 
-    public void saveFreeItems(ArrayList<Item> test) throws SQLException {
-        dbf.saveItem(test);
-    }
+
 
     public boolean saveOrder() throws SQLException {
         return dbf.saveOrder(orderlist);
@@ -179,9 +177,6 @@ public class Control {
         dbf.saveCustomer(customer);
     }
 
-    public void loadAvailableItems() {
-        availableItems = dbf.getAvailableItems();
-    }
 
     public Order loadSingleOrder(int ono) {
         return dbf.loadSingleOrder(ono);
@@ -193,9 +188,7 @@ public class Control {
         orderlist = dbf.loadAllOrders();
     }
 
-    public void commit() throws SQLException {
-        dbf.commit();
-    }
+  
     public boolean increaseAmount(ArrayList<Item> increasedItem){
     
         return dbf.increaseAmount(increasedItem);

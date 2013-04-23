@@ -61,21 +61,13 @@ public class DBFacade
         return tm.saveOrder(o, con);
     }
 
-    public boolean saveItem(ArrayList<Item> i) throws SQLException
-    {
-        return tm.saveAvailableItem(i, con);
-    }
+    
     public boolean saveCustomer(ArrayList<Customer> customer){
         return tm.saveCustomer(customer, con);
     }
-    public ArrayList getAvailableItems(){
-    return tm.getAvailableItem(con);
-    }
+ 
     
-    public void commit() throws SQLException
-    {
-        tm.commit(con);
-    }
+ 
     public boolean increaseAmount(ArrayList<Item> it){
     
     return tm.increaseItem(it, con);
