@@ -72,9 +72,9 @@ public class Order {
     }
 
     public String getItemlistString(){
-        String res = "";
+        String res = "\nVarer:\n";
         for (int i=0; i<itemlist.size(); i++){
-            res += "Vare navn: " + itemlist.get(i).getItemName() + " vare antal" + itemlist.get(i).getItemAmount();
+            res += itemlist.get(i).getItemName() + ", " + itemlist.get(i).getItemAmount() + "\n";
         }
         return res;
     }
