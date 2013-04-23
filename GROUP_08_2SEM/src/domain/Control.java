@@ -232,7 +232,8 @@ public class Control {
     }
      
     public void loadOrdersWithDate(Date dato){
-    
+        
+        orderlistWithDate.clear();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dato);
         int h = 0;
@@ -256,6 +257,8 @@ public class Control {
         }
         }
         }
+        System.out.println(
+        orderlistWithDate);
         reservedItem();
     
    
