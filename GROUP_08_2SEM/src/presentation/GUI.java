@@ -779,7 +779,7 @@ public class GUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "pik??");
             }
         }
-
+        control.clearOrderlist();
     }//GEN-LAST:event_jButtonHentOrdreActionPerformed
 
     private void jButtonTestActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTestActionPerformed
