@@ -266,4 +266,11 @@ public class Control {
     public void clearOrderlist(){
         orderlistWithDate.clear();
     }
+    public void deleteItem(Item item){
+        for (int i=0; i<itemlist.size(); i++){
+            if (item.equals(itemlist.get(i))){
+                dbf.deleteItem(itemlist.get(i).getItemNo());
+            }
+        }
+    }
 }

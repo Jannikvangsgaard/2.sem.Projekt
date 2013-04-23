@@ -51,7 +51,11 @@ public class GUI extends javax.swing.JFrame {
 //        jListStatusInformation.setModel(model4);
         jListVarePåLagerStatus.setModel(model5);
         VisÆndringer.setModel(model6);
-
+        try {
+            control.checkDate();
+        } catch (ParseException ex) {
+            JOptionPane.showMessageDialog(null, "YO BRO CHECKDATE VIRKER IKKE HOMIE!");
+        }
         control.loadItemliste();
 //        control.reservedItem();
 //        control.availableItems();
@@ -739,7 +743,7 @@ public class GUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Husk at vælge en vare at fjerne");
             }
         }
-        if (a==0){
+        if (a == 0) {
             JOptionPane.showMessageDialog(null, "Husk at hente Liste før du prøve at fjerne en vare");
         }
     }//GEN-LAST:event_jButtonFjernVareActionPerformed
@@ -795,28 +799,39 @@ public class GUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonTestActionPerformed
 
     private void jButtonBekræftÆndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBekræftÆndringActionPerformed
-        if (!it.isEmpty()){
-        control.increaseAmount(it);
-        visAlleItemListe();
-        visVareliste();
-        model6.removeAllElements();
-        } else{
+        if (!it.isEmpty()) {
+            control.increaseAmount(it);
+            visAlleItemListe();
+            visVareliste();
+            System.out.println("hej");
+            for (int i = 0; i < control.getItemList().size(); i++) {
+                if (control.getItemList().get(i).getItemAmount() == 0) {
+                    System.out.println(control.getItemList().get(i).getItemName() + ", " + control.getItemList().get(i).getItemAmount());
+                    control.deleteItem(control.getItemList().get(i));
+                    visAlleItemListe();
+                    visVareliste();
+                    System.out.println("2, "+ control.getItemList().get(i).getItemName() + ", " + control.getItemList().get(i).getItemAmount());
+                    
+                }
+            }
+            model6.removeAllElements();
+
+        } else {
             JOptionPane.showMessageDialog(null, "Husk at tilføj/fjern før du kan bekræftte");
-    }
+        }
 
     }//GEN-LAST:event_jButtonBekræftÆndringActionPerformed
 
     private void FjernÆndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_FjernÆndringActionPerformed
         int plads = 0;
         if (jListVarePåLagerStatus.getSelectedValue() != null) {
-            System.out.println("HEJHEJHEJEHJ" + jListVarePåLagerStatus.getSelectedValue().toString());
             int antal = Integer.parseInt(jTextFieldÆndringAfVareAntal.getText());
             String selected = jListVarePåLagerStatus.getSelectedValue().toString();
             for (int i = 0; i < alleItemsList.size(); i++) {
                 if (alleItemsList.get(i).toStringGUI().equals(selected)) {
                     if (antal <= alleItemsList.get(i).getItemAmount()) {
                         Item v = alleItemsList.get(i);
-                        v.setAmountTotal(v.getItemAmount() + antal);
+                        v.setAmountTotal(v.getItemAmount() - antal);
                         it.add(v);
                         jTextFieldÆndringAfVareAntal.setText("");
                         visVareliste();
@@ -878,13 +893,13 @@ public class GUI extends javax.swing.JFrame {
     {//GEN-HEADEREND:event_jButtonLavNyVareActionPerformed
         if (!jTextFieldNyVareNavn.getText().equals("")) {
             String vareNavn = jTextFieldNyVareNavn.getText();
-            try{
-            int vareAntal = Integer.parseInt(jTextFieldNyVareAntal.getText());
-            newItem.add(control.creatItem(0, vareNavn, vareAntal));
-            control.saveNewItem(newItem);
-            newItem.clear();
-            visAlleItemListe();
-            }catch(Exception e){
+            try {
+                int vareAntal = Integer.parseInt(jTextFieldNyVareAntal.getText());
+                newItem.add(control.creatItem(0, vareNavn, vareAntal));
+                control.saveNewItem(newItem);
+                newItem.clear();
+                visAlleItemListe();
+            } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, "VareAntal skal være et hel tal");
             }
             jTextFieldNyVareNavn.setText("");
@@ -908,22 +923,22 @@ public class GUI extends javax.swing.JFrame {
     private void jListStatusListeMousePressed(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jListStatusListeMousePressed
     {//GEN-HEADEREND:event_jListStatusListeMousePressed
         String ab = "";
-        
+
         for (int i = 0; i < control.getOrderlist().size(); i++) {
-            if (control.getOrderlist().get(i).getState()==1){
-                         ab = "ja\n";
-} else {        
-                if (control.getOrderlist().get(i).getState()==2){
-                ab ="udløbet\n";
+            if (control.getOrderlist().get(i).getState() == 1) {
+                ab = "ja\n";
             } else {
-                    ab ="nej\n";
+                if (control.getOrderlist().get(i).getState() == 2) {
+                    ab = "udløbet\n";
+                } else {
+                    ab = "nej\n";
                 }
             }
             if (control.getOrderlist().get(i).toString().equals(jListStatusListe.getSelectedValue())) {
-                jTextOrdreInformationer.setText("Kunde ID: " +control.getOrderlist().get(i).getCustomer().getCustomerID() + "\n"
+                jTextOrdreInformationer.setText("Kunde ID: " + control.getOrderlist().get(i).getCustomer().getCustomerID() + "\n"
                         + "Depositum Dato: " + control.getOrderlist().get(i).getDepositumDate() + "\n"
-                        +  "Bestillings Dato: " +control.getOrderlist().get(i).getBestillingsDate() + "\n"
-                        +  "Depositum modtaget: " + ab        
+                        + "Bestillings Dato: " + control.getOrderlist().get(i).getBestillingsDate() + "\n"
+                        + "Depositum modtaget: " + ab
                         + control.getOrderlist().get(i).getItemlistString());
             }
         }

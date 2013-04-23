@@ -89,5 +89,8 @@ public class DBFacade
      public boolean saveEmployee(ArrayList<Employee> employee){
         return tm.saveEmployee(employee, con);
     }
+     public boolean deleteItem(int itemNo){
+         return tm.deleteItem(itemNo, con);
+     }
    
 }

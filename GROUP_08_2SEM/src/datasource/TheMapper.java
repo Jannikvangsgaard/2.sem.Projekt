@@ -20,14 +20,12 @@ import java.util.Calendar;
  *
  * @author Mike
  */
-public class TheMapper
-{
+public class TheMapper {
 
     /**
      * Read from database
      */
-    public ArrayList<Order> getAllOrders(Connection conn)
-    {
+    public ArrayList<Order> getAllOrders(Connection conn) {
         ArrayList<Order> orders = new ArrayList();
         ArrayList<Item> itemlist = new ArrayList();
         PreparedStatement statement = null;
@@ -35,31 +33,25 @@ public class TheMapper
         int tjek = 0;
         int orderNo = 0;
         String SQLString = "SELECT * FROM ordre NATURAL JOIN ordredetails NATURAL JOIN varer";
-        try
-        {
+        try {
             statement = conn.prepareStatement(SQLString);
             ResultSet rs = statement.executeQuery();
-            while (rs.next())
-            {
+            while (rs.next()) {
                 o = getSingleOrder(orderNo = rs.getInt(2), conn);
-                if(orders.isEmpty())
-                {
-                orders.add(o);
-                }else if(orders.get(tjek).getOrderNo() != o.getOrderNo())
-                {
+                if (orders.isEmpty()) {
+                    orders.add(o);
+                } else if (orders.get(tjek).getOrderNo() != o.getOrderNo()) {
                     orders.add(o);
                     tjek++;
-                }              
+                }
             }
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Fejl i TheMapper - getAllOrders");
         }
         return orders;
     }
 
-    public Order getSingleOrder(int ono, Connection conn)
-    {
+    public Order getSingleOrder(int ono, Connection conn) {
         ArrayList<Item> items = new ArrayList();
         PreparedStatement statement = null;
         Order o = null;
@@ -76,13 +68,11 @@ public class TheMapper
         Date depositumdate = cal.getTime(), bestillingsdate = cal.getTime();
 
         String SQLString = "SELECT * FROM ordre NATURAL JOIN ordredetails NATURAL JOIN varer WHERE ordreno = ?";
-        try
-        {
+        try {
             statement = conn.prepareStatement(SQLString);
             statement.setInt(1, ono);
             ResultSet rs = statement.executeQuery();
-            while (rs.next())
-            {
+            while (rs.next()) {
                 itemNo = rs.getInt(1);
                 orderNo = rs.getInt(2);
                 customerNo = rs.getInt(3);
@@ -97,15 +87,13 @@ public class TheMapper
                 items.add(i);
             }
             o = new Order(orderNo, items, depositumdate, bestillingsdate, customer, state);
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Fejl i TheMapper - getSingleOrder");
         }
         return o;
     }
 
-    public ArrayList<Item> getItems(Connection conn)
-    {
+    public ArrayList<Item> getItems(Connection conn) {
 //        Item i = null;
         ArrayList<Item> itemsArr = new ArrayList();
 
@@ -113,14 +101,12 @@ public class TheMapper
 
         PreparedStatement statement = null;
 
-        try
-        {
+        try {
             statement = conn.prepareStatement(SQLString);
 
             ResultSet rs = statement.executeQuery();
 
-            while (rs.next())
-            {
+            while (rs.next()) {
                 int vNo = rs.getInt(1);
                 String vNa = rs.getString(2);
                 int vQtotal = rs.getInt(3);
@@ -128,66 +114,57 @@ public class TheMapper
                 Item i = new Item(vNo, vNa, vQtotal);
                 itemsArr.add(i);
             }
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Fejl i TheMapper - getItems");
         }
 
         return itemsArr;
     }
 
-    public ArrayList<Customer> getCustomer(Connection conn)
-    {
+    public ArrayList<Customer> getCustomer(Connection conn) {
 //        System.out.println("themapper her");
         String SQLString = "SELECT * FROM kunde";
 
         PreparedStatement statement = null;
         ArrayList<Customer> customer = new ArrayList();
-        try
-        {
+        try {
             //Get order
             statement = conn.prepareStatement(SQLString);
 
 
             ResultSet rs = statement.executeQuery();
-            while (rs.next())
-            {
+            while (rs.next()) {
                 int customerNo = rs.getInt(1);
                 String customerName = rs.getString(2);
                 Customer c = new Customer(customerNo, customerName);
                 customer.add(c);
             }
-        } catch (Exception ex)
-        {
+        } catch (Exception ex) {
             System.out.println("Error in TheMapper - getCustomer");
             System.out.println(ex.getMessage());
         }
         return customer;
     }
-    
-        public Customer getSingleCustomer(Connection conn, int cno)
-    {
+
+    public Customer getSingleCustomer(Connection conn, int cno) {
 //        System.out.println("themapper her");
         String SQLString = "SELECT * FROM kunde WHERE kundeno = ?";
 
         PreparedStatement statement = null;
         Customer c = null;
-        try
-        {
+        try {
             //Get order
             statement = conn.prepareStatement(SQLString);
             statement.setInt(1, cno);
-            
+
 
             ResultSet rs = statement.executeQuery();
-            while (rs.next())
-            {
+            while (rs.next()) {
                 int customerNo = rs.getInt(1);
                 String customerName = rs.getString(2);
                 c = new Customer(customerNo, customerName);
             }
-        } catch (Exception ex)
-        {
+        } catch (Exception ex) {
             System.out.println("Error in TheMapper - getCustomer");
             System.out.println(ex.getMessage());
         }
@@ -197,8 +174,7 @@ public class TheMapper
     /**
      * Write to database
      */
-    public boolean saveOrder(ArrayList<Order> order, Connection con) throws SQLException
-    {
+    public boolean saveOrder(ArrayList<Order> order, Connection con) throws SQLException {
 
 //        con.setAutoCommit(false);
         int rowsInserted = 0;
@@ -210,26 +186,21 @@ public class TheMapper
 
 
         PreparedStatement statement = null;
-        for (int j = 0; j < order.size(); j++)
-        {
+        for (int j = 0; j < order.size(); j++) {
             Order otest = order.get(j);
 
-            if (otest.getOrderNo() != 0)
-            {
+            if (otest.getOrderNo() != 0) {
                 tal++;
             }
         }
 
 
-        try
-        {
+        try {
             statement = con.prepareStatement(SQLString3);
             ResultSet rs = statement.executeQuery();
-            if (rs.next())
-            {
+            if (rs.next()) {
 
-                for (int k = tal; order.size() > k; k++)
-                {
+                for (int k = tal; order.size() > k; k++) {
 
                     Order o = order.get(k);
 
@@ -240,8 +211,7 @@ public class TheMapper
             statement = con.prepareStatement(SQLString1);
 
 
-            for (int j = tal; j < order.size(); j++)
-            {
+            for (int j = tal; j < order.size(); j++) {
                 Order o = order.get(j);
                 statement.setInt(1, o.getOrderNo());
                 statement.setInt(2, o.getCustomer().getCustomerID());
@@ -252,16 +222,13 @@ public class TheMapper
             }
 
 
-            if (rowsInserted == order.size() - tal)
-            {
+            if (rowsInserted == order.size() - tal) {
                 rowsInserted = 0;
                 statement = con.prepareStatement(SQLString2);
 
-                for (int i = tal; i < order.size(); i++)
-                {
+                for (int i = tal; i < order.size(); i++) {
                     Order o = order.get(i);
-                    for (int j = 0; j < o.getItemlist().size(); j++)
-                    {
+                    for (int j = 0; j < o.getItemlist().size(); j++) {
                         statement.setInt(1, o.getItemlist().get(j).getItemNo());
                         statement.setInt(2, o.getItemlist().get(j).getItemAmount());
                         statement.setInt(3, o.getOrderNo());
@@ -273,13 +240,11 @@ public class TheMapper
                     }
 
                 }
-            } else
-            {
+            } else {
                 System.out.println("Fejl i OrdreMapper - Part 1");
             }
 
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Fejl i OrdreMapper - SaveOrder");
             e.printStackTrace();
         }
@@ -287,28 +252,24 @@ public class TheMapper
 
     }
 
-    public boolean saveAvailableItem(ArrayList<Item> freeItems, Connection con) throws SQLException
-    {
+    public boolean saveAvailableItem(ArrayList<Item> freeItems, Connection con) throws SQLException {
 //        con.setAutoCommit(false);
         int rowsInserted = 0;
         String SQLString1 = "update tilrådighed set antal = ? where varerNo = ?";
 
         PreparedStatement statement = null;
 
-        try
-        {
+        try {
             statement = con.prepareStatement(SQLString1);
 
-            for (int i = 0; i < freeItems.size(); i++)
-            {
+            for (int i = 0; i < freeItems.size(); i++) {
                 statement.setInt(1, freeItems.get(i).getItemAmount());
                 statement.setInt(2, freeItems.get(i).getItemNo());
                 rowsInserted += statement.executeUpdate();
             }
 
 
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Fejl i OrdreMapper - SaveNewProject");
             e.printStackTrace();
         }
@@ -316,29 +277,24 @@ public class TheMapper
 
     }
 
-    public boolean saveCustomer(ArrayList<Customer> customer, Connection con)
-    {
+    public boolean saveCustomer(ArrayList<Customer> customer, Connection con) {
 
         int rowsInserted = 0;
         String SQLString1 = "insert into kunde values(?,?)";
         String SQLString2 = "select kundeseq.nextval from dual";
         PreparedStatement statement = null;
 
-        try
-        {
+        try {
             statement = con.prepareStatement(SQLString2);
             ResultSet rs = statement.executeQuery();
-            if (rs.next())
-            {
-                for (int j = 0; customer.size() > j; j++)
-                {
+            if (rs.next()) {
+                for (int j = 0; customer.size() > j; j++) {
                     Customer o = customer.get(j);
                     o.setCustomerID(rs.getInt(1));
                 }
 
                 statement = con.prepareStatement(SQLString1);
-                for (int i = 0; i < customer.size(); i++)
-                {
+                for (int i = 0; i < customer.size(); i++) {
                     Customer cus = customer.get(i);
                     statement.setInt(1, customer.get(i).getCustomerID());
                     statement.setString(2, customer.get(i).getName());
@@ -354,8 +310,7 @@ public class TheMapper
 
 
 
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Fejl i OrdreMapper - SaveNewProject");
             e.printStackTrace();
         }
@@ -363,102 +318,86 @@ public class TheMapper
 
     }
 
-    public ArrayList<Item> getAvailableItem(Connection conn)
-    {
+    public ArrayList<Item> getAvailableItem(Connection conn) {
 //       
         String SQLString = "SELECT * FROM tilrådighed";
 
         PreparedStatement statement = null;
         ArrayList<Item> availableItem = new ArrayList();
-        try
-        {
+        try {
             statement = conn.prepareStatement(SQLString);
 
 
             ResultSet rs = statement.executeQuery();
-            while (rs.next())
-            {
+            while (rs.next()) {
                 int itemNo = rs.getInt(1);
                 int availableItemCount = rs.getInt(2);
                 String itemName = rs.getString(3);
                 Item i = new Item(itemNo, itemName, availableItemCount);
                 availableItem.add(i);
             }
-        } catch (Exception ex)
-        {
+        } catch (Exception ex) {
             System.out.println("Error in TheMapper - getAvailableItem");
             System.out.println(ex.getMessage());
         }
         return availableItem;
     }
 
-    public void commit(Connection con) throws SQLException
-    {
+    public void commit(Connection con) throws SQLException {
         con.commit();
     }
 
-    
     public boolean increaseItem(ArrayList<Item> newItems, Connection con) {
         int rowsInserted = 0;
         String SQLString2 = "update varer set varerantaltotal = ? where varerNo = ?";
 
         PreparedStatement statement2 = null;
 
-        try 
-        {
+        try {
             statement2 = con.prepareStatement(SQLString2);
-         
-            for (int j = 0; j < newItems.size(); j++)
-            {
+
+            for (int j = 0; j < newItems.size(); j++) {
                 statement2.setInt(2, newItems.get(j).getItemNo());
                 statement2.setInt(1, newItems.get(j).getAmountTotal());
 
                 int rows = statement2.executeUpdate();
-                if (rows != 0)
-                {
+                if (rows != 0) {
                     System.out.println("INCREASEITEM VIRKER");
-                }
-                else
-                {
+                } else {
                     System.out.println("INCREASEITEM VIRKER IKKE");
                 }
             }
-            
 
-        } catch (Exception e) 
-        {
+
+        } catch (Exception e) {
             System.out.println("Fejl i OrdreMapper - increaseItem");
             e.printStackTrace();
         }
-        
+
         return newItems.size() == rowsInserted;
 
     }
-     public boolean saveNewItem(ArrayList<Item> newItem, Connection con)
-    {
+
+    public boolean saveNewItem(ArrayList<Item> newItem, Connection con) {
 
         int rowsInserted = 0;
         String SQLString1 = "insert into varer values(?,?,?)";
         String SQLString2 = "select varerseq.nextval from dual";
         PreparedStatement statement = null;
 
-        try
-        {
+        try {
             statement = con.prepareStatement(SQLString2);
             ResultSet rs = statement.executeQuery();
-            if (rs.next())
-            {
-                for (int j = 0; newItem.size() > j; j++)
-                {
+            if (rs.next()) {
+                for (int j = 0; newItem.size() > j; j++) {
                     Item it = newItem.get(j);
                     it.setItemNo(rs.getInt(1));
                 }
 
                 statement = con.prepareStatement(SQLString1);
-                for (int i = 0; i < newItem.size(); i++)
-                {
+                for (int i = 0; i < newItem.size(); i++) {
                     Item ni = newItem.get(i);
-                    statement.setInt(1,newItem.get(i).getItemNo());
+                    statement.setInt(1, newItem.get(i).getItemNo());
                     statement.setString(2, newItem.get(i).getItemName());
                     statement.setInt(3, newItem.get(i).getItemAmount());
                 }
@@ -469,8 +408,7 @@ public class TheMapper
 
 
 
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Fejl i OrdreMapper - SaveNewProject");
             e.printStackTrace();
         }
@@ -478,56 +416,46 @@ public class TheMapper
 
     }
 
-   
-      
- public boolean deleteItem(int itemNo, Connection con)
-    {
+    public boolean deleteItem(int itemNo, Connection con) {
 
         int rowsInserted = 0;
-        String SQLString1 = "delete * from varer where varerno = ?";
+        String SQLString1 = "delete from varer where varerno = ?";
         PreparedStatement statement = null;
 
-        try
-        {
+        try {
             statement = con.prepareStatement(SQLString1);
-            statement.setInt(1,itemNo);
+            statement.setInt(1, itemNo);
 
             rowsInserted += statement.executeUpdate();
 
 
 
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Fejl i OrdreMapper - SaveNewProject");
             e.printStackTrace();
         }
         return rowsInserted == 1;
 
-    }      
-      
-    public boolean saveEmployee(ArrayList<Employee> employee, Connection con)
-    {
+    }
+
+    public boolean saveEmployee(ArrayList<Employee> employee, Connection con) {
 
         int rowsInserted = 0;
         String SQLString1 = "insert into medarbejder values(?,?)";
         String SQLString2 = "select medarbejderseq.nextval from dual";
         PreparedStatement statement = null;
 
-        try
-        {
+        try {
             statement = con.prepareStatement(SQLString2);
             ResultSet rs = statement.executeQuery();
-            if (rs.next())
-            {
-                for (int j = 0; employee.size() > j; j++)
-                {
+            if (rs.next()) {
+                for (int j = 0; employee.size() > j; j++) {
                     Employee o = employee.get(j);
                     o.setEmployeeID(rs.getInt(1));
                 }
 
                 statement = con.prepareStatement(SQLString1);
-                for (int i = 0; i < employee.size(); i++)
-                {
+                for (int i = 0; i < employee.size(); i++) {
                     Employee emp = employee.get(i);
                     statement.setInt(1, employee.get(i).getEmployeeID());
                     statement.setString(2, employee.get(i).getName());
@@ -537,14 +465,13 @@ public class TheMapper
 
             rowsInserted += statement.executeUpdate();
 
-        } catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Fejl i OrdreMapper - SaveNewProject");
             e.printStackTrace();
         }
         return rowsInserted == employee.size();
 
     }
-    
+
     
 }
