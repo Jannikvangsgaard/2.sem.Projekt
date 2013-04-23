@@ -72,7 +72,8 @@ public class GUI extends javax.swing.JFrame {
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -113,6 +114,8 @@ public class GUI extends javax.swing.JFrame {
         jTextOrdreInformationer = new javax.swing.JTextArea();
         jLabel14 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
+        jCheckBoxBetalt = new javax.swing.JCheckBox();
+        jButtonBekaeftBetaling = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
         jListVarePåLagerStatus = new javax.swing.JList();
@@ -139,8 +142,10 @@ public class GUI extends javax.swing.JFrame {
         jLabel1.setText("Opret ny kunde");
 
         jButtonOpretKunde.setText("Opret kunde");
-        jButtonOpretKunde.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonOpretKunde.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonOpretKundeActionPerformed(evt);
             }
         });
@@ -150,8 +155,10 @@ public class GUI extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTextAreaVisKunder);
 
         jButtonHentKunder.setText("Hent kunde liste");
-        jButtonHentKunder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonHentKunder.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonHentKunderActionPerformed(evt);
             }
         });
@@ -211,20 +218,26 @@ public class GUI extends javax.swing.JFrame {
 
         jScrollPane1.setViewportView(jListvareliste);
 
-        jTextFieldAntalItems.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
+        jTextFieldAntalItems.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
                 jTextFieldAntalItemsKeyReleased(evt);
             }
         });
 
         jButtonTilføjvare.setText("Tilføj til ordre");
-        jButtonTilføjvare.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonTilføjvare.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonTilføjvareActionPerformed(evt);
             }
         });
-        jButtonTilføjvare.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
+        jButtonTilføjvare.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
                 jButtonTilføjvareKeyReleased(evt);
             }
         });
@@ -240,39 +253,49 @@ public class GUI extends javax.swing.JFrame {
         jLabel6.setText("Vare til ordre:");
 
         jButtonSaveOrder.setText("Bekræft Ordre");
-        jButtonSaveOrder.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonSaveOrder.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonSaveOrderActionPerformed(evt);
             }
         });
 
         jButtonFjernVare.setText("Fjern fra ordre");
-        jButtonFjernVare.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonFjernVare.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonFjernVareActionPerformed(evt);
             }
         });
 
         jTextFieldDateÅr.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jTextFieldDateÅr.setText("År");
-        jTextFieldDateÅr.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jTextFieldDateÅr.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 jTextFieldDateÅrMouseClicked(evt);
             }
         });
 
         jTextFieldDateDage.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jTextFieldDateDage.setText("Dage");
-        jTextFieldDateDage.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jTextFieldDateDage.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 jTextFieldDateDageMouseClicked(evt);
             }
         });
 
         jTextFieldDatoMåned.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jTextFieldDatoMåned.setText("Måned");
-        jTextFieldDatoMåned.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jTextFieldDatoMåned.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 jTextFieldDatoMånedMouseClicked(evt);
             }
         });
@@ -281,8 +304,10 @@ public class GUI extends javax.swing.JFrame {
         jLabel9.setText("Dato:");
 
         jButtonHentVareListe.setText("Vælg dato");
-        jButtonHentVareListe.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonHentVareListe.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonHentVareListeActionPerformed(evt);
             }
         });
@@ -374,14 +399,18 @@ public class GUI extends javax.swing.JFrame {
         jTabbedPane1.addTab("Bestilling", jPanel2);
 
         jButtonHentOrdre.setText("Indlæs alle ordre");
-        jButtonHentOrdre.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonHentOrdre.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonHentOrdreActionPerformed(evt);
             }
         });
 
-        jListStatusListe.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
+        jListStatusListe.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mousePressed(java.awt.event.MouseEvent evt)
+            {
                 jListStatusListeMousePressed(evt);
             }
         });
@@ -397,6 +426,17 @@ public class GUI extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel16.setText("Detaljer for valgte ordre");
 
+        jCheckBoxBetalt.setText("Betalt");
+
+        jButtonBekaeftBetaling.setText("Bekræft");
+        jButtonBekaeftBetaling.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonBekaeftBetalingActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -404,14 +444,23 @@ public class GUI extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButtonHentOrdre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 143, Short.MAX_VALUE)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
-                .addGap(56, 56, 56))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jButtonHentOrdre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(369, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jCheckBoxBetalt)
+                                    .addComponent(jButtonBekaeftBetaling))))
+                        .addGap(67, 67, 67))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -423,7 +472,11 @@ public class GUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jCheckBoxBetalt)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonBekaeftBetaling)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonHentOrdre)
                 .addGap(104, 104, 104))
@@ -433,13 +486,17 @@ public class GUI extends javax.swing.JFrame {
 
         jScrollPane6.setViewportView(jListVarePåLagerStatus);
 
-        jTextFieldÆndringAfVareAntal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jTextFieldÆndringAfVareAntal.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jTextFieldÆndringAfVareAntalActionPerformed(evt);
             }
         });
-        jTextFieldÆndringAfVareAntal.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
+        jTextFieldÆndringAfVareAntal.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
                 jTextFieldÆndringAfVareAntalKeyReleased(evt);
             }
         });
@@ -448,22 +505,28 @@ public class GUI extends javax.swing.JFrame {
         jLabel8.setText("Lager beholdning");
 
         jButtonBekræftÆndring.setText("Bekræft");
-        jButtonBekræftÆndring.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonBekræftÆndring.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonBekræftÆndringActionPerformed(evt);
             }
         });
 
         TilføjÆndring.setText("Tilføj");
-        TilføjÆndring.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        TilføjÆndring.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 TilføjÆndringActionPerformed(evt);
             }
         });
 
         FjernÆndring.setText("Fjern");
-        FjernÆndring.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        FjernÆndring.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 FjernÆndringActionPerformed(evt);
             }
         });
@@ -479,8 +542,10 @@ public class GUI extends javax.swing.JFrame {
         jLabel12.setText("Vare antal");
 
         jButtonLavNyVare.setText("Opret vare");
-        jButtonLavNyVare.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButtonLavNyVare.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jButtonLavNyVareActionPerformed(evt);
             }
         });
@@ -944,16 +1009,33 @@ public class GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButtonHentVareListeActionPerformed
 
+    private void jButtonBekaeftBetalingActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonBekaeftBetalingActionPerformed
+    {//GEN-HEADEREND:event_jButtonBekaeftBetalingActionPerformed
+             if(jCheckBoxBetalt.isSelected())
+        {
+            for(int i = 0; i < control.getOrderlist().size(); i++)
+            {
+            if(jListStatusListe.getSelectedValue().toString().equals(control.getOrderlist().get(i).toString()))
+            {
+                System.out.println("tjek");
+                control.getOrderlist().get(i).setState(1);
+                StatusListe.clear();
+                for (int j = 0; j < control.getOrderlist().size(); j++) {
+                StatusListe.addElement(control.getOrderlist().get(j).toString());
+                }
+                break;
+                
+            }
+                    }
+        }
+    }//GEN-LAST:event_jButtonBekaeftBetalingActionPerformed
+
     /**
      * @param args the command line arguments
      */
     public void visVareliste() {
         try {
             modelvareliste.clear();
-//            control.loadItemliste();
-            control.loadAllOrders();
-            control.reservedItem();
-            control.availableItems();
             vareliste2 = control.getAvailableItems();
             for (int i = 0; i < vareliste2.size(); i++) {
                 modelvareliste.addElement(vareliste2.get(i).toStringGUI());
@@ -1032,6 +1114,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton FjernÆndring;
     private javax.swing.JButton TilføjÆndring;
     private javax.swing.JList VisÆndringer;
+    private javax.swing.JButton jButtonBekaeftBetaling;
     private javax.swing.JButton jButtonBekræftÆndring;
     private javax.swing.JButton jButtonFjernVare;
     private javax.swing.JButton jButtonHentKunder;
@@ -1041,6 +1124,7 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JButton jButtonOpretKunde;
     private javax.swing.JButton jButtonSaveOrder;
     private javax.swing.JButton jButtonTilføjvare;
+    private javax.swing.JCheckBox jCheckBoxBetalt;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
