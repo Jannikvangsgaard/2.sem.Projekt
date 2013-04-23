@@ -263,4 +263,7 @@ public class Control {
     
    
 }
+    public void clearOrderlist(){
+        orderlistWithDate.clear();
+    }
 }

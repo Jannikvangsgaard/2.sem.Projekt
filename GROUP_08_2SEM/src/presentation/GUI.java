@@ -771,7 +771,6 @@ public class GUI extends javax.swing.JFrame {
         if (StatusListe.isEmpty()) {
             try {
                 control.loadAllOrders();
-                control.loadOrdersWithDate(date);
                 for (int i = 0; i < control.getOrderlist().size(); i++) {
                     StatusListe.addElement(control.getOrderlist().get(i).toString());
                 }
@@ -779,7 +778,6 @@ public class GUI extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "pik??");
             }
         }
-
     }//GEN-LAST:event_jButtonHentOrdreActionPerformed
 
     private void jButtonTestActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonTestActionPerformed
