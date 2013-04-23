@@ -133,7 +133,7 @@ public class Control {
                 
                 }
                 if (tjek == 0){
-                itemlistReserved.add(orderlist.get(i).getItemlist().get(j));
+                itemlistReserved.add(orderlistWithDate.get(i).getItemlist().get(j));
                 }
                 tjek=0;
             }
@@ -235,11 +235,22 @@ public class Control {
     
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dato);
+        int h = 0;
+        for(int j = -1; h <2;j++){
         
-        for(int j = -1; j <2;j++){
-        calendar.add(Calendar.DATE, j);
+            if(j==0){
+            j=1;
+            }
+            if(j==2){
+            j=1;
+            h=3;
+            }
+            calendar.add(Calendar.DATE, j);
+            System.out.println(j);
         
         for(int i = 0; i < orderlist.size();i++){
+            System.out.println(
+            calendar.getTime());
         if(orderlist.get(i).getBestillingsDate().equals(calendar.getTime())){
         orderlistWithDate.add(orderlist.get(i));
         }
