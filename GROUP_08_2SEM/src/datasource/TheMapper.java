@@ -252,30 +252,6 @@ public class TheMapper {
 
     }
 
-    public boolean saveAvailableItem(ArrayList<Item> freeItems, Connection con) throws SQLException {
-//        con.setAutoCommit(false);
-        int rowsInserted = 0;
-        String SQLString1 = "update tilrådighed set antal = ? where varerNo = ?";
-
-        PreparedStatement statement = null;
-
-        try {
-            statement = con.prepareStatement(SQLString1);
-
-            for (int i = 0; i < freeItems.size(); i++) {
-                statement.setInt(1, freeItems.get(i).getItemAmount());
-                statement.setInt(2, freeItems.get(i).getItemNo());
-                rowsInserted += statement.executeUpdate();
-            }
-
-
-        } catch (Exception e) {
-            System.out.println("Fejl i OrdreMapper - SaveNewProject");
-            e.printStackTrace();
-        }
-        return true;
-
-    }
 
     public boolean saveCustomer(ArrayList<Customer> customer, Connection con) {
 
@@ -318,34 +294,6 @@ public class TheMapper {
 
     }
 
-    public ArrayList<Item> getAvailableItem(Connection conn) {
-//       
-        String SQLString = "SELECT * FROM tilrådighed";
-
-        PreparedStatement statement = null;
-        ArrayList<Item> availableItem = new ArrayList();
-        try {
-            statement = conn.prepareStatement(SQLString);
-
-
-            ResultSet rs = statement.executeQuery();
-            while (rs.next()) {
-                int itemNo = rs.getInt(1);
-                int availableItemCount = rs.getInt(2);
-                String itemName = rs.getString(3);
-                Item i = new Item(itemNo, itemName, availableItemCount);
-                availableItem.add(i);
-            }
-        } catch (Exception ex) {
-            System.out.println("Error in TheMapper - getAvailableItem");
-            System.out.println(ex.getMessage());
-        }
-        return availableItem;
-    }
-
-    public void commit(Connection con) throws SQLException {
-        con.commit();
-    }
 
     public boolean increaseItem(ArrayList<Item> newItems, Connection con) {
         int rowsInserted = 0;
@@ -474,6 +422,34 @@ public class TheMapper {
         return rowsInserted == employee.size();
 
     }
+    
+      public boolean updateDepositum(Order o, Connection con) {
+        int rowsInserted = 0;
+        String SQLString1 = "update varer set state = ? where varerNo = ?";
 
+        PreparedStatement statement2 = null;
+
+        try 
+        {
+            statement2 = con.prepareStatement(SQLString1);
+         
+            {
+                statement2.setInt(2, o.getOrderNo());
+                statement2.setInt(1, o.getState() );
+
+                statement2.executeUpdate();
+          
+            }
+            
+
+        } catch (Exception e) 
+        {
+            System.out.println("Fejl i OrdreMapper - increaseItem");
+            e.printStackTrace();
+        }
+        
+        return 1 == rowsInserted;
+
+    }
     
 }
