@@ -418,7 +418,7 @@ public class TheMapper {
 
     public boolean deleteItem(int itemNo, Connection con) {
 
-        int rowsInserted = 0;
+        boolean rowsInserted = true;
         String SQLString1 = "delete from varer where varerno = ?";
         PreparedStatement statement = null;
 
@@ -426,15 +426,17 @@ public class TheMapper {
             statement = con.prepareStatement(SQLString1);
             statement.setInt(1, itemNo);
 
-            rowsInserted += statement.executeUpdate();
-
+            if (statement.executeUpdate()==0){
+                return false;
+            }
+            
+            
 
 
         } catch (Exception e) {
-            System.out.println("Fejl i OrdreMapper - SaveNewProject");
-            e.printStackTrace();
+            System.out.println("TheMapper fejl - Varen findes i en ordre" );
         }
-        return rowsInserted == 1;
+        return rowsInserted;
 
     }
 
