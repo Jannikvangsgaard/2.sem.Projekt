@@ -21,6 +21,7 @@ public class Control {
     private ArrayList<Customer> customerlist = new ArrayList<Customer>();
     private ArrayList<Item> allItemList = new ArrayList<Item>();
     private ArrayList<Order> orderlistWithDate = new ArrayList();
+    private ArrayList<Employee> employeesList = new ArrayList();
     private DBFacade dbf;
 
     public Control() {
@@ -268,5 +269,11 @@ public class Control {
     public boolean updateOrder(Order o)
     {
         return dbf.updateOrder(o);
+    }
+    
+    public ArrayList<Employee> loadAllEmployees()
+    {
+        employeesList = dbf.getAllEmployees();
+        return employeesList;
     }
 }

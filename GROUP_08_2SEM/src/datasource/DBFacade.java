@@ -90,4 +90,7 @@ public class DBFacade
          return tm.updateDepositum(o, con);
      }
    
+     public ArrayList<Employee> getAllEmployees(){
+         return tm.getAllEmployees(con);
+     }
 }

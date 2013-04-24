@@ -4,21 +4,35 @@
  */
 package domain;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  *
  * @author Mike
  */
 public class Employee {
     
-   private int employeeID;
+  private int employeeID;
    private String name;
+   private String position;
+   private Date dato;
+   private ArrayList dates = new ArrayList();
    
-    public Employee(int employeeID, String name){
+    public Employee(int employeeID, Date dato){
         this.employeeID = employeeID;
-        this.name = name;
+        this.dato = dato;
     }
-    public Employee(String name){
+    
+    public Employee(String name, String position){
         this.name = name;
+        this.position = position;
+    }
+    public Employee(int employeeID, String name, String position, ArrayList dates){
+        this.name = name;
+        this.position = position;
+        this.employeeID = employeeID;
+        this.dates=dates;
     }
 
     public int getEmployeeID() {

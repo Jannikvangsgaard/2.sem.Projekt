@@ -451,5 +451,62 @@ public class TheMapper {
         return 1 == rowsInserted;
 
     }
-    
+      
+        public Employee getSingleEmployee(int eno, Connection conn) {
+       
+          String SQLString = "SELECT * FROM medarbejder NATURAL JOIN medarbejderdetails where medarbejderNo = ? ";
+
+        PreparedStatement statement = null;
+        ArrayList dates = new ArrayList();
+        String position = "";
+        String employeeName = "";
+        int employeeID = 0;
+        Employee e = null;
+        try {
+            //Get order
+            statement = conn.prepareStatement(SQLString);
+            statement.setInt(1, eno);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                position = rs.getString(3);
+                employeeName = rs.getString(2);
+                employeeID = rs.getInt(1);
+                Date dato = rs.getDate(4);
+                dates.add(dato);
+            }
+            
+             e = new Employee(employeeID, employeeName, position, dates);
+        } catch (Exception ex) {
+            System.out.println("Error in TheMapper - getEmployees");
+            System.out.println(ex.getMessage());
+        }
+        return e;
+    }
+        
+        
+        public ArrayList<Employee> getAllEmployees(Connection conn) {
+         
+        ArrayList<Employee> employees = new ArrayList();
+        PreparedStatement statement = null;
+        Employee es = null;
+        int tjek = 0;
+        int employeeNo = 0;
+        String SQLString = "SELECT * FROM medarbejder NATURAL JOIN medarbejderdetails";
+        try {
+            statement = conn.prepareStatement(SQLString);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                es = getSingleEmployee(employeeNo = rs.getInt(1), conn);
+                if (employees.isEmpty()) {
+                    employees.add(es);
+                } else if (employees.get(tjek).getEmployeeID() != es.getEmployeeID()) {
+                    employees.add(es);
+                    tjek++;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Fejl i TheMapper - getAllOrders");
+        }
+        return employees;
+    }
 }
