@@ -138,6 +138,7 @@ public class Control {
                 tjek=0;
             }
         }
+        loadAllOrders();
     }
 
     public void availableItems() {
@@ -183,8 +184,6 @@ public class Control {
     }
 
     public void loadAllOrders() {
-        availableItems.clear();
-        itemlistReserved.clear();
         orderlist = dbf.loadAllOrders();
     }
 
@@ -227,6 +226,8 @@ public class Control {
     public void loadOrdersWithDate(Date dato){
         
         orderlistWithDate.clear();
+        availableItems.clear();
+        itemlistReserved.clear();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dato);
         int h = 0;
@@ -243,16 +244,13 @@ public class Control {
             System.out.println(j);
         
         for(int i = 0; i < orderlist.size();i++){
-            System.out.println(
-            calendar.getTime());
         if(orderlist.get(i).getBestillingsDate().equals(calendar.getTime())){
         orderlistWithDate.add(orderlist.get(i));
         }
         }
         }
-        System.out.println(
-        orderlistWithDate);
         reservedItem();
+        availableItems();
     
    
 }
