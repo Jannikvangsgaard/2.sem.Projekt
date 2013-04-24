@@ -151,6 +151,23 @@ public class GUI extends javax.swing.JFrame
         jSeparator2 = new javax.swing.JSeparator();
         jLabel15 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jTextFieldAnsatFornavn = new javax.swing.JTextField();
+        jTextFieldAnsatEfternavn = new javax.swing.JTextField();
+        jButtonOpretAnsat = new javax.swing.JButton();
+        jTextFieldAnsatTelefonNo = new javax.swing.JTextField();
+        jTextFieldAnsatEmail = new javax.swing.JTextField();
+        jTextFieldAnsatAnsatAdresse = new javax.swing.JTextField();
+        jTextFieldAnsatPostNo = new javax.swing.JTextField();
+        jTextFieldAnsatBy = new javax.swing.JTextField();
+        jLabel23 = new javax.swing.JLabel();
+        jLabel24 = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        jLabel26 = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        jLabel28 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jComboBoxStillinger = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -694,6 +711,106 @@ public class GUI extends javax.swing.JFrame
 
         jTabbedPane1.addTab("Lager Status", jPanel4);
 
+        jButtonOpretAnsat.setText("Opret Ansat");
+        jButtonOpretAnsat.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonOpretAnsatActionPerformed(evt);
+            }
+        });
+
+        jLabel23.setText("By:");
+
+        jLabel24.setText("Post nr:");
+
+        jLabel25.setText("Adresse:");
+
+        jLabel26.setText("Fornavn:");
+
+        jLabel27.setText("Efternavn:");
+
+        jLabel28.setText("Telefon nr:");
+
+        jLabel29.setText("Email:");
+
+        jComboBoxStillinger.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Montør", "Sælger", "Administrator" }));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jComboBoxStillinger, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel29)
+                            .addComponent(jLabel27)
+                            .addComponent(jLabel28)
+                            .addComponent(jLabel26))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jTextFieldAnsatFornavn)
+                            .addComponent(jTextFieldAnsatEfternavn)
+                            .addComponent(jTextFieldAnsatTelefonNo)
+                            .addComponent(jTextFieldAnsatEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))))
+                .addGap(95, 95, 95)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel23)
+                    .addComponent(jLabel24)
+                    .addComponent(jLabel25))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jButtonOpretAnsat, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                    .addComponent(jTextFieldAnsatAnsatAdresse)
+                    .addComponent(jTextFieldAnsatPostNo)
+                    .addComponent(jTextFieldAnsatBy))
+                .addContainerGap(96, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jComboBoxStillinger, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel25)
+                            .addComponent(jTextFieldAnsatAnsatAdresse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel24)
+                            .addComponent(jTextFieldAnsatPostNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel23)
+                            .addComponent(jTextFieldAnsatBy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonOpretAnsat))
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel26)
+                            .addComponent(jTextFieldAnsatFornavn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel27)
+                            .addComponent(jTextFieldAnsatEfternavn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel28)
+                            .addComponent(jTextFieldAnsatTelefonNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel29)
+                            .addComponent(jTextFieldAnsatEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(344, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Opret Ansat", jPanel5);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1151,6 +1268,18 @@ public class GUI extends javax.swing.JFrame
         }
     }//GEN-LAST:event_jButtonBekaeftBetalingActionPerformed
 
+    private void jButtonOpretAnsatActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonOpretAnsatActionPerformed
+    {//GEN-HEADEREND:event_jButtonOpretAnsatActionPerformed
+        String stilling = jComboBoxStillinger.getSelectedItem().toString();
+        String navn = jTextFieldAnsatFornavn.getText() + " " + jTextFieldAnsatEfternavn.getText();
+        String telefonNo = jTextFieldAnsatTelefonNo.getText();
+        String email = jTextFieldAnsatEmail.getText();
+        String addresse = jTextFieldAnsatAnsatAdresse.getText();
+        String postNo = jTextFieldAnsatPostNo.getText();
+        String by = jTextFieldAnsatBy.getText();
+        
+    }//GEN-LAST:event_jButtonOpretAnsatActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1260,6 +1389,7 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JButton jButtonHentOrdre;
     private javax.swing.JButton jButtonHentVareListe;
     private javax.swing.JButton jButtonLavNyVare;
+    private javax.swing.JButton jButtonOpretAnsat;
     private javax.swing.JButton jButtonOpretKunde;
     private javax.swing.JButton jButtonSaveOrder;
     private javax.swing.JButton jButtonTilføjvare;
@@ -1267,6 +1397,7 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JComboBox jComboBoxAar;
     private javax.swing.JComboBox jComboBoxDag;
     private javax.swing.JComboBox jComboBoxMaaned;
+    private javax.swing.JComboBox jComboBoxStillinger;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1282,6 +1413,13 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
+    private javax.swing.JLabel jLabel25;
+    private javax.swing.JLabel jLabel26;
+    private javax.swing.JLabel jLabel27;
+    private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1298,6 +1436,7 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1310,6 +1449,13 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTextArea jTextAreaVisKunder;
     private javax.swing.JTextField jTextFieldAdresse;
+    private javax.swing.JTextField jTextFieldAnsatAnsatAdresse;
+    private javax.swing.JTextField jTextFieldAnsatBy;
+    private javax.swing.JTextField jTextFieldAnsatEfternavn;
+    private javax.swing.JTextField jTextFieldAnsatEmail;
+    private javax.swing.JTextField jTextFieldAnsatFornavn;
+    private javax.swing.JTextField jTextFieldAnsatPostNo;
+    private javax.swing.JTextField jTextFieldAnsatTelefonNo;
     private javax.swing.JTextField jTextFieldAntalItems;
     private javax.swing.JTextField jTextFieldBy;
     private javax.swing.JTextField jTextFieldCustomerNo;
