@@ -88,9 +88,12 @@ public class Control {
         return itemlist;
     }
 
-    public void createCustomer(String name) {
-        if (name != null) {
-            Customer c = new Customer(name);
+    public void createCustomer(String name, String address, String postnr, 
+            String by, String email, String nr) {
+        if (name != null && address != null && postnr != null && by != null 
+                && email != null && nr != null) 
+        {
+            Customer c = new Customer(name, address, postnr, by, email, nr);
             customerlist.add(c);
             dbf.saveCustomer(customerlist);
         }
@@ -253,6 +256,7 @@ public class Control {
         System.out.println(
         orderlistWithDate);
         reservedItem();
+        availableItems();
     
    
 }

@@ -255,8 +255,8 @@ public class TheMapper {
 
     public boolean saveCustomer(ArrayList<Customer> customer, Connection con) {
 
-        int rowsInserted = 0;
-        String SQLString1 = "insert into kunde values(?,?)";
+        boolean didItWork = false;
+        String SQLString1 = "insert into kunde values(?,?,?,?,?,?,?)";
         String SQLString2 = "select kundeseq.nextval from dual";
         PreparedStatement statement = null;
 
@@ -272,25 +272,25 @@ public class TheMapper {
                 statement = con.prepareStatement(SQLString1);
                 for (int i = 0; i < customer.size(); i++) {
                     Customer cus = customer.get(i);
-                    statement.setInt(1, customer.get(i).getCustomerID());
-                    statement.setString(2, customer.get(i).getName());
+                    System.out.println(cus.getCustomerID());
+                    statement.setInt(1, cus.getCustomerID());
+                    statement.setString(2, cus.getName());
+                    statement.setString(3, cus.getAddress());
+                    statement.setString(4, cus.getPostnr());
+                    statement.setString(5, cus.getBy());
+                    statement.setString(6, cus.getEmail());
+                    statement.setString(7, cus.getNr());
+                    statement.executeQuery();
+                    didItWork = true;
                 }
 
             }
-
-
-
-
-
-            rowsInserted += statement.executeUpdate();
-
-
 
         } catch (Exception e) {
             System.out.println("Fejl i OrdreMapper - SaveNewProject");
             e.printStackTrace();
         }
-        return rowsInserted == customer.size();
+        return didItWork;
 
     }
 
