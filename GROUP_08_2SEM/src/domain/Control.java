@@ -223,8 +223,8 @@ public class Control {
         return dbf.saveNewItem(it);
     }
     
-     public void saveEmployee(ArrayList<Employee> employee) {
-        dbf.saveEmployee(employee);
+     public void saveEmployee() {
+        dbf.saveEmployee(employeesList);
     }
      
     public void loadOrdersWithDate(Date dato){
@@ -275,5 +275,11 @@ public class Control {
     {
         employeesList = dbf.getAllEmployees();
         return employeesList;
+    }
+    
+    public void createEmployee(String name, String position, String phoneNumber, String email, String zipCode,String city, String adress)
+    {
+        Employee emp = new Employee(name, position, phoneNumber, email, zipCode, city, adress);
+        employeesList.add(emp);
     }
 }
