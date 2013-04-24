@@ -391,7 +391,7 @@ public class TheMapper {
     public boolean saveEmployee(ArrayList<Employee> employee, Connection con) {
 
         int rowsInserted = 0;
-        String SQLString1 = "insert into medarbejder values(?,?)";
+        String SQLString1 = "insert into medarbejder values(?,?,?,?,?,?,?)";
         String SQLString2 = "select medarbejderseq.nextval from dual";
         PreparedStatement statement = null;
 
@@ -407,8 +407,14 @@ public class TheMapper {
                 statement = con.prepareStatement(SQLString1);
                 for (int i = 0; i < employee.size(); i++) {
                     Employee emp = employee.get(i);
-                    statement.setInt(1, employee.get(i).getEmployeeID());
-                    statement.setString(2, employee.get(i).getName());
+                    statement.setInt(1, emp.getEmployeeID());
+                    statement.setString(2, emp.getName());
+                    statement.setString(3, emp.getPosition());
+                    statement.setString(4, emp.getPhoneNumber());
+                    statement.setString(5, emp.getEmail());
+                    statement.setString(6, emp.getZipCode());
+                    statement.setString(7, emp.getAdress());
+                    statement.setString(8, emp.getCity());
                 }
 
             }
