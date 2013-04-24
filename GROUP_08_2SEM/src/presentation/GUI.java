@@ -1278,7 +1278,7 @@ public class GUI extends javax.swing.JFrame
         String postNo = jTextFieldAnsatPostNo.getText();
         String by = jTextFieldAnsatBy.getText();
         control.createEmployee(navn, stilling, telefonNo, email, postNo, by, addresse);
-        control.saveEmployee(null);
+        control.saveEmployee();
         
     }//GEN-LAST:event_jButtonOpretAnsatActionPerformed
 
