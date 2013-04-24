@@ -16,6 +16,11 @@ public class Employee {
   private int employeeID;
    private String name;
    private String position;
+   private String phoneNumber;
+   private String email;
+   private String zipCode;
+   private String city;
+   private String adress;
    private Date dato;
    private ArrayList dates = new ArrayList();
    
@@ -24,9 +29,78 @@ public class Employee {
         this.dato = dato;
     }
     
-    public Employee(String name, String position){
+    public Employee(String name, String position, String phoneNumber, String email, String zipCode,String city, String adress){
         this.name = name;
         this.position = position;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.zipCode= zipCode;
+        this.city = city;
+        this.adress=adress;
+    }
+
+    public void setPosition(String position) {
+        this.position = position;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setAdress(String adress) {
+        this.adress = adress;
+    }
+
+    public void setDato(Date dato) {
+        this.dato = dato;
+    }
+
+    public void setDates(ArrayList dates) {
+        this.dates = dates;
+    }
+
+    public String getPosition() {
+        return position;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getZipCode() {
+        return zipCode;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public Date getDato() {
+        return dato;
+    }
+
+    public ArrayList getDates() {
+        return dates;
     }
     public Employee(int employeeID, String name, String position, ArrayList dates){
         this.name = name;
