@@ -467,6 +467,13 @@ public class TheMapper {
         String position = "";
         String employeeName = "";
         int employeeID = 0;
+        String number = "";
+        String email = "";
+        String zipCode = "";
+        String adresse = "";
+        String city = "";
+        Date dato;
+        
         Employee e = null;
         try {
             //Get order
@@ -477,11 +484,16 @@ public class TheMapper {
                 position = rs.getString(3);
                 employeeName = rs.getString(2);
                 employeeID = rs.getInt(1);
-                Date dato = rs.getDate(4);
+                dato = rs.getDate(9);
+                number = rs.getString(4);
+                email = rs.getString(5);
+                zipCode = rs.getString(6);
+                adresse = rs.getString(7);
+                city = rs.getString(8);
                 dates.add(dato);
             }
             
-             e = new Employee(employeeID, employeeName, position, dates);
+             e = new Employee(employeeID, employeeName, position,number , email ,zipCode, city , adresse, dates);
         } catch (Exception ex) {
             System.out.println("Error in TheMapper - getEmployees");
             System.out.println(ex.getMessage());

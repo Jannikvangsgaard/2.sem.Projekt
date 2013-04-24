@@ -38,6 +38,17 @@ public class Employee {
         this.city = city;
         this.adress=adress;
     }
+    public Employee(int eno, String name, String position, String phoneNumber, String email, String zipCode,String city, String adress, ArrayList dates){
+        this.name = name;
+        this.position = position;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.zipCode= zipCode;
+        this.city = city;
+        this.adress=adress;
+        this.dates=dates;
+        this.employeeID=eno;
+    }
 
     public void setPosition(String position) {
         this.position = position;
