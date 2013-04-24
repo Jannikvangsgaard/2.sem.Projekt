@@ -55,7 +55,7 @@ public class DBFacade
         return tm.getItems(con);
     }
 
-    public boolean saveOrder(ArrayList<Order> o) throws SQLException
+    public int saveOrder(ArrayList<Order> o) throws SQLException
     {
     
         return tm.saveOrder(o, con);

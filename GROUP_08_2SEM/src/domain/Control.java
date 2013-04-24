@@ -173,7 +173,7 @@ public class Control {
 
 
 
-    public boolean saveOrder() throws SQLException {
+    public int saveOrder() throws SQLException {
         return dbf.saveOrder(orderlist);
     }
 

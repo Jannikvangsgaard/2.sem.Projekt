@@ -174,7 +174,7 @@ public class TheMapper {
     /**
      * Write to database
      */
-    public boolean saveOrder(ArrayList<Order> order, Connection con) throws SQLException {
+    public int saveOrder(ArrayList<Order> order, Connection con) throws SQLException {
 
 //        con.setAutoCommit(false);
         int rowsInserted = 0;
@@ -248,7 +248,7 @@ public class TheMapper {
             System.out.println("Fejl i OrdreMapper - SaveOrder");
             e.printStackTrace();
         }
-        return rowsInserted == order.get(tal).getItemlist().size();
+        return order.get(order.size()-1).getOrderNo();
 
     }
 
