@@ -877,9 +877,9 @@ public class GUI extends javax.swing.JFrame
         String by = jTextFieldBy.getText();
         String email = jTextFieldEmail.getText();
         String nr = jTextFieldNr.getText();
-        
-        if (navn.contains(" ") && !adresse.equals("") && postnr.length() == 4 && 
-                !by.equals("") && email.contains("@") && nr.length() == 8)
+
+        if (navn.contains(" ") && !adresse.equals("") && postnr.length() == 4
+                && !by.equals("") && email.contains("@") && nr.length() == 8)
         {
             control.createCustomer(navn, adresse, postnr, by, email, nr);
             jTextFieldFornavn.setText("");
@@ -1310,17 +1310,34 @@ public class GUI extends javax.swing.JFrame
         String navn = jTextFieldAnsatFornavn.getText() + " " + jTextFieldAnsatEfternavn.getText();
         String telefonNo = jTextFieldAnsatTelefonNo.getText();
         String email = jTextFieldAnsatEmail.getText();
-        String addresse = jTextFieldAnsatAnsatAdresse.getText();
+        String adresse = jTextFieldAnsatAnsatAdresse.getText();
         String postNo = jTextFieldAnsatPostNo.getText();
         String by = jTextFieldAnsatBy.getText();
-        control.createEmployee(navn, stilling, telefonNo, email, postNo, by, addresse);
-        control.saveEmployee();
-        
+
+        if (navn.contains(" ") && !adresse.equals("") && postNo.length() == 4
+                && !by.equals("") && email.contains("@") && telefonNo.length() == 8)
+        {
+            control.createEmployee(navn, stilling, telefonNo, email, postNo, by, adresse);
+            control.saveEmployee();
+            jTextFieldAnsatFornavn.setText("");
+            jTextFieldAnsatEfternavn.setText("");
+            jTextFieldAnsatAnsatAdresse.setText("");
+            jTextFieldAnsatPostNo.setText("");
+            jTextFieldAnsatBy.setText("");
+            jTextFieldAnsatEmail.setText("");
+            jTextFieldAnsatTelefonNo.setText("");
+        } else
+        {
+            JOptionPane.showMessageDialog(null, "Udfyld alle felter");
+        }
     }//GEN-LAST:event_jButtonOpretAnsatActionPerformed
 
     private void jButtonHentAnsatteActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonHentAnsatteActionPerformed
     {//GEN-HEADEREND:event_jButtonHentAnsatteActionPerformed
-        // TODO add your handling code here:
+         if (control.loadAllEmployees() != null)
+        {
+            jTextAreaVisKunder.setText(control.employeeToString());
+        }
     }//GEN-LAST:event_jButtonHentAnsatteActionPerformed
 
     /**

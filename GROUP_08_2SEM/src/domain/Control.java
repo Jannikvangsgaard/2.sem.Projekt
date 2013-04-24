@@ -277,6 +277,14 @@ public class Control {
         return employeesList;
     }
     
+        public String employeeToString() {
+        String res = "";
+        for (int i = 0; i < employeesList.size(); i++) {
+            res += employeesList.get(i).toString() + "\n";
+        }
+        return res;
+    }
+    
     public void createEmployee(String name, String position, String phoneNumber, String email, String zipCode,String city, String adress)
     {
         Employee emp = new Employee(name, position, phoneNumber, email, zipCode, city, adress);
