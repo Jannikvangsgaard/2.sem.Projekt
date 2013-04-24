@@ -391,7 +391,7 @@ public class TheMapper {
     public boolean saveEmployee(ArrayList<Employee> employee, Connection con) {
 
         int rowsInserted = 0;
-        String SQLString1 = "insert into medarbejder values(?,?,?,?,?,?,?)";
+        String SQLString1 = "insert into medarbejder values(?,?,?,?,?,?,?,?)";
         String SQLString2 = "select medarbejderseq.nextval from dual";
         PreparedStatement statement = null;
 
