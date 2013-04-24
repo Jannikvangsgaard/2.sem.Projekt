@@ -168,6 +168,11 @@ public class GUI extends javax.swing.JFrame
         jLabel28 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jComboBoxStillinger = new javax.swing.JComboBox();
+        jSeparator3 = new javax.swing.JSeparator();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTextAreaVisAnsatte = new javax.swing.JTextArea();
+        jLabel30 = new javax.swing.JLabel();
+        jButtonHentAnsatte = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -265,7 +270,7 @@ public class GUI extends javax.swing.JFrame
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButtonHentKunder, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButtonHentKunder, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -736,38 +741,61 @@ public class GUI extends javax.swing.JFrame
 
         jComboBoxStillinger.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Montør", "Sælger", "Administrator" }));
 
+        jTextAreaVisAnsatte.setColumns(20);
+        jTextAreaVisAnsatte.setRows(5);
+        jScrollPane5.setViewportView(jTextAreaVisAnsatte);
+
+        jLabel30.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
+        jLabel30.setText("Vis eksisterende ansatte");
+
+        jButtonHentAnsatte.setText("Hent ansatte liste");
+        jButtonHentAnsatte.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonHentAnsatteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSeparator3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 619, Short.MAX_VALUE)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboBoxStillinger, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel29)
-                            .addComponent(jLabel27)
-                            .addComponent(jLabel28)
-                            .addComponent(jLabel26))
-                        .addGap(18, 18, 18)
+                            .addComponent(jComboBoxStillinger, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel29)
+                                    .addComponent(jLabel27)
+                                    .addComponent(jLabel28)
+                                    .addComponent(jLabel26))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jTextFieldAnsatFornavn)
+                                    .addComponent(jTextFieldAnsatEfternavn)
+                                    .addComponent(jTextFieldAnsatTelefonNo)
+                                    .addComponent(jTextFieldAnsatEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))))
+                        .addGap(95, 95, 95)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel23)
+                            .addComponent(jLabel24)
+                            .addComponent(jLabel25))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextFieldAnsatFornavn)
-                            .addComponent(jTextFieldAnsatEfternavn)
-                            .addComponent(jTextFieldAnsatTelefonNo)
-                            .addComponent(jTextFieldAnsatEmail, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE))))
-                .addGap(95, 95, 95)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel23)
-                    .addComponent(jLabel24)
-                    .addComponent(jLabel25))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButtonOpretAnsat, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
-                    .addComponent(jTextFieldAnsatAnsatAdresse)
-                    .addComponent(jTextFieldAnsatPostNo)
-                    .addComponent(jTextFieldAnsatBy))
-                .addContainerGap(96, Short.MAX_VALUE))
+                            .addComponent(jButtonOpretAnsat, javax.swing.GroupLayout.DEFAULT_SIZE, 150, Short.MAX_VALUE)
+                            .addComponent(jTextFieldAnsatAnsatAdresse)
+                            .addComponent(jTextFieldAnsatPostNo)
+                            .addComponent(jTextFieldAnsatBy)))
+                    .addComponent(jLabel30)
+                    .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jButtonHentAnsatte, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -806,7 +834,15 @@ public class GUI extends javax.swing.JFrame
                         .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel29)
                             .addComponent(jTextFieldAnsatEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(344, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addComponent(jLabel30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonHentAnsatte)
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Opret Ansat", jPanel5);
@@ -1278,9 +1314,14 @@ public class GUI extends javax.swing.JFrame
         String postNo = jTextFieldAnsatPostNo.getText();
         String by = jTextFieldAnsatBy.getText();
         control.createEmployee(navn, stilling, telefonNo, email, postNo, by, addresse);
-        control.saveEmployee(null);
+        control.saveEmployee();
         
     }//GEN-LAST:event_jButtonOpretAnsatActionPerformed
+
+    private void jButtonHentAnsatteActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonHentAnsatteActionPerformed
+    {//GEN-HEADEREND:event_jButtonHentAnsatteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonHentAnsatteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1387,6 +1428,7 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JButton jButtonBekaeftBetaling;
     private javax.swing.JButton jButtonBekræftÆndring;
     private javax.swing.JButton jButtonFjernVare;
+    private javax.swing.JButton jButtonHentAnsatte;
     private javax.swing.JButton jButtonHentKunder;
     private javax.swing.JButton jButtonHentOrdre;
     private javax.swing.JButton jButtonHentVareListe;
@@ -1423,6 +1465,7 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1443,12 +1486,15 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea jTextAreaVisAnsatte;
     private javax.swing.JTextArea jTextAreaVisKunder;
     private javax.swing.JTextField jTextFieldAdresse;
     private javax.swing.JTextField jTextFieldAnsatAnsatAdresse;
