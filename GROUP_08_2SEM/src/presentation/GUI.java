@@ -877,6 +877,7 @@ public class GUI extends javax.swing.JFrame
                 && !by.equals("") && email.contains("@") && nr.length() == 8)
         {
             control.createCustomer(navn, adresse, postnr, by, email, nr);
+            control.saveCustomer();
             jTextFieldFornavn.setText("");
             jTextFieldEfternavn.setText("");
             jTextFieldAdresse.setText("");
