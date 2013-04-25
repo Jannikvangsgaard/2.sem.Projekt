@@ -22,11 +22,21 @@ public class Employee {
    private String city;
    private String adress;
    private Date dato;
+   private int ordreNo;
    private ArrayList dates = new ArrayList();
    
-    public Employee(int employeeID, Date dato){
+    public Employee(int employeeID, Date dato, int ordreNo){
         this.employeeID = employeeID;
         this.dato = dato;
+        this.ordreNo = ordreNo;
+    }
+
+    public void setOrdreNo(int ordreNo) {
+        this.ordreNo = ordreNo;
+    }
+
+    public int getOrdreNo() {
+        return ordreNo;
     }
     
     public Employee(String name, String position, String phoneNumber, String email, String zipCode,String city, String adress){

@@ -393,7 +393,7 @@ public class TheMapper {
         int rowsInserted = 0;
         String SQLString1 = "insert into medarbejder values(?,?,?,?,?,?,?,?)";
         String SQLString2 = "select medarbejderseq.nextval from dual";
-        String SQLString3 = "insert into medarbejderdetails values(?,?)";
+        String SQLString3 = "insert into medarbejderdetails values(?,?,?)";
         PreparedStatement statement = null;
 
         try {
@@ -426,6 +426,7 @@ public class TheMapper {
                     statement.setInt(1,em.getEmployeeID());
                     System.out.println(em.getEmployeeID()+ "#2");
                     statement.setDate(2, null);
+                    statement.setInt(3, em.getOrdreNo());
                     
                 }
 
