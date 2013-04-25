@@ -1319,7 +1319,7 @@ public class GUI extends javax.swing.JFrame
     {//GEN-HEADEREND:event_jButtonHentAnsatteActionPerformed
          if (control.loadAllEmployees() != null)
         {
-            jTextAreaVisKunder.setText(control.employeeToString());
+            jTextAreaVisAnsatte.setText(control.employeeToString());
         }
     }//GEN-LAST:event_jButtonHentAnsatteActionPerformed
 

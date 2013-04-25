@@ -391,22 +391,33 @@ public class TheMapper {
     public boolean saveEmployee(ArrayList<Employee> employee, Connection con) {
 
         int rowsInserted = 0;
+        int tal=0;
         String SQLString1 = "insert into medarbejder values(?,?,?,?,?,?,?,?)";
         String SQLString2 = "select medarbejderseq.nextval from dual";
-        String SQLString3 = "insert into medarbejderdetails values(?,?,?)";
+        String SQLString3 = "insert into medarbejderdetails values(?,?)";
         PreparedStatement statement = null;
+        
+           for (int j = 0; j < employee.size(); j++) {
+            Employee etest = employee.get(j);
+
+            if (etest.getEmployeeID()!= 0) {
+                tal++;
+            }
+        }
+        
+        
 
         try {
             statement = con.prepareStatement(SQLString2);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                for (int j = 0; employee.size() > j; j++) {
+                for (int j = tal; employee.size() > j; j++) {
                     Employee o = employee.get(j);
                     o.setEmployeeID(rs.getInt(1));
                 }
 
                 statement = con.prepareStatement(SQLString1);
-                for (int i = 0; i < employee.size(); i++) {
+                for (int i = tal; i < employee.size(); i++) {
                     Employee emp = employee.get(i);
                     statement.setInt(1, emp.getEmployeeID());
                     statement.setString(2, emp.getName());
@@ -420,11 +431,11 @@ public class TheMapper {
                     
                 }
                 statement = con.prepareStatement(SQLString3);
-                for(int k = 0; k<employee.size(); k++){
+                for(int k = tal; k<employee.size(); k++){
                     Employee em = employee.get(k);
                     statement.setInt(1,em.getEmployeeID());
                     statement.setDate(2, null);
-                    statement.setInt(3, em.getOrdreNo());
+//                    statement.setInt(3, em.getOrdreNo());
                     
                 }
 
@@ -513,7 +524,7 @@ public class TheMapper {
     }
         
         
-        public ArrayList<Employee> getAllEmployees(Connection conn) {
+         public ArrayList<Employee> getAllEmployees(Connection conn) {
          
         ArrayList<Employee> employees = new ArrayList();
         PreparedStatement statement = null;
