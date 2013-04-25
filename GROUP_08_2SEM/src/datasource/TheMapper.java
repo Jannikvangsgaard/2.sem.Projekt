@@ -393,6 +393,7 @@ public class TheMapper {
         int rowsInserted = 0;
         String SQLString1 = "insert into medarbejder values(?,?,?,?,?,?,?,?)";
         String SQLString2 = "select medarbejderseq.nextval from dual";
+        String SQLString3 = "insert into medarbejderdetails values(?,?,?)";
         PreparedStatement statement = null;
 
         try {
@@ -408,6 +409,7 @@ public class TheMapper {
                 for (int i = 0; i < employee.size(); i++) {
                     Employee emp = employee.get(i);
                     statement.setInt(1, emp.getEmployeeID());
+                    System.out.println(emp.getEmployeeID()+ "#1");
                     statement.setString(2, emp.getName());
                     statement.setString(3, emp.getPosition());
                     statement.setString(4, emp.getPhoneNumber());
@@ -415,6 +417,17 @@ public class TheMapper {
                     statement.setString(6, emp.getZipCode());
                     statement.setString(7, emp.getAdress());
                     statement.setString(8, emp.getCity());
+                    rowsInserted += statement.executeUpdate();
+                    
+                }
+                statement = con.prepareStatement(SQLString3);
+                for(int k = 0; k<employee.size(); k++){
+                    Employee em = employee.get(k);
+                    statement.setInt(1,em.getEmployeeID());
+                    System.out.println(em.getEmployeeID()+ "#2");
+                    statement.setDate(2, null);
+                    statement.setInt(3, em.getOrdreNo());
+                    
                 }
 
             }
