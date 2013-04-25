@@ -17,7 +17,6 @@ public class Order {
     private ArrayList<Item> itemlist = new ArrayList<Item>();
     private Date depositumDate;
     private Date bestillingsDate;
-
     @Override
     public String toString() {
         return "Ordre nummer " + orderNo + ", state " + state;
@@ -34,7 +33,7 @@ public class Order {
         this.bestillingsDate = bestillingsDate;
 //      java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 //      dateToString = new SimpleDateFormat("y M d").format(sqlDate);
-
+        
     }
 
     public Order(int orderNo, ArrayList<Item> itemlist, Date depositumDate, Date bestillingsDate, Customer customer, int state) {
