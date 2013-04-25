@@ -882,7 +882,7 @@ public class GUI extends javax.swing.JFrame
 
     private void jButtonHentKunderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonHentKunderActionPerformed
 
-        if (control.getCustomerlist() != null)
+        if (control.loadCustomerlist() != null)
         {
             jTextAreaVisKunder.setText(control.customerToString());
         }
@@ -923,7 +923,7 @@ public class GUI extends javax.swing.JFrame
             {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-            ArrayList<Customer> customerlist = control.getCustomerlist();
+            ArrayList<Customer> customerlist = control.loadCustomerlist();
             for (int i = 0; i < customerlist.size(); i++)
             {
 
