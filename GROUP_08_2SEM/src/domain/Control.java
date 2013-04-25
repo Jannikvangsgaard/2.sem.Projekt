@@ -22,6 +22,7 @@ public class Control {
     private ArrayList<Item> allItemList = new ArrayList<Item>();
     private ArrayList<Order> orderlistWithDate = new ArrayList();
     private ArrayList<Employee> employeesList = new ArrayList();
+    private ArrayList<Employee> availableEmployees = new ArrayList();
     private DBFacade dbf;
 
     public Control() {
@@ -83,7 +84,6 @@ public class Control {
                 && email != null && nr != null) {
             Customer c = new Customer(name, address, postnr, by, email, nr);
             customerlist.add(c);
-            dbf.saveCustomer(customerlist);
         }
 
     }
@@ -97,7 +97,7 @@ public class Control {
         return orderlist;
     }
 
-    public ArrayList<Customer> getCustomerlist() {
+    public ArrayList<Customer> loadCustomerlist() {
         customerlist = dbf.getCustomer();
         return customerlist;
     }
@@ -152,7 +152,9 @@ public class Control {
     public ArrayList<Item> getAvailableItems() {
         return availableItems;
     }
+    
 
+    
     public int saveOrder() throws SQLException {
         return dbf.saveOrder(orderlist);
     }
@@ -257,6 +259,39 @@ public class Control {
         Employee emp = new Employee(name, position, phoneNumber, email, zipCode, city, adress);
         employeesList.add(emp);
     }
+    
+     public ArrayList<Employee> checkEmployee(Date date)
+    {
+        System.out.println("test");
+        for (int i = 0; i < employeesList.size(); i++)
+        {
+            System.out.println(employeesList.get(i).getDates().size());
+            if (employeesList.get(i).getDates().size() != 0)
+            {
+                for (int j = 0; j < employeesList.get(i).getDates().size(); j++)
+                {
+                    System.out.println("tjek2");
+                    if (employeesList.get(i).getPosition().equals("Montør") && employeesList.get(i).getDates().get(j) != date)
+                    {
+                        System.out.println("tjek3");
+                        int empID = employeesList.get(i).getEmployeeID();
+                        Employee emp = new Employee(empID, date, 0);
+                        availableEmployees.add(emp);
+                    }
+                }
+            } else
+            {
+                System.out.println("tjek4");
+                int empID = employeesList.get(i).getEmployeeID();
+                Employee emp = new Employee(empID, date, 0);
+                availableEmployees.add(emp);
+            }
+        }
+        return availableEmployees;
+    }
+     public ArrayList<Customer> getCustomerlist(){
+         return customerlist;
+     }
     
     
 }
