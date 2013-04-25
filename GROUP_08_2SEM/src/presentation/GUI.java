@@ -53,13 +53,6 @@ public class GUI extends javax.swing.JFrame
 //        jListStatusInformation.setModel(model4);
         jListVarePåLagerStatus.setModel(model5);
         VisÆndringer.setModel(model6);
-        try
-        {
-            control.checkDate();
-        } catch (ParseException ex)
-        {
-            JOptionPane.showMessageDialog(null, "YO BRO CHECKDATE VIRKER IKKE HOMIE!");
-        }
         control.loadItemliste();
 //        control.reservedItem();
 //        control.availableItems();
@@ -1080,26 +1073,15 @@ public class GUI extends javax.swing.JFrame
     private void jButtonHentOrdreActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonHentOrdreActionPerformed
     {//GEN-HEADEREND:event_jButtonHentOrdreActionPerformed
         StatusListe.clear();
+        control.loadAllOrders();
+        control.checkDate();
         for (int i = 0; i < control.getOrderlist().size(); i++)
         {
             StatusListe.addElement(control.getOrderlist().get(i).toString());
         }
-        Calendar cal = Calendar.getInstance();
-        Date date = (Date) cal.getTime();
-        if (StatusListe.isEmpty())
-        {
-            try
-            {
-                control.loadAllOrders();
-                for (int i = 0; i < control.getOrderlist().size(); i++)
-                {
-                    StatusListe.addElement(control.getOrderlist().get(i).toString());
-                }
-            } catch (Exception e)
-            {
-                JOptionPane.showMessageDialog(null, "pik??");
-            }
-        }
+       
+          
+       
     }//GEN-LAST:event_jButtonHentOrdreActionPerformed
 
     private void jButtonBekræftÆndringActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBekræftÆndringActionPerformed

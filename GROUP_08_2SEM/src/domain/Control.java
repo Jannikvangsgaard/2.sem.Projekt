@@ -28,37 +28,43 @@ public class Control {
         dbf = new DBFacade().getInstance();
     }
 
-    public ArrayList<Item> allItemList()
-    {
+    public ArrayList<Item> allItemList() {
         allItemList = dbf.getVare();
         return allItemList;
     }
-    
+
     public void createItem(int number, String itemName, int amount) {
         Item item = new Item(number, itemName, amount);
         itemlist.add(item);
     }
 
-    public void checkDate() throws ParseException {
+    public void checkDate(){
         Calendar c1 = Calendar.getInstance();
         Calendar c2 = Calendar.getInstance();
         Item item1, item2, item3;
-        SimpleDateFormat sdf = new SimpleDateFormat("y M d");
+        System.out.println("hej1");
         for (int i = 0; i < orderlist.size(); i++) {
-            c2.setTime(sdf.parse(orderlist.get(i).getDepositumDateToString()));
+            System.out.println("hej2");
+            c2.setTime(orderlist.get(i).getDepositumDate());
             if (c1.after(c2)) {
+                System.out.println("hej3");
                 orderlist.get(i).setState(2);
                 for (int j = 0; j < orderlist.get(i).getItemlist().size(); j++) {
+                    System.out.println("hej4");
                     item1 = orderlist.get(i).getItemlist().get(j);
-                    for (int k = 0; k < availableItems.size(); k++) {
-                        item2 = availableItems.get(k);
-                        if (item2 == item1) {
-                            availableItems.get(k).setItemAmount(item2.getItemAmount() + item1.getItemAmount());
-                            orderlist.get(i).getItemlist().remove(j);
-                        }
-                    }
-                    if (orderlist.get(i).getItemlist().size() > 0) {
+//                    for (int k = 0; k < availableItems.size(); k++) {
+//                        System.out.println("hej5");
+//                        item2 = availableItems.get(k);
+//                        if (item2 == item1) {
+//                            System.out.println("hej6");
+//                            availableItems.get(k).setItemAmount(item2.getItemAmount() + item1.getItemAmount());
+//                            orderlist.get(i).getItemlist().remove(j);
+//                        }
+//                    }
+                    if (orderlist.get(i).getItemlist().size() > 0) { 
+                        System.out.println("hej7");
                         for (int l = 0; l < orderlist.size(); l++) {
+                            System.out.println("hej8");
                             item3 = orderlist.get(i).getItemlist().get(l);
                             availableItems.add(item3);
                         }
@@ -89,20 +95,18 @@ public class Control {
         return itemlist;
     }
 
-    public void createCustomer(String name, String address, String postnr, 
+    public void createCustomer(String name, String address, String postnr,
             String by, String email, String nr) {
-        if (name != null && address != null && postnr != null && by != null 
-                && email != null && nr != null) 
-        {
+        if (name != null && address != null && postnr != null && by != null
+                && email != null && nr != null) {
             Customer c = new Customer(name, address, postnr, by, email, nr);
             customerlist.add(c);
             dbf.saveCustomer(customerlist);
         }
 
     }
-    
-    public Item creatItem(int itemNo, String itemName, int itemAmount)
-    {
+
+    public Item creatItem(int itemNo, String itemName, int itemAmount) {
         Item item = new Item(itemNo, itemName, itemAmount);
         return item;
     }
@@ -124,22 +128,22 @@ public class Control {
         return res;
     }
 
- public void reservedItem() {
-        int tjek=0;
+    public void reservedItem() {
+        int tjek = 0;
         for (int i = 0; i < orderlistWithDate.size(); i++) {
             for (int j = 0; j < orderlistWithDate.get(i).getItemlist().size(); j++) {
-                for (int k = 0; k<itemlistReserved.size(); k++){
-                if (itemlistReserved.get(k).getItemNo()==orderlistWithDate.get(i).getItemlist().get(j).getItemNo()){
-                itemlistReserved.get(k).setItemAmount(itemlistReserved.get(k).getItemAmount() + orderlistWithDate.get(i).getItemlist().get(j).getItemAmount());
-                tjek++;
+                for (int k = 0; k < itemlistReserved.size(); k++) {
+                    if (itemlistReserved.get(k).getItemNo() == orderlistWithDate.get(i).getItemlist().get(j).getItemNo()) {
+                        itemlistReserved.get(k).setItemAmount(itemlistReserved.get(k).getItemAmount() + orderlistWithDate.get(i).getItemlist().get(j).getItemAmount());
+                        tjek++;
+                    }
+
+
                 }
-                   
-                
+                if (tjek == 0) {
+                    itemlistReserved.add(orderlistWithDate.get(i).getItemlist().get(j));
                 }
-                if (tjek == 0){
-                itemlistReserved.add(orderlistWithDate.get(i).getItemlist().get(j));
-                }
-                tjek=0;
+                tjek = 0;
             }
         }
         loadAllOrders();
@@ -172,8 +176,6 @@ public class Control {
         return availableItems;
     }
 
-
-
     public int saveOrder() throws SQLException {
         return dbf.saveOrder(orderlist);
     }
@@ -181,7 +183,6 @@ public class Control {
     public void saveCustomer(ArrayList<Customer> customer) {
         dbf.saveCustomer(customer);
     }
-
 
     public Order loadSingleOrder(int ono) {
         return dbf.loadSingleOrder(ono);
@@ -191,25 +192,19 @@ public class Control {
         orderlist = dbf.loadAllOrders();
     }
 
-  
-    public boolean increaseAmount(ArrayList<Item> increasedItem){
-    
+    public boolean increaseAmount(ArrayList<Item> increasedItem) {
+
         return dbf.increaseAmount(increasedItem);
     }
-        public boolean varelisteTjek(ArrayList<Item> tjekListe)
-    {
+
+    public boolean varelisteTjek(ArrayList<Item> tjekListe) {
         boolean status = false;
-        for (int i = 0; i < tjekListe.size(); i++)
-        {
-            for (int j = 0; j < availableItems.size(); j++)
-            {
-                if (availableItems.get(j).getItemNo() == tjekListe.get(i).getItemNo())
-                {
-                    if (availableItems.get(j).getItemAmount() > tjekListe.get(i).getItemAmount())
-                    {
+        for (int i = 0; i < tjekListe.size(); i++) {
+            for (int j = 0; j < availableItems.size(); j++) {
+                if (availableItems.get(j).getItemNo() == tjekListe.get(i).getItemNo()) {
+                    if (availableItems.get(j).getItemAmount() > tjekListe.get(i).getItemAmount()) {
                         status = true;
-                    } else
-                    {
+                    } else {
                         status = false;
                     }
                 }
@@ -217,77 +212,74 @@ public class Control {
         }
         return status;
     }
-        
-    public boolean saveNewItem(ArrayList<Item> it)
-    {
+
+    public boolean saveNewItem(ArrayList<Item> it) {
         return dbf.saveNewItem(it);
     }
-    
-     public void saveEmployee() {
+
+    public void saveEmployee() {
         dbf.saveEmployee(employeesList);
     }
-     
-    public void loadOrdersWithDate(Date dato){
-        
+
+    public void loadOrdersWithDate(Date dato) {
+
         orderlistWithDate.clear();
         availableItems.clear();
         itemlistReserved.clear();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dato);
         int h = 0;
-        for(int j = -1; h <2;j++){
-        
-            if(j==0){
-            j=1;
+        for (int j = -1; h < 2; j++) {
+
+            if (j == 0) {
+                j = 1;
             }
-            if(j==2){
-            j=1;
-            h=3;
+            if (j == 2) {
+                j = 1;
+                h = 3;
             }
             calendar.add(Calendar.DATE, j);
             System.out.println(j);
-        
-        for(int i = 0; i < orderlist.size();i++){
-        if(orderlist.get(i).getBestillingsDate().equals(calendar.getTime())){
-        orderlistWithDate.add(orderlist.get(i));
-        }
-        }
+
+            for (int i = 0; i < orderlist.size(); i++) {
+                if (orderlist.get(i).getBestillingsDate().equals(calendar.getTime())) {
+                    orderlistWithDate.add(orderlist.get(i));
+                }
+            }
         }
         reservedItem();
         availableItems();
-    
-   
-}
-    public void clearOrderlist(){
+
+
+    }
+
+    public void clearOrderlist() {
         orderlistWithDate.clear();
     }
-    public void deleteItem(Item item){
-        
-                dbf.deleteItem(item.getItemNo());
+
+    public void deleteItem(Item item) {
+
+        dbf.deleteItem(item.getItemNo());
     }
-    
-    public boolean updateOrder(Order o)
-    {
+
+    public boolean updateOrder(Order o) {
         return dbf.updateOrder(o);
     }
-    
-    public ArrayList<Employee> loadAllEmployees()
-    {
-        
+
+    public ArrayList<Employee> loadAllEmployees() {
         employeesList = dbf.getAllEmployees();
         return employeesList;
     }
-    
-        public String employeeToString() {
+
+    public String employeeToString() {
         String res = "";
         for (int i = 0; i < employeesList.size(); i++) {
             res += employeesList.get(i).toString() + "\n";
         }
         return res;
     }
-    
-    public void createEmployee(String name, String position, String phoneNumber, String email, String zipCode,String city, String adress)
-    {
+
+    public void createEmployee(String name, String position, String phoneNumber, String email, String zipCode, String city, String adress) {
         Employee emp = new Employee(name, position, phoneNumber, email, zipCode, city, adress);
         employeesList.add(emp);
     }
