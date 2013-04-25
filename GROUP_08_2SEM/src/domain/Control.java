@@ -273,6 +273,7 @@ public class Control {
     
     public ArrayList<Employee> loadAllEmployees()
     {
+        
         employeesList = dbf.getAllEmployees();
         return employeesList;
     }
@@ -290,4 +291,6 @@ public class Control {
         Employee emp = new Employee(name, position, phoneNumber, email, zipCode, city, adress);
         employeesList.add(emp);
     }
+    
+    
 }
