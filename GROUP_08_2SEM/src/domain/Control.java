@@ -42,31 +42,15 @@ public class Control {
         Calendar c1 = Calendar.getInstance();
         Calendar c2 = Calendar.getInstance();
         Item item1, item2, item3;
-        System.out.println("hej1");
         for (int i = 0; i < orderlist.size(); i++) {
-            System.out.println("hej2");
             c2.setTime(orderlist.get(i).getDepositumDate());
             if (c1.after(c2)) {
-                System.out.println("hej3");
                 orderlist.get(i).setState(2);
                 for (int j = 0; j < orderlist.get(i).getItemlist().size(); j++) {
-                    System.out.println("hej4");
                     item1 = orderlist.get(i).getItemlist().get(j);
-//                    for (int k = 0; k < availableItems.size(); k++) {
-//                        System.out.println("hej5");
-//                        item2 = availableItems.get(k);
-//                        if (item2 == item1) {
-//                            System.out.println("hej6");
-//                            availableItems.get(k).setItemAmount(item2.getItemAmount() + item1.getItemAmount());
-//                            orderlist.get(i).getItemlist().remove(j);
-//                        }
-//                    }
                     if (orderlist.get(i).getItemlist().size() > 0) { 
-                        System.out.println("hej7");
                         for (int l = 0; l < orderlist.size(); l++) {
-                            System.out.println("hej8");
                             item3 = orderlist.get(i).getItemlist().get(l);
-                            availableItems.add(item3);
                         }
 
                     }
@@ -89,8 +73,6 @@ public class Control {
     }
 
     public ArrayList loadItemliste() {
-//        availableItems.clear();
-//        itemlistReserved.clear();
         itemlist = dbf.getVare();
         return itemlist;
     }
@@ -137,8 +119,6 @@ public class Control {
                         itemlistReserved.get(k).setItemAmount(itemlistReserved.get(k).getItemAmount() + orderlistWithDate.get(i).getItemlist().get(j).getItemAmount());
                         tjek++;
                     }
-
-
                 }
                 if (tjek == 0) {
                     itemlistReserved.add(orderlistWithDate.get(i).getItemlist().get(j));
@@ -161,9 +141,6 @@ public class Control {
                     item2 = itemlistReserved.get(j);
                     item3 = item1;
                     item3.setItemAmount(item1.getItemAmount() - item2.getItemAmount());
-//                    if (item3.getItemAmount() > 0) {
-//                        availableItems.add(item3);
-//                    }
                 }
             }
             if (itemlist.get(i).getItemAmount() > 0) {
@@ -222,7 +199,6 @@ public class Control {
     }
 
     public void loadOrdersWithDate(Date dato) {
-
         orderlistWithDate.clear();
         availableItems.clear();
         itemlistReserved.clear();
@@ -230,7 +206,6 @@ public class Control {
         calendar.setTime(dato);
         int h = 0;
         for (int j = -1; h < 2; j++) {
-
             if (j == 0) {
                 j = 1;
             }
@@ -239,10 +214,9 @@ public class Control {
                 h = 3;
             }
             calendar.add(Calendar.DATE, j);
-            System.out.println(j);
 
             for (int i = 0; i < orderlist.size(); i++) {
-                if (orderlist.get(i).getBestillingsDate().equals(calendar.getTime())) {
+                if (orderlist.get(i).getState()!=2 &&orderlist.get(i).getBestillingsDate().equals(calendar.getTime())) {
                     orderlistWithDate.add(orderlist.get(i));
                 }
             }

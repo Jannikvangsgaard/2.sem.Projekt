@@ -50,19 +50,11 @@ public class GUI extends javax.swing.JFrame
         jListvareliste.setModel(modelvareliste);
         jListVareTilOrdre.setModel(modelVareTilOrdre);
         jListStatusListe.setModel(StatusListe);
-//        jListStatusInformation.setModel(model4);
         jListVarePåLagerStatus.setModel(model5);
         VisÆndringer.setModel(model6);
         control.loadItemliste();
-//        control.reservedItem();
-//        control.availableItems();
-//        control.loadSingleOrder(1025);
-
-
-//        control.loadAllOrders();
-//        control.loadAvailableItems();
-
-//        visVareliste();
+        control.loadAllOrders();
+        control.checkDate();
         visAlleItemListe();
 
     }
@@ -947,7 +939,6 @@ public class GUI extends javax.swing.JFrame
                 if (control.varelisteTjek(orderList) == true)
                 {
                     jLabelOrderSavedNotSaved.setText("Ordre nummer: " + control.saveOrder());
-//                    control.saveFreeItems(vareliste2);
                     visVareliste();
                 } else
                 {
@@ -1073,8 +1064,6 @@ public class GUI extends javax.swing.JFrame
     private void jButtonHentOrdreActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonHentOrdreActionPerformed
     {//GEN-HEADEREND:event_jButtonHentOrdreActionPerformed
         StatusListe.clear();
-        control.loadAllOrders();
-        control.checkDate();
         for (int i = 0; i < control.getOrderlist().size(); i++)
         {
             StatusListe.addElement(control.getOrderlist().get(i).toString());
@@ -1253,7 +1242,6 @@ public class GUI extends javax.swing.JFrame
         try
         {
             date = newDate.parse(dato);
-            control.loadAllOrders();
             control.loadOrdersWithDate(date);
             visVareliste();
         } catch (ParseException ex)
