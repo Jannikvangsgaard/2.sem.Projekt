@@ -345,9 +345,9 @@ public class TheMapper {
                 statement = con.prepareStatement(SQLString1);
                 for (int i = 0; i < newItem.size(); i++) {
                     Item ni = newItem.get(i);
-                    statement.setInt(1, newItem.get(i).getItemNo());
-                    statement.setString(2, newItem.get(i).getItemName());
-                    statement.setInt(3, newItem.get(i).getItemAmount());
+                    statement.setInt(1, ni.getItemNo());
+                    statement.setString(2, ni.getItemName());
+                    statement.setInt(3, ni.getItemAmount());
                 }
 
             }
@@ -409,7 +409,6 @@ public class TheMapper {
                 for (int i = 0; i < employee.size(); i++) {
                     Employee emp = employee.get(i);
                     statement.setInt(1, emp.getEmployeeID());
-                    System.out.println(emp.getEmployeeID()+ "#1");
                     statement.setString(2, emp.getName());
                     statement.setString(3, emp.getPosition());
                     statement.setString(4, emp.getPhoneNumber());
@@ -424,7 +423,6 @@ public class TheMapper {
                 for(int k = 0; k<employee.size(); k++){
                     Employee em = employee.get(k);
                     statement.setInt(1,em.getEmployeeID());
-                    System.out.println(em.getEmployeeID()+ "#2");
                     statement.setDate(2, null);
                     statement.setInt(3, em.getOrdreNo());
                     
@@ -539,6 +537,40 @@ public class TheMapper {
             System.out.println("Fejl i TheMapper - getAllOrders");
         }
         return employees;
+    }
+        
+        public boolean giveEmployeeDate(ArrayList<Employee> employeeDates, Connection con) {
+
+        int rowsInserted = 0;
+        String SQLString1 = "insert into medarbejderdetails values(?,?,?)";
+        PreparedStatement statement = null;
+
+        try {
+            statement = con.prepareStatement(SQLString1);
+      
+                statement = con.prepareStatement(SQLString1);
+                
+                for (int i = 0; i < employeeDates.size(); i++) {
+                    
+                    Employee ed = employeeDates.get(i);
+                    statement.setInt(1, ed.getEmployeeID());
+                    java.sql.Date sqlDate = new java.sql.Date(ed.getDato().getTime());
+                    statement.setDate(2, sqlDate);
+                    statement.setInt(3, ed.getOrdreNo());
+                }
+
+            
+
+            rowsInserted += statement.executeUpdate();
+
+
+
+        } catch (Exception e) {
+            System.out.println("Fejl i OrdreMapper - SaveNewProject");
+            e.printStackTrace();
+        }
+        return rowsInserted == employeeDates.size();
+
     }
         
 }
