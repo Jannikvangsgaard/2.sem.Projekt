@@ -23,7 +23,7 @@ public class Employee {
    private String adress;
    private Date dato;
    private int ordreNo;
-   private ArrayList dates = new ArrayList();
+   private ArrayList<Date> dates = new ArrayList();
    
     public Employee(int employeeID, Date dato, int ordreNo){
         this.employeeID = employeeID;

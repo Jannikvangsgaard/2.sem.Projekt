@@ -83,7 +83,6 @@ public class Control {
                 && email != null && nr != null) {
             Customer c = new Customer(name, address, postnr, by, email, nr);
             customerlist.add(c);
-            dbf.saveCustomer(customerlist);
         }
 
     }
@@ -97,7 +96,7 @@ public class Control {
         return orderlist;
     }
 
-    public ArrayList<Customer> getCustomerlist() {
+    public ArrayList<Customer> loadCustomerlist() {
         customerlist = dbf.getCustomer();
         return customerlist;
     }
@@ -153,6 +152,7 @@ public class Control {
         return availableItems;
     }
 
+    
     public int saveOrder() throws SQLException {
         return dbf.saveOrder(orderlist);
     }
