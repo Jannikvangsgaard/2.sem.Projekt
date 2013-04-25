@@ -152,6 +152,7 @@ public class Control {
     public ArrayList<Item> getAvailableItems() {
         return availableItems;
     }
+    
 
     
     public int saveOrder() throws SQLException {
@@ -288,6 +289,9 @@ public class Control {
         }
         return availableEmployees;
     }
+     public ArrayList<Customer> getCustomerlist(){
+         return customerlist;
+     }
     
     
 }
