@@ -218,20 +218,15 @@ public class Control
         boolean status = false;
         for (int i = 0; i < tjekListe.size(); i++)
         {
-            System.out.println("test");
             for (int j = 0; j < availableItems.size(); j++)
             {
-                System.out.println("test2");
                 if (availableItems.get(j).getItemNo() == tjekListe.get(i).getItemNo())
                 {
-                    System.out.println("test3");
                     if (availableItems.get(j).getItemAmount() >= tjekListe.get(i).getItemAmount())
                     {
-                        System.out.println("test4");
                         status = true;
                     } else
                     {
-                        System.out.println("test5");
                         status = false;
                     }
                 }

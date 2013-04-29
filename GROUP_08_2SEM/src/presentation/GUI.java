@@ -908,7 +908,7 @@ public class GUI extends javax.swing.JFrame
             String måned = jComboBoxMaaned.getSelectedItem().toString();
             String aar = jComboBoxAar.getSelectedItem().toString();
             String dato = aar + måned + dag;
-            DateFormat newDate = new SimpleDateFormat("yMd");
+            DateFormat newDate = new SimpleDateFormat("yyyyMMdd");
             try
             {
                 date = newDate.parse(dato);
@@ -933,6 +933,7 @@ public class GUI extends javax.swing.JFrame
                 {
                     int ordreNummer = control.saveOrder();
                     jLabelOrderSavedNotSaved.setText("Ordre nummer: " + ordreNummer);
+                    
                     Employee employee1 = new Employee(emp.get(0).getEmployeeID(), date, ordreNummer);
                     Employee employee2 = new Employee(emp.get(1).getEmployeeID(), date, ordreNummer);
                     control.saveEmployeeWithDate(employee1);
