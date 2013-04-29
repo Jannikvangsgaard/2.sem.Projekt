@@ -1173,6 +1173,7 @@ public class GUI extends javax.swing.JFrame
             }
             jTextFieldNyVareNavn.setText("");
             jTextFieldNyVareAntal.setText("");
+            jTextFieldPrice.setText("");
         } else
         {
             JOptionPane.showMessageDialog(null, "Husk at skriv et navn");
@@ -1218,6 +1219,7 @@ public class GUI extends javax.swing.JFrame
                         + "Depositum Dato: " + control.getOrderlist().get(i).getDepositumDate() + "\n"
                         + "Bestillings Dato: " + control.getOrderlist().get(i).getBestillingsDate() + "\n"
                         + "Depositum modtaget: " + ab
+                        + "Depositum beløb: " + control.getOrderlist().get(i).getDepositumPrice()
                         + control.getOrderlist().get(i).getItemlistString());
             }
         }

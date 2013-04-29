@@ -17,6 +17,8 @@ public class Order {
     private ArrayList<Item> itemlist = new ArrayList<Item>();
     private Date depositumDate;
     private Date bestillingsDate;
+    private int depositumPrice;
+
     @Override
     public String toString() {
         return "Ordre nummer " + orderNo + ", state " + state;
@@ -33,7 +35,18 @@ public class Order {
         this.bestillingsDate = bestillingsDate;
 //      java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 //      dateToString = new SimpleDateFormat("y M d").format(sqlDate);
-        
+
+    }
+
+    public int getDepositumPrice() {
+        for (int i = 0; i < itemlist.size(); i++) {
+            if (itemlist.get(i).getItemAmount() > 1) {
+                depositumPrice += itemlist.get(i).getPrice() * itemlist.get(i).getItemAmount();
+            } else {
+                depositumPrice += itemlist.get(i).getPrice();
+            }
+        }
+        return depositumPrice;
     }
 
     public Order(int orderNo, ArrayList<Item> itemlist, Date depositumDate, Date bestillingsDate, Customer customer, int state) {
@@ -70,14 +83,14 @@ public class Order {
         return itemlist;
     }
 
-    public String getItemlistString(){
+    public String getItemlistString() {
         String res = "\nVarer:\n";
-        for (int i=0; i<itemlist.size(); i++){
+        for (int i = 0; i < itemlist.size(); i++) {
             res += itemlist.get(i).getItemName() + ", " + itemlist.get(i).getItemAmount() + "\n";
         }
         return res;
     }
-    
+
     public Date getDepositumDate() {
         return depositumDate;
     }
@@ -85,7 +98,8 @@ public class Order {
     public Date getBestillingsDate() {
         return bestillingsDate;
     }
-    public void setBestillingsDate(Date date){
+
+    public void setBestillingsDate(Date date) {
         bestillingsDate = date;
     }
 

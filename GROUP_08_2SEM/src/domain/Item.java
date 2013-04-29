@@ -17,6 +17,7 @@ public class Item
         this.itemNo = itemNo;
         this.itemName = itemName;
         this.itemAmount = itemAmount;
+        this.price = price;
     }
     
     public Item (int amountTotal){

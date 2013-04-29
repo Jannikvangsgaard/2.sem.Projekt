@@ -557,9 +557,6 @@ public class TheMapper {
         } catch (Exception e) {
             System.out.println("Fejl i TheMapper - getAllEmployees");
         }
-            System.out.println(employees.size() + "mapper employees");
-            System.out.println(employees.get(0).getDates().toString());
-            System.out.println(employees.get(1).getDates().toString());
         return employees;
     }
         
