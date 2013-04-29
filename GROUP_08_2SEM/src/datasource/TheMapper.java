@@ -210,7 +210,6 @@ public class TheMapper {
 
             statement = con.prepareStatement(SQLString1);
 
-
             for (int j = tal; j < order.size(); j++) {
                 Order o = order.get(j);
                 statement.setInt(1, o.getOrderNo());
@@ -417,10 +416,13 @@ public class TheMapper {
                 }
 
                 statement = con.prepareStatement(SQLString1);
-                for (int i = tal; i < employee.size(); i++) {
+                System.out.println(employee.size() + "size");
+                for (int i = 0; i < employee.size(); i++) {
                     Employee emp = employee.get(i);
                     statement.setInt(1, emp.getEmployeeID());
+//                    System.out.println(emp.getEmployeeID()+ "#1");
                     statement.setString(2, emp.getName());
+                    System.out.println("test");
                     statement.setString(3, emp.getPosition());
                     statement.setString(4, emp.getPhoneNumber());
                     statement.setString(5, emp.getEmail());
@@ -529,7 +531,7 @@ public class TheMapper {
         ArrayList<Employee> employees = new ArrayList();
         PreparedStatement statement = null;
         Employee es = null;
-        int tjek = 0;
+        boolean tjek = false;
         int employeeNo = 0;
         String SQLString = "SELECT * FROM medarbejder NATURAL JOIN medarbejderdetails";
         try {
@@ -539,14 +541,31 @@ public class TheMapper {
                 es = getSingleEmployee(employeeNo = rs.getInt(1), conn);
                 if (employees.isEmpty()) {
                     employees.add(es);
-                } else if (employees.get(tjek).getEmployeeID() != es.getEmployeeID()) {
+                }else
+                {
+//                    tjek = 1;
+                for(int i = 0; i < employees.size(); i++)
+                {
+                if (employees.get(i).getEmployeeID() != es.getEmployeeID()) {
+                    tjek = true;
+                }else
+                {
+                    tjek = false;
+                    break;
+                }
+                }
+                if(tjek)
+                {
                     employees.add(es);
-                    tjek++;
+                }
                 }
             }
         } catch (Exception e) {
-            System.out.println("Fejl i TheMapper - getAllOrders");
+            System.out.println("Fejl i TheMapper - getAllEmployees");
         }
+            System.out.println(employees.size() + "mapper employees");
+            System.out.println(employees.get(0).getDates().toString());
+            System.out.println(employees.get(1).getDates().toString());
         return employees;
     }
         
