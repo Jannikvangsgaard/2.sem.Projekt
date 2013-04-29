@@ -608,4 +608,37 @@ public class TheMapper {
 
     }
         
+        public boolean saveEmployeeWithDate(Employee em, Connection con) {
+
+        int rowsInserted = 0;
+        String SQLString1 = "insert into medarbejderdetails values(?,?)";
+        PreparedStatement statement = null;
+        ArrayList<Date> dates = new ArrayList();
+        dates = em.getDates();
+
+        try {
+            statement = con.prepareStatement(SQLString1);
+            
+            
+            for (int j = 0; dates.size() > j; j++) {
+                    Date date = dates.get(j);
+                    
+                    statement.setInt(1, em.getEmployeeID());
+                    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                    statement.setDate(2, sqlDate);
+
+            }
+
+            rowsInserted += statement.executeUpdate();
+
+
+
+        } catch (Exception e) {
+            System.out.println("Fejl i OrdreMapper - SaveNewProject");
+            e.printStackTrace();
+        }
+        return rowsInserted == dates.size();
+
+    }
+        
 }
