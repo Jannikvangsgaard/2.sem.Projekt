@@ -634,10 +634,10 @@ public class TheMapper {
                     statement.setInt(1, em.getEmployeeID());
                     java.sql.Date sqlDate = new java.sql.Date(date.getTime());
                     statement.setDate(2, sqlDate);
-
+                    rowsInserted += statement.executeUpdate();
             }
 
-            rowsInserted += statement.executeUpdate();
+            
 
 
 
