@@ -515,12 +515,13 @@ public class TheMapper {
                 position = rs.getString(3);
                 employeeName = rs.getString(2);
                 employeeID = rs.getInt(1);
-                dato = rs.getDate(9);
+                
                 number = rs.getString(4);
                 email = rs.getString(5);
                 zipCode = rs.getString(6);
                 adresse = rs.getString(7);
                 city = rs.getString(8);
+                dato = rs.getDate(9);
                 dates.add(dato);
             }
             
@@ -557,6 +558,13 @@ public class TheMapper {
                     tjek = true;
                 }else
                 {
+                    for(int j = 0; j < employees.get(i).getDates().size(); j++)
+                    {
+                    if(!employees.get(i).getDates().get(j).equals(es.getDates().get(j)))
+                    {
+                        employees.get(i).getDates().add(es.getDates().get(j));
+                    }
+                    }
                     tjek = false;
                     break;
                 }

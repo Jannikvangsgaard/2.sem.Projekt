@@ -21,13 +21,19 @@ public class Employee {
    private String zipCode;
    private String city;
    private String adress;
-   private Date dato;
+   private Date date;
    private int ordreNo;
    private ArrayList<Date> dates = new ArrayList();
    
-    public Employee(int employeeID, Date dato, int ordreNo){
+    public Employee(int employeeID, ArrayList<Date> date, int ordreNo){
         this.employeeID = employeeID;
-        this.dato = dato;
+        this.dates = date;
+        this.ordreNo = ordreNo;
+    }
+    public Employee(int employeeID, Date date, int ordreNo)
+    {
+        this.employeeID = employeeID;
+        this.date = date;
         this.ordreNo = ordreNo;
     }
 
@@ -85,7 +91,7 @@ public class Employee {
     }
 
     public void setDato(Date dato) {
-        this.dato = dato;
+        this.date = dato;
     }
 
     public void setDates(ArrayList dates) {
@@ -117,18 +123,18 @@ public class Employee {
     }
 
     public Date getDato() {
-        return dato;
+        return date;
     }
 
     public ArrayList getDates() {
         return dates;
     }
-    public Employee(int employeeID, String name, String position, ArrayList dates){
-        this.name = name;
-        this.position = position;
-        this.employeeID = employeeID;
-        this.dates=dates;
-    }
+//    public Employee(int employeeID, String name, String position, ArrayList dates){
+//        this.name = name;
+//        this.position = position;
+//        this.employeeID = employeeID;
+//        this.dates=dates;
+//    }
 
     public int getEmployeeID() {
         return employeeID;

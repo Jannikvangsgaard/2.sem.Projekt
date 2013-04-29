@@ -242,14 +242,19 @@ public class Control
     {
         dbf.saveEmployee(employeesList);
     }
+    
+    public void saveEmployeeWithDate(Date date)
+    {
+        
+    }
 
-    public void loadOrdersWithDate(Date dato)
+    public void loadOrdersWithDate(Date date)
     {
         orderlistWithDate.clear();
         availableItems.clear();
         itemlistReserved.clear();
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(dato);
+        calendar.setTime(date);
         int h = 0;
         for (int j = -1; h < 2; j++)
         {
