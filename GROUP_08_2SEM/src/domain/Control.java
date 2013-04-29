@@ -34,8 +34,8 @@ public class Control {
         return allItemList;
     }
 
-    public void createItem(int number, String itemName, int amount) {
-        Item item = new Item(number, itemName, amount);
+    public void createItem(int number, String itemName, int amount, int price) {
+        Item item = new Item(number, itemName, amount, price);
         itemlist.add(item);
     }
 
@@ -88,8 +88,8 @@ public class Control {
 
     }
 
-    public Item creatItem(int itemNo, String itemName, int itemAmount) {
-        Item item = new Item(itemNo, itemName, itemAmount);
+    public Item creatItem(int itemNo, String itemName, int itemAmount, int price) {
+        Item item = new Item(itemNo, itemName, itemAmount, price);
         return item;
     }
 
