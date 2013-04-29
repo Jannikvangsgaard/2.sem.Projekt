@@ -61,7 +61,8 @@ public class TheMapper {
                 qty = 0,
                 state = 0,
                 totalAmount = 0,
-                customerNo = 0;
+                customerNo = 0,
+                price = 0; 
         String itemName = "";
         Customer customer = null;
         Calendar cal = Calendar.getInstance();
@@ -82,8 +83,9 @@ public class TheMapper {
                 qty = rs.getInt(5);
                 itemName = rs.getString(8);
                 totalAmount = rs.getInt(9);
+                price = rs.getInt(10);
                 customer = getSingleCustomer(conn, customerNo);
-                i = new Item(itemNo, itemName, qty);
+                i = new Item(itemNo, itemName, qty, price);
                 items.add(i);
             }
             o = new Order(orderNo, items, depositumdate, bestillingsdate, customer, state);
@@ -110,8 +112,9 @@ public class TheMapper {
                 int vNo = rs.getInt(1);
                 String vNa = rs.getString(2);
                 int vQtotal = rs.getInt(3);
+                int price = rs.getInt(4);
 
-                Item i = new Item(vNo, vNa, vQtotal);
+                Item i = new Item(vNo, vNa, vQtotal, price);
                 itemsArr.add(i);
             }
         } catch (Exception e) {
@@ -328,7 +331,7 @@ public class TheMapper {
     public boolean saveNewItem(ArrayList<Item> newItem, Connection con) {
 
         int rowsInserted = 0;
-        String SQLString1 = "insert into varer values(?,?,?)";
+        String SQLString1 = "insert into varer values(?,?,?,?)";
         String SQLString2 = "select varerseq.nextval from dual";
         PreparedStatement statement = null;
 

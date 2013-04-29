@@ -12,11 +12,12 @@ public class Item
     private int price;
     private int amountTotal;
 
-    public Item(int itemNo, String itemName, int itemAmount)
+    public Item(int itemNo, String itemName, int itemAmount, int price)
     {
         this.itemNo = itemNo;
         this.itemName = itemName;
         this.itemAmount = itemAmount;
+        this.price = price;
     }
     
     public Item (int amountTotal){
