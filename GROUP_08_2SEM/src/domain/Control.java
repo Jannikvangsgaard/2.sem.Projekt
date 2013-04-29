@@ -37,7 +37,8 @@ public class Control
         return allItemList;
     }
 
-    public void createItem(int number, String itemName, int amount, int price) {
+    public void createItem(int number, String itemName, int amount, int price)
+    {
         Item item = new Item(number, itemName, amount, price);
         itemlist.add(item);
     }
@@ -103,7 +104,8 @@ public class Control
 
     }
 
-    public Item creatItem(int itemNo, String itemName, int itemAmount, int price) {
+    public Item creatItem(int itemNo, String itemName, int itemAmount, int price)
+    {
         Item item = new Item(itemNo, itemName, itemAmount, price);
         return item;
     }
@@ -242,10 +244,9 @@ public class Control
     {
         dbf.saveEmployee(employeesList);
     }
-    
+
     public void saveEmployeeWithDate(Date date)
     {
-        
     }
 
     public void loadOrdersWithDate(Date date)
@@ -331,6 +332,27 @@ public class Control
             count = 0;
             for (int j = 0; j < employeesList.get(i).getDates().size(); j++)
             {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(date);
+                int h = 0;
+                for (int l = -1; h < 2; l++)
+                {
+                    if (l == 0)
+                    {
+                        l = 1;
+                    }
+                    if (l == 2)
+                    {
+                        l = 1;
+                        h = 3;
+                    }
+                    calendar.add(Calendar.DATE, l);
+                    if(!employeesList.get(i).getDates().get(j).equals(res))
+                    {
+                    employeesList.get(i).getDates().add(calendar.getTime());
+                    }
+                }
+
                 String tjek = "" + employeesList.get(i).getDates().get(j);
                 if (employeesList.get(i).getPosition().equals("Montør") && !tjek.equals(res) && count == 0)
                 {
