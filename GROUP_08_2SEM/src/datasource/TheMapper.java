@@ -332,7 +332,7 @@ public class TheMapper {
     public boolean saveNewItem(ArrayList<Item> newItem, Connection con) {
 
         int rowsInserted = 0;
-        String SQLString1 = "insert into varer values(?,?,?)";
+        String SQLString1 = "insert into varer values(?,?,?,?)";
         String SQLString2 = "select varerseq.nextval from dual";
         PreparedStatement statement = null;
 
@@ -351,6 +351,7 @@ public class TheMapper {
                     statement.setInt(1, newItem.get(i).getItemNo());
                     statement.setString(2, newItem.get(i).getItemName());
                     statement.setInt(3, newItem.get(i).getItemAmount());
+                    statement.setInt(4,newItem.get(i).getPrice());
                 }
 
             }
