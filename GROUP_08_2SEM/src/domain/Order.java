@@ -36,6 +36,7 @@ public class Order {
     }
 
     public int getDepositumPrice() {
+        depositumPrice =0;
         for (int i = 0; i < itemlist.size(); i++) {
             if (itemlist.get(i).getItemAmount() > 1) {
                 depositumPrice += itemlist.get(i).getPrice() * itemlist.get(i).getItemAmount();
