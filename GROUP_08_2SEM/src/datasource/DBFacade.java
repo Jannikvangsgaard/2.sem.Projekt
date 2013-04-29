@@ -93,4 +93,9 @@ public class DBFacade
      public ArrayList<Employee> getAllEmployees(){
          return tm.getAllEmployees(con);
      }
+     
+     public boolean saveEmployeeWithDate(Employee emp)
+     {
+         return tm.saveEmployeeWithDate(emp, con);
+     }
 }

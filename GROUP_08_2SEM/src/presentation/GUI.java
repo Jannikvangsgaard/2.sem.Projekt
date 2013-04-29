@@ -35,6 +35,7 @@ public class GUI extends javax.swing.JFrame
     ArrayList<Item> alleItemsList = new ArrayList();
     ArrayList<Item> it = new ArrayList();
     ArrayList<Item> newItem = new ArrayList();
+    ArrayList<Employee> emp = new ArrayList();
 
     /**
      * Creates new form GUI
@@ -930,7 +931,12 @@ public class GUI extends javax.swing.JFrame
             {
                 if (control.varelisteTjek(orderList) == true)
                 {
-                    jLabelOrderSavedNotSaved.setText("Ordre nummer: " + control.saveOrder());
+                    int ordreNummer = control.saveOrder();
+                    jLabelOrderSavedNotSaved.setText("Ordre nummer: " + ordreNummer);
+                    Employee employee1 = new Employee(emp.get(0).getEmployeeID(), date, ordreNummer);
+                    Employee employee2 = new Employee(emp.get(1).getEmployeeID(), date, ordreNummer);
+                    control.saveEmployeeWithDate(employee1);
+                    control.saveEmployeeWithDate(employee2);
                     visVareliste();
                 } else
                 {
@@ -1234,11 +1240,12 @@ public class GUI extends javax.swing.JFrame
         String aar = jComboBoxAar.getSelectedItem().toString();
         String dato = aar + måned + dag;
         DateFormat newDate = new SimpleDateFormat("yyyyMMdd");
-        ArrayList<Employee> emp = new ArrayList();
+//        ArrayList<Employee> emp = new ArrayList();
         try
         {
             date = newDate.parse(dato);
             emp = control.checkEmployee(date);
+            
             jLabelLedigeMontore.setText("Der er " + emp.size() + " Montøre ledige");
             control.loadOrdersWithDate(date);
             visVareliste();

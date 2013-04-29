@@ -218,15 +218,20 @@ public class Control
         boolean status = false;
         for (int i = 0; i < tjekListe.size(); i++)
         {
+            System.out.println("test");
             for (int j = 0; j < availableItems.size(); j++)
             {
+                System.out.println("test2");
                 if (availableItems.get(j).getItemNo() == tjekListe.get(i).getItemNo())
                 {
-                    if (availableItems.get(j).getItemAmount() > tjekListe.get(i).getItemAmount())
+                    System.out.println("test3");
+                    if (availableItems.get(j).getItemAmount() >= tjekListe.get(i).getItemAmount())
                     {
+                        System.out.println("test4");
                         status = true;
                     } else
                     {
+                        System.out.println("test5");
                         status = false;
                     }
                 }
@@ -245,8 +250,28 @@ public class Control
         dbf.saveEmployee(employeesList);
     }
 
-    public void saveEmployeeWithDate(Date date)
+    public void saveEmployeeWithDate(Employee emp)
     {
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(emp.getDato());
+                int h = 0;
+                for (int l = -1; h < 2; l++)
+                {
+                    if (l == 0)
+                    {
+                        l = 1;
+                    }
+                    if (l == 2)
+                    {
+                        l = 1;
+                        h = 3;
+                    }
+                    calendar.add(Calendar.DATE, l);
+                    
+                        emp.getDates().add(calendar.getTime());
+        }
+                Employee employee = new Employee(emp.getEmployeeID(), emp.getDates(), emp.getOrdreNo());
+                dbf.saveEmployeeWithDate(employee);
     }
 
     public void loadOrdersWithDate(Date date)
@@ -332,27 +357,6 @@ public class Control
             count = 0;
             for (int j = 0; j < employeesList.get(i).getDates().size(); j++)
             {
-                Calendar calendar = Calendar.getInstance();
-                calendar.setTime(date);
-                int h = 0;
-                for (int l = -1; h < 2; l++)
-                {
-                    if (l == 0)
-                    {
-                        l = 1;
-                    }
-                    if (l == 2)
-                    {
-                        l = 1;
-                        h = 3;
-                    }
-                    calendar.add(Calendar.DATE, l);
-                    if(!employeesList.get(i).getDates().get(j).equals(res))
-                    {
-                    employeesList.get(i).getDates().add(calendar.getTime());
-                    }
-                }
-
                 String tjek = "" + employeesList.get(i).getDates().get(j);
                 if (employeesList.get(i).getPosition().equals("Montør") && !tjek.equals(res) && count == 0)
                 {
