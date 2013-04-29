@@ -347,10 +347,9 @@ public class TheMapper {
                 statement = con.prepareStatement(SQLString1);
                 for (int i = 0; i < newItem.size(); i++) {
                     Item ni = newItem.get(i);
-                    statement.setInt(1, newItem.get(i).getItemNo());
-                    statement.setString(2, newItem.get(i).getItemName());
-                    statement.setInt(3, newItem.get(i).getItemAmount());
-                    statement.setInt(4,newItem.get(i).getPrice());
+                    statement.setInt(1, ni.getItemNo());
+                    statement.setString(2, ni.getItemName());
+                    statement.setInt(3, ni.getItemAmount());
                 }
 
             }
@@ -394,26 +393,41 @@ public class TheMapper {
     public boolean saveEmployee(ArrayList<Employee> employee, Connection con) {
 
         int rowsInserted = 0;
+        int tal=0;
         String SQLString1 = "insert into medarbejder values(?,?,?,?,?,?,?,?)";
         String SQLString2 = "select medarbejderseq.nextval from dual";
         String SQLString3 = "insert into medarbejderdetails values(?,?)";
         PreparedStatement statement = null;
+        Calendar cal = Calendar.getInstance();
+        Date joinDate = cal.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(joinDate.getTime());
+        
+        
+           for (int j = 0; j < employee.size(); j++) {
+            Employee etest = employee.get(j);
+
+            if (etest.getEmployeeID()!= 0) {
+                tal++;
+            }
+        }
+        
+        
 
         try {
             statement = con.prepareStatement(SQLString2);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                for (int j = 0; employee.size() > j; j++) {
+                for (int j = tal; employee.size() > j; j++) {
                     Employee o = employee.get(j);
                     o.setEmployeeID(rs.getInt(1));
                 }
 
                 statement = con.prepareStatement(SQLString1);
                 System.out.println(employee.size() + "size");
-                for (int i = 0; i < employee.size(); i++) {
+                for (int i = tal; i < employee.size(); i++) {
                     Employee emp = employee.get(i);
                     statement.setInt(1, emp.getEmployeeID());
-//                    System.out.println(emp.getEmployeeID()+ "#1");
+                    System.out.println(emp.getEmployeeID()+ "#1");
                     statement.setString(2, emp.getName());
                     System.out.println("test");
                     statement.setString(3, emp.getPosition());
@@ -426,12 +440,11 @@ public class TheMapper {
                     
                 }
                 statement = con.prepareStatement(SQLString3);
-                for(int k = 0; k<employee.size(); k++){
+                for(int k = tal; k<employee.size(); k++){
                     Employee em = employee.get(k);
                     statement.setInt(1,em.getEmployeeID());
-                    System.out.println(em.getEmployeeID()+ "#2");
-                    statement.setDate(2, null);
-//                    statement.setInt(3, em.getOrdreNo());
+                    statement.setDate(2, sqlDate);
+//                statement.setInt(3, em.getOrdreNo());
                     
                 }
 
@@ -520,7 +533,7 @@ public class TheMapper {
     }
         
         
-        public ArrayList<Employee> getAllEmployees(Connection conn) {
+         public ArrayList<Employee> getAllEmployees(Connection conn) {
          
         ArrayList<Employee> employees = new ArrayList();
         PreparedStatement statement = null;
@@ -557,7 +570,75 @@ public class TheMapper {
         } catch (Exception e) {
             System.out.println("Fejl i TheMapper - getAllEmployees");
         }
+            System.out.println(employees.size() + "mapper employees");
         return employees;
+    }
+        
+        public boolean giveEmployeeDate(ArrayList<Employee> employeeDates, Connection con) {
+
+        int rowsInserted = 0;
+        String SQLString1 = "insert into medarbejderdetails values(?,?,?)";
+        PreparedStatement statement = null;
+
+        try {
+            statement = con.prepareStatement(SQLString1);
+      
+                statement = con.prepareStatement(SQLString1);
+                
+                for (int i = 0; i < employeeDates.size(); i++) {
+                    
+                    Employee ed = employeeDates.get(i);
+                    statement.setInt(1, ed.getEmployeeID());
+                    java.sql.Date sqlDate = new java.sql.Date(ed.getDato().getTime());
+                    statement.setDate(2, sqlDate);
+                    statement.setInt(3, ed.getOrdreNo());
+                }
+
+            
+
+            rowsInserted += statement.executeUpdate();
+
+
+
+        } catch (Exception e) {
+            System.out.println("Fejl i OrdreMapper - SaveNewProject");
+            e.printStackTrace();
+        }
+        return rowsInserted == employeeDates.size();
+
+    }
+        
+        public boolean saveEmployeeWithDate(Employee em, Connection con) {
+
+        int rowsInserted = 0;
+        String SQLString1 = "insert into medarbejderdetails values(?,?)";
+        PreparedStatement statement = null;
+        ArrayList<Date> dates = new ArrayList();
+        dates = em.getDates();
+
+        try {
+            statement = con.prepareStatement(SQLString1);
+            
+            
+            for (int j = 0; dates.size() > j; j++) {
+                    Date date = dates.get(j);
+                    
+                    statement.setInt(1, em.getEmployeeID());
+                    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+                    statement.setDate(2, sqlDate);
+
+            }
+
+            rowsInserted += statement.executeUpdate();
+
+
+
+        } catch (Exception e) {
+            System.out.println("Fejl i OrdreMapper - SaveNewProject");
+            e.printStackTrace();
+        }
+        return rowsInserted == dates.size();
+
     }
         
 }
