@@ -353,12 +353,16 @@ public class Control
             for (int j = 0; j < employeesList.get(i).getDates().size(); j++)
             {
                 String tjek = "" + employeesList.get(i).getDates().get(j);
-                if (employeesList.get(i).getPosition().equals("Montør") && !tjek.equals(res) && count == 0)
+                System.out.println(tjek + " tjek");
+                if (employeesList.get(i).getPosition().equals("Montør") && !tjek.equals(res))
                 {
                     count++;
+                    if(count == employeesList.get(i).getDates().size())
+                    {
                     int empID = employeesList.get(i).getEmployeeID();
                     Employee emp = new Employee(empID, date, 0);
                     availableEmployees.add(emp);
+                    }
                 }
             }
         }

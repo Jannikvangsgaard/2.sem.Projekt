@@ -1249,6 +1249,7 @@ public class GUI extends javax.swing.JFrame
             
             jLabelLedigeMontore.setText("Der er " + emp.size() + " Montøre ledige");
             control.loadOrdersWithDate(date);
+            control.loadItemliste();
             visVareliste();
         } catch (ParseException ex)
         {
