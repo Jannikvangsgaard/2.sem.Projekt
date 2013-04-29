@@ -19,11 +19,6 @@ public class Order {
     private Date bestillingsDate;
     private int depositumPrice;
 
-    @Override
-    public String toString() {
-        return "Ordre nummer " + orderNo + ", state " + state;
-    }
-
     public Order(ArrayList<Item> itemlist, Customer customer, Date bestillingsDate) {
         this.itemlist = itemlist;
         state = 0;
@@ -33,18 +28,6 @@ public class Order {
         Date date = (Date) calendar.getTime();
         depositumDate = date;
         this.bestillingsDate = bestillingsDate;
-    }
-
-    public int getDepositumPrice() {
-        depositumPrice =0;
-        for (int i = 0; i < itemlist.size(); i++) {
-            if (itemlist.get(i).getItemAmount() > 1) {
-                depositumPrice += itemlist.get(i).getPrice() * itemlist.get(i).getItemAmount();
-            } else {
-                depositumPrice += itemlist.get(i).getPrice();
-            }
-        }
-        return depositumPrice;
     }
 
     public Order(int orderNo, ArrayList<Item> itemlist, Date depositumDate, Date bestillingsDate, Customer customer, int state) {
@@ -115,5 +98,22 @@ public class Order {
         java.sql.Date sqlDate = new java.sql.Date(bestillingsDate.getTime());
         res = new SimpleDateFormat("y M d").format(sqlDate);
         return res;
+    }
+
+    public int getDepositumPrice() {
+        depositumPrice = 0;
+        for (int i = 0; i < itemlist.size(); i++) {
+            if (itemlist.get(i).getItemAmount() > 1) {
+                depositumPrice += itemlist.get(i).getPrice() * itemlist.get(i).getItemAmount();
+            } else {
+                depositumPrice += itemlist.get(i).getPrice();
+            }
+        }
+        return depositumPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "Ordre nummer " + orderNo + ", state " + state;
     }
 }

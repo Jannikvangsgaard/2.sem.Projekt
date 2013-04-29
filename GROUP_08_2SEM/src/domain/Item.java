@@ -31,14 +31,15 @@ public class Item
     public int getPrice(){
         return price;
     }
+       public void setPrice(int price){
+        this.price = price;
+    }
     
     public String getItemName()
     {
         return itemName;
     }
-    public void setPrice(int price){
-        this.price = price;
-    }
+ 
 
     public int getItemAmount()
     {
@@ -60,7 +61,13 @@ public class Item
         this.itemNo = itemNo;
     }
     
-    public String toString()
+    public void setAmountTotal(int amount){
+        this.amountTotal = amount;
+    }
+    public int getAmountTotal(){
+        return amountTotal;
+    }
+      public String toString()
     {
         return "ItemNo: " + itemNo + " Item name: " + itemName + " Item amount: " + itemAmount + "\n";
     }
@@ -73,11 +80,5 @@ public class Item
     public String toStringGUIReserved()
     {
         return itemName + " ønskede antal " + itemAmount;
-    }
-    public void setAmountTotal(int amount){
-        this.amountTotal = amount;
-    }
-    public int getAmountTotal(){
-        return amountTotal;
     }
 }
