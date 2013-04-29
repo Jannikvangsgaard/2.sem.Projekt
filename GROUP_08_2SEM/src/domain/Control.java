@@ -320,6 +320,7 @@ public class Control
 
     public ArrayList<Employee> checkEmployee(Date date)
     {
+        availableEmployees.clear();
         int count = 0;
         String res = createDate(date);
         for (int i = 0; i < employeesList.size(); i++)

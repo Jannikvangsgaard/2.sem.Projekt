@@ -395,6 +395,10 @@ public class TheMapper {
         String SQLString2 = "select medarbejderseq.nextval from dual";
         String SQLString3 = "insert into medarbejderdetails values(?,?)";
         PreparedStatement statement = null;
+        Calendar cal = Calendar.getInstance();
+        Date joinDate = cal.getTime();
+        java.sql.Date sqlDate = new java.sql.Date(joinDate.getTime());
+        
         
            for (int j = 0; j < employee.size(); j++) {
             Employee etest = employee.get(j);
@@ -417,10 +421,10 @@ public class TheMapper {
 
                 statement = con.prepareStatement(SQLString1);
                 System.out.println(employee.size() + "size");
-                for (int i = 0; i < employee.size(); i++) {
+                for (int i = tal; i < employee.size(); i++) {
                     Employee emp = employee.get(i);
                     statement.setInt(1, emp.getEmployeeID());
-//                    System.out.println(emp.getEmployeeID()+ "#1");
+                    System.out.println(emp.getEmployeeID()+ "#1");
                     statement.setString(2, emp.getName());
                     System.out.println("test");
                     statement.setString(3, emp.getPosition());
@@ -436,8 +440,8 @@ public class TheMapper {
                 for(int k = tal; k<employee.size(); k++){
                     Employee em = employee.get(k);
                     statement.setInt(1,em.getEmployeeID());
-                    statement.setDate(2, null);
-//                    statement.setInt(3, em.getOrdreNo());
+                    statement.setDate(2, sqlDate);
+//                statement.setInt(3, em.getOrdreNo());
                     
                 }
 
@@ -564,8 +568,6 @@ public class TheMapper {
             System.out.println("Fejl i TheMapper - getAllEmployees");
         }
             System.out.println(employees.size() + "mapper employees");
-            System.out.println(employees.get(0).getDates().toString());
-            System.out.println(employees.get(1).getDates().toString());
         return employees;
     }
         
