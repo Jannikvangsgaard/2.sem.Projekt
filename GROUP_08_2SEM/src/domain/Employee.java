@@ -36,15 +36,6 @@ public class Employee {
         this.date = date;
         this.ordreNo = ordreNo;
     }
-
-    public void setOrdreNo(int ordreNo) {
-        this.ordreNo = ordreNo;
-    }
-
-    public int getOrdreNo() {
-        return ordreNo;
-    }
-    
     public Employee(String name, String position, String phoneNumber, String email, String zipCode,String city, String adress){
         this.name = name;
         this.position = position;
@@ -65,7 +56,19 @@ public class Employee {
         this.dates=dates;
         this.employeeID=eno;
     }
+     public Employee(int employeeID, String name, String position, ArrayList dates){
+        this.name = name;
+        this.position = position;
+        this.employeeID = employeeID;
+        this.dates=dates;
+    }
+  public void setOrdreNo(int ordreNo) {
+        this.ordreNo = ordreNo;
+    }
 
+    public int getOrdreNo() {
+        return ordreNo;
+    }
     public void setPosition(String position) {
         this.position = position;
     }
@@ -129,12 +132,7 @@ public class Employee {
     public ArrayList getDates() {
         return dates;
     }
-//    public Employee(int employeeID, String name, String position, ArrayList dates){
-//        this.name = name;
-//        this.position = position;
-//        this.employeeID = employeeID;
-//        this.dates=dates;
-//    }
+   
 
     public int getEmployeeID() {
         return employeeID;
