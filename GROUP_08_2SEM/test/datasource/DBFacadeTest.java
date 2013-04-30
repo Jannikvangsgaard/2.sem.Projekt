@@ -43,8 +43,8 @@ public class DBFacadeTest {
         /**
          * Sletter de oprettede testpersoner fra databasen, efter den er kørt.
          */
-        DBFacade instance = new DBFacade();
-        instance.deleteTestPersons();
+//        DBFacade instance = new DBFacade();
+//        instance.deleteTestPersons();
     }
 
     /**
@@ -57,8 +57,8 @@ public class DBFacadeTest {
         System.out.println("loadSingleOrder");
         c.loadAllOrders();
         DBFacade instance = new DBFacade();
-        int expectedOrderNo = 1;
-        int actualOrderNo = instance.loadSingleOrder(1).getOrderNo();
+        int expectedOrderNo = 1000;
+        int actualOrderNo = instance.loadSingleOrder(1000).getOrderNo();
         
         assertEquals(expectedOrderNo, actualOrderNo);
     }
@@ -246,6 +246,7 @@ public class DBFacadeTest {
             }
         }
         
+        o.setState(1);
         DBFacade instance = new DBFacade();
         boolean expResult = true;
         boolean result = instance.updateOrder(o);

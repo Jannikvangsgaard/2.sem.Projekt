@@ -329,7 +329,7 @@ public class TheMapper {
 
     public boolean saveNewItem(ArrayList<Item> newItem, Connection con) {
 
-        int rowsInserted = 0;
+        boolean didItWork = true;
         String SQLString1 = "insert into varer values(?,?,?,?)";
         String SQLString2 = "select varerseq.nextval from dual";
         PreparedStatement statement = null;
@@ -349,19 +349,21 @@ public class TheMapper {
                     statement.setInt(1, ni.getItemNo());
                     statement.setString(2, ni.getItemName());
                     statement.setInt(3, ni.getItemAmount());
+                    statement.setInt(4, ni.getPrice());
                 }
 
             }
 
-            rowsInserted += statement.executeUpdate();
+            statement.executeUpdate();
 
 
 
         } catch (Exception e) {
+            didItWork = false;
             System.out.println("Fejl i OrdreMapper - SaveNewProject");
             e.printStackTrace();
         }
-        return rowsInserted == newItem.size();
+        return didItWork;
 
     }
 
@@ -391,7 +393,7 @@ public class TheMapper {
 
     public boolean saveEmployee(ArrayList<Employee> employee, Connection con) {
 
-        int rowsInserted = 0;
+        boolean didItWork = true;
         int tal=0;
         String SQLString1 = "insert into medarbejder values(?,?,?,?,?,?,?,?)";
         String SQLString2 = "select medarbejderseq.nextval from dual";
@@ -422,20 +424,17 @@ public class TheMapper {
                 }
 
                 statement = con.prepareStatement(SQLString1);
-                System.out.println(employee.size() + "size");
                 for (int i = tal; i < employee.size(); i++) {
                     Employee emp = employee.get(i);
                     statement.setInt(1, emp.getEmployeeID());
-                    System.out.println(emp.getEmployeeID()+ "#1");
                     statement.setString(2, emp.getName());
-                    System.out.println("test");
                     statement.setString(3, emp.getPosition());
                     statement.setString(4, emp.getPhoneNumber());
                     statement.setString(5, emp.getEmail());
                     statement.setString(6, emp.getZipCode());
                     statement.setString(7, emp.getAdress());
                     statement.setString(8, emp.getCity());
-                    rowsInserted += statement.executeUpdate();
+                    statement.executeUpdate();
                     
                 }
                 statement = con.prepareStatement(SQLString3);
@@ -449,19 +448,20 @@ public class TheMapper {
 
             }
 
-            rowsInserted += statement.executeUpdate();
+            statement.executeUpdate();
 
         } catch (Exception e) {
+            didItWork = false;
             System.out.println("Fejl i OrdreMapper - SaveNewProject");
             e.printStackTrace();
         }
-        return rowsInserted == employee.size();
+        return didItWork;
 
     }
     
       public boolean updateDepositum(Order o, Connection con) {
-        int rowsInserted = 0;
-        String SQLString1 = "update ordre set state = ? where ordreNo = ?";
+          boolean didItWork = true;
+          String SQLString1 = "update ordre set state = ? where ordreNo = ?";
 
         PreparedStatement statement2 = null;
 
@@ -480,11 +480,12 @@ public class TheMapper {
 
         } catch (Exception e) 
         {
+            didItWork = false;
             System.out.println("Fejl i OrdreMapper - increaseItem");
             e.printStackTrace();
         }
         
-        return 1 == rowsInserted;
+        return didItWork;
 
     }
       
@@ -648,40 +649,40 @@ public class TheMapper {
 
     }
         
-        public boolean deleteTestPersons(Connection con)
-    {
-        boolean didItWork = true;
-        
-        String SQLString1 = "DELETE FROM kunde WHERE navn = 'testperson'";
-        String SQLString2 = "DELETE FROM medarbejder WHERE stilling = 'test'";
-        
-        PreparedStatement statement = null;
-        try 
-        {
-            statement = con.prepareStatement(SQLString1);
-
-            if(statement.executeUpdate() == 0)
-            {
-                didItWork = false;
-                System.out.println("Ingen testpersoner i kundedatabasen");
-            }
-            statement = con.prepareStatement(SQLString2);
-            
-            if(statement.executeUpdate() == 0)
-            {
-                didItWork = false;
-                System.out.println("Ingen testpersoner i medarbejderdatabasen");
-            }
-        }
-        
-        
-        catch (Exception e)
-        {
-            System.out.println("Fejl i TheMapper - deleteTestPersons");
-        }
-        
-        return didItWork;
-    }
+//    public boolean deleteTestPersons(Connection con)
+//    {
+//        boolean didItWork = true;
+//        
+//        String SQLString1 = "DELETE FROM kunde WHERE navn = 'testperson'";
+//        String SQLString2 = "DELETE FROM medarbejder WHERE stilling = 'test'";
+//        
+//        PreparedStatement statement = null;
+//        try 
+//        {
+//            statement = con.prepareStatement(SQLString1);
+//
+//            if(statement.executeUpdate() == 0)
+//            {
+//                didItWork = false;
+//                System.out.println("Ingen testpersoner i kundedatabasen");
+//            }
+//            statement = con.prepareStatement(SQLString2);
+//            
+//            if(statement.executeUpdate() == 0)
+//            {
+//                didItWork = false;
+//                System.out.println("Ingen testpersoner i medarbejderdatabasen");
+//            }
+//        }
+//        
+//        
+//        catch (Exception e)
+//        {
+//            System.out.println("Fejl i TheMapper - deleteTestPersons");
+//        }
+//        
+//        return didItWork;
+//    }
         
         
 }
