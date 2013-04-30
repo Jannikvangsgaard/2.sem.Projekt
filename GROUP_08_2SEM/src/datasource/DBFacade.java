@@ -102,8 +102,8 @@ public class DBFacade
         return tm.saveEmployeeWithDate(emp, con);
     }
 
-    public boolean deleteTestPersons()
-    {
-        return tm.deleteTestPersons(con);
-    }
+//    public boolean deleteTestPersons()
+//    {
+//        return tm.deleteTestPersons(con);
+//    }
 }
