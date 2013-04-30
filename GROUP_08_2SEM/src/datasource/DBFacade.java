@@ -15,6 +15,7 @@ public class DBFacade
     private static DBFacade instance;
     private TheMapper tm;
     private Connection con;
+    private Control control = new Control();
 //    private static DBFacade instance;
 
     public DBFacade()
@@ -55,10 +56,17 @@ public class DBFacade
         return tm.getItems(con);
     }
 
-    public int saveOrder(ArrayList<Order> o) throws SQLException
+    public String saveOrder(ArrayList<Order> o) throws SQLException
     {
-    
-        return tm.saveOrder(o, con);
+        if(control.itemListCheck(o.get(o.size()-1).getItemlist()))
+        {
+            con.setAutoCommit(false);
+        return "" + tm.saveOrder(o, con);
+        }
+        else
+        {
+            return "Varene er ikke længere ledige";
+        }
     }
 
     

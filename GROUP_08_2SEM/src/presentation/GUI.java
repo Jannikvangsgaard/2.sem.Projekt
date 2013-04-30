@@ -970,16 +970,17 @@ public class GUI extends javax.swing.JFrame
             }
             try
             {
-                if (control.varelisteTjek(orderItemList) == true)
+                if (control.itemListCheck(orderItemList) == true)
                 {
-                    int ordreNummer = control.saveOrder();
+                    String ordreNummer = control.saveOrder();
                     jLabelOrderSavedNotSaved.setText("Ordre nummer: " + ordreNummer);
+                    int ordreNo = Integer.parseInt(ordreNummer);
                     for (int i = 0; i < orderItemList.size(); i++)
                     {
                         if (orderItemList.get(i).getItemName().equals("Telt"))
                         {
-                            Employee employee1 = new Employee(emp.get(0).getEmployeeID(), date, ordreNummer);
-                            Employee employee2 = new Employee(emp.get(1).getEmployeeID(), date, ordreNummer);
+                            Employee employee1 = new Employee(emp.get(0).getEmployeeID(), date, ordreNo);
+                            Employee employee2 = new Employee(emp.get(1).getEmployeeID(), date, ordreNo);
                             control.saveEmployeeWithDate(employee1);
                             control.saveEmployeeWithDate(employee2);
                         }

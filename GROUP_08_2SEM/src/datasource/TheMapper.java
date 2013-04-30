@@ -245,10 +245,11 @@ public class TheMapper {
             } else {
                 System.out.println("Fejl i OrdreMapper - Part 1");
             }
-
+            con.commit();
         } catch (Exception e) {
             System.out.println("Fejl i OrdreMapper - SaveOrder");
             e.printStackTrace();
+            con.rollback();
         }
         return order.get(order.size()-1).getOrderNo();
 

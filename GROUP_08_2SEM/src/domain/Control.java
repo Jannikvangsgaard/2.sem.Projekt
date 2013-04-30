@@ -187,7 +187,7 @@ public class Control
         return availableItems;
     }
 
-    public int saveOrder() throws SQLException
+    public String saveOrder() throws SQLException
     {
         return dbf.saveOrder(orderlist);
     }
@@ -213,16 +213,16 @@ public class Control
         return dbf.increaseAmount(increasedItem);
     }
 
-    public boolean varelisteTjek(ArrayList<Item> tjekListe)
+    public boolean itemListCheck(ArrayList<Item> checkList)
     {
         boolean status = false;
-        for (int i = 0; i < tjekListe.size(); i++)
+        for (int i = 0; i < checkList.size(); i++)
         {
             for (int j = 0; j < availableItems.size(); j++)
             {
-                if (availableItems.get(j).getItemNo() == tjekListe.get(i).getItemNo())
+                if (availableItems.get(j).getItemNo() == checkList.get(i).getItemNo())
                 {
-                    if (availableItems.get(j).getItemAmount() >= tjekListe.get(i).getItemAmount())
+                    if (availableItems.get(j).getItemAmount() >= checkList.get(i).getItemAmount())
                     {
                         status = true;
                     } else
