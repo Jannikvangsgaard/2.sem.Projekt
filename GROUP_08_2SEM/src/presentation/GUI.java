@@ -970,7 +970,7 @@ public class GUI extends javax.swing.JFrame
             }
             try
             {
-                if (control.itemListCheck(orderItemList) == true)
+                if (true)
                 {
                     String ordreNummer = control.saveOrder();
                     jLabelOrderSavedNotSaved.setText("Ordre nummer: " + ordreNummer);

@@ -199,6 +199,7 @@ public class TheMapper {
 
 
         try {
+            con.setAutoCommit(false);
             statement = con.prepareStatement(SQLString3);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {

@@ -57,7 +57,6 @@ public class DBFacade
 
     public String saveOrder(ArrayList<Order> o) throws SQLException
     {
-            con.setAutoCommit(false);
         return "" + tm.saveOrder(o, con);
     }
 
@@ -81,6 +80,7 @@ public class DBFacade
      public boolean saveEmployee(ArrayList<Employee> employee){
         return tm.saveEmployee(employee, con);
     }
+     
      public boolean deleteItem(int itemNo){
          return tm.deleteItem(itemNo, con);
      }

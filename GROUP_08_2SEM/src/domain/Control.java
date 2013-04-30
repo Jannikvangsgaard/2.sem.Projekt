@@ -222,6 +222,8 @@ public class Control
             {
                 if (availableItems.get(j).getItemNo() == checkList.get(i).getItemNo())
                 {
+                    System.out.println(availableItems.get(j).getItemAmount() + "available items");
+                    System.out.println(checkList.get(i).getItemAmount() + "checklist");
                     if (availableItems.get(j).getItemAmount() >= checkList.get(i).getItemAmount())
                     {
                         status = true;
