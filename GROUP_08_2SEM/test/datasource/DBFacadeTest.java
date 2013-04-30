@@ -1,10 +1,13 @@
 package datasource;
 
+import domain.Control;
 import domain.Customer;
 import domain.Employee;
 import domain.Item;
 import domain.Order;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -17,6 +20,7 @@ import static org.junit.Assert.*;
  * @author Jannik
  */
 public class DBFacadeTest {
+    Control c = new Control();
     
     public DBFacadeTest() {
     }
@@ -33,196 +37,231 @@ public class DBFacadeTest {
     public void setUp() {
     }
     
-    @After
-    public void tearDown() {
-    }
-
-    /**
-     * Test of getInstance method, of class DBFacade.
-     */
-    @Test
-    public void testGetInstance() {
-        System.out.println("getInstance");
-        DBFacade expResult = null;
-        DBFacade result = DBFacade.getInstance();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of loadSingleOrder method, of class DBFacade.
-     */
-    @Test
-    public void testLoadSingleOrder() {
-        System.out.println("loadSingleOrder");
-        int ono = 0;
+@After
+    public void tearDown() 
+    {
+        /**
+         * Sletter de oprettede testpersoner fra databasen, efter den er kørt.
+         */
         DBFacade instance = new DBFacade();
-        Order expResult = null;
-        Order result = instance.loadSingleOrder(ono);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        instance.deleteTestPersons();
     }
 
     /**
-     * Test of loadAllOrders method, of class DBFacade.
+     * Tester om metoden loadSingleOrder() henter vores "testordre" fra
+     * databasen, som har ordrenummer 1.
      */
     @Test
-    public void testLoadAllOrders() {
+    public void testLoadSingleOrder() 
+    {
+        System.out.println("loadSingleOrder");
+        c.loadAllOrders();
+        DBFacade instance = new DBFacade();
+        int expectedOrderNo = 1;
+        int actualOrderNo = instance.loadSingleOrder(1).getOrderNo();
+        
+        assertEquals(expectedOrderNo, actualOrderNo);
+    }
+
+    /**
+     * Tester om metoden loadAllOrders() henter noget fra databasen.
+     */
+    @Test
+    public void testLoadAllOrders() 
+    {
         System.out.println("loadAllOrders");
         DBFacade instance = new DBFacade();
-        ArrayList expResult = null;
-        ArrayList result = instance.loadAllOrders();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int result = instance.loadAllOrders().size();
+        assertTrue(result > 0);
     }
 
     /**
-     * Test of getCustomer method, of class DBFacade.
+     * Tester om metoden getCustomers() får kunder fra databasen.
      */
     @Test
-    public void testGetCustomer() {
+    public void testGetCustomers() {
         System.out.println("getCustomer");
         DBFacade instance = new DBFacade();
-        ArrayList expResult = null;
-        ArrayList result = instance.getCustomer();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int result = instance.getCustomer().size();
+        assertTrue(result > 0);
     }
 
     /**
-     * Test of getVare method, of class DBFacade.
+     * Tester om der bliver hentet varer fra databasen.
      */
     @Test
-    public void testGetVare() {
+    public void testGetVarer() {
         System.out.println("getVare");
         DBFacade instance = new DBFacade();
-        ArrayList expResult = null;
-        ArrayList result = instance.getVare();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int result = instance.getVare().size();
+        assertTrue(result > 0);
     }
 
     /**
-     * Test of saveOrder method, of class DBFacade.
+     * Tester om en ordre bliver gemt i databasen.
      */
     @Test
-    public void testSaveOrder() throws Exception {
-        System.out.println("saveOrder");
-        ArrayList<Order> o = null;
+    public void testSaveOrder() throws Exception 
+    {
         DBFacade instance = new DBFacade();
-        int expResult = 0;
-        String result = instance.saveOrder(o);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        Calendar cal = Calendar.getInstance();
+        ArrayList<Order> o = new ArrayList();
+        ArrayList<Item> i = new ArrayList();
+        Date d = cal.getTime();
+        c.loadItemliste();
+
+        Customer cus = c.loadCustomerlist().get(0);
+        Item it = c.getItemList().get(0);
+        
+        i.add(it);
+        Order order = new Order(i, cus, d);
+        o.add(order);
+        
+        assertFalse(instance.saveOrder(o).equals(null));
     }
 
     /**
-     * Test of saveCustomer method, of class DBFacade.
+     * Tilføjer en ny kunde til databasen.
      */
     @Test
     public void testSaveCustomer() {
         System.out.println("saveCustomer");
-        ArrayList<Customer> customer = null;
+        ArrayList<Customer> customer = new ArrayList();
+        Customer c = new Customer("testperson", "testadresse", "0000", "testby", "test@email.test", "00000000");
+        customer.add(c);
+        
         DBFacade instance = new DBFacade();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.saveCustomer(customer);
+        
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-
-    /**
-     * Test of increaseAmount method, of class DBFacade.
-     */
-    @Test
-    public void testIncreaseAmount() {
-        System.out.println("increaseAmount");
-        ArrayList<Item> it = null;
-        DBFacade instance = new DBFacade();
-        boolean expResult = false;
-        boolean result = instance.increaseAmount(it);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of saveNewItem method, of class DBFacade.
+    
+     /**
+     * Opretter et "testitem" i databasen.
      */
     @Test
     public void testSaveNewItem() {
         System.out.println("saveNewItem");
-        ArrayList<Item> it = null;
+        ArrayList<Item> it = new ArrayList();
+        Item testitem = new Item(0, "testitem", 0, 0);
+        it.add(testitem);
+        
         DBFacade instance = new DBFacade();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.saveNewItem(it);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
-
+    
     /**
-     * Test of saveEmployee method, of class DBFacade.
+     * Ændre antallet af på det tidligere oprettede "testitem" i databasen.
      */
     @Test
-    public void testSaveEmployee() {
-        System.out.println("saveEmployee");
-        ArrayList<Employee> employee = null;
-        DBFacade instance = new DBFacade();
-        boolean expResult = false;
-        boolean result = instance.saveEmployee(employee);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    public void testIncreaseAmount() {
+        System.out.println("increaseAmount");
+        
+        c.loadItemliste();
+        c.getItemList();
+        ArrayList<Item> it = new ArrayList();
+        int x = 0;
+        
+        for(int i = 0; i < c.getItemList().size(); i++)
+        {
+            if(c.getItemList().get(i).getItemName().equals("testitem"))
+            {
+                x = i;
+            }
+        }
+        
+        c.getItemList().get(x).increaseTotalAmount(2);
+        int amountBefore = c.getItemList().get(x).getAmountTotal();
+        it.add(c.getItemList().get(x));
+        c.increaseAmount(it);
+        
+        int expResult = amountBefore; 
+        int result = c.getItemList().get(x).getAmountTotal();
+        assertTrue(expResult == result);
     }
-
-    /**
-     * Test of deleteItem method, of class DBFacade.
+    
+     /**
+     * Sletter "testitem" fra databasen igen.
      */
     @Test
     public void testDeleteItem() {
         System.out.println("deleteItem");
         int itemNo = 0;
+        c.loadItemliste();
+        c.getItemList();
+        
+        for(int i = 0; i < c.getItemList().size(); i++)
+        {
+            if(c.getItemList().get(i).getItemName().equals("testitem"))
+            {
+                itemNo = c.getItemList().get(i).getItemNo();
+            }
+        }
+        
         DBFacade instance = new DBFacade();
-        boolean expResult = false;
+        boolean expResult = true;
         boolean result = instance.deleteItem(itemNo);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
-     * Test of updateOrder method, of class DBFacade.
+     * Opretter en medarbejder i databasen.
      */
     @Test
-    public void testUpdateOrder() {
-        System.out.println("updateOrder");
-        Order o = null;
+    public void testSaveEmployee() 
+    {
+        System.out.println("saveEmployee");
+        ArrayList<Employee> e = new ArrayList();
+        Employee employee = new Employee("test", "test", "00000000", "test@test.test", "0000", "test", "test");
+        e.add(employee);
+        
         DBFacade instance = new DBFacade();
-        boolean expResult = false;
+        boolean expResult = true;
+        boolean result = instance.saveEmployee(e);
+        assertEquals(expResult, result);
+    }
+
+
+
+    /**
+     * Tester om en ordres depositums-status bliver ændret.
+     */
+    @Test
+    public void testUpdateOrder() 
+    {
+        
+        System.out.println("updateOrder");
+        c.loadAllOrders();
+        ArrayList<Order> orders = c.getOrderlist();
+        Order o = null;
+        
+        for(int i = 0; i < orders.size(); i++)
+        {
+            if(orders.get(i).getOrderNo() == 1) //OrderNo 1 er en test ordre
+            {
+                o = orders.get(i);
+            }
+        }
+        
+        DBFacade instance = new DBFacade();
+        boolean expResult = true;
         boolean result = instance.updateOrder(o);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
-     * Test of getAllEmployees method, of class DBFacade.
+     * Henter alle medarbejdere fra databasen.
      */
     @Test
-    public void testGetAllEmployees() {
+    public void testGetAllEmployees() 
+    {
         System.out.println("getAllEmployees");
         DBFacade instance = new DBFacade();
-        ArrayList expResult = null;
-        ArrayList result = instance.getAllEmployees();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        int result = instance.getAllEmployees().size();
+        assertTrue(result > 0);
     }
+
 }

@@ -651,4 +651,42 @@ public class TheMapper {
 
     }
         
+        public boolean deleteTestPersons(Connection con)
+    {
+        boolean didItWork = true;
+        
+        String SQLString1 = "DELETE FROM kunde WHERE navn = 'testperson'";
+        String SQLString2 = "DELETE FROM medarbejder WHERE stilling = 'test'";
+        
+        PreparedStatement statement = null;
+        try 
+        {
+            statement = con.prepareStatement(SQLString1);
+
+            if(statement.executeUpdate() == 0)
+            {
+                didItWork = false;
+                System.out.println("Ingen testpersoner i kundedatabasen");
+            }
+            statement = con.prepareStatement(SQLString2);
+            
+            if(statement.executeUpdate() == 0)
+            {
+                didItWork = false;
+                System.out.println("Ingen testpersoner i medarbejderdatabasen");
+            }
+        }
+        
+        
+        catch (Exception e)
+        {
+            System.out.println("Fejl i TheMapper - deleteTestPersons");
+        }
+        
+        return didItWork;
+    }
+        
+        
 }
+        
+

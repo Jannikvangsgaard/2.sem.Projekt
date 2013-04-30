@@ -970,8 +970,6 @@ public class GUI extends javax.swing.JFrame
             }
             try
             {
-                if (true)
-                {
                     String ordreNummer = control.saveOrder();
                     jLabelOrderSavedNotSaved.setText("Ordre nummer: " + ordreNummer);
                     int ordreNo = Integer.parseInt(ordreNummer);
@@ -986,11 +984,6 @@ public class GUI extends javax.swing.JFrame
                         }
                     }
                     visVareliste();
-                } else
-                {
-                    jLabelOrderSavedNotSaved.setText("Ordren blev ikke gemt");
-                    visVareliste();
-                }
             } catch (SQLException ex)
             {
                 Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
