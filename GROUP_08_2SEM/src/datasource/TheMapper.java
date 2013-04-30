@@ -471,7 +471,7 @@ public class TheMapper {
          
             {
                 statement2.setInt(2, o.getOrderNo());
-                statement2.setInt(1, o.getState() );
+                statement2.setInt(1, o.getState());
 
                 statement2.executeUpdate();
           
