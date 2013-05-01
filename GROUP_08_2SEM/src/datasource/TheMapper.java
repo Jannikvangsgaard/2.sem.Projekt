@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 package datasource;
-
+import domain.Package;
 import domain.Customer;
 import domain.Employee;
 import domain.Order;
@@ -692,54 +692,128 @@ public class TheMapper {
 //    }
         
         
-     public boolean saveItemList(ArrayList<Item> itemList, int priceTotal,String packageName , Connection con) {
+     public boolean saveItemList(ArrayList<Package> packList, int priceTotal,String packageName , Connection con) {
 
         int rowsInserted = 0;
+        int tal = 0;
         String SQLString1 = "insert into pakker values(?,?,?)";
         String SQLString2 = "select pakkeseq.nextval from dual";
         String SQLString3 = "insert into pakkedetails values(?,?,?)";
         PreparedStatement statement = null;
 
+           for (int j = 0; j < packList.size(); j++) {
+            Package ptest = packList.get(j);
+
+            if (ptest.getPackageNo() != 0) {
+                tal++;
+            }
+        }
+        
+        
         try {
+            
+            
             statement = con.prepareStatement(SQLString2);
             ResultSet rs = statement.executeQuery();
              if (rs.next()) {
-                for (int j = 0; itemList.size() > j; j++) {
-                    Item it = itemList.get(j);
-                    it.setPakkeNo(rs.getInt(1));
+                for (int j = tal; packList.size() > j; j++) {
+                    Package pk = packList.get(j);
+                    pk.setPakkeNo(rs.getInt(1));
                 }
              }
-                statement = con.prepareStatement(SQLString1);
-                
-                    Item nin = itemList.get(0);
-                    statement.setInt(1, nin.getPakkeNo());
-                    statement.setString(2, packageName );
-                    statement.setInt(3, priceTotal);
-                    rowsInserted += statement.executeUpdate();
-                
-                
-                 statement = con.prepareStatement(SQLString3);
-                for (int i = 0; i < itemList.size(); i++) {
-                    Item ni = itemList.get(i);
-                    statement.setInt(1, ni.getPakkeNo());
-                    statement.setInt(2, ni.getItemNo());
-                    statement.setInt(3, ni.getItemAmount());
-                    rowsInserted += statement.executeUpdate();
+             
+             statement = con.prepareStatement(SQLString1);
+              for (int j = tal; j < packList.size(); j++) {
+                Package pk = packList.get(j);
+                statement.setInt(1, pk.getPackageNo());
+                statement.setString(2, pk.getPackageName());
+                statement.setInt(3, pk.getPrice());
+
+
+                rowsInserted += statement.executeUpdate();
+            }
+              
+              statement = con.prepareStatement(SQLString3);
+
+              
+                for (int i = tal; i < packList.size(); i++) {
+                    Package pk = packList.get(i);
+                    for (int j = 0; j < pk.getItems().size(); j++) {
+                        statement.setInt(2, pk.getItems().get(j).getItemNo());
+                        statement.setInt(1, pk.getPackageNo());
+                        statement.setInt(3, pk.getItems().get(j).getItemAmount());
+                        rowsInserted += statement.executeUpdate();
+                    }
                 }
-                
-           
-
-            
-
-
 
         } catch (Exception e) {
             System.out.println("Fejl i OrdreMapper - SaveNewProject");
             e.printStackTrace();
         }
-        return rowsInserted == itemList.size();
+        return rowsInserted == packList.size();
 
     }
+     
+      public Package getSinglePackages(int packNo, Connection conn) {
+        ArrayList<Item> itemlist = new ArrayList();
+        PreparedStatement statement = null;
+        Package p = null;
+        Item i = null;
+        int packageNo = 0;
+        String packageName = "";
+        int price = 0;
+        int itemNo = 0;
+        int amount = 0;
+        
+        String SQLString = "SELECT * FROM pakker NATURAL JOIN pakkedetails where pakkeNo = ?";
+        try {
+            
+            statement = conn.prepareStatement(SQLString);
+            statement.setInt(1, packNo);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+            packageNo = rs.getInt(1);
+            packageName = rs.getString(2);
+            price = rs.getInt(3);
+            itemNo = rs.getInt(4);
+            amount = rs.getInt(5);
+            
+            i = new Item(amount,itemNo);
+            itemlist.add(i);
+            }
+            p = new Package(packageNo, packageName, itemlist, price);
+        } catch (Exception e) {
+            System.out.println("Fejl i TheMapper - getAllOrders");
+        }
+        return p;
+    }
+
+      
+      public ArrayList<Package> getAllPackages(Connection conn) {
+        ArrayList<Package> packages = new ArrayList();
+        PreparedStatement statement = null;
+        Package p = null;
+        int tjek = 0;
+        int packNo = 0;
+        String SQLString = "SELECT * FROM pakker NATURAL JOIN pakkedetails";
+        try {
+            statement = conn.prepareStatement(SQLString);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                p = getSinglePackages(packNo = rs.getInt(1), conn);
+                if (packages.isEmpty()) {
+                    packages.add(p);
+                } else if (packages.get(tjek).getPackageNo() != p.getPackageNo()) {
+                    packages.add(p);
+                    tjek++;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Fejl i TheMapper - getAllOrders");
+        }
+        return packages;
+    }
+
         
         
 }
