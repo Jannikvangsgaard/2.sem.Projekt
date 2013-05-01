@@ -109,7 +109,7 @@ public class Order {
                 depositumPrice += itemlist.get(i).getPrice();
             }
         }
-        return depositumPrice;
+        return depositumPrice/2;
     }
 
     @Override

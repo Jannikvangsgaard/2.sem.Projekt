@@ -179,6 +179,7 @@ public class GUI extends javax.swing.JFrame
             }
         });
 
+        jTextAreaVisKunder.setEditable(false);
         jTextAreaVisKunder.setColumns(20);
         jTextAreaVisKunder.setRows(5);
         jScrollPane2.setViewportView(jTextAreaVisKunder);
@@ -483,6 +484,7 @@ public class GUI extends javax.swing.JFrame
         });
         jScrollPane4.setViewportView(jListStatusListe);
 
+        jTextOrdreInformationer.setEditable(false);
         jTextOrdreInformationer.setColumns(20);
         jTextOrdreInformationer.setRows(5);
         jScrollPane8.setViewportView(jTextOrdreInformationer);
@@ -575,6 +577,7 @@ public class GUI extends javax.swing.JFrame
 
         jComboBoxStillinger.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Montør", "Sælger", "Administrator" }));
 
+        jTextAreaVisAnsatte.setEditable(false);
         jTextAreaVisAnsatte.setColumns(20);
         jTextAreaVisAnsatte.setRows(5);
         jScrollPane5.setViewportView(jTextAreaVisAnsatte);
@@ -983,6 +986,7 @@ public class GUI extends javax.swing.JFrame
                             control.saveEmployeeWithDate(employee2);
                         }
                     }
+                    control.loadOrdersWithDate(date);
                     visVareliste();
             } catch (SQLException ex)
             {
@@ -1266,7 +1270,8 @@ public class GUI extends javax.swing.JFrame
                         + "Depositum Dato: " + control.getOrderlist().get(i).getDepositumDate() + "\n"
                         + "Bestillings Dato: " + control.getOrderlist().get(i).getBestillingsDate() + "\n"
                         + "Depositum modtaget: " + ab
-                        + "Depositum beløb: " + control.getOrderlist().get(i).getDepositumPrice()
+                        + "Depositum beløb: " + control.getOrderlist().get(i).getDepositumPrice() + " kr\n"
+                        + "Pris på ordre: " + control.getOrderlist().get(i).getDepositumPrice()*2 + " kr"
                         + control.getOrderlist().get(i).getItemlistString());
             }
         }

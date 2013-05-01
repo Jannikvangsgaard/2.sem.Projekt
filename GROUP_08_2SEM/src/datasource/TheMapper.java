@@ -257,21 +257,30 @@ public class TheMapper {
     public boolean saveCustomer(ArrayList<Customer> customer, Connection con) {
 
         boolean didItWork = false;
+        int tal = 0;
         String SQLString1 = "insert into kunde values(?,?,?,?,?,?,?)";
         String SQLString2 = "select kundeseq.nextval from dual";
         PreparedStatement statement = null;
 
+                   for (int j = 0; j < customer.size(); j++) {
+            Customer ctest = customer.get(j);
+
+            if (ctest.getCustomerID()!= 0) {
+                tal++;
+            }
+        }
+        
         try {
             statement = con.prepareStatement(SQLString2);
             ResultSet rs = statement.executeQuery();
             if (rs.next()) {
-                for (int j = 0; customer.size() > j; j++) {
+                for (int j = tal; customer.size() > j; j++) {
                     Customer o = customer.get(j);
                     o.setCustomerID(rs.getInt(1));
                 }
 
                 statement = con.prepareStatement(SQLString1);
-                for (int i = 0; i < customer.size(); i++) {
+                for (int i = tal; i < customer.size(); i++) {
                     Customer cus = customer.get(i);
                     System.out.println(cus.getCustomerID());
                     statement.setInt(1, cus.getCustomerID());
@@ -281,6 +290,7 @@ public class TheMapper {
                     statement.setString(5, cus.getBy());
                     statement.setString(6, cus.getEmail());
                     statement.setString(7, cus.getNr());
+                    System.out.println("tjek1");
                     statement.executeQuery();
                     didItWork = true;
                 }
@@ -578,7 +588,6 @@ public class TheMapper {
         } catch (Exception e) {
             System.out.println("Fejl i TheMapper - getAllEmployees");
         }
-            System.out.println(employees.size() + "mapper employees");
         return employees;
     }
         
