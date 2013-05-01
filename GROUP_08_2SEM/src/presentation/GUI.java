@@ -36,7 +36,7 @@ public class GUI extends javax.swing.JFrame
     ArrayList<Item> alleItemsList = new ArrayList();
     ArrayList<Item> it = new ArrayList();
     ArrayList<Item> newItem = new ArrayList();
-    ArrayList<Item> PakkeListe = new ArrayList();
+    ArrayList<Item> pakkeListe = new ArrayList();
     ArrayList<Employee> emp = new ArrayList();
 
     /**
@@ -1516,10 +1516,11 @@ public class GUI extends javax.swing.JFrame
                 if (alleItemsList.get(i).toStringGUI().equals(selected))
                 {
                     Item v = alleItemsList.get(i);
-                    PakkeListe.add(v);
+                    pakkeListe.add(v);
                     jTextFieldÆndringAfVareAntal.setText("");
                     modelPakkeListe.add(plads, "Vare navn: " + v.getItemName() + " Antal: " + antal);
                     plads++;
+                    jTextFieldAntalTilPakkeListe.setText("");
                 }
             }
         } else
@@ -1537,7 +1538,7 @@ public class GUI extends javax.swing.JFrame
                 if (jListPakkeListe.getSelectedValue().equals(modelPakkeListe.elementAt(i)))
                 {
                     modelPakkeListe.removeElement(jListPakkeListe.getSelectedValue());
-                    PakkeListe.remove(i);
+                    pakkeListe.remove(i);
                 }
             } catch (Exception e)
             {
@@ -1552,9 +1553,12 @@ public class GUI extends javax.swing.JFrame
         {
         String pakkeNavn = jTextFieldPakkeListeNavn.getText();
         int pris = Integer.parseInt(jTextFieldPrisPaaPakke.getText());
-        if(!PakkeListe.isEmpty())
+        if(!pakkeListe.isEmpty())
         {
-            
+            control.saveItemList(pakkeListe, pris, pakkeNavn);
+            jTextFieldPakkeListeNavn.setText("");
+            jTextFieldPrisPaaPakke.setText("");
+            modelPakkeListe.clear();
         }
         }
         catch(Exception e)
