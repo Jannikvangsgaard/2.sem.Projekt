@@ -707,7 +707,7 @@ public class TheMapper {
              if (rs.next()) {
                 for (int j = 0; itemList.size() > j; j++) {
                     Item it = itemList.get(j);
-                    it.setItemNo(rs.getInt(1));
+                    it.setPakkeNo(rs.getInt(1));
                 }
              }
                 statement = con.prepareStatement(SQLString1);
