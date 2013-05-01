@@ -955,16 +955,16 @@ public class GUI extends javax.swing.JFrame
                         .addComponent(jButtonFjernFraPakkeListe, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel33))
                 .addGap(32, 32, 32)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel36)
-                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(jButtonBekraeftPakkeLøsning, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
                         .addComponent(jTextFieldPrisPaaPakke, javax.swing.GroupLayout.Alignment.LEADING))
                     .addComponent(jLabel34)
                     .addComponent(jLabel32)
-                    .addComponent(jTextFieldPakkeListeNavn, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE))
-                .addContainerGap(169, Short.MAX_VALUE))
+                    .addComponent(jTextFieldPakkeListeNavn, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(85, Short.MAX_VALUE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1516,9 +1516,9 @@ public class GUI extends javax.swing.JFrame
                 if (alleItemsList.get(i).toStringGUI().equals(selected))
                 {
                     Item v = alleItemsList.get(i);
+                    v.setItemAmount(antal);
                     pakkeListe.add(v);
-                    jTextFieldÆndringAfVareAntal.setText("");
-                    modelPakkeListe.add(plads, "Vare navn: " + v.getItemName() + " Antal: " + antal);
+                    modelPakkeListe.add(plads, "Vare navn: " + v.getItemName() + " Antal: " + v.getItemAmount());
                     plads++;
                     jTextFieldAntalTilPakkeListe.setText("");
                 }
