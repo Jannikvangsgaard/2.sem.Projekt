@@ -282,7 +282,6 @@ public class TheMapper {
                 statement = con.prepareStatement(SQLString1);
                 for (int i = tal; i < customer.size(); i++) {
                     Customer cus = customer.get(i);
-                    System.out.println(cus.getCustomerID());
                     statement.setInt(1, cus.getCustomerID());
                     statement.setString(2, cus.getName());
                     statement.setString(3, cus.getAddress());
@@ -290,7 +289,6 @@ public class TheMapper {
                     statement.setString(5, cus.getBy());
                     statement.setString(6, cus.getEmail());
                     statement.setString(7, cus.getNr());
-                    System.out.println("tjek1");
                     statement.executeQuery();
                     didItWork = true;
                 }
