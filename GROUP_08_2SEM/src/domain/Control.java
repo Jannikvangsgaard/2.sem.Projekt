@@ -24,6 +24,8 @@ public class Control
     private ArrayList<Order> orderlistWithDate = new ArrayList();
     private ArrayList<Employee> employeesList = new ArrayList();
     private ArrayList<Employee> availableEmployees = new ArrayList();
+    private ArrayList<Package> packageList = new ArrayList();
+    private ArrayList<Package> allPackageList = new ArrayList();
     private DBFacade dbf;
 
     public Control()
@@ -79,6 +81,12 @@ public class Control
     {
         Order order = new Order(itemliste2, customer, bestillingsDato);
         orderlist.add(order);
+    }
+    
+    public void createPackage(ArrayList<Item> items, String packageName, int price)
+    {
+        Package pack = new Package(packageName, items, price);
+        packageList.add(pack);
     }
 
     public Order loadOrderList(int ono)
@@ -355,7 +363,6 @@ public class Control
             for (int j = 0; j < employeesList.get(i).getDates().size(); j++)
             {
                 String tjek = "" + employeesList.get(i).getDates().get(j);
-                System.out.println(tjek + " tjek");
                 if (employeesList.get(i).getPosition().equals("Montør") && !tjek.equals(res))
                 {
                     count++;
@@ -383,7 +390,16 @@ public class Control
         return sqlDate;
     }
     
-       public boolean saveItemList(ArrayList<Item> items, int price, String Name){
-         return dbf.saveItemList(items, price, Name);
+       public boolean saveItemList(){
+         return dbf.saveItemList(packageList);
      }
+       
+    public void loadAllPackages()
+    {
+        allPackageList = dbf.loadAllPackages();
+    }
+    
+    public ArrayList<Package> getAllPackages(){
+        return allPackageList;
+    }
 }

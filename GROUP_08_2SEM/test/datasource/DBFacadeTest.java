@@ -49,7 +49,7 @@ public class DBFacadeTest {
 
     /**
      * Tester om metoden loadSingleOrder() henter vores "testordre" fra
-     * databasen, som har ordrenummer 1.
+     * databasen, som har ordrenummer 1000.
      */
     @Test
     public void testLoadSingleOrder() 
@@ -240,7 +240,7 @@ public class DBFacadeTest {
         
         for(int i = 0; i < orders.size(); i++)
         {
-            if(orders.get(i).getOrderNo() == 1) //OrderNo 1 er en test ordre
+            if(orders.get(i).getOrderNo() == 1000) //OrderNo 1000 er en test ordre
             {
                 o = orders.get(i);
             }

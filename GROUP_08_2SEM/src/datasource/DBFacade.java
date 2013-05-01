@@ -1,6 +1,7 @@
 package datasource;
 
 import domain.*;
+import domain.Package;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -107,7 +108,12 @@ public class DBFacade
 //        return tm.deleteTestPersons(con);
 //    }
     
-    public boolean saveItemList(ArrayList<Item> items, int price, String Name){
-         return tm.saveItemList(items, price, Name, con);
+    public boolean saveItemList(ArrayList<Package> pack){
+         return tm.saveItemList(pack, con);
      }
+    
+        public ArrayList<Package> loadAllPackages()
+    {
+        return tm.getAllPackages(con);
+    }
 }

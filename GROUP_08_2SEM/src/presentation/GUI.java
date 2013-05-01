@@ -4,6 +4,7 @@ import domain.Control;
 import domain.Customer;
 import domain.Employee;
 import domain.Item;
+import domain.Package;
 import java.util.Date;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -31,6 +32,7 @@ public class GUI extends javax.swing.JFrame
     DefaultListModel modelVarePaaLager;
     DefaultListModel model6;
     DefaultListModel modelPakkeListe;
+    DefaultListModel modelAllePakker;
     ArrayList<Item> orderItemList = new ArrayList();
     ArrayList<Item> vareliste2 = new ArrayList();
     ArrayList<Item> alleItemsList = new ArrayList();
@@ -38,6 +40,7 @@ public class GUI extends javax.swing.JFrame
     ArrayList<Item> newItem = new ArrayList();
     ArrayList<Item> pakkeListe = new ArrayList();
     ArrayList<Employee> emp = new ArrayList();
+    ArrayList<Package> allePakker = new ArrayList();
 
     /**
      * Creates new form GUI
@@ -52,6 +55,7 @@ public class GUI extends javax.swing.JFrame
         modelVarePaaLager = new DefaultListModel();
         model6 = new DefaultListModel();
         modelPakkeListe = new DefaultListModel();
+        modelAllePakker = new DefaultListModel();
         jListvareliste.setModel(modelvareliste);
         jListVareTilOrdre.setModel(modelVareTilOrdre);
         jListStatusListe.setModel(StatusListe);
@@ -59,11 +63,13 @@ public class GUI extends javax.swing.JFrame
         VisÆndringer.setModel(model6);
         jListVarePaaLagerPakkeLøsning.setModel(modelVarePaaLager);
         jListPakkeListe.setModel(modelPakkeListe);
+        jListAllePakker.setModel(modelAllePakker);
         control.loadItemliste();
         control.loadAllOrders();
         control.checkDate();
         control.loadAllEmployees();
         visAlleItemListe();
+        visAllePakker();
 
     }
 
@@ -185,6 +191,14 @@ public class GUI extends javax.swing.JFrame
         jLabel34 = new javax.swing.JLabel();
         jLabel35 = new javax.swing.JLabel();
         jLabel36 = new javax.swing.JLabel();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane13 = new javax.swing.JScrollPane();
+        jListAllePakker = new javax.swing.JList();
+        jButtonUdskrivPakke = new javax.swing.JButton();
+        jLabel42 = new javax.swing.JLabel();
+        jLabel37 = new javax.swing.JLabel();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jTextAreaPakkeInformationer = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -1002,6 +1016,68 @@ public class GUI extends javax.swing.JFrame
 
         jTabbedPane1.addTab("Opret Pakke Løsning", jPanel6);
 
+        jScrollPane13.setViewportView(jListAllePakker);
+
+        jButtonUdskrivPakke.setText("Udskriv Pakke");
+        jButtonUdskrivPakke.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                jButtonUdskrivPakkeActionPerformed(evt);
+            }
+        });
+        jButtonUdskrivPakke.addKeyListener(new java.awt.event.KeyAdapter()
+        {
+            public void keyReleased(java.awt.event.KeyEvent evt)
+            {
+                jButtonUdskrivPakkeKeyReleased(evt);
+            }
+        });
+
+        jLabel42.setText("Pakke liste:");
+
+        jLabel37.setText("Pakke information:");
+
+        jTextAreaPakkeInformationer.setEditable(false);
+        jTextAreaPakkeInformationer.setColumns(20);
+        jTextAreaPakkeInformationer.setRows(5);
+        jScrollPane11.setViewportView(jTextAreaPakkeInformationer);
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(49, 49, 49)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel42)
+                    .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel37)
+                    .addComponent(jScrollPane11)
+                    .addComponent(jButtonUdskrivPakke, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(236, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel42)
+                    .addComponent(jLabel37))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
+                        .addComponent(jScrollPane11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonUdskrivPakke)))
+                .addContainerGap(278, Short.MAX_VALUE))
+        );
+
+        jTabbedPane1.addTab("Udskriv Pakker", jPanel7);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -1555,10 +1631,12 @@ public class GUI extends javax.swing.JFrame
         int pris = Integer.parseInt(jTextFieldPrisPaaPakke.getText());
         if(!pakkeListe.isEmpty())
         {
-            control.saveItemList(pakkeListe, pris, pakkeNavn);
+            control.createPackage(pakkeListe, pakkeNavn, pris);
+            control.saveItemList();
             jTextFieldPakkeListeNavn.setText("");
             jTextFieldPrisPaaPakke.setText("");
             modelPakkeListe.clear();
+            visAllePakker();
         }
         }
         catch(Exception e)
@@ -1566,6 +1644,27 @@ public class GUI extends javax.swing.JFrame
                 JOptionPane.showMessageDialog(null, "Husk at Udfyld Pakke navn og pris");
         }
     }//GEN-LAST:event_jButtonBekraeftPakkeLøsningActionPerformed
+
+    private void jButtonUdskrivPakkeActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButtonUdskrivPakkeActionPerformed
+    {//GEN-HEADEREND:event_jButtonUdskrivPakkeActionPerformed
+                for(int i = 0; i < allePakker.size(); i++)
+        {
+            System.out.println(control.getAllPackages().get(i).toString());
+        if (control.getAllPackages().get(i).toString().equals(jListAllePakker.getSelectedValue()))
+            {
+                System.out.println("test");
+                jTextAreaPakkeInformationer.setText("Pakke navn: " + control.getAllPackages().get(i).getPackageName() + "\n"
+                        + "Pakke ID: " + control.getAllPackages().get(i).getPackageNo() + "\n"
+                        + "Pakke pris: " + control.getAllPackages().get(i).getPrice() + "\n"
+                        + control.getOrderlist().get(i).getItemlistString());
+            }
+        }
+    }//GEN-LAST:event_jButtonUdskrivPakkeActionPerformed
+
+    private void jButtonUdskrivPakkeKeyReleased(java.awt.event.KeyEvent evt)//GEN-FIRST:event_jButtonUdskrivPakkeKeyReleased
+    {//GEN-HEADEREND:event_jButtonUdskrivPakkeKeyReleased
+  
+    }//GEN-LAST:event_jButtonUdskrivPakkeKeyReleased
 
     /**
      * @param args the command line arguments
@@ -1595,6 +1694,23 @@ public class GUI extends javax.swing.JFrame
             for (int i = 0; i < alleItemsList.size(); i++)
             {
                 modelVarePaaLager.addElement(alleItemsList.get(i).toStringGUI());
+            }
+        } catch (NullPointerException ex)
+        {
+            System.out.println("Error in GUI - \"visAlleItemListe\"");
+        }
+    }
+    
+        public void visAllePakker()
+    {
+        try
+        {
+            modelAllePakker.clear();
+            control.loadAllPackages();
+            allePakker = control.getAllPackages();
+            for (int i = 0; i < allePakker.size(); i++)
+            {
+                modelAllePakker.addElement(allePakker.get(i).toString());
             }
         } catch (NullPointerException ex)
         {
@@ -1684,6 +1800,7 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JButton jButtonSaveOrder;
     private javax.swing.JButton jButtonTilføjTilPakkeListe;
     private javax.swing.JButton jButtonTilføjvare;
+    private javax.swing.JButton jButtonUdskrivPakke;
     private javax.swing.JCheckBox jCheckBoxBetalt;
     private javax.swing.JComboBox jComboBoxAar;
     private javax.swing.JComboBox jComboBoxDag;
@@ -1719,7 +1836,9 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JLabel jLabel34;
     private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel36;
+    private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel42;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -1727,6 +1846,7 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JLabel jLabel9;
     private javax.swing.JLabel jLabelLedigeMontore;
     private javax.swing.JLabel jLabelOrderSavedNotSaved;
+    private javax.swing.JList jListAllePakker;
     private javax.swing.JList jListPakkeListe;
     private javax.swing.JList jListStatusListe;
     private javax.swing.JList jListVarePaaLagerPakkeLøsning;
@@ -1739,8 +1859,11 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane13;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1753,6 +1876,7 @@ public class GUI extends javax.swing.JFrame
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea jTextAreaPakkeInformationer;
     private javax.swing.JTextArea jTextAreaVisAnsatte;
     private javax.swing.JTextArea jTextAreaVisKunder;
     private javax.swing.JTextField jTextFieldAdresse;

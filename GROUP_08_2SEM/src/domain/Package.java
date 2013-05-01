@@ -61,5 +61,17 @@ public class Package {
         this.price =price;
     
     }
+    public String toString()
+    {
+        return "" + packageName;
+    }
+    
+        public String getPackageString() {
+        String res = "\nVarer:\n";
+        for (int i = 0; i < items.size(); i++) {
+            res += items.get(i).getItemName() + ", " + items.get(i).getItemAmount() + "\n";
+        }
+        return res;
+    }
     
 }

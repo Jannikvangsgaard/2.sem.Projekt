@@ -692,7 +692,7 @@ public class TheMapper {
 //    }
         
         
-     public boolean saveItemList(ArrayList<Package> packList, int priceTotal,String packageName , Connection con) {
+     public boolean saveItemList(ArrayList<Package> packList, Connection con) {
 
         int rowsInserted = 0;
         int tal = 0;
