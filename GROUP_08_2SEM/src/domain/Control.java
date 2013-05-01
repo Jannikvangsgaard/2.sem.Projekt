@@ -382,4 +382,8 @@ public class Control
         String sqlDate = sdf.format(utilDate);
         return sqlDate;
     }
+    
+       public boolean saveItemList(ArrayList<Item> items, int price, String Name){
+         return dbf.saveItemList(items, price, Name);
+     }
 }

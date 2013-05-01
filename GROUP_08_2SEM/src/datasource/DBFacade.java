@@ -106,4 +106,8 @@ public class DBFacade
 //    {
 //        return tm.deleteTestPersons(con);
 //    }
+    
+    public boolean saveItemList(ArrayList<Item> items, int price, String Name){
+         return tm.saveItemList(items, price, Name, con);
+     }
 }

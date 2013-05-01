@@ -694,6 +694,48 @@ public class TheMapper {
 //    }
         
         
+     public boolean saveItemList(ArrayList<Item> itemList, int priceTotal,String packageName , Connection con) {
+
+        int rowsInserted = 0;
+        String SQLString1 = "insert into pakker values(?,?,?,?,?)";
+        String SQLString2 = "select pakkeseq.nextval from dual";
+        PreparedStatement statement = null;
+
+        try {
+            statement = con.prepareStatement(SQLString2);
+            ResultSet rs = statement.executeQuery();
+             if (rs.next()) {
+                for (int j = 0; itemList.size() > j; j++) {
+                    Item it = itemList.get(j);
+                    it.setItemNo(rs.getInt(1));
+                }
+             }
+                statement = con.prepareStatement(SQLString1);
+                for (int i = 0; i < itemList.size(); i++) {
+                    Item ni = itemList.get(i);
+                    statement.setInt(1, ni.getPakkeNo());
+                    statement.setInt(2, ni.getItemNo());
+                    statement.setInt(3, ni.getItemAmount());
+                    statement.setString(4, packageName );
+                    statement.setInt(5, priceTotal);
+                    
+                }
+
+            rowsInserted += statement.executeUpdate();
+
+            
+
+
+
+        } catch (Exception e) {
+            System.out.println("Fejl i OrdreMapper - SaveNewProject");
+            e.printStackTrace();
+        }
+        return rowsInserted == itemList.size();
+
+    }
+        
+        
 }
         
 

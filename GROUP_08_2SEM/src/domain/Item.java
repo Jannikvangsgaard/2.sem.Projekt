@@ -11,6 +11,15 @@ public class Item
     private int itemAmount;
     private int price;
     private int amountTotal;
+    private int pakkeNo;
+
+    public int getPakkeNo() {
+        return pakkeNo;
+    }
+
+    public void setPakkeNo(int pakkeNo) {
+        this.pakkeNo = pakkeNo;
+    }
 
     public Item(int itemNo, String itemName, int itemAmount, int price)
     {
