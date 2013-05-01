@@ -697,8 +697,9 @@ public class TheMapper {
      public boolean saveItemList(ArrayList<Item> itemList, int priceTotal,String packageName , Connection con) {
 
         int rowsInserted = 0;
-        String SQLString1 = "insert into pakker values(?,?,?,?,?)";
+        String SQLString1 = "insert into pakker values(?,?,?)";
         String SQLString2 = "select pakkeseq.nextval from dual";
+        String SQLString3 = "insert into pakkedetails values(?,?,?)";
         PreparedStatement statement = null;
 
         try {
@@ -711,17 +712,24 @@ public class TheMapper {
                 }
              }
                 statement = con.prepareStatement(SQLString1);
+                
+                    Item nin = itemList.get(0);
+                    statement.setInt(1, nin.getPakkeNo());
+                    statement.setString(2, packageName );
+                    statement.setInt(3, priceTotal);
+                    rowsInserted += statement.executeUpdate();
+                
+                
+                 statement = con.prepareStatement(SQLString3);
                 for (int i = 0; i < itemList.size(); i++) {
                     Item ni = itemList.get(i);
                     statement.setInt(1, ni.getPakkeNo());
                     statement.setInt(2, ni.getItemNo());
                     statement.setInt(3, ni.getItemAmount());
-                    statement.setString(4, packageName );
-                    statement.setInt(5, priceTotal);
-                    
+                    rowsInserted += statement.executeUpdate();
                 }
-
-            rowsInserted += statement.executeUpdate();
+                
+           
 
             
 
