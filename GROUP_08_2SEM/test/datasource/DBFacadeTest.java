@@ -5,6 +5,7 @@ import domain.Customer;
 import domain.Employee;
 import domain.Item;
 import domain.Order;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -40,16 +41,12 @@ public class DBFacadeTest {
 @After
     public void tearDown() 
     {
-        /**
-         * Sletter de oprettede testpersoner fra databasen, efter den er kørt.
-         */
-//        DBFacade instance = new DBFacade();
-//        instance.deleteTestPersons();
+   
     }
 
     /**
      * Tester om metoden loadSingleOrder() henter vores "testordre" fra
-     * databasen, som har ordrenummer 1000.
+     * databasen, som har ordrenummer 999.
      */
     @Test
     public void testLoadSingleOrder() 
@@ -57,8 +54,8 @@ public class DBFacadeTest {
         System.out.println("loadSingleOrder");
         c.loadAllOrders();
         DBFacade instance = new DBFacade();
-        int expectedOrderNo = 1000;
-        int actualOrderNo = instance.loadSingleOrder(1000).getOrderNo();
+        int expectedOrderNo = 999; //OrdreNo 999 er en testordre
+        int actualOrderNo = instance.loadSingleOrder(999).getOrderNo();
         
         assertEquals(expectedOrderNo, actualOrderNo);
     }
@@ -117,7 +114,7 @@ public class DBFacadeTest {
         Order order = new Order(i, cus, d);
         o.add(order);
         
-        assertFalse(instance.saveOrder(o).equals(null));
+        assertFalse(instance.saveOrder(o).isEmpty());
     }
 
     /**
@@ -232,15 +229,15 @@ public class DBFacadeTest {
     @Test
     public void testUpdateOrder() 
     {
-        
         System.out.println("updateOrder");
         c.loadAllOrders();
+        c.getOrderlist();
         ArrayList<Order> orders = c.getOrderlist();
         Order o = null;
         
         for(int i = 0; i < orders.size(); i++)
         {
-            if(orders.get(i).getOrderNo() == 1000) //OrderNo 1000 er en test ordre
+            if(orders.get(i).getOrderNo() == 999) //OrderNo 999 er en test ordre
             {
                 o = orders.get(i);
             }
@@ -264,5 +261,50 @@ public class DBFacadeTest {
         int result = instance.getAllEmployees().size();
         assertTrue(result > 0);
     }
-
+    /**
+     *  Herfra bliver alt hvad vi har gemt i databasen fjernet igen.
+     */
+    @Test
+    public void testDeleteTestPersons()
+    {
+        System.out.println("deleteTestPersons");
+        DBFacade instance = new DBFacade();
+        
+        boolean expResult = true;
+        boolean result = instance.deleteTestEmployees();
+        assertTrue(expResult == result);
+    }
+    
+    @Test
+    public void testDeleteTestOrders()
+    {
+        System.out.println("deleteTestOrders");
+        DBFacade instance = new DBFacade();
+        
+        boolean expResult = true;
+        boolean result = instance.deleteTestOrders();
+        assertTrue(expResult == result);
+    }
+    
+    @Test
+    public void testDeleteTestCustomers() throws SQLException
+    {
+        System.out.println("deleteTestCustomers");
+        DBFacade instance = new DBFacade();
+        
+        boolean expResult = true;
+        boolean result = instance.deleteTestCustomers();
+        assertTrue(expResult == result);
+    }
+    
+    @Test
+    public void testResetStateOnTestOrder() throws SQLException
+    {
+        System.out.println("resetStateOnTestOrder");
+        DBFacade instance = new DBFacade();
+        
+        boolean expResult = true;
+        boolean result = instance.resetStateOnTestOrder();
+        assertTrue(expResult == result);
+    }
 }

@@ -813,7 +813,171 @@ public class TheMapper {
         }
         return packages;
     }
+    public boolean deleteTestEmployees(Connection con)
+    {
+        boolean didItWork = true;
+        ArrayList<Integer> empno = new ArrayList();
+        
+        String SQLString1 = "SELECT medarbejderno "
+                          + "FROM medarbejder "
+                          + "WHERE navn = 'test'";
+        
+        String SQLString2 = "DELETE FROM medarbejderdetails "
+                           +"WHERE medarbejderno = ?";
+        
+        String SQLString3 = "DELETE FROM medarbejder"
+                          + " WHERE navn = 'test'";
+        
+        
+        PreparedStatement statement = null;
+        try 
+        {
+            statement = con.prepareStatement(SQLString1);
+            ResultSet rs = statement.executeQuery();
+            
+            while(rs.next())
+            {
+                empno.add(rs.getInt(1));
+            }
 
+            statement = con.prepareStatement(SQLString2);
+            for(int i = 0; i < empno.size(); i++)
+            {
+                statement.setInt(1, empno.get(i));
+                if(statement.executeUpdate() == 0)
+                {
+                    didItWork = false;
+                }
+            }
+            
+            statement = con.prepareStatement(SQLString3);
+            if(statement.executeUpdate() == 0)
+            {
+                didItWork = false;
+            }
+        }
+        
+        
+        catch (Exception e)
+        {
+            System.out.println("Fejl i TheMapper - deleteTestEmployees");
+            didItWork = false;
+        }
+        
+        return didItWork;
+    }
+    
+    public boolean deleteTestOrders(Connection con)
+    {
+        boolean didItWork = true;
+        ArrayList<Integer> onos = new ArrayList(); //Indeholder ordrenumre på testordre
+        
+        String SQLString1 = "SELECT ordreno FROM ordre WHERE kundeno = 1";
+        String SQLString2 = "DELETE FROM ordredetails WHERE ordreno = ?";
+        String SQLString3 = "DELETE FROM ordre WHERE ordreno = ?";
+        
+        
+        PreparedStatement statement = null;
+        try 
+        {
+            statement = con.prepareStatement(SQLString1);
+            ResultSet rs = statement.executeQuery();
+            
+            while(rs.next())
+            {
+                onos.add(rs.getInt(1)); //OrdreNo på ordre fra testperson
+            }
+            
+            statement = con.prepareStatement(SQLString2);
+            for(int i = 0; i < onos.size(); i++)
+            {
+                if(!onos.get(i).equals(999)) //999 er en testordre - må ikke slettes
+                {
+                    statement.setInt(1, onos.get(i));
+                    if(statement.executeUpdate() == 0)
+                    {
+                        didItWork = false;
+                    }
+                }
+            }
+            
+            statement = con.prepareStatement(SQLString3);
+            for(int j = 0; j < onos.size(); j++)
+            {
+                if(!onos.get(j).equals(999))
+                {
+                    statement.setInt(1, onos.get(j));
+                    if(statement.executeUpdate() == 0)
+                    {
+                        didItWork = false;
+                    }
+                }
+            }
+        }
+        
+        
+        catch (Exception e)
+        {
+            System.out.println("Fejl i TheMapper - deleteTestOrdre");
+            didItWork = false;
+        }
+        
+        return didItWork;
+    }
+    
+    public boolean deleteTestCustomers(Connection con) throws SQLException
+    {
+        boolean didItWork = true;
+
+        String SQLString = "DELETE FROM kunde WHERE navn = 'testperson'";
+        
+        PreparedStatement statement = null;
+        statement = con.prepareStatement(SQLString);
+        
+        try
+        {
+            if(statement.executeUpdate() == 0)
+            {
+                System.out.println("Ingen testkunder i databasen");
+            }
+        }
+        catch(Exception e)
+        {
+            System.out.println("Fejl i TheMapper - deleteTestCustomers");
+            didItWork = false;
+        }
+        
+        return didItWork;
+    }
+    
+    public boolean resetStateOnTestOrder(Connection con) throws SQLException
+    {
+        boolean didItWork = true;
+        
+        String SQLString = "UPDATE ordre SET state = 0 WHERE ordreno = 999";
+        
+        PreparedStatement statement = null;
+        
+        try
+        {
+            statement = con.prepareStatement(SQLString);
+            
+            if(statement.executeUpdate() == 0)
+            {
+                System.out.println("State på testordre (999) er allerede 0");
+            }
+            else {
+                System.out.println("State på testordre (999) ændret til 0");
+            }
+        }
+        catch(Exception ex)
+        {
+            System.out.println("Fejl i TheMapper - resetStateOnTestOrder");
+            didItWork = false;
+        }
+        
+        return didItWork;
+    }
         
         
 }

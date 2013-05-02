@@ -102,12 +102,6 @@ public class DBFacade
     {
         return tm.saveEmployeeWithDate(emp, con);
     }
-
-//    public boolean deleteTestPersons()
-//    {
-//        return tm.deleteTestPersons(con);
-//    }
-    
     public boolean saveItemList(ArrayList<Package> pack){
          return tm.saveItemList(pack, con);
      }
@@ -115,5 +109,24 @@ public class DBFacade
         public ArrayList<Package> loadAllPackages()
     {
         return tm.getAllPackages(con);
+    }
+    public boolean deleteTestEmployees()
+    {
+        return tm.deleteTestEmployees(con);
+    }
+    
+    public boolean deleteTestOrders()
+    {
+        return tm.deleteTestOrders(con);
+    }
+    
+    public boolean deleteTestCustomers() throws SQLException
+    {
+        return tm.deleteTestCustomers(con);
+    }
+    
+    public boolean resetStateOnTestOrder() throws SQLException
+    {
+        return tm.resetStateOnTestOrder(con);
     }
 }
