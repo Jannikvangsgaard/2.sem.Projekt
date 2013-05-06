@@ -1477,7 +1477,7 @@ public class GUI extends javax.swing.JFrame
             {
                 jTextOrdreInformationer.setText("Kunde ID: " + control.getOrderlist().get(i).getCustomer().getCustomerID() + "\n"
                         + "Depositum Dato: " + control.getOrderlist().get(i).getDepositumDate() + "\n"
-                        + "Bestillings Dato: " + control.getOrderlist().get(i).getBestillingsDate() + "\n"
+                        + "Bestillings Dato: " + control.getOrderlist().get(i).getorderDate() + "\n"
                         + "Depositum modtaget: " + ab
                         + "Depositum beløb: " + control.getOrderlist().get(i).getDepositumPrice() + " kr\n"
                         + "Pris på ordre: " + control.getOrderlist().get(i).getDepositumPrice()*2 + " kr"

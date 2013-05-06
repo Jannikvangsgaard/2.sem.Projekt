@@ -96,7 +96,6 @@ public class TheMapper {
     }
 
     public ArrayList<Item> getItems(Connection conn) {
-//        Item i = null;
         ArrayList<Item> itemsArr = new ArrayList();
 
         String SQLString = "SELECT * FROM varer";
@@ -125,7 +124,6 @@ public class TheMapper {
     }
 
     public ArrayList<Customer> getCustomer(Connection conn) {
-//        System.out.println("themapper her");
         String SQLString = "SELECT * FROM kunde";
 
         PreparedStatement statement = null;
@@ -150,7 +148,6 @@ public class TheMapper {
     }
 
     public Customer getSingleCustomer(Connection conn, int cno) {
-//        System.out.println("themapper her");
         String SQLString = "SELECT * FROM kunde WHERE kundeno = ?";
 
         PreparedStatement statement = null;
@@ -179,7 +176,6 @@ public class TheMapper {
      */
     public int saveOrder(ArrayList<Order> order, Connection con) throws SQLException {
 
-//        con.setAutoCommit(false);
         int rowsInserted = 0;
         int tal = 0;
         String SQLString1 = "insert into ordre values(?,?,?)";
@@ -235,7 +231,7 @@ public class TheMapper {
                         statement.setInt(2, o.getItemlist().get(j).getItemAmount());
                         statement.setInt(3, o.getOrderNo());
                         java.sql.Date sqlDate = new java.sql.Date(o.getDepositumDate().getTime());
-                        java.sql.Date sqlDate2 = new java.sql.Date(o.getBestillingsDate().getTime());
+                        java.sql.Date sqlDate2 = new java.sql.Date(o.getorderDate().getTime());
                         statement.setDate(4, sqlDate);
                         statement.setDate(5, sqlDate2);
                         rowsInserted += statement.executeUpdate();
@@ -656,40 +652,6 @@ public class TheMapper {
 
     }
         
-//    public boolean deleteTestPersons(Connection con)
-//    {
-//        boolean didItWork = true;
-//        
-//        String SQLString1 = "DELETE FROM kunde WHERE navn = 'testperson'";
-//        String SQLString2 = "DELETE FROM medarbejder WHERE stilling = 'test'";
-//        
-//        PreparedStatement statement = null;
-//        try 
-//        {
-//            statement = con.prepareStatement(SQLString1);
-//
-//            if(statement.executeUpdate() == 0)
-//            {
-//                didItWork = false;
-//                System.out.println("Ingen testpersoner i kundedatabasen");
-//            }
-//            statement = con.prepareStatement(SQLString2);
-//            
-//            if(statement.executeUpdate() == 0)
-//            {
-//                didItWork = false;
-//                System.out.println("Ingen testpersoner i medarbejderdatabasen");
-//            }
-//        }
-//        
-//        
-//        catch (Exception e)
-//        {
-//            System.out.println("Fejl i TheMapper - deleteTestPersons");
-//        }
-//        
-//        return didItWork;
-//    }
         
         
      public boolean saveItemList(ArrayList<Package> packList, Connection con) {

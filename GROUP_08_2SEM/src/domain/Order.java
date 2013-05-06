@@ -16,10 +16,10 @@ public class Order {
     private Customer customer;
     private ArrayList<Item> itemlist = new ArrayList<Item>();
     private Date depositumDate;
-    private Date bestillingsDate;
+    private Date orderDate;
     private int depositumPrice;
 
-    public Order(ArrayList<Item> itemlist, Customer customer, Date bestillingsDate) {
+    public Order(ArrayList<Item> itemlist, Customer customer, Date orderDate) {
         this.itemlist = itemlist;
         state = 0;
         this.customer = customer;
@@ -27,15 +27,15 @@ public class Order {
         calendar.add(Calendar.DATE, 3);
         Date date = (Date) calendar.getTime();
         depositumDate = date;
-        this.bestillingsDate = bestillingsDate;
+        this.orderDate = orderDate;
     }
 
-    public Order(int orderNo, ArrayList<Item> itemlist, Date depositumDate, Date bestillingsDate, Customer customer, int state) {
+    public Order(int orderNo, ArrayList<Item> itemlist, Date depositumDate, Date orderDate, Customer customer, int state) {
 
         this.orderNo = orderNo;
         this.itemlist = itemlist;
         this.state = state;
-        this.bestillingsDate = bestillingsDate;
+        this.orderDate = orderDate;
         this.depositumDate = depositumDate;
         this.customer = customer;
     }
@@ -76,12 +76,12 @@ public class Order {
         return depositumDate;
     }
 
-    public Date getBestillingsDate() {
-        return bestillingsDate;
+    public Date getorderDate() {
+        return orderDate;
     }
 
-    public void setBestillingsDate(Date date) {
-        bestillingsDate = date;
+    public void setorderDate(Date date) {
+        orderDate = date;
     }
 
     public String getDepositumDateToString() {
@@ -92,10 +92,10 @@ public class Order {
         return res;
     }
 
-    public String getBestillingsDateToString() {
+    public String getOrderDateToString() {
         String res = "";
 
-        java.sql.Date sqlDate = new java.sql.Date(bestillingsDate.getTime());
+        java.sql.Date sqlDate = new java.sql.Date(orderDate.getTime());
         res = new SimpleDateFormat("y M d").format(sqlDate);
         return res;
     }

@@ -221,29 +221,6 @@ public class Control
         return dbf.increaseAmount(increasedItem);
     }
 
-//    public boolean itemListCheck(ArrayList<Item> checkList)
-//    {
-//        boolean status = false;
-//        for (int i = 0; i < checkList.size(); i++)
-//        {
-//            for (int j = 0; j < availableItems.size(); j++)
-//            {
-//                if (availableItems.get(j).getItemNo() == checkList.get(i).getItemNo())
-//                {
-//                    System.out.println(availableItems.get(j).getItemAmount() + "available items");
-//                    System.out.println(checkList.get(i).getItemAmount() + "checklist");
-//                    if (availableItems.get(j).getItemAmount() >= checkList.get(i).getItemAmount())
-//                    {
-//                        status = true;
-//                    } else
-//                    {
-//                        status = false;
-//                    }
-//                }
-//            }
-//        }
-//        return status;
-//    }
 
     public boolean saveNewItem(ArrayList<Item> it)
     {
@@ -302,7 +279,7 @@ public class Control
 
             for (int i = 0; i < orderlist.size(); i++)
             {
-                if (orderlist.get(i).getState() != 2 && orderlist.get(i).getBestillingsDate().equals(calendar.getTime()))
+                if (orderlist.get(i).getState() != 2 && orderlist.get(i).getorderDate().equals(calendar.getTime()))
                 {
                     orderlistWithDate.add(orderlist.get(i));
                 }
