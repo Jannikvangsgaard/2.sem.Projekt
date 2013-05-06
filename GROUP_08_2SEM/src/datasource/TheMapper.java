@@ -137,7 +137,12 @@ public class TheMapper {
             while (rs.next()) {
                 int customerNo = rs.getInt(1);
                 String customerName = rs.getString(2);
-                Customer c = new Customer(customerNo, customerName);
+                String customerAdresse = rs.getString(3);
+                String customerPostNr = rs.getString(4);
+                String customerTown = rs.getString(5);
+                String customerEmail = rs.getString(6);
+                String customerNummer = rs.getString(7);
+                Customer c = new Customer(customerNo, customerName, customerAdresse, customerPostNr, customerTown, customerEmail, customerNummer);
                 customer.add(c);
             }
         } catch (Exception ex) {
@@ -281,8 +286,8 @@ public class TheMapper {
                     statement.setInt(1, cus.getCustomerID());
                     statement.setString(2, cus.getName());
                     statement.setString(3, cus.getAddress());
-                    statement.setString(4, cus.getPostnr());
-                    statement.setString(5, cus.getBy());
+                    statement.setString(4, cus.getZip());
+                    statement.setString(5, cus.getTown());
                     statement.setString(6, cus.getEmail());
                     statement.setString(7, cus.getNr());
                     statement.executeQuery();

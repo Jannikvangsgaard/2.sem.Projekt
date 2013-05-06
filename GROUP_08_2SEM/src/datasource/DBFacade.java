@@ -17,7 +17,6 @@ public class DBFacade
     private static DBFacade instance;
     private TheMapper tm;
     private Connection con;
-//    private static DBFacade instance;
 
     public DBFacade()
     {
@@ -47,13 +46,11 @@ public class DBFacade
 
     public ArrayList getCustomer()
     {
-//        System.out.println("dbfacade her");
         return tm.getCustomer(con);
     }
 
     public ArrayList getVare()
     {
-//        System.out.println("DBFacade");
         return tm.getItems(con);
     }
 

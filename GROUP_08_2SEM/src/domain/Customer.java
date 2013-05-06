@@ -8,8 +8,8 @@ public class Customer {
    private int customerID;
    private String name;
    private String address;
-   private String postnr;
-   private String by;
+   private String zip;
+   private String town;
    private String email;
    private String nr;
    
@@ -17,13 +17,16 @@ public class Customer {
         this.customerID = customerID;
         this.name = name;
     }
-    public Customer(String name, String address, String postnr, String by, String email, String nr){
+    public Customer(String name, String address, String zip, String town, String email, String nr){
         this.name = name;
         this.address = address;
-        this.postnr = postnr;
-        this.by = by;
+        this.zip = zip;
+        this.town = town;
         this.email = email;
         this.nr = nr;
+    }
+    public Customer(int customerID, String name, String address, String zip, String town, String email, String nr){
+        
     }
 
     public int getCustomerID() {
@@ -66,20 +69,20 @@ public class Customer {
         this.nr = nr;
     }
 
-    public String getPostnr() {
-        return postnr;
+    public String getZip() {
+        return zip;
     }
 
-    public void setPostnr(String postnr) {
-        this.postnr = postnr;
+    public void setZip(String zip) {
+        this.zip = zip;
     }
 
-    public String getBy() {
-        return by;
+    public String getTown() {
+        return town;
     }
 
-    public void setBy(String by) {
-        this.by = by;
+    public void setTown(String town) {
+        this.town = town;
     }
     
     
@@ -95,7 +98,7 @@ public class Customer {
                 + "Email: " + email + "\n"
                 + "Tlf: " + nr + "\n"
                 + "Adresse: " + address + "\n"
-                + "By: " + postnr + ", " + by + "\n";
+                + "By: " + zip + ", " + town + "\n";
 
     }
 
