@@ -56,18 +56,6 @@ public class Control
             if (c1.after(c2))
             {
                 orderlist.get(i).setState(2);
-                for (int j = 0; j < orderlist.get(i).getItemlist().size(); j++)
-                {
-                    item1 = orderlist.get(i).getItemlist().get(j);
-                    if (orderlist.get(i).getItemlist().size() > 0)
-                    {
-                        for (int l = 0; l < orderlist.size(); l++)
-                        {
-                            item3 = orderlist.get(i).getItemlist().get(l);
-                        }
-
-                    }
-                }
             }
         }
     }
