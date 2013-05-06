@@ -1481,7 +1481,6 @@ public class GUI extends javax.swing.JFrame
                         + "Depositum modtaget: " + ab
                         + "Depositum beløb: " + control.getOrderlist().get(i).getDepositumPrice() + " kr\n"
                         + "Pris på ordre: " + control.getOrderlist().get(i).getDepositumPrice()*2 + " kr"
-                        + "Adresse: " + control.getOrderlist().get(i).getCustomer()
                         + control.getOrderlist().get(i).getItemlistString());
             }
         }

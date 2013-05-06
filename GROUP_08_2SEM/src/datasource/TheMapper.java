@@ -137,12 +137,7 @@ public class TheMapper {
             while (rs.next()) {
                 int customerNo = rs.getInt(1);
                 String customerName = rs.getString(2);
-                String customerAdresse = rs.getString(3);
-                String customerPostNr = rs.getString(4);
-                String customerTown = rs.getString(5);
-                String customerEmail = rs.getString(6);
-                String customerNummer = rs.getString(7);
-                Customer c = new Customer(customerNo, customerName, customerAdresse, customerPostNr, customerTown, customerEmail, customerNummer);
+                Customer c = new Customer(customerNo, customerName);
                 customer.add(c);
             }
         } catch (Exception ex) {
