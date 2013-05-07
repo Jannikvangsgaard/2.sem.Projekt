@@ -154,23 +154,12 @@ public class Control
 
     public void availableItems()
     {
-        Item item1, item2, item3;
         if (availableItems.size() > 0)
         {
             availableItems.clear();
         }
         for (int i = 0; i < itemlist.size(); i++)
         {
-            for (int j = 0; j < itemlistReserved.size(); j++)
-            {
-                if (itemlist.get(i).getItemNo() == itemlistReserved.get(j).getItemNo() && itemlist.get(i).getItemAmount() >= itemlistReserved.get(j).getItemAmount())
-                {
-                    item1 = itemlist.get(i);
-                    item2 = itemlistReserved.get(j);
-                    item3 = item1;
-                    item3.setItemAmount(item1.getItemAmount() - item2.getItemAmount());
-                }
-            }
             if (itemlist.get(i).getItemAmount() > 0)
             {
                 availableItems.add(itemlist.get(i));
